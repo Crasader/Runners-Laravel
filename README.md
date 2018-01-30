@@ -4,6 +4,8 @@ Runners is driver managing app, specially designed for the [paleo](http://yeah.p
 
 ## Version changelog **v2.0.0-alpha.0**
 
+Empty release to clean the master for future v2.
+
 Break changes :
 * API migration to [laravel passport](https://laravel.com/docs/5.5/passport) package
 

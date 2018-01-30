@@ -12,10 +12,10 @@ Changes :
 * Big repository clean
 
 Improuvments :
-* 
+* x
 
 Bux fixes :
-*
+* x
 
 ## Start developping
 
@@ -25,8 +25,6 @@ You can find a complete install procedure [here](docs/install.md).
 
 You find docs [here](docs/readme.md)
 
-# Using the app
-
 ## Logins
 
 If you seeded the database, you will hae a couple users, but a few are important.
@@ -34,8 +32,8 @@ If you seeded the database, you will hae a couple users, but a few are important
 
 | username | email          | password | access token |
 |----------|----------------|----------|--------------|
-| root     | root.toor@paleo.ch | root     | root         |
-| runner     | runner.runner@paleo.ch | runner     | runner         |
+| root     | root.toor@paleo.ch     | root   | root   |
+| runner   | runner.runner@paleo.ch | runner | runner |
 
 
 ## Api

@@ -28,6 +28,7 @@ Homestead.yaml
 # Node
 npm_debug.log
 yarn-error.log
+yarn.lock
 node_modules/
 jspm_packages/
 .npm

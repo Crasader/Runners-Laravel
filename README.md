@@ -1,6 +1,6 @@
 # Runners
 
-Runners is driver managing app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
+Runners is a driver managing app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
 
 ## Version changelog **v2.0.0-alpha.0**
 

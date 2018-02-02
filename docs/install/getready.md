@@ -4,6 +4,12 @@
 
 ## Install the node.js dependencies
 
+## Migrate the database
+
+```sh
+php artisan migrate:refresh --seed
+```
+
 <hr>
 
 **Helpful links :**

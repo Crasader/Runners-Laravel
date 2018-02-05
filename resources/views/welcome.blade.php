@@ -4,20 +4,20 @@
     <div class="container">
         <div class="columns">
             <div class="column is-half">
-                Content 1
+                Runs
             </div>
             
             <div class="column is-half">
-                Content 2
+                Chauffeurs
             </div>
         </div>
         <div class="columns">
             <div class="column is-half">
-                Content 3
+                Véhicules
             </div>
             
             <div class="column is-half">
-                Content 4
+                Stats
             </div>
         </div>
         

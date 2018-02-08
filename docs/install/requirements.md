@@ -1,6 +1,16 @@
 # Installation requirements
 
-The App requires a few dependencies, 
+The App requires a few dependencies :
+
+* PHP
+    * PHP > 7.1
+    * OpenSSL PHP Extension
+    * PDO PHP Extension
+    * Mbstring PHP Extension
+    * Tokenizer PHP Extension
+    * XML PHP Extension
+* JS
+    * node.js > 8
 
 <hr>
 

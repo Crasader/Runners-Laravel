@@ -7,7 +7,7 @@
 ## Migrate the database
 
 ```sh
-php artisan migrate:refresh --seed
+php artisan migrate:fresh --seed
 ```
 
 <hr>

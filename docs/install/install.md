@@ -2,7 +2,13 @@
 
 ## Get the sources
 
+```sh
+git clone git@github.com:CPNV-ES/Runners-Laravel.git Runners
+```
+
 ## Configure the .env
+
+Duplicate the `.env.example` in `.env` and configure the variables four our environment.
 
 <hr>
 

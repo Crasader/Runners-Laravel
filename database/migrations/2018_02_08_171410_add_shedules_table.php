@@ -20,7 +20,7 @@ class AddShedulesTable extends Migration
             $table->dateTime('end_time');
 
             // Foreing keys
-            foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 

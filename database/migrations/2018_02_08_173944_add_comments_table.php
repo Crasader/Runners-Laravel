@@ -22,7 +22,7 @@ class AddCommentsTable extends Migration
             $table->timestamps();
 
             // Foreing keys
-            foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

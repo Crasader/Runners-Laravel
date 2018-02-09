@@ -22,6 +22,7 @@ This will download the base homestead box on our machine.
 **3. Initialize homestead in runners**
 
 To generates a homestead configuration, specific to runners you need to run the foolowing commands on our project directory.
+To run this command, you must have install the php dependencies, see [installation](install.md#Install-the-php-dependencies) for more infos.
 
 Linux / Mac OS :
 ```sh

@@ -21,7 +21,7 @@ Bux fixes :
 
 ## Start developping
 
-You can find a complete install procedure [here](docs/install.md).
+You can find a complete install procedure [here](docs/install/requirements.md).
 
 ## Docs
 

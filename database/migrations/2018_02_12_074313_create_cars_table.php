@@ -38,6 +38,14 @@ class CreateCarsTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('cars', function (Blueprint $table) {
+            $table->dropForeign(['car_type_id']);
+        });
+
+        // Drop the table
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('cars');
+        Schema::enableForeignKeyConstraints();
     }
 }

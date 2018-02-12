@@ -20,8 +20,8 @@ class AddGroupUserTable extends Migration
             $table->timestamps();
 
             // Foreing keys
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 
@@ -32,6 +32,12 @@ class AddGroupUserTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('group_user', function (Blueprint $table) {
+            $table->dropForeign(['group_id', 'user_id']);
+        });
+
+        // Drop the table
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('group_user');
         Schema::enableForeignKeyConstraints();

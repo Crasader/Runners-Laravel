@@ -31,6 +31,7 @@ class AddImagesTable extends Migration
      */
     public function down()
     {
+        // Drop the table
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('images');
         Schema::enableForeignKeyConstraints();

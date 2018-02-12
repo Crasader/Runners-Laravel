@@ -31,12 +31,14 @@ class AddShedulesTable extends Migration
      */
     public function down()
     {
-        // The foreign key
+        // Drop the foreign keys
         Schema::table('shedules', function (Blueprint $table) {
             $table->dropForeign(['group_id']);
         });
 
         // Drop the table
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('shedules');
+        Schema::enableForeignKeyConstraints();
     }
 }

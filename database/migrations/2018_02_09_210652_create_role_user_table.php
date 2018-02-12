@@ -30,6 +30,12 @@ class CreateRoleUserTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('role_user', function (Blueprint $table) {
+            $table->dropForeign(['user_id', 'role_id']);
+        });
+
+        // Drop the table
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('role_user');
         Schema::enableForeignKeyConstraints();

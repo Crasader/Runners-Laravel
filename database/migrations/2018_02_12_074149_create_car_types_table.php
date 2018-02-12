@@ -28,6 +28,9 @@ class CreateCarTypesTable extends Migration
      */
     public function down()
     {
+        // Drop the table
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('car_types');
+        Schema::enableForeignKeyConstraints();
     }
 }

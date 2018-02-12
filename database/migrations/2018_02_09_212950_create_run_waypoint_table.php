@@ -30,6 +30,12 @@ class CreateRunWaypointTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('run_waypoint', function (Blueprint $table) {
+            $table->dropForeign(['run_id', 'waypoint_id']);
+        });
+
+        // Drop the table
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('run_waypoint');
         Schema::enableForeignKeyConstraints();

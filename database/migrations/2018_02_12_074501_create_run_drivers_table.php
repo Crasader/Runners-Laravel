@@ -38,6 +38,14 @@ class CreateRunDriversTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('run_drivers', function (Blueprint $table) {
+            $table->dropForeign(['user_id', 'run_id', 'car_id', 'car_type_id']);
+        });
+
+        // Drop the table
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('run_drivers');
+        Schema::enableForeignKeyConstraints();
     }
 }

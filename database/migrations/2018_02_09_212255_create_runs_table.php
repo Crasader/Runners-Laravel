@@ -24,8 +24,8 @@ class CreateRunsTable extends Migration
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->integer('passengers');
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

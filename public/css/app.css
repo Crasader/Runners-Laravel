@@ -11517,3 +11517,12 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+a {
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.homepage .notification {
+  padding: 130px 0px;
+}
+

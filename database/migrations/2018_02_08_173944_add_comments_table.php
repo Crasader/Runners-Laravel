@@ -22,7 +22,7 @@ class AddCommentsTable extends Migration
             $table->timestamps();
 
             // Foreing keys
-            foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,12 @@ class AddCommentsTable extends Migration
      */
     public function down()
     {
+        // Drop the foreign keys
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+
+        // Drop the table
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('comments');
         Schema::enableForeignKeyConstraints();

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddShedulesTable extends Migration
+class CreateRunWaypointTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class AddShedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shedules', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('group_id')->unsigned();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+        Schema::create('run_waypoint', function (Blueprint $table) {
+            $table->integer('run_id')->unsigned();
+            $table->integer('waypoint_id')->unsigned();
 
             // Foreing keys
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('run_id')->references('id')->on('runs');
+            $table->foreign('waypoint_id')->references('id')->on('waypoints');
         });
     }
 
@@ -32,13 +31,13 @@ class AddShedulesTable extends Migration
     public function down()
     {
         // Drop the foreign keys
-        Schema::table('shedules', function (Blueprint $table) {
-            $table->dropForeign(['group_id']);
+        Schema::table('run_waypoint', function (Blueprint $table) {
+            $table->dropForeign(['run_id', 'waypoint_id']);
         });
 
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('shedules');
+        Schema::dropIfExists('run_waypoint');
         Schema::enableForeignKeyConstraints();
     }
 }

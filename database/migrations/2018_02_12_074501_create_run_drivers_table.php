@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddGroupUserTable extends Migration
+class CreateRunDriversTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,21 @@ class AddGroupUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_user', function (Blueprint $table) {
+        Schema::create('run_drivers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('group_id')->unsigned();
+            $table->integer('run_id')->unsigned();
+            $table->integer('car_id')->unsigned();
+            $table->integer('car_type_id')->unsigned();
+            $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
 
             // Foreing keys
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('run_id')->references('id')->on('runs');
+            $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('car_type_id')->references('id')->on('car_types');
         });
     }
 
@@ -33,13 +39,13 @@ class AddGroupUserTable extends Migration
     public function down()
     {
         // Drop the foreign keys
-        Schema::table('group_user', function (Blueprint $table) {
-            $table->dropForeign(['group_id', 'user_id']);
+        Schema::table('run_drivers', function (Blueprint $table) {
+            $table->dropForeign(['user_id', 'run_id', 'car_id', 'car_type_id']);
         });
 
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('group_user');
+        Schema::dropIfExists('run_drivers');
         Schema::enableForeignKeyConstraints();
     }
 }

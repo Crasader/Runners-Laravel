@@ -14,6 +14,7 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->softDeletes();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('phone_number')->nullable();
@@ -29,6 +30,7 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
+        // Drop the table columns
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['firstname', 'lastname', 'phone_number', 'sex', 'status']);
         });

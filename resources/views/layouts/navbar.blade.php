@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
-                <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+                <img src="/img/logo.svg" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
             </a>
             <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
                 <span></span>
@@ -30,6 +30,10 @@
                     <div class="navbar-dropdown is-boxed">
                         <a class="navbar-item" href="/vehicule/create">
                             Créer véhicule
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="/vehicule/create">
+                            Créer type de véhicule
                         </a>
                     </div>
                 </div>

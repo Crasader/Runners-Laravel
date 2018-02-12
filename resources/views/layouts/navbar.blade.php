@@ -1,4 +1,4 @@
-<nav class="navbar is-transparent">
+<nav class="navbar is-light">
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
@@ -14,22 +14,22 @@
         <div class="navbar-menu">
             <div class="navbar-start">
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/courses">
-                        Courses
+                    <a class="navbar-link" href="/runs">
+                        Runs
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/courses/create">
-                            Créer courses
+                        <a class="navbar-item" href="/runs/create">
+                            Créer run
                         </a>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/voitures">
-                        Voitures
+                    <a class="navbar-link" href="/vehicules">
+                        Véhicules
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/voitures/create">
-                            Créer voiture
+                        <a class="navbar-item" href="/vehicule/create">
+                            Créer véhicule
                         </a>
                     </div>
                 </div>

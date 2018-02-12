@@ -1,39 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="section homepage">
+    <div class="section runners">
         <div class="container">
             <div class="columns">
-                <div class="column is-half">
+                <div class="column is-12">
                     <a href="#">
                         <div class="notification is-warning">
-                            <h2 class="title is-2 has-text-centered">Runs</h2>
+                            <h2 class="title is-2 has-text-centered">Tous</h2>
                         </div>
                     </a>
                 </div>
-                
-                <div class="column is-half">
-                    <a href="/chauffeurs">
+            </div>
+
+            <div class="columns">                
+                <div class="column is-12">
+                    <a href="#">
                         <div class="notification is-primary">
-                            <h2 class="title is-2 has-text-centered">Chauffeurs</h2>
+                            <h2 class="title is-2 has-text-centered">Kiéla?</h2>
                         </div>
                     </a>
                 </div>
             </div>
 
             <div class="columns">
-                <div class="column is-half">
+                <div class="column">
                     <a href="#">
                         <div class="notification is-success">
-                            <h2 class="title is-2 has-text-centered">Véhicules</h2>
+                            <h2 class="title is-2 has-text-centered">Groupes</h2>
                         </div>
                     </a>
                 </div>
-                
-                <div class="column is-half">
+            </div>
+
+            <div class="columns">
+                <div class="column">
                     <a href="#">
                         <div class="notification is-info">
-                            <h2 class="title is-2 has-text-centered">Stats</h2>
+                            <h2 class="title is-2 has-text-centered">Planning</h2>
                         </div>
                     </a>
                 </div>

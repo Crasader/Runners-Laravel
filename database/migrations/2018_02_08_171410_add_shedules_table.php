@@ -13,7 +13,7 @@ class AddShedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shedules', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id')->unsigned();
             $table->dateTime('start_time');
@@ -32,13 +32,13 @@ class AddShedulesTable extends Migration
     public function down()
     {
         // Drop the foreign keys
-        Schema::table('shedules', function (Blueprint $table) {
+        Schema::table('schedules', function (Blueprint $table) {
             $table->dropForeign(['group_id']);
         });
 
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('shedules');
+        Schema::dropIfExists('schedules');
         Schema::enableForeignKeyConstraints();
     }
 }

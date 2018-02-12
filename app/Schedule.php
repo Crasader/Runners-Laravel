@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\User;
+use App\Group;
 
-class Comment extends Model
+class Schedule extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,14 +14,14 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'content'
+        'start_time', 'end_time'
     ];
 
     /**
-     * The user who owns this comment
+     * The group that belong this schedule
      */
-    public function user()
+    public function group()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Group::class);
     }
 }

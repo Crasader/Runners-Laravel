@@ -5,6 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Role;
+use App\Group;
+use App\Comment;
+use App\RunDrivers;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,4 +31,36 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * The group that belong to the user.
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    /**
+     * The comments that belong to the user.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * The runner info for the user runs
+     */
+    public function runDrivers()
+    {
+        return $this->hasMany(RunDrivers::class);
+    }
 }

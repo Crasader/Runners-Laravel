@@ -17,6 +17,7 @@ class CreateCarTypesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->mediumText('description');
+            $table->integer('nb_places');
             $table->timestamps();
         });
     }

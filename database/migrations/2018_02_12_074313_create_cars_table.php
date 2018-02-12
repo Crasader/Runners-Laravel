@@ -20,7 +20,6 @@ class CreateCarsTable extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('color');
-            $table->integer('nb_places');
             $table->string('status');
             $table->integer('car_type_id')->unsigned();
             $table->softDeletes();

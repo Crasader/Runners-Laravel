@@ -9,6 +9,7 @@ use App\User;
 class Comment extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -18,6 +19,7 @@ class Comment extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The user who owns this comment
      */
     public function user()

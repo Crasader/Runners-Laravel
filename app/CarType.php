@@ -10,6 +10,7 @@ use App\RunDriver;
 class CarType extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,6 +20,7 @@ class CarType extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The cars in this type
      */
     public function cars()
@@ -27,6 +29,7 @@ class CarType extends Model
     }
 
     /**
+     * MODEL RELATION
      * The run driver who this car type is specified
      */
     public function runDrivers()

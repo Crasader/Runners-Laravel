@@ -10,6 +10,7 @@ use App\Schedule;
 class Group extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,6 +20,7 @@ class Group extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The users that belong to the group.
      */
     public function users()
@@ -27,6 +29,7 @@ class Group extends Model
     }
 
     /**
+     * MODEL RELATION
      * The shedules of this group
      */
     public function schedules()

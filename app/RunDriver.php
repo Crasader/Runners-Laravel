@@ -12,6 +12,7 @@ use App\Car;
 class RunDriver extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -21,6 +22,7 @@ class RunDriver extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The user who drive this run_driver
      */
     public function user()
@@ -29,6 +31,7 @@ class RunDriver extends Model
     }
 
     /**
+     * MODEL RELATION
      * The run who this run driver is assigned
      */
     public function run()
@@ -37,6 +40,7 @@ class RunDriver extends Model
     }
 
     /**
+     * MODEL RELATION
      * The type of car assigned to this driver
      */
     public function carType()
@@ -45,6 +49,7 @@ class RunDriver extends Model
     }
 
     /**
+     * MODEL RELATION
      * The car assigned to this driver
      */
     public function car()

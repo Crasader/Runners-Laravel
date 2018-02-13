@@ -9,6 +9,7 @@ use App\User;
 class Role extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -18,6 +19,7 @@ class Role extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The users that belong to the role.
      */
     public function users()

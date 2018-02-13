@@ -9,6 +9,7 @@ use App\Run;
 class Waypoint extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -18,6 +19,7 @@ class Waypoint extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The group that belong to the user.
      */
     public function runs()

@@ -9,6 +9,7 @@ use App\Group;
 class Schedule extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -18,6 +19,7 @@ class Schedule extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The group that belong this schedule
      */
     public function group()

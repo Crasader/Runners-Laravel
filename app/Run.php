@@ -10,6 +10,7 @@ use App\Waypoint;
 class Run extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,6 +20,7 @@ class Run extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The run who this run driver is assigned
      */
     public function runDrivers()
@@ -27,6 +29,7 @@ class Run extends Model
     }
 
     /**
+     * MODEL RELATION
      * The group that belong to the user.
      */
     public function waypoints()

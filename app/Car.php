@@ -10,6 +10,7 @@ use App\CarType;
 class Car extends Model
 {
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,6 +20,7 @@ class Car extends Model
     ];
 
     /**
+     * MODEL RELATION
      * The run drivers who this car is assigned
      */
     public function runDrivers()
@@ -27,6 +29,7 @@ class Car extends Model
     }
 
     /**
+     * MODEL RELATION
      * The type of this car
      */
     public function type()

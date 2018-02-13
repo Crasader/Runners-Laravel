@@ -15,6 +15,7 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array
@@ -24,6 +25,7 @@ class User extends Authenticatable
     ];
 
     /**
+     * MODEL PROPERTY
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -33,6 +35,7 @@ class User extends Authenticatable
     ];
 
     /**
+     * MODEL RELATION
      * The roles that belong to the user.
      */
     public function roles()
@@ -41,6 +44,7 @@ class User extends Authenticatable
     }
 
     /**
+     * MODEL RELATION
      * The group that belong to the user.
      */
     public function groups()
@@ -49,6 +53,7 @@ class User extends Authenticatable
     }
 
     /**
+     * MODEL RELATION
      * The comments that belong to the user.
      */
     public function comments()
@@ -57,6 +62,7 @@ class User extends Authenticatable
     }
 
     /**
+     * MODEL RELATION
      * The run_driver this user drive
      */
     public function runDriver()

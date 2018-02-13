@@ -9,7 +9,14 @@ use App\CarType;
 use App\Run;
 use App\User;
 use App\Comment;
+use App\Image;
 
+/**
+ * Car
+ * Retrive the cars datas
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Car extends Model
 {
     /**
@@ -65,5 +72,14 @@ class Car extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * MODEL RELATION
+     * The images pinned for this car
+     */
+    public function userImage()
+    {
+        return $this->morphMany(Image::class, 'have_image');
     }
 }

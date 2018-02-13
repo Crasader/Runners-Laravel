@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\User;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -11,10 +13,23 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+        /**
+         * Create base users
+         * Administrator, Production assistant...
+         */
+        $root = User::create([
+            'name' => 'root',
+            'email' => 'root@toor.paleo.ch',
             'password' => bcrypt('secret'),
+            'firstname' => 'Root',
+            'lastname' => 'Toor',
+            'phone_number' => '0794657846',
+            'sex' => 'm',
+            'status' => 'active'
         ]);
+
+        /**
+         * Create runners
+         */
     }
 }

@@ -11,7 +11,7 @@ use App\Waypoint;
  * RunWaypoint
  * This class represents the pivot table between runs and waypoints.
  * @author Bastien Nicoud
- * @package app
+ * @package App
  */
 class RunWaypoint extends Pivot
 {

@@ -18,7 +18,7 @@ use App\Image;
  * User
  * User model
  * @author Bastien Nicoud
- * @package app
+ * @package App
  */
 class User extends Authenticatable
 {
@@ -31,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'firstname', 'lastname', 'phone_number', 'sex', 'status'
     ];
 
     /**
@@ -132,5 +132,16 @@ class User extends Authenticatable
     public function userImage()
     {
         return $this->morphMany(Image::class, 'have_image');
+    }
+
+    /**
+     * MODEL ACCESSOR
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
     }
 }

@@ -11,7 +11,7 @@ use App\User;
  * Model for images, each images belongs to an user (the user who upload it),
  * and is attached to a model via polymorphic relation (have_image...) field.
  * @author Bastien Nicoud
- * @package app
+ * @package App
  */
 class Image extends Model
 {

@@ -22,7 +22,7 @@ class Comment extends Model
      * MODEL RELATION
      * The user who owns this comment
      */
-    public function user()
+    public function author()
     {
         return $this->belongsTo(User::class);
     }

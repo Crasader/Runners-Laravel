@@ -9,6 +9,7 @@ use App\Waypoint;
 use App\Car;
 use App\CarType;
 use App\User;
+use App\Comment;
 
 class Run extends Model
 {
@@ -65,5 +66,14 @@ class Run extends Model
     public function waypoints()
     {
         return $this->belongsToMany(Waypoint::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the run comments
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

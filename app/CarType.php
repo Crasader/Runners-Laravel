@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Car;
 use App\RunDriver;
 use App\Run;
+use App\Comment;
 
 class CarType extends Model
 {
@@ -45,5 +46,14 @@ class CarType extends Model
     public function runs()
     {
         return $this->belongsToMany(Run::class)->using(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the car type comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

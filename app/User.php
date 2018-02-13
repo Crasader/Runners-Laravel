@@ -12,6 +12,7 @@ use App\RunDriver;
 use App\Schedule;
 use App\Run;
 use App\Car;
+use App\Image;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,15 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
+     * The images that belong to the user.
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    /**
+     * MODEL RELATION
      * The run_driver this user drive
      */
     public function runDriver()
@@ -98,5 +108,23 @@ class User extends Authenticatable
     public function schedules()
     {
         return $this->hasManyThrough(Schedule::class, Group::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the comments on this profile (not the comments who belongs to this user)
+     */
+    public function commented()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * MODEL RELATION
+     * The images pinned for this user (profile and conduct card)
+     */
+    public function imaged()
+    {
+        return $this->morphMany(Image::class, 'have_image');
     }
 }

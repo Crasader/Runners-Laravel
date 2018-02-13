@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Run;
+use App\Comment;
 
 class Waypoint extends Model
 {
@@ -25,5 +26,14 @@ class Waypoint extends Model
     public function runs()
     {
         return $this->belongsToMany(Run::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the waypoints comments
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

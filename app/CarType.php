@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Car;
 use App\RunDriver;
+use App\Run;
 
 class CarType extends Model
 {
@@ -35,5 +36,14 @@ class CarType extends Model
     public function runDrivers()
     {
         return $this->hasMany(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The runs who this car type is assigned (vie the run_drivers)
+     */
+    public function runs()
+    {
+        return $this->belongsToMany(Run::class)->using(RunDriver::class);
     }
 }

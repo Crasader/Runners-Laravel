@@ -26,4 +26,13 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * MODEL RELATION
+     * Get all of the owning commentable models.
+     */
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 }

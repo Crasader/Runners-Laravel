@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\RunDriver;
 use App\CarType;
+use App\Run;
+use App\User;
+use App\Comment;
 
 class Car extends Model
 {
@@ -35,5 +38,32 @@ class Car extends Model
     public function type()
     {
         return $this->belongsTo(CarType::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The runs who this car is assigned (vie the run_drivers)
+     */
+    public function runs()
+    {
+        return $this->belongsToMany(Run::class)->using(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The runners who drive this car (via the run_driver)
+     */
+    public function runners()
+    {
+        return $this->belongsToMany(User::class)->using(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the car's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

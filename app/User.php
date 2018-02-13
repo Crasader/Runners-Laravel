@@ -8,11 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\Group;
 use App\Comment;
-use App\RunDrivers;
+use App\RunDriver;
+use App\Schedule;
+use App\Run;
+use App\Car;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * MODEL PROPERTY
@@ -49,7 +52,7 @@ class User extends Authenticatable
      */
     public function groups()
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
     /**
@@ -68,5 +71,32 @@ class User extends Authenticatable
     public function runDriver()
     {
         return $this->hasMany(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The runs who this user is mandated
+     */
+    public function runs()
+    {
+        return $this->belongsToMany(Run::class)->using(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The cars who this user drives (vie run_driver)
+     */
+    public function cars()
+    {
+        return $this->belongsToMany(Car::class)->using(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all the schedules of this user (via the group)
+     */
+    public function schedules()
+    {
+        return $this->hasManyThrough(Schedule::class, Group::class);
     }
 }

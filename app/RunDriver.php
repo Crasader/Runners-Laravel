@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 use App\User;
 use App\Run;
 use App\CarType;
 use App\Car;
 
-class RunDriver extends Model
+class RunDriver extends Pivot
 {
     /**
      * MODEL PROPERTY

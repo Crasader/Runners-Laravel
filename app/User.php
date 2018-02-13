@@ -14,6 +14,12 @@ use App\Run;
 use App\Car;
 use App\Image;
 
+/**
+ * User
+ * User model
+ * @author Bastien Nicoud
+ * @package app
+ */
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
@@ -123,7 +129,7 @@ class User extends Authenticatable
      * MODEL RELATION
      * The images pinned for this user (profile and conduct card)
      */
-    public function imaged()
+    public function userImage()
     {
         return $this->morphMany(Image::class, 'have_image');
     }

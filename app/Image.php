@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 
+/**
+ * Image
+ * Model for images, each images belongs to an user (the user who upload it),
+ * and is attached to a model via polymorphic relation (have_image...) field.
+ * @author Bastien Nicoud
+ * @package app
+ */
 class Image extends Model
 {
     /**
@@ -33,6 +40,6 @@ class Image extends Model
      */
     public function haveImage()
     {
-        return $this->morphTo();
+        return $this->morphTo(null, 'have_image_type', 'have_image_id');
     }
 }

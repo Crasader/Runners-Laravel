@@ -57,10 +57,10 @@ class User extends Authenticatable
     }
 
     /**
-     * The runner info for the user runs
+     * The run_driver this user drive
      */
-    public function runDrivers()
+    public function runDriver()
     {
-        return $this->hasMany(RunDrivers::class);
+        return $this->hasMany(RunDriver::class);
     }
 }

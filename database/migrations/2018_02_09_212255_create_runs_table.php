@@ -17,7 +17,6 @@ class CreateRunsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('status');
-            $table->integer('drafting');
             $table->dateTime('published_at');
             $table->dateTime('planned_at');
             $table->dateTime('end_planned_at');

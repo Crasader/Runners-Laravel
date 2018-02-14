@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Role;
 use App\Group;
@@ -143,5 +144,16 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "{$this->firstname} {$this->lastname}";
+    }
+
+    /**
+     * MODEL ACCESSOR
+     * Get the user's slug
+     *
+     * @return string
+     */
+    public function getSlugAttribute()
+    {
+        return str_slug("{$this->firstname} {$this->lastname}");
     }
 }

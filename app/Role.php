@@ -15,7 +15,18 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'permissions',
+        'name', 'slug', 'permissions'
+    ];
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be cast to native types.
+     * (Here serialize and deserialize the permissions field to native php array)
+     *
+     * @var array
+     */
+    protected $casts = [
+        'permissions' => 'array'
     ];
 
     /**

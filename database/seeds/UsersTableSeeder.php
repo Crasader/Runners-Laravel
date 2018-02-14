@@ -3,7 +3,14 @@
 use Illuminate\Database\Seeder;
 
 use App\User;
+use App\Role;
 
+/**
+ * UsersTableSeeder
+ * Create all the users in the database.
+ * 
+ * @author Bastien Nicoud
+ */
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -14,12 +21,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         /**
+         * Gets the roles to easily attach them to users in the seeder
+         */
+        $admin       = Role::where('slug', 'admin')->first();
+        $coordinator = Role::where('slug', 'coordinator')->first();
+        $runner      = Role::where('slug', 'runner')->first();
+
+        /**
          * Create base users
          * Administrator, Production assistant...
          */
         $root = User::create([
             'name' => 'root',
-            'email' => 'root@toor.paleo.ch',
+            'email' => 'root.toor@paleo.ch',
             'password' => bcrypt('secret'),
             'firstname' => 'Root',
             'lastname' => 'Toor',
@@ -27,6 +41,8 @@ class UsersTableSeeder extends Seeder
             'sex' => 'm',
             'status' => 'active'
         ]);
+        // Asociate the admin role
+        $root->roles()->save($admin);
 
         /**
          * Create runners

@@ -18,8 +18,8 @@ class UpdateUsersTable extends Migration
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('phone_number')->nullable();
-            $table->boolean('sex')->nullable();
-            $table->string('status')->nullable();
+            $table->string('sex', 2)->nullable();
+            $table->string('status')->default('not-requested');
         });
     }
 

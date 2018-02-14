@@ -14,10 +14,8 @@ class AddGroupUserTable extends Migration
     public function up()
     {
         Schema::create('group_user', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('group_id')->unsigned();
-            $table->timestamps();
 
             // Foreing keys
             $table->foreign('user_id')->references('id')->on('users');

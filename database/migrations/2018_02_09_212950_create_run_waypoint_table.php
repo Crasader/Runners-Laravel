@@ -16,6 +16,7 @@ class CreateRunWaypointTable extends Migration
         Schema::create('run_waypoint', function (Blueprint $table) {
             $table->integer('run_id')->unsigned();
             $table->integer('waypoint_id')->unsigned();
+            $table->integer('order')->unsigned();
 
             // Foreing keys
             $table->foreign('run_id')->references('id')->on('runs');

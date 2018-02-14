@@ -16,13 +16,13 @@ class AddCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->text('content');
             $table->integer('commentable_id')->unsigned();
             $table->string('commentable_type');
+            $table->text('content');
             $table->timestamps();
 
             // Foreing keys
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

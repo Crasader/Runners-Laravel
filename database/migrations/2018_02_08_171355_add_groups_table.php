@@ -16,8 +16,7 @@ class AddGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('color');
-            $table->string('name');
-            $table->boolean('active');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

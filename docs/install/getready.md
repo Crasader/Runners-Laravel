@@ -7,6 +7,7 @@ php artisan migrate:fresh --seed
 ```
 
 This command will create a fresh database with the seeds specified in the `database/seeds` folder.
+If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/migrationAndSeeding.md) doc page.
 
 ## Runners is ready
 

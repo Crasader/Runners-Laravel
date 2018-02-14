@@ -44,10 +44,7 @@ class GroupsTableSeeder extends Seeder
          * insert all these groups in the database
          */
         foreach($groups as $group) {
-            Group::create([
-                'color' => $group['color'],
-                'name'  => $group['name']
-            ]);
+            Group::create($group);
         }
     }
 }

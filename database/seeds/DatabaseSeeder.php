@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             GroupsTableSeeder::class,
             SchedulesTableSeeder::class,
+            CarTypesTableSeeder::class,
             UsersTableSeeder::class
         ]);
     }

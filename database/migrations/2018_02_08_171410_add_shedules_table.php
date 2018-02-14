@@ -15,12 +15,12 @@ class AddShedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id')->unsigned();
+            $table->integer('group_id')->unsigned()->nullable();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
 
             // Foreing keys
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 

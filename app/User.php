@@ -18,6 +18,7 @@ use App\Image;
 /**
  * User
  * User model
+ *
  * @author Bastien Nicoud
  * @package App
  */
@@ -44,6 +45,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * MODEL RELATION

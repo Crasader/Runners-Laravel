@@ -20,11 +20,31 @@ class Schedule extends Model
     ];
 
     /**
+     * MODEL PROPERTY
      * Remove model timestamps
      *
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_time',
+        'end_time'
+    ];
+
+    /**
+     * MODEL PROPERTY
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d H:i';
 
     /**
      * MODEL RELATION
@@ -39,7 +59,7 @@ class Schedule extends Model
      * MODEL RELATION
      * Get all the users they have this shedule (via the group)
      */
-    public function schedules()
+    public function users()
     {
         return $this->hasManyThrough(User::class, Group::class);
     }

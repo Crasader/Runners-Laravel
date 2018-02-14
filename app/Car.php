@@ -14,6 +14,7 @@ use App\Image;
 /**
  * Car
  * Retrive the cars datas
+ *
  * @author Bastien Nicoud
  * @package App
  */

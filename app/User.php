@@ -14,6 +14,7 @@ use App\Schedule;
 use App\Run;
 use App\Car;
 use App\Image;
+use App\Festival;
 
 /**
  * User
@@ -52,7 +53,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * MODEL RELATION
@@ -61,6 +64,15 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The paleo festival editions who the user have participed
+     */
+    public function festivals()
+    {
+        return $this->belongsToMany(Festival::class);
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Car;
 use App\CarType;
 use App\User;
 use App\Comment;
+use App\Artist;
 
 /**
  * Run
@@ -91,6 +92,15 @@ class Run extends Model
     public function waypoints()
     {
         return $this->belongsToMany(Waypoint::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The artist transported in this run
+     */
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
     }
 
     /**

@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Run;
+use App\User;
 use App\Comment;
 
 /**
- * Artist
- * Artists model
+ * Festival
+ * Festivals model
  *
  * @author Bastien Nicoud
  * @package App
  */
-class Artist extends Model
+class Festival extends Model
 {
     use SoftDeletes;
 
@@ -26,7 +26,7 @@ class Artist extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'starts_on', 'ends_on'
     ];
 
     /**
@@ -36,22 +36,23 @@ class Artist extends Model
      * @var array
      */
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
+        'starts_on',
+        'ends_on'
     ];
 
     /**
      * MODEL RELATION
-     * The runs where this artist is asigned
+     * The users who have participate to this edition of paleo festival
      */
-    public function runs()
+    public function users()
     {
-        return $this->belongsToMany(Run::class);
+        return $this->belongsToMany(User::class);
     }
 
     /**
      * MODEL RELATION
-     * Get all of the artists comments
-     * Actually not used, but if you want to comment a given artist ??!
+     * Comments on this edition of paleo festival
      */
     public function comments()
     {

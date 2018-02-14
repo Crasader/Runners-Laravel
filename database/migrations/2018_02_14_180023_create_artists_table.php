@@ -5,11 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * CreateWaypointsTable
+ * CreateArtistsTable
  * 
  * @author Bastien Nicoud
  */
-class CreateWaypointsTable extends Migration
+class CreateArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +18,10 @@ class CreateWaypointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('waypoints', function (Blueprint $table) {
+        Schema::create('artists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -34,7 +35,7 @@ class CreateWaypointsTable extends Migration
     {
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('waypoints');
+        Schema::dropIfExists('artists');
         Schema::enableForeignKeyConstraints();
     }
 }

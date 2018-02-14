@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateCarTypesTable
+ * 
+ * @author Bastien Nicoud
+ */
 class CreateCarTypesTable extends Migration
 {
     /**

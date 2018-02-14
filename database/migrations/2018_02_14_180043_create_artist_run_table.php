@@ -5,11 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * AddShedulesTable
+ * CreateArtistRunTable
  * 
  * @author Bastien Nicoud
  */
-class AddShedulesTable extends Migration
+class CreateArtistRunTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,14 +18,13 @@ class AddShedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('group_id')->unsigned()->nullable();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+        Schema::create('artist_run', function (Blueprint $table) {
+            $table->integer('artist_id')->unsigned();
+            $table->integer('run_id')->unsigned();
 
             // Foreing keys
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('artist_id')->references('id')->on('artists');
+            $table->foreign('run_id')->references('id')->on('runs');
         });
     }
 
@@ -37,13 +36,13 @@ class AddShedulesTable extends Migration
     public function down()
     {
         // Drop the foreign keys
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->dropForeign(['group_id']);
+        Schema::table('artist_run', function (Blueprint $table) {
+            $table->dropForeign(['artist_id', 'run_id']);
         });
 
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('artist_run');
         Schema::enableForeignKeyConstraints();
     }
 }

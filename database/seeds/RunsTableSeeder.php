@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Carbon\Carbon;
+
 /**
  * RunsTableSeeder
  * Create runs in the db
@@ -17,6 +19,14 @@ class RunsTableSeeder extends Seeder
      */
     public function run()
     {
+        // The number of runs you want to generate in the db
+        $runsAmount = 60;
+
+        // Festival first day and festival last day
+        // use to generate the runs in a known period
+        $paleoStartDate = Carbon::createFromFormat('Y-m-d', '2017-07-18');
+        $paleoEndDate   = Carbon::createFromFormat('Y-m-d', '2017-07-24');
+
         // Artists for which runs will be created
         $artists = collect([
             "RED HOT CHILI PEPPERS",
@@ -117,6 +127,7 @@ class RunsTableSeeder extends Seeder
         ]);
 
         // Little notes to simulate runs notes (randomly assigned to runs)
+        // These notes will be assigned to the run via a comment
         $notes = collect([
             'Band départ 11 Pax',
             'Crew départ 1 Pax, 1 VALISE + 1 SAC',
@@ -129,6 +140,16 @@ class RunsTableSeeder extends Seeder
             'divers transfert Pax'
         ]);
 
+        // The status possible for a run
+        $status = collect([
+            'drafting',
+            'published',
+            'finalizing',
+            'started',
+            'finished',
+            'error'
+        ]);
+
         // Create runs randomly using the datas indicated above
         // This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
 
@@ -137,5 +158,11 @@ class RunsTableSeeder extends Seeder
         // Associate waypoints
         // Add a status (define the published at if the run is published)
         // Add a planned at and end_planned at
+
+        // We iterates for the amount of runs we want to create (value specified on the top of this class)
+        for ($i=0; $i < $runsAmount; $i++) { 
+
+            
+        }
     }
 }

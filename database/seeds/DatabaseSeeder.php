@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             CarTypesTableSeeder::class,
             CarsTableSeeder::class,
             WaypointsTableSeeder::class,
-            UsersTableSeeder::class
+            UsersTableSeeder::class,
+            RunsTableSeeder::class,
+            AssociateRunnersAndCarsToRunSeeder::class
         ]);
     }
 }

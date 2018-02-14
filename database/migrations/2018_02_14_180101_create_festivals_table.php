@@ -9,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
  * 
  * @author Bastien Nicoud
  */
-class CreateFestivalTable extends Migration
+class CreateFestivalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateFestivalTable extends Migration
      */
     public function up()
     {
-        Schema::create('festival', function (Blueprint $table) {
+        Schema::create('festivals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->dateTime('starts_on')->nullable();
@@ -37,7 +37,7 @@ class CreateFestivalTable extends Migration
     {
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('festival');
+        Schema::dropIfExists('festivals');
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateWaypointsTable
+ * 
+ * @author Bastien Nicoud
+ */
 class CreateWaypointsTable extends Migration
 {
     /**

@@ -2,6 +2,14 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Artist;
+
+/**
+ * ArtistsTableSeeder
+ * Populates the artist table
+ * 
+ * @author Bastien Nicoud
+ */
 class ArtistsTableSeeder extends Seeder
 {
     /**
@@ -112,7 +120,9 @@ class ArtistsTableSeeder extends Seeder
 
         // Insert these artists in the database
         foreach ($artists as $artist) {
-            
+            Artist::create([
+                'name' => $artist
+            ]);
         }
     }
 }

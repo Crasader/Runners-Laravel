@@ -20,6 +20,7 @@ class CreateFestivalsTable extends Migration
     {
         Schema::create('festivals', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('edition');
             $table->string('name');
             $table->dateTime('starts_on')->nullable();
             $table->dateTime('ends_on')->nullable();

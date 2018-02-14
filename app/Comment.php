@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 
+/**
+ * Comment
+ * Comments model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Comment extends Model
 {
     /**

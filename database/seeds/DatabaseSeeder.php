@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             GroupsTableSeeder::class,
             SchedulesTableSeeder::class,
             CarTypesTableSeeder::class,
+            CarsTableSeeder::class,
+            WaypointsTableSeeder::class,
             UsersTableSeeder::class
         ]);
     }

@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Run;
 use App\Comment;
 
+/**
+ * Waypoint
+ * Waypoints model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Waypoint extends Model
 {
     /**

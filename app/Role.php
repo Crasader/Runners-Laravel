@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 
+/**
+ * Role
+ * Roles model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Role extends Model
 {
     /**

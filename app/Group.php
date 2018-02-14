@@ -8,6 +8,13 @@ use App\User;
 use App\Schedule;
 use App\Comment;
 
+/**
+ * Group
+ * Groups model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Group extends Model
 {
     /**

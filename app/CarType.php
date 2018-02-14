@@ -9,6 +9,13 @@ use App\RunDriver;
 use App\Run;
 use App\Comment;
 
+/**
+ * CarType
+ * Car types model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class CarType extends Model
 {
     /**

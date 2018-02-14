@@ -9,6 +9,13 @@ use App\Run;
 use App\CarType;
 use App\Car;
 
+/**
+ * RuneDriver
+ * Model to represent the Pivot table between users, runs, cars
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class RunDriver extends Pivot
 {
     /**

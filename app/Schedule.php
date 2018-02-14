@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Group;
 use App\User;
 
+/**
+ * Schedule
+ * Schedules model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Schedule extends Model
 {
     /**

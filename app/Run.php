@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\RunDriver;
 use App\Waypoint;
@@ -11,8 +12,17 @@ use App\CarType;
 use App\User;
 use App\Comment;
 
+/**
+ * Run
+ * Runs model
+ *
+ * @author Bastien Nicoud
+ * @package App
+ */
 class Run extends Model
 {
+    use SoftDeletes;
+
     /**
      * MODEL PROPERTY
      * The attributes that are mass assignable.
@@ -21,6 +31,21 @@ class Run extends Model
      */
     protected $fillable = [
         'name', 'status', 'published_at', 'planned_at', 'end_planned_at', 'started_at', 'ended_at', 'passengers'
+    ];
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
+        'published_at',
+        'planned_at',
+        'end_planned_at',
+        'started_at',
+        'ended_at'
     ];
 
     /**

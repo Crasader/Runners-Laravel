@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\Car;
+use App\CarType;
 
 /**
  * CarsTableSeeder
@@ -19,6 +20,75 @@ class CarsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Retrive the car types to easily attach them after
+        $vito  = CarType::where('name', 'VITO')->first();
+        $limo  = CarType::where('name', 'LIMO')->first();
+        $matos = CarType::where('name', 'MATOS')->first();
+
+        /**
+         * 12 Vito bus
+         */
+        for ($i = 0; $i < 12; $i++) {
+            $tmpCar = Car::create([
+                'plate_number' => 'AI ' . rand(1000000, 200000),
+                'brand'        => 'Mercedes',
+                'model'        => 'Vito',
+                'color'        => 'noir',
+                'status'       => 'free'
+            ]);
+            // Set the car type to $vito
+            $tmpCar->type()->associate($vito);
+            $tmpCar->save();
+        }
+
+        /**
+         * 2 Limos
+         */
+        $tmpLimo = Car::create([
+            'plate_number' => 'VD ' . rand(1000000, 500000),
+            'brand'        => 'Mercedes',
+            'model'        => 'S500',
+            'color'        => 'noir',
+            'status'       => 'free'
+        ]);
+        // Set the car type to $limo
+        $tmpLimo->type()->associate($limo);
+        $tmpLimo->save();
+
+        $tmpLimo = Car::create([
+            'plate_number' => 'VD ' . rand(1000000, 500000),
+            'brand'        => 'Mercedes',
+            'model'        => 'S350',
+            'color'        => 'blue',
+            'status'       => 'free'
+        ]);
+        // Set the car type to $limo
+        $tmpLimo->type()->associate($limo);
+        $tmpLimo->save();
+
+        /**
+         * 2 matos
+         */
+        $tmpMatos = Car::create([
+            'plate_number' => 'VD ' . rand(1000000, 500000),
+            'brand'        => 'Peugeot',
+            'model'        => 'Boxer',
+            'color'        => 'white',
+            'status'       => 'free'
+        ]);
+        // Set the car type to $matos
+        $tmpMatos->type()->associate($matos);
+        $tmpMatos->save();
+
+        $tmpMatos = Car::create([
+            'plate_number' => 'VD ' . rand(1000000, 500000),
+            'brand'        => 'Peugeot',
+            'model'        => 'Kangoo',
+            'color'        => 'white',
+            'status'       => 'free'
+        ]);
+        // Set the car type to $matos
+        $tmpMatos->type()->associate($matos);
+        $tmpMatos->save();
     }
 }

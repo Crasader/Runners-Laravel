@@ -24,7 +24,7 @@ class CreateRunDriversTable extends Migration
             $table->integer('run_id')->unsigned()->nullable();
             $table->integer('car_id')->unsigned()->nullable();
             $table->integer('car_type_id')->unsigned()->nullable();
-            $table->string('status');
+            $table->string('status')->default('sollicited');
             $table->softDeletes();
             $table->timestamps();
 

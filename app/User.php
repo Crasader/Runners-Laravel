@@ -122,15 +122,6 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * Get all the schedules of this user (via the group)
-     */
-    public function schedules()
-    {
-        return $this->hasManyThrough(Schedule::class, Group::class);
-    }
-
-    /**
-     * MODEL RELATION
      * Get all of the comments on this profile (not the comments who belongs to this user)
      */
     public function commented()

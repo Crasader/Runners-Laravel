@@ -45,8 +45,6 @@ class RunsTableSeeder extends Seeder
         $status = collect([
             'drafting',
             'drafting',
-            'drafting',
-            'published',
             'published',
             'published',
             'finalizing',
@@ -161,7 +159,7 @@ class RunsTableSeeder extends Seeder
 
                 }
 
-                // IF the run is finished we hawe to generate an ended_at
+                // IF the run is finished we have to generate an ended_at
                 if ($run['status'] === 'finished') {
 
                     // create a start time with 0 to 30 minutes of delay from the planned at time

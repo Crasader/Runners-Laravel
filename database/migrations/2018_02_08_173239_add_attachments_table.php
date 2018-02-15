@@ -21,8 +21,8 @@ class AddAttachmentsTable extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('attachable_id')->unsigned();
-            $table->string('attachable_type');
+            $table->integer('attachable_id')->unsigned()->nullable();
+            $table->string('attachable_type')->nullable();
             $table->string('type')->nullable(); // To describe the type of image (driver's license, profile picture, ...)
             $table->string('title')->nullable(); // Eventual title for the picture
             $table->string('path');

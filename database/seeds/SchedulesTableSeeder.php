@@ -27,7 +27,7 @@ class SchedulesTableSeeder extends Seeder
         $generateSchedules = 'random';
 
         /**
-         * Declare all the schedules (if you don use the random generator)
+         * Declare all the schedules (if you don't use the random generator)
          */
         $schedules = [
             // Paleo edition 2017

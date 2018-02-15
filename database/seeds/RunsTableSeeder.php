@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use App\Festival;
 use App\Artist;
 use App\Run;
+use App\Comment;
+use App\User;
+use App\Waypoint;
 
 /**
  * RunsTableSeeder
@@ -174,6 +177,18 @@ class RunsTableSeeder extends Seeder
 
                 // Assign the artist of this run
                 $createdRun->artists()->save($selectedArtist);
+
+                // Sets random waypoints for the run
+                $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 1]);
+                $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 2]);
+
+                // Insert random notes to the run
+                // create a comment with a random note and user
+                $comment = new Comment(['content' => $notes->random()]);
+                $comment->author()->associate(User::all()->random());
+                $comment->save();
+                // Atach the comment to the run
+                $createdRun->comments()->save($comment);
 
             }
         }

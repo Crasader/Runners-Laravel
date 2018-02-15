@@ -13,7 +13,7 @@ use App\RunDriver;
 use App\Schedule;
 use App\Run;
 use App\Car;
-use App\Image;
+use App\Attachment;
 use App\Festival;
 
 /**
@@ -86,7 +86,7 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * The comments that belong to the user.
+     * The comments that belong to the user (posted by this user).
      */
     public function comments()
     {
@@ -95,20 +95,11 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * The images that belong to the user.
+     * The attachments that belong to the user (posted by this user).
      */
-    public function images()
+    public function attachments()
     {
-        return $this->hasMany(Image::class);
-    }
-
-    /**
-     * MODEL RELATION
-     * The run_driver this user drive
-     */
-    public function runDriver()
-    {
-        return $this->hasMany(RunDriver::class);
+        return $this->hasMany(Attachment::class);
     }
 
     /**
@@ -149,11 +140,20 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * The images pinned for this user (profile and conduct card)
+     * Gets the driver license for this user
      */
-    public function userImage()
+    public function driverLicense()
     {
-        return $this->morphMany(Image::class, 'have_image');
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'driverLicense');
+    }
+
+    /**
+     * MODEL RELATION
+     * Gets the profile picture for this user
+     */
+    public function profilePicture()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'profilePicture');
     }
 
     /**

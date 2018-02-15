@@ -24,7 +24,7 @@ class RunsTableSeeder extends Seeder
     public function run()
     {
         // The number of runs you want to generate for each edition of the paleo festival
-        $runsAmount = 10;
+        $runsAmount = 50;
 
         // Little notes to simulate runs notes (randomly assigned to runs)
         // These notes will be assigned to the run via a comment

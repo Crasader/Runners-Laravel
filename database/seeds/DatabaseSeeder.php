@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             WaypointsTableSeeder::class,
             UsersTableSeeder::class,
             ArtistsTableSeeder::class,
+            AttachmentsTableSeeder::class,
             RunsTableSeeder::class,
             AssociateRunnersAndCarsToRunSeeder::class
         ]);

@@ -88,18 +88,18 @@ class User extends Authenticatable
      * MODEL RELATION
      * The comments that belong to the user (posted by this user).
      */
-    public function comments()
+    public function commentsOwner()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'user_id');
     }
 
     /**
      * MODEL RELATION
      * The attachments that belong to the user (posted by this user).
      */
-    public function attachments()
+    public function attachmentsOwner()
     {
-        return $this->hasMany(Attachment::class);
+        return $this->hasMany(Attachment::class, 'user_id');
     }
 
     /**
@@ -124,7 +124,7 @@ class User extends Authenticatable
      * MODEL RELATION
      * Get all of the comments on this profile (not the comments who belongs to this user)
      */
-    public function commented()
+    public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
@@ -133,9 +133,9 @@ class User extends Authenticatable
      * MODEL RELATION
      * Gets the driver license for this user
      */
-    public function driverLicense()
+    public function attachments()
     {
-        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'driverLicense');
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
     /**

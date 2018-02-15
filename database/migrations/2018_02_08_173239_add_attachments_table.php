@@ -5,11 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * AddImagesTable
+ * AddAttachmentsTable
  * 
  * @author Bastien Nicoud
  */
-class AddImagesTable extends Migration
+class AddAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.

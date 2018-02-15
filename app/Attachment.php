@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 
 /**
- * Image
- * Model for images, each images belongs to an user (the user who upload it),
+ * Attachment
+ * Model to save atachments (images, files...)
  * and is attached to a model via polymorphic relation (have_image...) field.
+ *
  * @author Bastien Nicoud
  * @package App
  */
-class Image extends Model
+class Attachment extends Model
 {
     /**
      * MODEL PROPERTY
@@ -31,15 +32,15 @@ class Image extends Model
      */
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
      * MODEL RELATION
      * Get all of the owning image pinnable models.
      */
-    public function haveImage()
+    public function attachable()
     {
-        return $this->morphTo(null, 'have_image_type', 'have_image_id');
+        return $this->morphTo();
     }
 }

@@ -2,7 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\User;
 use App\Run;
@@ -16,8 +17,10 @@ use App\Car;
  * @author Bastien Nicoud
  * @package App
  */
-class RunDriver extends Pivot
+class RunDriver extends Model
 {
+    use SoftDeletes;
+
     /**
      * MODEL PROPERTY
      * The attributes that are mass assignable.
@@ -26,6 +29,16 @@ class RunDriver extends Pivot
      */
     protected $fillable = [
         'status'
+    ];
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
     ];
 
     /**

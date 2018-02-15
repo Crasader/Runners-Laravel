@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
          * If you specify new groups or roles, don't forget to add it in the corresponding seeders
          */
         $users = [
-            // ['lastname', 'firstname', 'phone_number', 'sex', 'group', 'role', 'status']
+            // ['lastname', 'firstname', 'phone_number', 'sex', 'group', 'role']
             // Coordinators
             ['Fleischman',    'Roland',      '4749624639', 'm', 'secret', 'C1', 'coordinator'],
             ['Borel',         'Julien',      '4749624639', 'm', 'secret', 'C1', 'coordinator'],
@@ -130,6 +130,9 @@ class UsersTableSeeder extends Seeder
             // Attach the right role and group for this user
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());
             $tmpUser->groups()->save(Group::where('name', $user[5])->first());
+            // Attatch the 2016 and 2017 edition of pale to this user
+            // (for dev we assume all user have participed to all editions)
+            $tmpUser->festivals()->attach([1, 2]);
         }
     }
 }

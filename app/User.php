@@ -13,7 +13,8 @@ use App\RunDriver;
 use App\Schedule;
 use App\Run;
 use App\Car;
-use App\Image;
+use App\Attachment;
+use App\Festival;
 
 /**
  * User
@@ -52,7 +53,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * MODEL RELATION
@@ -61,6 +64,15 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The paleo festival editions who the user have participed
+     */
+    public function festivals()
+    {
+        return $this->belongsToMany(Festival::class);
     }
 
     /**
@@ -74,29 +86,20 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * The comments that belong to the user.
+     * The comments that belong to the user (posted by this user).
      */
-    public function comments()
+    public function commentsOwner()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'user_id');
     }
 
     /**
      * MODEL RELATION
-     * The images that belong to the user.
+     * The attachments that belong to the user (posted by this user).
      */
-    public function images()
+    public function attachmentsOwner()
     {
-        return $this->hasMany(Image::class);
-    }
-
-    /**
-     * MODEL RELATION
-     * The run_driver this user drive
-     */
-    public function runDriver()
-    {
-        return $this->hasMany(RunDriver::class);
+        return $this->hasMany(Attachment::class, 'user_id');
     }
 
     /**
@@ -119,29 +122,29 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * Get all the schedules of this user (via the group)
-     */
-    public function schedules()
-    {
-        return $this->hasManyThrough(Schedule::class, Group::class);
-    }
-
-    /**
-     * MODEL RELATION
      * Get all of the comments on this profile (not the comments who belongs to this user)
      */
-    public function commented()
+    public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**
      * MODEL RELATION
-     * The images pinned for this user (profile and conduct card)
+     * Gets the driver license for this user
      */
-    public function userImage()
+    public function attachments()
     {
-        return $this->morphMany(Image::class, 'have_image');
+        return $this->morphMany(Attachment::class, 'attachable');
+    }
+
+    /**
+     * MODEL RELATION
+     * Gets the profile picture for this user
+     */
+    public function profilePicture()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'profilePicture');
     }
 
     /**

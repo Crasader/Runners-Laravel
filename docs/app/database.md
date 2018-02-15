@@ -12,6 +12,6 @@
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](migrationAndSeeding.md) // [Summary](../README.md) // [Next ->](lifecycle.md)**
 
 </div>

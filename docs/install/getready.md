@@ -1,5 +1,13 @@
 # Get the app ready
 
+## System locale
+
+Dont forget to install the french locale on our system, example on ubuntu :
+
+```sh
+sudo locale-gen fr_FR.UTF-8
+```
+
 ## Migrate the database
 
 ```sh

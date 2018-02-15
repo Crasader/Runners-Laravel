@@ -11,6 +11,7 @@ use App\Car;
 use App\CarType;
 use App\User;
 use App\Comment;
+use App\Artist;
 
 /**
  * Run
@@ -50,11 +51,11 @@ class Run extends Model
 
     /**
      * MODEL RELATION
-     * The run who this run driver is assigned
+     * The diffrents stakolders for the run (user, car, car_type)
      */
-    public function runDrivers()
+    public function subscriptions()
     {
-        return $this->hasMany(RunDriver::class);
+        return $this->hasMany(RunDriver::class, 'run_id');
     }
 
     /**
@@ -63,7 +64,10 @@ class Run extends Model
      */
     public function runners()
     {
-        return $this->belongsToMany(User::class)->using(RunDriver::class);
+        return $this->belongsToMany(User::class, 'run_drivers', 'run_id', 'user_id')
+                    ->using(RunDriver::class)
+                    ->withPivot(["car_type_id","car_id"])
+                    ->withTimestamps();
     }
 
     /**
@@ -72,7 +76,10 @@ class Run extends Model
      */
     public function cars()
     {
-        return $this->belongsToMany(Car::class)->using(RunDriver::class);
+        return $this->belongsToMany(Car::class, 'run_drivers')
+                    ->using(RunDriver::class)
+                    ->withPivot(["user_id","car_type_id"])
+                    ->withTimestamps();
     }
 
     /**
@@ -81,7 +88,10 @@ class Run extends Model
      */
     public function carTypes()
     {
-        return $this->belongsToMany(CarType::class)->using(RunDriver::class);
+        return $this->belongsToMany(CarType::class, 'run_drivers')
+                    ->using(RunDriver::class)
+                    ->withPivot(["user_id","car_id"])
+                    ->withTimestamps();
     }
 
     /**
@@ -90,7 +100,16 @@ class Run extends Model
      */
     public function waypoints()
     {
-        return $this->belongsToMany(Waypoint::class);
+        return $this->belongsToMany(Waypoint::class)->withPivot("order");
+    }
+
+    /**
+     * MODEL RELATION
+     * The artist transported in this run
+     */
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
     }
 
     /**

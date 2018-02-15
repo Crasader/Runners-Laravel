@@ -10,9 +10,17 @@ Here we found all the documentation for the Runners project.
 * [Homestead](install/homestead.md)
 * [Last steps](install/getready.md)
 
-### Code documentation
+### App
+* [Migrations and Seeding](app/migrationAndSeeding.md)
+* [Note about database](app/database.md)
+* [App lifecycle](app/lifecycle.md)
+* [App architecture](app/architecture.md)
+* [Permissions system](app/permissions.md)
+* [Status system](app/status.md)
 
-* [Generate code doc](generatedoc.md)
+### Api
+
+* [Api architecture](api/arch.md)
 
 ### Diagrams
 
@@ -21,12 +29,6 @@ Here we found all the documentation for the Runners project.
 * [Modules interactions](diagrams/modules.png)
 
 *All the diagrams are created with [draw.io](draw.io), you can easyly edit them.*
-
-### App
-
-### Api
-
-* [Api architecture](api/arch.md)
 
 ### Deployment / production installation
 * [Server requirements](deploy/requirements.md)

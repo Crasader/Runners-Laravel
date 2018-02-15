@@ -1,6 +1,8 @@
 # Migrations and seeding
 
+## Migrations
 
+## Seeding
 
 <br>
 <br>
@@ -12,6 +14,6 @@
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](../install/getready.md) // [Summary](../README.md) // [Next ->](database.md)**
 
 </div>

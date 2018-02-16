@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImagesTable extends Migration
+/**
+ * CreateArtistsTable
+ * 
+ * @author Bastien Nicoud
+ */
+class CreateArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +18,10 @@ class AddImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('artists', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('have_image_id')->unsigned();
-            $table->string('have_image_type');
-            $table->string('type')->nullable(); // To describe the type of image (driver's license, profile picture, ...)
-            $table->string('title')->nullable(); // Eventual title for the picture
-            $table->string('path');
+            $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -33,7 +35,7 @@ class AddImagesTable extends Migration
     {
         // Drop the table
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('artists');
         Schema::enableForeignKeyConstraints();
     }
 }

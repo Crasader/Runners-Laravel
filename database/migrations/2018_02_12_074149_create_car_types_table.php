@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateCarTypesTable
+ * 
+ * @author Bastien Nicoud
+ */
 class CreateCarTypesTable extends Migration
 {
     /**
@@ -17,7 +22,7 @@ class CreateCarTypesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->mediumText('description');
-            $table->integer('nb_places');
+            $table->integer('nb_place');
             $table->timestamps();
         });
     }

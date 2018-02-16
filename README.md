@@ -1,3 +1,7 @@
+<div align="center" style="margin-bottom:60px;">
+  <img src ="public/img/logo.svg" width="40%"/><br><br>
+</div>
+
 # Runners
 
 Runners is a driver managing app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.

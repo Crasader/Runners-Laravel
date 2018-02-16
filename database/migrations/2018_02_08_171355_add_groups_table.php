@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * AddGroupsTable
+ *
+ * @author Bastien Nicoud
+ */
 class AddGroupsTable extends Migration
 {
     /**
@@ -16,8 +21,7 @@ class AddGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('color');
-            $table->string('name');
-            $table->boolean('active');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

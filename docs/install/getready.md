@@ -1,5 +1,13 @@
 # Get the app ready
 
+## System locale
+
+Dont forget to install the french locale on our system, example on ubuntu :
+
+```sh
+sudo locale-gen fr_FR.UTF-8
+```
+
 ## Migrate the database
 
 ```sh
@@ -7,6 +15,7 @@ php artisan migrate:fresh --seed
 ```
 
 This command will create a fresh database with the seeds specified in the `database/seeds` folder.
+If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/migrationAndSeeding.md) doc page.
 
 ## Runners is ready
 

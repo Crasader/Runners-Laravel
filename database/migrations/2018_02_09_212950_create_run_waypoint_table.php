@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateRunWaypointTable
+ * 
+ * @author Bastien Nicoud
+ */
 class CreateRunWaypointTable extends Migration
 {
     /**
@@ -16,6 +21,7 @@ class CreateRunWaypointTable extends Migration
         Schema::create('run_waypoint', function (Blueprint $table) {
             $table->integer('run_id')->unsigned();
             $table->integer('waypoint_id')->unsigned();
+            $table->integer('order')->unsigned();
 
             // Foreing keys
             $table->foreign('run_id')->references('id')->on('runs');

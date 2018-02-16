@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * CreateRunDriversTable
+ * 
+ * @author Bastien Nicoud
+ */
 class CreateRunDriversTable extends Migration
 {
     /**
@@ -15,11 +20,11 @@ class CreateRunDriversTable extends Migration
     {
         Schema::create('run_drivers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('run_id')->unsigned();
-            $table->integer('car_id')->unsigned();
-            $table->integer('car_type_id')->unsigned();
-            $table->string('status');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('run_id')->unsigned()->nullable();
+            $table->integer('car_id')->unsigned()->nullable();
+            $table->integer('car_type_id')->unsigned()->nullable();
+            $table->string('status')->default('sollicited');
             $table->softDeletes();
             $table->timestamps();
 

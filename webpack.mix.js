@@ -14,4 +14,27 @@ let mix = require('laravel-mix')
 
 mix.disableNotifications()
 
-mix.js('resources/assets/app.js', 'public/js')
+// Set the path to extract the lazy loaded js parts
+mix.webpackConfig({
+  output: {
+    chunkFilename: 'js/[name].js'
+  }
+})
+
+// Set the path to extract the vue components style
+mix.options({
+  // Extract here the components styles
+  extractVueStyles: 'public/css/components.css',
+  // The app vars to be injected in each components
+  globalVueSyles: 'resources/assets/vars.scss'
+})
+
+// JS extraction (from assets to public)... (extract to a separate file the js of libraries)
+mix.js('resources/assets/main.js', 'js').extract(['vue', 'vue-router', 'vuex', 'axios'])
+// SCSS extraction (from assets to public)
+mix.sass('resources/assets/main.scss', 'css')
+
+// Create unique hash in production to force browser cache clearing
+if (mix.inProduction()) {
+  mix.version()
+}

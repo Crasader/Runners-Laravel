@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+Route::view('/', 'index');
+
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::get('/chauffeurs', function () {
     return view('runners');

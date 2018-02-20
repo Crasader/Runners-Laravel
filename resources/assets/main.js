@@ -23,7 +23,6 @@ import store from './store'
 
 // Css framework
 import Buefy from 'buefy'
-import './globals.scss'
 
 // Vue initialisation
 Vue.use(Buefy)

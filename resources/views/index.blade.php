@@ -12,18 +12,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 </head>
 
 <body>
-    @include('layouts.navbar')
-
-    @yield('content')
-
-    @include('layouts.footer')
+    <div id="app"></div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/main.js') }}"></script>
 </body>
 
 </html>

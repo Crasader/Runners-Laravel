@@ -9,15 +9,11 @@
  |
  */
 
-
 /*
  |--------------------------------------------------------------------------
  | Buefy / Bulma global config
  |--------------------------------------------------------------------------
  */
-
-// Import Bulma's core
-@import "~bulma/sass/utilities/_all";
 
 // Sets custom colors
 // $primary: #924bc2;
@@ -40,10 +36,6 @@
 // Links
 //$link: $primary;
 //$link-invert: $primary-invert;
-
-// Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
 
 /*
  |--------------------------------------------------------------------------

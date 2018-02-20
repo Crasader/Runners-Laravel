@@ -1,0 +1,18 @@
+/*
+ |--------------------------------------------------------------------------
+ | App global scss config
+ |--------------------------------------------------------------------------
+ |
+ | Imports all the scss files to generate the global main.css file in public
+ |
+ */
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Import the app global vars
+@import './vars.scss';
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

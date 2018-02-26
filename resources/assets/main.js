@@ -21,7 +21,7 @@ import VueAxios from 'vue-axios'
 import router from './router'
 import store from './store'
 
-// Css framework
+// Css framework components
 import Buefy from 'buefy'
 
 // Vue initialisation

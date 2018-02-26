@@ -1,9 +1,9 @@
 /*
  |--------------------------------------------------------------------------
- | App global scss config
+ | MAIN - bootstrap the css framework
  |--------------------------------------------------------------------------
  |
- | Imports all the scss files to generate the global main.css file in public
+ | Imports all the scss files to compile the css framework and configuration
  |
  */
 
@@ -11,7 +11,7 @@
 @import "~bulma/sass/utilities/_all";
 
 // Import the app global vars
-// @import './vars.scss';
+@import './vars.scss';
 
 // Import Bulma and Buefy styles
 @import "~bulma";

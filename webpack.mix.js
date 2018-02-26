@@ -24,15 +24,16 @@ mix.webpackConfig({
 // Set the path to extract the vue components style
 mix.options({
   // Extract here the components styles
-  extractVueStyles: 'public/css/components.css',
+  extractVueStyles: 'public/css/components.css'
   // The app vars to be injected in each components
-  globalVueSyles: 'resources/assets/vars.scss'
+  // globalVueSyles: 'resources/assets/vars.scss'
 })
 
-// JS extraction (from assets to public)... (extract to a separate file the js of libraries)
-mix.js('resources/assets/main.js', 'js').extract(['vue', 'vue-router', 'vuex', 'axios'])
 // SCSS extraction (from assets to public)
-mix.sass('resources/assets/main.scss', 'css')
+// JS extraction (from assets to public)... (extract to a separate file the js of libraries)
+mix.js('resources/assets/main.js', 'js')
+  .sass('resources/assets/main.scss', 'css')
+  .extract(['vue', 'vue-router', 'vuex', 'axios'])
 
 // Create unique hash in production to force browser cache clearing
 if (mix.inProduction()) {

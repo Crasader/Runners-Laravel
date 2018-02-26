@@ -12,6 +12,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+//@import './main.scss';
+
 h1 {
   color: white;
 }

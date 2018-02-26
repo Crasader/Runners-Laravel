@@ -15,11 +15,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 h1 {
   color: red;
 }
 h3 {
-  color: blueviolet;
+  color: $globalTest;
 }
 </style>

@@ -24,80 +24,106 @@
       <div class="navbar-menu">
 
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown is-hoverable">
+
+          <b-dropdown hoverable>
             <a
-              class="navbar-link"
-              href="/runs">
-              Runs
+              slot="trigger"
+              class="navbar-item">
+              <span>Runs</span>
+              <b-icon icon="chevron-down"/>
             </a>
-            <div class="navbar-dropdown is-boxed">
-              <a
-                class="navbar-item"
-                href="/runs/create">
-                Créer run
-              </a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
+            <b-dropdown-item>
+              Liste des runs
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item>
+              Créer un run
+            </b-dropdown-item>
+          </b-dropdown>
+
+          <b-dropdown hoverable>
             <a
-              class="navbar-link"
-              href="/vehicules">
-              Véhicules
+              slot="trigger"
+              class="navbar-item">
+              <span>Véhicules</span>
+              <b-icon icon="chevron-down"/>
             </a>
-            <div class="navbar-dropdown is-boxed">
-              <a
-                class="navbar-item"
-                href="/vehicule/create">
-                Créer véhicule
-              </a>
-              <hr class="navbar-divider">
-              <a
-                class="navbar-item"
-                href="/vehicule/create">
-                Créer type de véhicule
-              </a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
+            <b-dropdown-item>
+              Créer véhicule
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item>
+              Créer type de véhicule
+            </b-dropdown-item>
+          </b-dropdown>
+
+          <b-dropdown hoverable>
             <a
-              class="navbar-link"
-              href="/chauffeurs">
-              Chauffeurs
+              slot="trigger"
+              class="navbar-item">
+              <span>Chauffeurs</span>
+              <b-icon icon="chevron-down"/>
             </a>
-            <div class="navbar-dropdown is-boxed">
-              <a
-                class="navbar-item"
-                href="/chauffeurs/create">
-                Créer chauffeurs
-              </a>
-            </div>
-          </div>
-          <a
-            class="navbar-item"
-            href="/groupes">
-            Groupes
-          </a>
-          <a
-            class="navbar-item"
-            href="/horaires">
-            Horaires
-          </a>
+            <b-dropdown-item>
+              Liste chauffeurs
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item>
+              Importer liste chauffeurs
+            </b-dropdown-item>
+            <b-dropdown-item>
+              Créer chaffeur
+            </b-dropdown-item>
+          </b-dropdown>
+
+          <b-dropdown hoverable>
+            <a
+              slot="trigger"
+              class="navbar-item">
+              <span>Groupes</span>
+              <b-icon icon="chevron-down"/>
+            </a>
+            <b-dropdown-item>
+              Liste des groupes
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item>
+              Ajouter groupe
+            </b-dropdown-item>
+          </b-dropdown>
+
+          <b-dropdown hoverable>
+            <a
+              slot="trigger"
+              class="navbar-item">
+              <span>Horaires</span>
+              <b-icon icon="chevron-down"/>
+            </a>
+            <b-dropdown-item>
+              Liste des horaires
+            </b-dropdown-item>
+            <hr class="dropdown-divider">
+            <b-dropdown-item>
+              Ajouter horaire
+            </b-dropdown-item>
+          </b-dropdown>
+
         </div>
 
         <div class="navbar-end">
           <!-- Authentication Links -->
           <a
             class="navbar-item"
-            href="LOGIN">Login</a>
-          <a
-            class="navbar-item"
-            href="REGISTER">Register</a>
-          <b-dropdown position="is-bottom-left">
+            href="LOGIN">Connexion</a>
+
+          <b-dropdown
+            hoverable
+            position="is-bottom-left">
             <a
               slot="trigger"
               class="navbar-item">
-              <span>Menu</span>
-              <b-icon icon="menu-down"/>
+              <span>Bastien</span>
+              <b-icon icon="chevron-down"/>
             </a>
 
             <b-dropdown-item custom>
@@ -129,11 +155,11 @@
             <hr class="dropdown-divider">
             <b-dropdown-item value="settings">
               <b-icon icon="settings"/>
-              Settings
+              Profile
             </b-dropdown-item>
             <b-dropdown-item value="logout">
               <b-icon icon="logout"/>
-              Logout
+              Déconnexion
             </b-dropdown-item>
           </b-dropdown>
         </div>

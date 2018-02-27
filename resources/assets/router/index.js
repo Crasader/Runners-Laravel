@@ -4,41 +4,28 @@
  |--------------------------------------------------------------------------
  |
  | Register all the routes resolved by the client app
+ | @author Bastien Nicoud
  |
  */
 
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// Conponents imports
-import HomePage from '../views/HomePage.vue'
-import RunsList from '../views/Runs/RunsList.vue'
+// Import all the routes from sub modules
+import BaseRoutes from './base'
+import RunsRoutes from './runs'
+import ErrorRoutes from './errors'
 
 // Initialize the router
 Vue.use(Router)
 
+// Concatenate all the routes modules
+const routes = BaseRoutes.concat(RunsRoutes, ErrorRoutes)
+
 // Create and export the router
 export default new Router({
   mode: 'history',
-  routes: [
-    // Homepages / dashboards
-    {
-      path: '/',
-      name: 'home-page',
-      component: HomePage
-    },
-    // Runs
-    {
-      path: 'runs',
-      name: 'runs-list',
-      component: RunsList
-    },
-    // Redirect / errors
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ],
+  routes,
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -46,6 +33,6 @@ export default new Router({
       return { x: 0, y: 0 }
     }
   },
-  linkExactActiveClass: 'is-active',
+  // linkExactActiveClass: 'is-active',
   linkActiveClass: 'is-active'
 })

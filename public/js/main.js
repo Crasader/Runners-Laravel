@@ -1037,50 +1037,37 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_HomePage_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_HomePage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_HomePage_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Runs_RunsList_vue__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_Runs_RunsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_Runs_RunsList_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__base__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__runs__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__errors__ = __webpack_require__(71);
 /*
  |--------------------------------------------------------------------------
  | Client side router
  |--------------------------------------------------------------------------
  |
  | Register all the routes resolved by the client app
+ | @author Bastien Nicoud
  |
  */
 
 
 
 
-// Conponents imports
+// Import all the routes from sub modules
+
 
 
 
 // Initialize the router
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["default"]);
 
+// Concatenate all the routes modules
+var routes = __WEBPACK_IMPORTED_MODULE_2__base__["a" /* default */].concat(__WEBPACK_IMPORTED_MODULE_3__runs__["a" /* default */], __WEBPACK_IMPORTED_MODULE_4__errors__["a" /* default */]);
+
 // Create and export the router
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["default"]({
   mode: 'history',
-  routes: [
-  // Homepages / dashboards
-  {
-    path: '/',
-    name: 'home-page',
-    component: __WEBPACK_IMPORTED_MODULE_2__views_HomePage_vue___default.a
-  },
-  // Runs
-  {
-    path: 'runs',
-    name: 'runs-list',
-    component: __WEBPACK_IMPORTED_MODULE_3__views_Runs_RunsList_vue___default.a
-  },
-  // Redirect / errors
-  {
-    path: '*',
-    redirect: '/'
-  }],
+  routes: routes,
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -1089,7 +1076,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }
   },
 
-  linkExactActiveClass: 'is-active',
+  // linkExactActiveClass: 'is-active',
   linkActiveClass: 'is-active'
 }));
 
@@ -1439,6 +1426,87 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-13c0ee38", module.exports)
   }
 }
+
+/***/ }),
+/* 68 */,
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_HomePage_vue__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_HomePage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__views_HomePage_vue__);
+/*
+ |--------------------------------------------------------------------------
+ | Base routes
+ |--------------------------------------------------------------------------
+ |
+ | Register global routes for the app (homepage...)
+ | @author Bastien Nicoud
+ |
+ */
+
+// Conponents imports
+
+
+// Routes declarations
+/* harmony default export */ __webpack_exports__["a"] = ([
+// Homepage
+{
+  path: '/',
+  name: 'home-page',
+  component: __WEBPACK_IMPORTED_MODULE_0__views_HomePage_vue___default.a
+}]);
+
+/***/ }),
+/* 70 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_Runs_RunsList_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__views_Runs_RunsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__views_Runs_RunsList_vue__);
+/*
+ |--------------------------------------------------------------------------
+ | Runs routes
+ |--------------------------------------------------------------------------
+ |
+ | All the routes for the run crud
+ | @author Bastien Nicoud
+ |
+ */
+
+// Conponents imports
+
+
+// Routes declarations
+/* harmony default export */ __webpack_exports__["a"] = ([
+// Runs
+{
+  path: 'runs',
+  name: 'runs-list',
+  component: __WEBPACK_IMPORTED_MODULE_0__views_Runs_RunsList_vue___default.a
+}]);
+
+/***/ }),
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/*
+ |--------------------------------------------------------------------------
+ | Errors and redirect routes
+ |--------------------------------------------------------------------------
+ |
+ | Register global routes to cover errors and not founds
+ | @author Bastien Nicoud
+ |
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = ([
+// Redirect to homepage for inexitant routes
+{
+  path: '*',
+  redirect: '/'
+}]);
 
 /***/ })
 ],[15]);

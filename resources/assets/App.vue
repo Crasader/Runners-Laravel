@@ -1,13 +1,27 @@
 <template>
   <div id="app">
-    <h1>App</h1>
-    <router-view/>
+    <!-- Navication component -->
+    <nav-bar/>
+
+    <!-- The route view (binded by the router) -->
+    <transition
+      name="fade"
+      mode="out-in">
+      <router-view/>
+    </transition>
+
+    <!-- Footer component -->
+    <runners-footer/>
   </div>
 </template>
 
 <script>
+import NavBar from './components/Navigation/NavBar'
+import RunnersFooter from './components/RunnersFooter'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { NavBar, RunnersFooter }
 }
 </script>
 

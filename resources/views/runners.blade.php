@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="columns">                
+            <div class="columns">
                 <div class="column is-12">
                     <a href="#">
                         <div class="notification is-primary">

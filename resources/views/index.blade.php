@@ -20,6 +20,7 @@
         <link rel="icon" type="image/png" href="icon.png" />
 
         {{--  Styles  --}}
+        <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
         <link href="{{ mix('css/main.css') }}" rel="stylesheet">
     </head>
 
@@ -27,7 +28,8 @@
         <div id="app"></div>
 
         {{--  App playload  --}}
-        
+        {{--  Laravel pre inject datas here to prevent over requesting the server  --}}
+
 
         {{--  Scripts  --}}
         <script src="{{ mix('js/manifest.js') }}"></script>

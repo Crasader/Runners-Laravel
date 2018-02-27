@@ -11,6 +11,7 @@
 |
 */
 
+// Return the full vue
 Route::view('/', 'index');
 
 /*Route::get('/', function () {

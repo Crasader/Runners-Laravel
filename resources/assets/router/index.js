@@ -24,8 +24,11 @@ const routes = BaseRoutes.concat(RunsRoutes, ErrorRoutes)
 
 // Create and export the router
 export default new Router({
+  // Router mode (use the history.pushState js method)
   mode: 'history',
+  // Pass all the routes
   routes,
+  // Simulates the scoll between page changes (like native browser comportment)(called at each page change)
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -33,6 +36,6 @@ export default new Router({
       return { x: 0, y: 0 }
     }
   },
-  // linkExactActiveClass: 'is-active',
+  // Define class to be applied when a link is active (for higlighting the link)
   linkActiveClass: 'is-active'
 })

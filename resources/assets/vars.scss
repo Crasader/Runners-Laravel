@@ -15,12 +15,17 @@
 //--------------------------------------------------------------------------
 //
 
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
 // Sets custom colors
-// $primary: #924bc2;
-// $primary-invert: findColorInvert($primary);
+$primary: #8c67ef;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-/*$colors: (
+$colors: (
     "white": ($white, $black),
     "black": ($black, $white),
     "light": ($light, $light-invert),
@@ -31,16 +36,15 @@
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "twitter": ($twitter, $twitter-invert)
-);*/
+);
 
 // Links
-//$link: $primary;
-//$link-invert: $primary-invert;
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
 
 //
 //--------------------------------------------------------------------------
 // Application specifc custom vars
 //--------------------------------------------------------------------------
 //
-
-$globalTest: blue;

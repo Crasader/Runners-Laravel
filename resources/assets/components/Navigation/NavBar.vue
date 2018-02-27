@@ -109,11 +109,51 @@
         </div>
 
         <div class="navbar-end">
-          <!-- Authentication Links -->
-          <a
-            class="navbar-item"
-            href="LOGIN">Connexion</a>
 
+          <!-- Connexion dropdown -->
+          <b-dropdown position="is-bottom-left">
+            <a
+              slot="trigger"
+              class="navbar-item navbar-link">
+              <span>Connexion</span>
+            </a>
+
+            <b-dropdown-item
+              custom
+              paddingless>
+              <form action="">
+                <div
+                  class="modal-card"
+                  style="width:300px;">
+                  <section class="modal-card-body">
+                    <b-field label="Email">
+                      <b-input
+                        v-model="user.email"
+                        type="email"
+                        placeholder="Your email"
+                        required/>
+                    </b-field>
+
+                    <b-field label="Password">
+                      <b-input
+                        v-model="user.password"
+                        type="password"
+                        password-reveal
+                        placeholder="Your password"
+                        required/>
+                    </b-field>
+
+                    <b-checkbox v-model="user.remember">Remember me</b-checkbox>
+                  </section>
+                  <footer class="modal-card-foot">
+                    <button class="button is-primary">Login</button>
+                  </footer>
+                </div>
+              </form>
+            </b-dropdown-item>
+          </b-dropdown>
+
+          <!-- Dropdown with the infos for connected user -->
           <b-dropdown
             hoverable
             position="is-bottom-left">
@@ -169,7 +209,16 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  data () {
+    return {
+      user: {
+        email: '',
+        password: '',
+        remember: ''
+      }
+    }
+  }
 }
 </script>
 

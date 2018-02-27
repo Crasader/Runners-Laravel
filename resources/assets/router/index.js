@@ -12,6 +12,7 @@ import Router from 'vue-router'
 
 // Conponents imports
 import HomePage from '../views/HomePage.vue'
+import RunsList from '../views/Runs/RunsList.vue'
 
 // Initialize the router
 Vue.use(Router)
@@ -20,14 +21,31 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    // Homepages / dashboards
     {
       path: '/',
       name: 'home-page',
       component: HomePage
     },
+    // Runs
+    {
+      path: 'runs',
+      name: 'runs-list',
+      component: RunsList
+    },
+    // Redirect / errors
     {
       path: '*',
       redirect: '/'
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
+  linkExactActiveClass: 'is-active',
+  linkActiveClass: 'is-active'
 })

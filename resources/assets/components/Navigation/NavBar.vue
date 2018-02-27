@@ -3,15 +3,15 @@
     <div class="container">
 
       <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="/">
+        <router-link
+          :to="{ name : 'home-page' }"
+          class="navbar-item">
           <img
             src="/img/logo.svg"
             alt="Bulma: a modern CSS framework based on Flexbox"
             width="112"
             height="28">
-        </a>
+        </router-link>
         <div
           class="navbar-burger burger"
           data-target="navbarExampleTransparentExample">
@@ -26,14 +26,16 @@
         <div class="navbar-start">
 
           <b-dropdown hoverable>
-            <a
+            <router-link
               slot="trigger"
-              class="navbar-item">
+              :to="{ name : 'runs-list' }"
+              class="navbar-link navbar-item">
               <span>Runs</span>
-              <b-icon icon="chevron-down"/>
-            </a>
-            <b-dropdown-item>
-              Liste des runs
+            </router-link>
+            <b-dropdown-item has-link>
+              <router-link :to="{ name : 'runs-list' }">
+                Liste des runs
+              </router-link>
             </b-dropdown-item>
             <hr class="dropdown-divider">
             <b-dropdown-item>
@@ -44,9 +46,8 @@
           <b-dropdown hoverable>
             <a
               slot="trigger"
-              class="navbar-item">
+              class="navbar-link navbar-item">
               <span>Véhicules</span>
-              <b-icon icon="chevron-down"/>
             </a>
             <b-dropdown-item>
               Créer véhicule
@@ -60,9 +61,8 @@
           <b-dropdown hoverable>
             <a
               slot="trigger"
-              class="navbar-item">
+              class="navbar-link navbar-item">
               <span>Chauffeurs</span>
-              <b-icon icon="chevron-down"/>
             </a>
             <b-dropdown-item>
               Liste chauffeurs
@@ -79,9 +79,8 @@
           <b-dropdown hoverable>
             <a
               slot="trigger"
-              class="navbar-item">
+              class="navbar-link navbar-item">
               <span>Groupes</span>
-              <b-icon icon="chevron-down"/>
             </a>
             <b-dropdown-item>
               Liste des groupes
@@ -95,9 +94,8 @@
           <b-dropdown hoverable>
             <a
               slot="trigger"
-              class="navbar-item">
+              class="navbar-link navbar-item">
               <span>Horaires</span>
-              <b-icon icon="chevron-down"/>
             </a>
             <b-dropdown-item>
               Liste des horaires
@@ -121,9 +119,8 @@
             position="is-bottom-left">
             <a
               slot="trigger"
-              class="navbar-item">
+              class="navbar-link navbar-item">
               <span>Bastien</span>
-              <b-icon icon="chevron-down"/>
             </a>
 
             <b-dropdown-item custom>

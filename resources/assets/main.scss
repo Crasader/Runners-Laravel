@@ -1,11 +1,11 @@
-/*
- |--------------------------------------------------------------------------
- | MAIN - bootstrap the css framework
- |--------------------------------------------------------------------------
- |
- | Imports all the scss files to compile the css framework and configuration
- |
- */
+//
+//--------------------------------------------------------------------------
+// MAIN - bootstrap the css framework
+//--------------------------------------------------------------------------
+//
+// Imports all the scss files to compile the css framework and configuration
+// @author Bastien Nicoud
+//
 
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";

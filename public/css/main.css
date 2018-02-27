@@ -10181,9 +10181,6 @@ body {
  | Application specifc custom vars
  |--------------------------------------------------------------------------
  */
-h1[data-v-d23b73f0] {
+h1 {
   color: red;
-}
-h3[data-v-d23b73f0] {
-  color: blue;
 }

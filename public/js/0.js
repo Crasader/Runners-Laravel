@@ -18,7 +18,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-d23b73f0"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -29,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/components/HomePage.vue"
+Component.options.__file = "resources/assets/components/SecondPage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-317e2a9a", Component.options)
+    hotAPI.createRecord("data-v-d23b73f0", Component.options)
   } else {
-    hotAPI.reload("data-v-317e2a9a", Component.options)
+    hotAPI.reload("data-v-d23b73f0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -62,13 +62,13 @@ var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(51)("09abe45a", content, false, {});
+var update = __webpack_require__(51)("191fcd28", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-317e2a9a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./HomePage.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-317e2a9a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./HomePage.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d23b73f0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SecondPage.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d23b73f0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SecondPage.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -87,7 +87,7 @@ exports = module.exports = __webpack_require__(50)(false);
 
 
 // module
-exports.push([module.i, "/*\n |--------------------------------------------------------------------------\n | App global scss config\n |--------------------------------------------------------------------------\n |\n | This file allows you to customize the global scss vars used by the Bulma framework\n | You find all the possible variabes in the official bulma documentation\n | We also foud (end of this file) custom global vars added just for our needs\n |\n */\n/*\n |--------------------------------------------------------------------------\n | Buefy / Bulma global config\n |--------------------------------------------------------------------------\n */\n/*$colors: (\n    \"white\": ($white, $black),\n    \"black\": ($black, $white),\n    \"light\": ($light, $light-invert),\n    \"dark\": ($dark, $dark-invert),\n    \"primary\": ($primary, $primary-invert),\n    \"info\": ($info, $info-invert),\n    \"success\": ($success, $success-invert),\n    \"warning\": ($warning, $warning-invert),\n    \"danger\": ($danger, $danger-invert),\n    \"twitter\": ($twitter, $twitter-invert)\n);*/\n/*\n |--------------------------------------------------------------------------\n | Application specifc custom vars\n |--------------------------------------------------------------------------\n */\nh1 {\n  color: red;\n}\n", ""]);
+exports.push([module.i, "/*\n |--------------------------------------------------------------------------\n | App global scss config\n |--------------------------------------------------------------------------\n |\n | This file allows you to customize the global scss vars used by the Bulma framework\n | You find all the possible variabes in the official bulma documentation\n | We also foud (end of this file) custom global vars added just for our needs\n |\n */\n/*\n |--------------------------------------------------------------------------\n | Buefy / Bulma global config\n |--------------------------------------------------------------------------\n */\n/*$colors: (\n    \"white\": ($white, $black),\n    \"black\": ($black, $white),\n    \"light\": ($light, $light-invert),\n    \"dark\": ($dark, $dark-invert),\n    \"primary\": ($primary, $primary-invert),\n    \"info\": ($info, $info-invert),\n    \"success\": ($success, $success-invert),\n    \"warning\": ($warning, $warning-invert),\n    \"danger\": ($danger, $danger-invert),\n    \"twitter\": ($twitter, $twitter-invert)\n);*/\n/*\n |--------------------------------------------------------------------------\n | Application specifc custom vars\n |--------------------------------------------------------------------------\n */\nh1[data-v-d23b73f0] {\n  color: red;\n}\nh3[data-v-d23b73f0] {\n  color: blue;\n}\n", ""]);
 
 // exports
 
@@ -126,14 +126,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "homepage" },
+    { staticClass: "secondpage" },
     [
       _c("h1", [_vm._v("Hello")]),
       _vm._v(" "),
       _c("b-message", { attrs: { title: "Success", type: "is-success" } }, [
-        _vm._v(
-          "\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit\n  "
-        )
+        _vm._v("\n    Test second page !?\n  ")
       ])
     ],
     1
@@ -145,7 +143,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-317e2a9a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d23b73f0", module.exports)
   }
 }
 

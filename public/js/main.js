@@ -169,7 +169,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// Css framework
+// Css framework components
 
 
 // Vue initialisation
@@ -356,30 +356,39 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="fun
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_SecondPage_vue__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_SecondPage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_SecondPage_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_HomePage_vue__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_HomePage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_HomePage_vue__);
+/*
+ |--------------------------------------------------------------------------
+ | Client side router
+ |--------------------------------------------------------------------------
+ |
+ | Register all the routes resolved by the client app
+ |
+ */
 
 
-// import { resolve } from 'path';
 
-// import HomePage from '../components/HomePage.vue'
 
-// const HomePage = () => import('../components/HomePage.vue').then(m => m.default)
-// const Foo = () => import('./Foo.vue')
+// Conponents imports
 
+
+// Initialize the router
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["default"]);
 
+// Create and export the router
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["default"]({
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'home-page',
-    component: function component(resolve) {
-      return __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(52)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
-    }
+    component: __WEBPACK_IMPORTED_MODULE_2__components_HomePage_vue___default.a
   }, {
     path: '/second',
     name: 'second-page',
-    component: __WEBPACK_IMPORTED_MODULE_2__components_SecondPage_vue___default.a
+    component: function component(resolve) {
+      return __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(52)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+    }
   }, {
     path: '*',
     redirect: '/'
@@ -405,7 +414,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-d23b73f0"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -416,7 +425,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/components/SecondPage.vue"
+Component.options.__file = "resources/assets/components/HomePage.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -425,9 +434,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d23b73f0", Component.options)
+    hotAPI.createRecord("data-v-317e2a9a", Component.options)
   } else {
-    hotAPI.reload("data-v-d23b73f0", Component.options)
+    hotAPI.reload("data-v-317e2a9a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -460,6 +469,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   //
@@ -475,12 +485,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "secondpage" },
+    { staticClass: "homepage" },
     [
       _c("h1", [_vm._v("Hello")]),
       _vm._v(" "),
+      _c("router-link", { attrs: { to: { name: "second-page" } } }, [
+        _vm._v("Second")
+      ]),
+      _vm._v(" "),
       _c("b-message", { attrs: { title: "Success", type: "is-success" } }, [
-        _vm._v("\n    Test second page !?\n  ")
+        _vm._v(
+          "\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit\n  "
+        )
       ])
     ],
     1
@@ -492,7 +508,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d23b73f0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-317e2a9a", module.exports)
   }
 }
 
@@ -504,11 +520,23 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(14);
+/*
+ |--------------------------------------------------------------------------
+ | Client side store
+ |--------------------------------------------------------------------------
+ |
+ | Register a global js store for the client side app
+ | Here we store all datas that will be accesible by all the componenets
+ |
+ */
 
 
 
+
+// Initialize vuex
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["default"]);
 
+// Create and export the store
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["default"].Store({
   //
   strict: "development" !== 'production'

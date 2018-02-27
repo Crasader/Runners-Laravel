@@ -11,7 +11,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Conponents imports
-import SecondPage from '../components/SecondPage.vue'
+import HomePage from '../views/HomePage.vue'
 
 // Initialize the router
 Vue.use(Router)
@@ -23,12 +23,7 @@ export default new Router({
     {
       path: '/',
       name: 'home-page',
-      component: resolve => require(['../components/HomePage.vue'], resolve)
-    },
-    {
-      path: '/second',
-      name: 'second-page',
-      component: SecondPage
+      component: HomePage
     },
     {
       path: '*',

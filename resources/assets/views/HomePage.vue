@@ -1,6 +1,7 @@
 <template>
   <div class="homepage">
     <h1>Hello</h1>
+    <router-link :to="{ name: 'second-page'}">Second</router-link>
     <b-message
       title="Success"
       type="is-success">
@@ -19,7 +20,4 @@ export default {
 // Global vars
 @import '../vars.scss';
 
-h1 {
-  color: red;
-}
 </style>

@@ -1,19 +1,19 @@
-/*
- |--------------------------------------------------------------------------
- | App global scss config
- |--------------------------------------------------------------------------
- |
- | This file allows you to customize the global scss vars used by the Bulma framework
- | You find all the possible variabes in the official bulma documentation
- | We also foud (end of this file) custom global vars added just for our needs
- |
- */
+//
+//--------------------------------------------------------------------------
+// App global scss config
+//--------------------------------------------------------------------------
+//
+// This file allows you to customize the global scss vars used by the Bulma framework
+// You find all the possible variabes in the official bulma documentation
+// We also foud (end of this file) custom global vars added just for our needs
+// @author Bastien Nicoud
+//
 
-/*
- |--------------------------------------------------------------------------
- | Buefy / Bulma global config
- |--------------------------------------------------------------------------
- */
+//
+//--------------------------------------------------------------------------
+// Buefy / Bulma global config
+//--------------------------------------------------------------------------
+//
 
 // Sets custom colors
 // $primary: #924bc2;
@@ -37,10 +37,10 @@
 //$link: $primary;
 //$link-invert: $primary-invert;
 
-/*
- |--------------------------------------------------------------------------
- | Application specifc custom vars
- |--------------------------------------------------------------------------
- */
+//
+//--------------------------------------------------------------------------
+// Application specifc custom vars
+//--------------------------------------------------------------------------
+//
 
 $globalTest: blue;

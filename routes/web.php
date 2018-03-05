@@ -12,7 +12,8 @@
 */
 
 // Return the full vue
-Route::view('/', 'index');
+Route::get('/', 'HomeController@index');
+//Route::view('/', 'index');
 
 /*Route::get('/', function () {
     return view('welcome');
@@ -24,4 +25,4 @@ Route::get('/chauffeurs', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

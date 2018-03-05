@@ -29,7 +29,9 @@
 
         {{--  App playload  --}}
         {{--  Laravel pre inject datas here to prevent over requesting the server  --}}
-
+        <script>
+            window.__INITIAL_STATE__ = {!! json_encode($user) !!}
+        </script>
 
         {{--  Scripts  --}}
         <script src="{{ mix('js/manifest.js') }}"></script>

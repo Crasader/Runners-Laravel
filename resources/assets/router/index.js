@@ -1,11 +1,9 @@
-/*
- |--------------------------------------------------------------------------
- | Client side router
- |--------------------------------------------------------------------------
- |
- | Register all the routes resolved by the client app
- | @author Bastien Nicoud
- |
+/**
+ * Client side router
+ *
+ * Register all the routes resolved by the client app
+ *
+ * @author Bastien Nicoud
  */
 
 import Vue from 'vue'
@@ -26,7 +24,7 @@ const routes = BaseRoutes.concat(RunsRoutes, ErrorRoutes)
 export default new Router({
   // Router mode (use the history.pushState js method)
   mode: 'history',
-  // Pass all the routes
+  // Pass all the routes (concatenated above)
   routes,
   // Simulates the scoll between page changes (like native browser comportment)(called at each page change)
   scrollBehavior (to, from, savedPosition) {

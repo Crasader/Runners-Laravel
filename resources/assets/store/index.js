@@ -1,11 +1,10 @@
-/*
- |--------------------------------------------------------------------------
- | Client side store
- |--------------------------------------------------------------------------
- |
- | Register a global js store for the client side app
- | Here we store all datas that will be accesible by all the componenets
- |
+/**
+ * Client side store
+ *
+ * Register a global js store for the client side app
+ * Here we store all datas that will be accesible by all the componenets
+ *
+ * @author Bastien Nicoud
  */
 
 import Vue from 'vue'

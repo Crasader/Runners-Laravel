@@ -1,3 +1,35 @@
+<script>
+/**
+ * LoginForm
+ *
+ * A little authentication form (used in the navbar)
+ *
+ * @author Bastien Nicoud
+ */
+
+// Module to map the vue x actions in component methods
+import { mapActions } from 'vuex'
+
+// Export the component
+export default {
+  name: 'LoginForm',
+  data () {
+    return {
+      user: {
+        email: '',
+        password: '',
+        remember: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions('user', [
+      'login'
+    ])
+  }
+}
+</script>
+
 <template>
   <form class="loginform">
     <div
@@ -26,32 +58,10 @@
       <footer class="modal-card-foot">
         <button
           class="button is-primary"
-          @click="login()">
+          @click="login(user)">
           Login
         </button>
       </footer>
     </div>
   </form>
 </template>
-
-<script>
-import { mapActions } from 'vuex'
-
-export default {
-  name: 'LoginForm',
-  data () {
-    return {
-      user: {
-        email: '',
-        password: '',
-        remember: ''
-      }
-    }
-  },
-  methods: {
-    ...mapActions('user', [
-      'login'
-    ])
-  }
-}
-</script>

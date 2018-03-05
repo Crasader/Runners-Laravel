@@ -1,11 +1,9 @@
-/*
- |--------------------------------------------------------------------------
- | Runs routes
- |--------------------------------------------------------------------------
- |
- | All the routes for the run crud
- | @author Bastien Nicoud
- |
+/**
+ * Runs routes
+ *
+ * All the routes for the run crud
+ *
+ * @author Bastien Nicoud
  */
 
 // Conponents imports

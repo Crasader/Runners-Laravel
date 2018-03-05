@@ -1,3 +1,16 @@
+<script>
+/**
+ * RunnersFooter
+ *
+ * @author Bastien Nicoud
+ */
+
+// Export the component
+export default {
+  name: 'RunnersFooter'
+}
+</script>
+
 <template>
   <footer class="runnersfooter footer">
     <div class="container">
@@ -12,15 +25,3 @@
     </div>
   </footer>
 </template>
-
-<script>
-export default {
-  name: 'RunnersFooter'
-}
-</script>
-
-<style lang="scss">
-// Import the global app style
-@import '../vars.scss';
-
-</style>

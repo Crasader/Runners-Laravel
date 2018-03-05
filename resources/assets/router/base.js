@@ -1,11 +1,9 @@
-/*
- |--------------------------------------------------------------------------
- | Base routes
- |--------------------------------------------------------------------------
- |
- | Register global routes for the app (homepage...)
- | @author Bastien Nicoud
- |
+/**
+ * Base routes
+ *
+ * Register generic routes for the app (homepage...)
+ *
+ * @author Bastien Nicoud
  */
 
 // Conponents imports

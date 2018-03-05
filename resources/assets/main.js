@@ -1,12 +1,11 @@
-/*
- |--------------------------------------------------------------------------
- | Client side app entry point
- |--------------------------------------------------------------------------
- |
- | This file initialise the client-side app
- | You foud here all the imports and library instanciations
- | All the assets are compiled/transpiled by webpack to generate dist files in the public directory
- |
+/**
+ * Client side app entry point
+ *
+ * This file initialise the client-side app
+ * You foud here all the imports and library instanciations
+ * All the assets are compiled/transpiled by webpack to generate dist files in the public directory
+ *
+ * @author Bastien Nicoud
  */
 
 // Vue main

@@ -1,12 +1,10 @@
-/*
- |--------------------------------------------------------------------------
- | User store module
- |--------------------------------------------------------------------------
- |
- | Here we describe the user part of the store
- | This store is imported in the global store as a module
- | @author Bastien Nicoud
- |
+/**
+ * User store module
+ *
+ * Here we describe the user part of the store
+ * This store is imported in the global store as a module
+ *
+ * @author Bastien Nicoud
  */
 
 export default {
@@ -40,8 +38,9 @@ export default {
     }
   },
   actions: {
-    login ({ state, commit, rootState }) {
+    login ({ state, commit, rootState }, connexionDatas) {
       console.log('tutu')
+      console.log(connexionDatas)
     },
     fetchUser ({ state, commit, rootState }) {
       //

@@ -1,3 +1,23 @@
+<script>
+/**
+ * App
+ *
+ * The root component of the app
+ *
+ * @author Bastien Nicoud
+ */
+
+// Import the base sub components
+import NavBar from './components/Navigation/NavBar'
+import RunnersFooter from './components/RunnersFooter'
+
+// Component export
+export default {
+  name: 'App',
+  components: { NavBar, RunnersFooter }
+}
+</script>
+
 <template>
   <div id="app">
     <!-- Navication component -->
@@ -14,19 +34,3 @@
     <runners-footer/>
   </div>
 </template>
-
-<script>
-import NavBar from './components/Navigation/NavBar'
-import RunnersFooter from './components/RunnersFooter'
-
-export default {
-  name: 'App',
-  components: { NavBar, RunnersFooter }
-}
-</script>
-
-<style lang="scss">
-// Import the global app style
-@import './main.scss';
-
-</style>

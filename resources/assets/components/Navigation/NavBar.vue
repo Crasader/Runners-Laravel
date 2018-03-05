@@ -1,7 +1,27 @@
+<script>
+/**
+ * NavBar
+ *
+ * The top navbar of the app
+ *
+ * @author Bastien Nicoud
+ */
+
+// Child components import
+import LoginForm from './LoginForm'
+
+// Exports the component
+export default {
+  name: 'NavBar',
+  components: { LoginForm }
+}
+</script>
+
 <template>
   <nav class="navbar is-light">
     <div class="container">
 
+      <!-- Left side of the nav, always shown -->
       <div class="navbar-brand">
         <router-link
           :to="{ name : 'home-page' }"
@@ -21,8 +41,10 @@
         </div>
       </div>
 
+      <!-- The navbar menu -->
       <div class="navbar-menu">
 
+        <!-- Left side of the menu -->
         <div class="navbar-start">
 
           <b-dropdown hoverable>
@@ -108,6 +130,7 @@
 
         </div>
 
+        <!-- Right side of the menu -->
         <div class="navbar-end">
 
           <!-- Connexion dropdown -->
@@ -121,6 +144,7 @@
             <b-dropdown-item
               custom
               paddingless>
+              <!-- The form for authenticating in the app -->
               <login-form/>
             </b-dropdown-item>
           </b-dropdown>
@@ -178,18 +202,3 @@
     </div>
   </nav>
 </template>
-
-<script>
-import LoginForm from './LoginForm'
-
-export default {
-  name: 'NavBar',
-  components: { LoginForm }
-}
-</script>
-
-<style lang="scss">
-// Import the global app style
-@import '../../main.scss';
-
-</style>

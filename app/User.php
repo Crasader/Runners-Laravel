@@ -58,6 +58,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * MODEL PROPERTY
+     * Default value for attribute
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'name' => ''
+    ];
+
+    /**
      * MODEL RELATION
      * The roles that belong to the user.
      */
@@ -167,5 +177,18 @@ class User extends Authenticatable
     public function getSlugAttribute()
     {
         return str_slug("{$this->firstname} {$this->lastname}");
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a name if its not specified
+     *
+     * @return string
+     */
+    public function generateName()
+    {
+        if (empty($this->name)) {
+            $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
+        }
     }
 }

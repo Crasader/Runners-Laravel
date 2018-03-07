@@ -37,6 +37,7 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $user = new User($request->all());
+        $user->generateName();
         $user->save();
         return new UserResource($user);
     }

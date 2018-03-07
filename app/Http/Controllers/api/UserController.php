@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\users\UserCollection;
+use App\Http\Resources\users\UserResource;
+use App\Http\Requests\StoreUser;
 
 /**
  * UserController
@@ -22,18 +25,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return new UserCollection(User::paginate());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+        $user = new User($request->all());
+        $user->save();
+        return new UserResource($user);
     }
 
     /**
@@ -44,7 +49,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**

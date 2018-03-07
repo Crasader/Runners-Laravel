@@ -20,7 +20,7 @@ class StoreUser extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,10 @@ class StoreUser extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname'     => ['required', 'min:2', 'max:100'],
+            'lastname'      => ['required', 'min:2', 'max:100'],
+            'email'         => ['sometimes', 'email']
+            'phone_number'  => ['required', 'min:2', 'max:100'],
         ];
     }
 }

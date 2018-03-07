@@ -21,6 +21,15 @@ class UserResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            // Base user datas to be serialized
+            'id'           => $this->id,
+            'name'         => $this->name,
+            'firstname'    => $this->firstname,
+            'lastname'     => $this->lastname,
+            'email'        => $this->email,
+            'phone_number' => $this->phone_number,
+            'sex'          => $this->sex
+        ];
     }
 }

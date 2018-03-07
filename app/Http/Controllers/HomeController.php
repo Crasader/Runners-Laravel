@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user = Auth::user()->toJson();
         } else {
-            $user = ['user' => 'guest'];
+            $user = ['role' => 'guest'];
         }
         return view('index', compact('user'));
     }

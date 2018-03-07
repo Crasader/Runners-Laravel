@@ -7,9 +7,11 @@
  * @author Bastien Nicoud
  */
 
+// Exports the user state module
 export default {
   namespaced: true,
   state: {
+    id: '',
     username: '',
     firstname: '',
     lastname: '',

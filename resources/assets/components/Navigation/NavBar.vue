@@ -28,7 +28,7 @@ export default {
           class="navbar-item">
           <img
             src="/img/logo.svg"
-            alt="Bulma: a modern CSS framework based on Flexbox"
+            alt="Runners logo"
             width="112"
             height="28">
         </router-link>

@@ -14,6 +14,9 @@ class CarTypeResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+          ];
     }
 }

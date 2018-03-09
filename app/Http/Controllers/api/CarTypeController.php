@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\cartypes\CarTypeCollection;
 
 class CarTypeController extends Controller
 {
@@ -15,7 +16,7 @@ class CarTypeController extends Controller
      */
     public function index()
     {
-        //
+        return new CarTypeCollection(CarType::all());
     }
 
     /**

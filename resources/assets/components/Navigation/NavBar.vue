@@ -144,8 +144,10 @@ export default {
             <b-dropdown-item
               custom
               paddingless>
+
               <!-- The form for authenticating in the app -->
               <login-form/>
+
             </b-dropdown-item>
           </b-dropdown>
 
@@ -159,10 +161,13 @@ export default {
               <span>Bastien</span>
             </a>
 
+            <!-- Connected user infos -->
             <b-dropdown-item custom>
               Logged as <b>Rafael Beraldo</b>
             </b-dropdown-item>
+
             <hr class="dropdown-divider">
+
             <b-dropdown-item has-link>
               <a
                 href="https://google.com"
@@ -180,12 +185,14 @@ export default {
               Products
             </b-dropdown-item>
             <b-dropdown-item
-              value="blog"
               disabled>
               <b-icon icon="book-open"/>
-              Blog
+              Securité
             </b-dropdown-item>
+
             <hr class="dropdown-divider">
+
+            <!-- Connected user links -->
             <b-dropdown-item value="settings">
               <b-icon icon="settings"/>
               Profile
@@ -194,6 +201,7 @@ export default {
               <b-icon icon="logout"/>
               Déconnexion
             </b-dropdown-item>
+
           </b-dropdown>
         </div>
 

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\users\UserCollection;
 use App\Http\Resources\users\UserResource;
-use App\Http\Requests\StoreUser;
+use App\Http\Requests\Users\StoreUser;
+use App\Http\Requests\Users\UpdateUser;
 
 /**
  * UserController
@@ -39,7 +40,7 @@ class UserController extends Controller
         $user = new User($request->all());
         $user->generateName();
         $user->save();
-        return new UserResource($user);
+        return (new UserResource($user))->response()->setStatusCode(201);
     }
 
     /**
@@ -56,13 +57,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateUser  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUser $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return new UserResource($user);
     }
 
     /**
@@ -73,6 +75,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(null, 204);
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Resources\Shedules;
+namespace App\Http\Resources\Schedules;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * SheduleCollection
- * Translate Shedule model collection to Json collection
+ * ScheduleCollection
+ * Translate Schedule model collection to Json collection
  *
  * @author Bastien Nicoud
  * @package App\Http\Resources\Users
  */
-class SheduleCollection extends ResourceCollection
+class ScheduleCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

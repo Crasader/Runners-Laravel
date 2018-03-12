@@ -69,4 +69,14 @@ class ScheduleController extends Controller
     {
         //
     }
+
+    /**
+     * Return the working ours of the current user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function workinghours()
+    {
+        //
+    }
 }

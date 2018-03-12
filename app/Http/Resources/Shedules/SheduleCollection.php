@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Resources\Users;
+namespace App\Http\Resources\Shedules;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * UserCollection
- * Translate User model collection to Json collection
+ * SheduleCollection
+ * Translate Shedule model collection to Json collection
  *
  * @author Bastien Nicoud
  * @package App\Http\Resources\Users
  */
-class UserCollection extends ResourceCollection
+class SheduleCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -21,8 +21,6 @@ class UserCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => UserResource::collection($this->collection)
-        ];
+        return parent::toArray($request);
     }
 }

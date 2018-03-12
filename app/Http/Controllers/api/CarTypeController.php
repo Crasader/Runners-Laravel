@@ -6,7 +6,16 @@ use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\cartypes\CarTypeCollection;
+use App\Http\Resources\cartypes\CarTypeResource;
+use App\Http\Requests\StoreCarType;
 
+/**
+ * UserController
+ * Api ressource controller
+ *
+ * @author Nicolas Henry
+ * @package App\Http\Controllers\api
+ */
 class CarTypeController extends Controller
 {
     /**
@@ -16,7 +25,7 @@ class CarTypeController extends Controller
      */
     public function index()
     {
-        return new CarTypeCollection(CarType::all());
+        return new CarTypeCollection(CarType::paginate());
     }
 
     /**
@@ -25,9 +34,11 @@ class CarTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarType $request)
     {
-        //
+        $carTypes = new CarType($request->all());
+        $carTypes->save();
+        return (new CarTypeResource($carTypes))->response()->setStatusCode(201);
     }
 
     /**
@@ -38,7 +49,7 @@ class CarTypeController extends Controller
      */
     public function show(CarType $carType)
     {
-        //
+        return new CarTypeResource($carType);
     }
 
     /**
@@ -50,7 +61,9 @@ class CarTypeController extends Controller
      */
     public function update(Request $request, CarType $carType)
     {
-        //
+        $carType->fill($request->all());
+        $carType->save();
+        return new CarTypeResource($carType);
     }
 
     /**
@@ -61,6 +74,7 @@ class CarTypeController extends Controller
      */
     public function destroy(CarType $carType)
     {
-        //
+        $carType->delete();
+        return response()->json(null, 204);
     }
 }

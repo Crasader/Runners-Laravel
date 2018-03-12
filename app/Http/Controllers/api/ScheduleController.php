@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Schedules\ScheduleCollection;
 
 /**
  * ScheduleController
@@ -22,7 +23,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        return new ScheduleCollection(Schedule::paginate());
     }
 
     /**

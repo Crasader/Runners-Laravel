@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Resources\Schedules;
+namespace App\Http\Resources\Groups;
 
 use Illuminate\Http\Resources\Json\Resource;
-use App\Http\Resources\Groups\GroupResource;
 
 /**
- * ScheduleResource
- * Translate Schedule model to Json
+ * GroupResource
+ * Translate Group model to Json
  *
  * @author Bastien Nicoud
- * @package App\Http\Resources\Shedules
+ * @package App\Http\Resources\Groups
  */
-class ScheduleResource extends Resource
+class GroupResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -25,9 +24,10 @@ class ScheduleResource extends Resource
         return [
             // Base user datas to be serialized
             'id'         => $this->id,
-            'start_time' => $this->start_time,
-            'end_time'   => $this->end_time,
-            'group'      => new GroupResource($this->group)
+            'color'      => $this->color,
+            'name'       => $this->name,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

@@ -63,6 +63,6 @@ You can easealy find extensions to use these linters with many editors.
 <hr>
 <div align="center">
 
-**[<- Prev](homestead.md) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](3_homestead.md) // [Summary](../README.md) // [Next ->](../README.md)**
 
 </div>

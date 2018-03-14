@@ -97,6 +97,6 @@ We recommend to run all the laravel comands in the vm.
 <hr>
 <div align="center">
 
-**[<- Prev](install.md) // [Summary](../README.md) // [Next ->](getready.md)**
+**[<- Prev](2_install.md) // [Summary](../README.md) // [Next ->](4_getready.md)**
 
 </div>

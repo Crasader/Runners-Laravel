@@ -22,6 +22,10 @@ Here we found the summary of all the documentation for the Runners project.
 
 1. [Api architecture](api/arch.md)
 
+### Tests
+
+1. [Testing api](tests/1_api.md)
+
 ### Diagrams
 
 1. [Database MLD](diagrams/databaseMLD.png)

@@ -20,5 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources([
     'users'     => 'api\UserController',
     'carTypes'  => 'api\CarTypeController',
-    'cars'      => 'api\CarController'
+    'cars'      => 'api\CarController',
+    'groups'    => 'api\GroupController'
 ]);

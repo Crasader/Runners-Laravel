@@ -21,6 +21,6 @@ Route::get('/me/workinghours', 'api\ScheduleController@workinghours');
 
 Route::apiResources([
     'users' => 'api\UserController',
-    'carTypes' => 'api\CarTypeController'
+    'carTypes' => 'api\CarTypeController',
     'schedules' => 'api\ScheduleController'
 ]);

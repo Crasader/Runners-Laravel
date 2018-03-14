@@ -5,8 +5,8 @@ namespace App\Http\Controllers\api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\users\UserCollection;
-use App\Http\Resources\users\UserResource;
+use App\Http\Resources\Users\UserCollection;
+use App\Http\Resources\Users\UserResource;
 use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 

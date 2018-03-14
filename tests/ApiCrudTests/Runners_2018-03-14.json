@@ -1,0 +1,388 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-03-14T14:35:12.360Z",
+	"__export_source": "insomnia.desktop.app:v5.14.9",
+	"resources": [
+		{
+			"_id": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"created": 1518692965674,
+			"description": "# All the api request tests for the runnesr api",
+			"modified": 1520435956337,
+			"name": "Runners",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_3884321f6d884dceb1e99b7a0f62d798",
+			"color": null,
+			"created": 1518692965690,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1518692965690,
+			"name": "New Environment",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_919233fea429489f8c096274fa9d64fe",
+			"cookies": [
+				{
+					"creation": "2018-03-09T13:23:16.522Z",
+					"domain": "runners-laravel",
+					"expires": "2018-03-09T15:23:29.000Z",
+					"hostOnly": true,
+					"id": "10171890346492019",
+					"key": "XSRF-TOKEN",
+					"lastAccessed": "2018-03-09T13:23:29.591Z",
+					"maxAge": 7200,
+					"path": "/",
+					"value": "eyJpdiI6Ikt5dVwvS09QVDBvVXI5TUlDbFpcL0lTQT09IiwidmFsdWUiOiJrbEVycldGR2gwT0J5OWhpMkJaN1dLZ3cxdWpPdFp1RDZPVmV1TTNTQm14dmRldE0rUmJtWlhWNnROUnZ4UjlcL3hjSTJKREllUFRWOTlLUGU3cTRNY0E9PSIsIm1hYyI6IjliYTM1ZWI2OWIxYmExYjdjYTgxM2IwMWVjNDlmNTkwNzVhOTEyOTk3ZmZiMDI5ZjllZTI1NWMxNWE0YmRhNzMifQ%3D%3D"
+				},
+				{
+					"creation": "2018-03-09T13:23:16.523Z",
+					"domain": "runners-laravel",
+					"expires": "2018-03-09T15:23:29.000Z",
+					"hostOnly": true,
+					"httpOnly": true,
+					"id": "20102940839315986",
+					"key": "runners_session",
+					"lastAccessed": "2018-03-09T13:23:29.591Z",
+					"maxAge": 7200,
+					"path": "/",
+					"value": "eyJpdiI6Im13QjdLQWhOejRcL1VqRmZjVzdVQXN3PT0iLCJ2YWx1ZSI6IjdnbHJJUmxcL0tSTVVrWjdqdWRIa2M4NllOWTh3K3NNdVVHcFNNWnpkZjRcL1wvVnZSaktsU2JYVDRvZUwyZlIxN3MwdkpkZ1ZFOUxkSE5CNEd2amJGRlFnPT0iLCJtYWMiOiIxMjFjN2I3MWQ4YjdlNWYwNTYxZjAwYTM2MDFiM2QzNDQ3ZGYyMjNhNGUzNjk1OTAwMjM3M2NjYTM4OTFjZjAxIn0%3D"
+				}
+			],
+			"created": 1518692965693,
+			"modified": 1520601809591,
+			"name": "Default Jar",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"created": 1520433832419,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520433832419,
+			"modified": 1520433832419,
+			"name": "users",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_8670594715554aa8af8510ade39b7670",
+			"created": 1521033669316,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520433832369,
+			"modified": 1521033678388,
+			"name": "schedules",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_888820b057fc4fb481924eed6da1bf33",
+			"color": "#cb564b",
+			"created": 1520603751783,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1520603756856,
+			"name": "New Environment",
+			"parentId": "env_3884321f6d884dceb1e99b7a0f62d798",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_df589487e94647bba981f4a5a12b178b",
+			"authentication": {},
+			"body": {},
+			"created": 1520433862139,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_69f0648f9bf04f34bd44263417a0def0",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520433862140,
+			"method": "GET",
+			"modified": 1520603722309,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2f81c90fe3cc408caa82b5011d38bbe2",
+			"authentication": {},
+			"body": {},
+			"created": 1520434058296,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_34638ec1685e4b5e88650f1d30ce1f3f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520433862190,
+			"method": "GET",
+			"modified": 1520603711118,
+			"name": "users",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_184eb1ffffa34cd6b9fe63739db07935",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"lastname\": \"ApiTest\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"email\": \"test6@api.com\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
+			},
+			"created": 1520434885462,
+			"description": "Create a user without validation errors",
+			"headers": [
+				{
+					"id": "pair_cc666f3cac534387bfc3af1b524eedad",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_2e498d07b4ef4fd592d0ebaa41d0b05d",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520434885462,
+			"method": "POST",
+			"modified": 1520604034011,
+			"name": "users",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8bc112d1699643779ecfc0c1e3020ab2",
+			"authentication": {},
+			"body": {},
+			"created": 1520439222129,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_fee90c7ab4cd4c17a72a0e60e783a0de",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520439222129,
+			"method": "DELETE",
+			"modified": 1520603939856,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users/60",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3a1a7c61396f408498e54d4713774cfb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"name\": \"MonSuperNom\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
+			},
+			"created": 1520439256220,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd01a350caf345d9aad7afce1181e98f",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_669c44f2e98240b49e92514119d5b0de",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520439256220,
+			"method": "PATCH",
+			"modified": 1520605277120,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users/61",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bfcd77e9571d4fcca50564a4d8e35344",
+			"authentication": {},
+			"body": {},
+			"created": 1521033669320,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_69f0648f9bf04f34bd44263417a0def0",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520433862140,
+			"method": "GET",
+			"modified": 1521036160107,
+			"name": "schedules/{id}",
+			"parameters": [],
+			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/schedules/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_076a770420df43f98dab2cd4f121f19b",
+			"authentication": {},
+			"body": {},
+			"created": 1521033669325,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_34638ec1685e4b5e88650f1d30ce1f3f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520433862190,
+			"method": "GET",
+			"modified": 1521036164176,
+			"name": "schedules",
+			"parameters": [],
+			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/schedules",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f088a1e8d1d44cabacac34e113455ab3",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"group_id\": \"2\",\n\t\"start_time\": \"2016-07-19 06:00:00\",\n\t\"end_time\": \"2016-07-19 12:00:00\"\n}"
+			},
+			"created": 1521033669327,
+			"description": "Create a user without validation errors",
+			"headers": [
+				{
+					"id": "pair_cc666f3cac534387bfc3af1b524eedad",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_2e498d07b4ef4fd592d0ebaa41d0b05d",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520434885462,
+			"method": "POST",
+			"modified": 1521036247118,
+			"name": "schedules",
+			"parameters": [],
+			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/schedules",
+			"_type": "request"
+		},
+		{
+			"_id": "req_86700892db5442bc95836d9f15938cb0",
+			"authentication": {},
+			"body": {},
+			"created": 1521033669331,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_fee90c7ab4cd4c17a72a0e60e783a0de",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520439222129,
+			"method": "DELETE",
+			"modified": 1521037765744,
+			"name": "schedules/{id}",
+			"parameters": [],
+			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/schedules/128",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fda2de6d051f4a90b4b3e7f3f9057b96",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"group_id\": \"4\",\n\t\"start_time\": \"2016-07-19 06:00:00\",\n\t\"end_time\": \"2016-07-19 12:00:00\"\n}"
+			},
+			"created": 1521033669334,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_dd01a350caf345d9aad7afce1181e98f",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_669c44f2e98240b49e92514119d5b0de",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520439256220,
+			"method": "PATCH",
+			"modified": 1521037841124,
+			"name": "schedules/{id}",
+			"parameters": [],
+			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/schedules/129",
+			"_type": "request"
+		}
+	]
+}

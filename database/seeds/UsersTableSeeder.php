@@ -32,7 +32,8 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Toor',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'active'
+            'status'       => 'active',
+            'api_token'    => str_random(60)
         ]);
         // Asociate the admin role
         $root->roles()->save(Role::where('slug', 'admin')->first());
@@ -125,7 +126,8 @@ class UsersTableSeeder extends Seeder
                 'lastname'     => $user[0],
                 'firstname'    => $user[1],
                 'phone_number' => $user[2],
-                'sex'          => $user[3]
+                'sex'          => $user[3],
+                'api_token'    => str_random(60)
             ]);
             // Attach the right role and group for this user
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());

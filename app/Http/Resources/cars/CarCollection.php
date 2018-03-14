@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Resources\cartypes;
+namespace App\Http\Resources\cars;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * CarTypeController
- * Api ressource controller
+ * CarCollection
+ * Api ressource
  *
  * @author Nicolas Henry
- * @package App\Http\Resources\cartypes
+ * @package App\Http\Resources\cars
  */
-class CarTypeCollection extends ResourceCollection
+class CarCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -22,7 +22,7 @@ class CarTypeCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => CarTypeResource::collection($this->collection),
+            'data' => CarResource::collection($this->collection),
         ];
     }
 }

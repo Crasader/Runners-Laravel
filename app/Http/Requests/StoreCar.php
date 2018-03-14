@@ -5,13 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * StoreCarType
- * Validates a store cartype request
+ * StoreCar
+ * Validates a store car request
  *
  * @author Nicolas Henry
  * @package App\Http\Requests\
  */
-class StoreCarType extends FormRequest
+class StoreCar extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,9 +31,11 @@ class StoreCarType extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:30'],
-            'description' => ['required', 'min:5', 'max:255'],
-            'nb_place' => ['required', 'numeric', 'min:1', 'max:8']
+            'plate_number' => ['required', 'min:9', 'max:9'],
+            'brand'        => ['required', 'min:2', 'max:20'],
+            'model'        => ['required', 'min:2', 'max:10'],
+            'color'        => ['required', 'min:2', 'max:10'],
+            'type_id'      => ['required', 'integer']
         ];
     }
 }

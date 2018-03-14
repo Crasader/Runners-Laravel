@@ -24,5 +24,6 @@ Route::apiResources([
     'carTypes'  => 'api\CarTypeController',
     'cars'      => 'api\CarController',
     'groups'    => 'api\GroupController',
-    'schedules' => 'api\ScheduleController'
+    'schedules' => 'api\ScheduleController',
+    'waypoints' => 'api\WaypointController'
 ]);

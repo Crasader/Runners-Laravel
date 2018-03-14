@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-03-14T14:35:12.360Z",
+	"__export_date": "2018-03-14T16:04:01.774Z",
 	"__export_source": "insomnia.desktop.app:v5.14.9",
 	"resources": [
 		{
@@ -26,35 +26,9 @@
 		},
 		{
 			"_id": "jar_919233fea429489f8c096274fa9d64fe",
-			"cookies": [
-				{
-					"creation": "2018-03-09T13:23:16.522Z",
-					"domain": "runners-laravel",
-					"expires": "2018-03-09T15:23:29.000Z",
-					"hostOnly": true,
-					"id": "10171890346492019",
-					"key": "XSRF-TOKEN",
-					"lastAccessed": "2018-03-09T13:23:29.591Z",
-					"maxAge": 7200,
-					"path": "/",
-					"value": "eyJpdiI6Ikt5dVwvS09QVDBvVXI5TUlDbFpcL0lTQT09IiwidmFsdWUiOiJrbEVycldGR2gwT0J5OWhpMkJaN1dLZ3cxdWpPdFp1RDZPVmV1TTNTQm14dmRldE0rUmJtWlhWNnROUnZ4UjlcL3hjSTJKREllUFRWOTlLUGU3cTRNY0E9PSIsIm1hYyI6IjliYTM1ZWI2OWIxYmExYjdjYTgxM2IwMWVjNDlmNTkwNzVhOTEyOTk3ZmZiMDI5ZjllZTI1NWMxNWE0YmRhNzMifQ%3D%3D"
-				},
-				{
-					"creation": "2018-03-09T13:23:16.523Z",
-					"domain": "runners-laravel",
-					"expires": "2018-03-09T15:23:29.000Z",
-					"hostOnly": true,
-					"httpOnly": true,
-					"id": "20102940839315986",
-					"key": "runners_session",
-					"lastAccessed": "2018-03-09T13:23:29.591Z",
-					"maxAge": 7200,
-					"path": "/",
-					"value": "eyJpdiI6Im13QjdLQWhOejRcL1VqRmZjVzdVQXN3PT0iLCJ2YWx1ZSI6IjdnbHJJUmxcL0tSTVVrWjdqdWRIa2M4NllOWTh3K3NNdVVHcFNNWnpkZjRcL1wvVnZSaktsU2JYVDRvZUwyZlIxN3MwdkpkZ1ZFOUxkSE5CNEd2amJGRlFnPT0iLCJtYWMiOiIxMjFjN2I3MWQ4YjdlNWYwNTYxZjAwYTM2MDFiM2QzNDQ3ZGYyMjNhNGUzNjk1OTAwMjM3M2NjYTM4OTFjZjAxIn0%3D"
-				}
-			],
+			"cookies": [],
 			"created": 1518692965693,
-			"modified": 1520601809591,
+			"modified": 1518692965693,
 			"name": "Default Jar",
 			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
 			"_type": "cookie_jar"
@@ -71,26 +45,48 @@
 			"_type": "request_group"
 		},
 		{
-			"_id": "fld_8670594715554aa8af8510ade39b7670",
-			"created": 1521033669316,
+			"_id": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"created": 1520600076484,
 			"description": "",
 			"environment": {},
-			"metaSortKey": -1520433832369,
-			"modified": 1521033678388,
-			"name": "schedules",
+			"metaSortKey": -1520600076484,
+			"modified": 1520600076484,
+			"name": "cartypes",
 			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
 			"_type": "request_group"
 		},
 		{
-			"_id": "env_888820b057fc4fb481924eed6da1bf33",
-			"color": "#cb564b",
-			"created": 1520603751783,
-			"data": {},
-			"isPrivate": false,
-			"modified": 1520603756856,
-			"name": "New Environment",
-			"parentId": "env_3884321f6d884dceb1e99b7a0f62d798",
-			"_type": "environment"
+			"_id": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"created": 1521032230644,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1521032230645,
+			"modified": 1521032238186,
+			"name": "cars",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_fadc49735a074b088828181b238bf459",
+			"created": 1521038636314,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1521038636314,
+			"modified": 1521038636314,
+			"name": "groups",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"created": 1521042775859,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1521042775859,
+			"modified": 1521042775859,
+			"name": "waypoints",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
 		},
 		{
 			"_id": "req_df589487e94647bba981f4a5a12b178b",
@@ -98,16 +94,10 @@
 			"body": {},
 			"created": 1520433862139,
 			"description": "",
-			"headers": [
-				{
-					"id": "pair_69f0648f9bf04f34bd44263417a0def0",
-					"name": "X-Requested-With",
-					"value": "XMLHttpRequest"
-				}
-			],
+			"headers": [],
 			"metaSortKey": -1520433862140,
 			"method": "GET",
-			"modified": 1520603722309,
+			"modified": 1520433885105,
 			"name": "users/{id}",
 			"parameters": [],
 			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
@@ -124,16 +114,10 @@
 			"body": {},
 			"created": 1520434058296,
 			"description": "",
-			"headers": [
-				{
-					"id": "pair_34638ec1685e4b5e88650f1d30ce1f3f",
-					"name": "X-Requested-With",
-					"value": "XMLHttpRequest"
-				}
-			],
+			"headers": [],
 			"metaSortKey": -1520433862190,
 			"method": "GET",
-			"modified": 1520603711118,
+			"modified": 1520434080841,
 			"name": "users",
 			"parameters": [],
 			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
@@ -149,7 +133,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"lastname\": \"ApiTest\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"email\": \"test6@api.com\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
+				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"lastname\": \"ApiTest\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"email\": \"test@api.com\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
 			},
 			"created": 1520434885462,
 			"description": "Create a user without validation errors",
@@ -160,14 +144,14 @@
 					"value": "application/json"
 				},
 				{
-					"id": "pair_2e498d07b4ef4fd592d0ebaa41d0b05d",
+					"id": "pair_2e908556b3684c258db19786972cb842",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
 				}
 			],
 			"metaSortKey": -1520434885462,
 			"method": "POST",
-			"modified": 1520604034011,
+			"modified": 1520602563924,
 			"name": "users",
 			"parameters": [],
 			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
@@ -184,16 +168,10 @@
 			"body": {},
 			"created": 1520439222129,
 			"description": "",
-			"headers": [
-				{
-					"id": "pair_fee90c7ab4cd4c17a72a0e60e783a0de",
-					"name": "X-Requested-With",
-					"value": "XMLHttpRequest"
-				}
-			],
+			"headers": [],
 			"metaSortKey": -1520439222129,
 			"method": "DELETE",
-			"modified": 1520603939856,
+			"modified": 1520439231634,
 			"name": "users/{id}",
 			"parameters": [],
 			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
@@ -201,7 +179,7 @@
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/users/60",
+			"url": "runners-laravel/api/users/1",
 			"_type": "request"
 		},
 		{
@@ -209,25 +187,20 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"name\": \"MonSuperNom\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
+				"text": ""
 			},
 			"created": 1520439256220,
 			"description": "",
 			"headers": [
 				{
-					"id": "pair_dd01a350caf345d9aad7afce1181e98f",
+					"id": "pair_343efd278ade4e858a9cea08b2c83673",
 					"name": "Content-Type",
 					"value": "application/json"
-				},
-				{
-					"id": "pair_669c44f2e98240b49e92514119d5b0de",
-					"name": "X-Requested-With",
-					"value": "XMLHttpRequest"
 				}
 			],
 			"metaSortKey": -1520439256220,
-			"method": "PATCH",
-			"modified": 1520605277120,
+			"method": "PUT",
+			"modified": 1520600172142,
 			"name": "users/{id}",
 			"parameters": [],
 			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
@@ -235,153 +208,591 @@
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/users/61",
+			"url": "",
 			"_type": "request"
 		},
 		{
-			"_id": "req_bfcd77e9571d4fcca50564a4d8e35344",
+			"_id": "req_f65117fad6294a7aa0aa3ba114e8c664",
 			"authentication": {},
 			"body": {},
-			"created": 1521033669320,
+			"created": 1520600093325,
 			"description": "",
 			"headers": [
 				{
-					"id": "pair_69f0648f9bf04f34bd44263417a0def0",
+					"id": "pair_1cbd7dc6b8d84c16b879ffe1b0363298",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
 				}
 			],
-			"metaSortKey": -1520433862140,
+			"metaSortKey": -1520600093325,
 			"method": "GET",
-			"modified": 1521036160107,
-			"name": "schedules/{id}",
+			"modified": 1520841767191,
+			"name": "cartypes",
 			"parameters": [],
-			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
 			"settingDisableRenderRequestBody": false,
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/schedules/1",
+			"url": "runners-laravel/api/carTypes",
 			"_type": "request"
 		},
 		{
-			"_id": "req_076a770420df43f98dab2cd4f121f19b",
+			"_id": "req_d3ff713cc91d4fce9b5462d43335ae19",
 			"authentication": {},
 			"body": {},
-			"created": 1521033669325,
+			"created": 1520600113607,
 			"description": "",
 			"headers": [
 				{
-					"id": "pair_34638ec1685e4b5e88650f1d30ce1f3f",
+					"id": "pair_f8af5faa2e814ebdb4ed05af62585973",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
 				}
 			],
-			"metaSortKey": -1520433862190,
+			"metaSortKey": -1520600093275,
 			"method": "GET",
-			"modified": 1521036164176,
-			"name": "schedules",
+			"modified": 1520843360193,
+			"name": "cartypes/{id}",
 			"parameters": [],
-			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
 			"settingDisableRenderRequestBody": false,
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/schedules",
+			"url": "runners-laravel/api/carTypes/1",
 			"_type": "request"
 		},
 		{
-			"_id": "req_f088a1e8d1d44cabacac34e113455ab3",
+			"_id": "req_4583e11c089740fe8abd7c41bc5994a2",
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"group_id\": \"2\",\n\t\"start_time\": \"2016-07-19 06:00:00\",\n\t\"end_time\": \"2016-07-19 12:00:00\"\n}"
+				"text": "{\n\t\"name\": \"tutu\",\n\t\"description\": \"Maintutu\",\n\t\"nb_place\": \"4\"\n}"
 			},
-			"created": 1521033669327,
-			"description": "Create a user without validation errors",
+			"created": 1520600128132,
+			"description": "",
 			"headers": [
 				{
-					"id": "pair_cc666f3cac534387bfc3af1b524eedad",
-					"name": "Content-Type",
-					"value": "application/json"
-				},
-				{
-					"id": "pair_2e498d07b4ef4fd592d0ebaa41d0b05d",
+					"id": "pair_27090c6da6fd47a38009849be12bf3da",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_5b53362089f14d50b15f78dc4cc9bbba",
+					"name": "Content-Type",
+					"value": "application/json"
 				}
 			],
-			"metaSortKey": -1520434885462,
+			"metaSortKey": -1520600093375,
 			"method": "POST",
-			"modified": 1521036247118,
-			"name": "schedules",
+			"modified": 1520851499272,
+			"name": "cartypes",
 			"parameters": [],
-			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
 			"settingDisableRenderRequestBody": false,
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/schedules",
+			"url": "runners-laravel/api/carTypes",
 			"_type": "request"
 		},
 		{
-			"_id": "req_86700892db5442bc95836d9f15938cb0",
+			"_id": "req_20bc091019444aeb9ac96fe2e2bf3b5c",
 			"authentication": {},
 			"body": {},
-			"created": 1521033669331,
+			"created": 1520600142276,
 			"description": "",
 			"headers": [
 				{
-					"id": "pair_fee90c7ab4cd4c17a72a0e60e783a0de",
+					"id": "pair_e905e242ff994ed1bd0a6a44bacf9b4f",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
 				}
 			],
-			"metaSortKey": -1520439222129,
+			"metaSortKey": -1520600093425,
 			"method": "DELETE",
-			"modified": 1521037765744,
-			"name": "schedules/{id}",
+			"modified": 1520842288062,
+			"name": "cartypes/{id}",
 			"parameters": [],
-			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
 			"settingDisableRenderRequestBody": false,
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/schedules/128",
+			"url": "runners-laravel/api/carTypes/1",
 			"_type": "request"
 		},
 		{
-			"_id": "req_fda2de6d051f4a90b4b3e7f3f9057b96",
+			"_id": "req_8f15515ad5d24d949f0f5477a55fdfe6",
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"group_id\": \"4\",\n\t\"start_time\": \"2016-07-19 06:00:00\",\n\t\"end_time\": \"2016-07-19 12:00:00\"\n}"
+				"text": "{\n\t\"name\": \"tutu2\",\n\t\"description\": \"tutu2\",\n\t\"nb_place\": \"3\"\n}"
 			},
-			"created": 1521033669334,
+			"created": 1520600159204,
 			"description": "",
 			"headers": [
 				{
-					"id": "pair_dd01a350caf345d9aad7afce1181e98f",
-					"name": "Content-Type",
-					"value": "application/json"
-				},
-				{
-					"id": "pair_669c44f2e98240b49e92514119d5b0de",
+					"id": "pair_ee33e063f8c340e8b346cb6f0141afe8",
 					"name": "X-Requested-With",
 					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_cbe20c3ef56a4911879635b52858db29",
+					"name": "Content-Type",
+					"value": "application/json"
 				}
 			],
-			"metaSortKey": -1520439256220,
-			"method": "PATCH",
-			"modified": 1521037841124,
-			"name": "schedules/{id}",
+			"metaSortKey": -1520600093475,
+			"method": "PUT",
+			"modified": 1520842284655,
+			"name": "cartypes/{id}",
 			"parameters": [],
-			"parentId": "fld_8670594715554aa8af8510ade39b7670",
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
 			"settingDisableRenderRequestBody": false,
 			"settingEncodeUrl": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "runners-laravel/api/schedules/129",
+			"url": "runners-laravel/api/carTypes/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_25417229a4fb46e5a33809805106e0a4",
+			"authentication": {},
+			"body": {},
+			"created": 1521032639434,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_329de753ffde4d6e98b886eb6b083c1f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521025478286.2344,
+			"method": "GET",
+			"modified": 1521038099569,
+			"name": "cars/{id}",
+			"parameters": [],
+			"parentId": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/cars/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f18769935c264c248a5c40f8540e29ba",
+			"authentication": {},
+			"body": {},
+			"created": 1521032649250,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_57758cd1e5444f67bf477436c4e0cd8d",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521025478336.2344,
+			"method": "GET",
+			"modified": 1521032810090,
+			"name": "cars",
+			"parameters": [],
+			"parentId": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/cars",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fdcc65895f9d4c8da2533b2465b604f3",
+			"authentication": {},
+			"body": {},
+			"created": 1521032681890,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_0a305ebbfb41410799304b7fb7dc62c2",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521025478386.2344,
+			"method": "DELETE",
+			"modified": 1521037988715,
+			"name": "cars/{id}",
+			"parameters": [],
+			"parentId": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/cars/21",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c9a4d2b0733a410bbcb44530122110e2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"plate_number\": \"AI 403289\",\n\t\"brand\": \"Mercedes\",\n\t\"model\": \"Vito\",\n\t\"color\": \"noir\",\n\t\"status\": \"free\",\n\t\"type_id\": \"1\"\n}"
+			},
+			"created": 1521032697162,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_15a1936e767e44c589a7ef36f4db90be",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_6f7d8b30e8e34a35b62972e95398090d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521025478436.2344,
+			"method": "PUT",
+			"modified": 1521038067663,
+			"name": "cars/{id}",
+			"parameters": [],
+			"parentId": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/cars/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_999add2e8d7d46109cd5b65000169867",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"plate_number\": \"AI 403289\",\n\t\"brand\": \"Mercedes\",\n\t\"model\": \"Vito\",\n\t\"color\": \"noir\",\n\t\"status\": \"free\",\n\t\"type_id\": \"2\"\n}"
+			},
+			"created": 1521032733675,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_5d90736da0b64643a825ee01faa10838",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_e71e97a2ef2c4db0b15c03040721712b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521025478361.2344,
+			"method": "POST",
+			"modified": 1521037968520,
+			"name": "cars",
+			"parameters": [],
+			"parentId": "fld_1968e13a4b4748c68d1e7a0921e093ae",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/cars",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3388d47d131047ed96754a17f4982ae2",
+			"authentication": {},
+			"body": {},
+			"created": 1521038647817,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_0bf73a1166c4434cbd5bf58f6000aa9f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521038647831.0625,
+			"method": "GET",
+			"modified": 1521038968910,
+			"name": "groups",
+			"parameters": [],
+			"parentId": "fld_fadc49735a074b088828181b238bf459",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6baacb2fc59049f6a11238ed778253de",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"color\": \"444444\",\n\t\"name\": \"CD\"\n}"
+			},
+			"created": 1521038877219,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ee5c35401590486492f16dc1e12b3150",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_89429e0788c744e78a20ae8796c0119b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521038647835.75,
+			"method": "POST",
+			"modified": 1521041292624,
+			"name": "groups",
+			"parameters": [],
+			"parentId": "fld_fadc49735a074b088828181b238bf459",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/groups",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c87790f2953c4754b19da5d94fc00126",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"color\": \"444444\",\n\t\"name\": \"A\"\n}"
+			},
+			"created": 1521038888769,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_7479c4b16fb940d2bb71bfc885174252",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_f189d2b9990a4e3d80cfb55b18a17d4a",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521038647917,
+			"method": "PUT",
+			"modified": 1521041520160,
+			"name": "groups/{id}",
+			"parameters": [],
+			"parentId": "fld_fadc49735a074b088828181b238bf459",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/groups/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9b5b29ad08fe4955a700d2f325749829",
+			"authentication": {},
+			"body": {},
+			"created": 1521038898692,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b49e6a857fb3400b8035a8f85767ed42",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521038647854.5,
+			"method": "DELETE",
+			"modified": 1521041537073,
+			"name": "groups/{id}",
+			"parameters": [],
+			"parentId": "fld_fadc49735a074b088828181b238bf459",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/groups/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_1478ab27f4804ae2ac14840feb3c12d9",
+			"authentication": {},
+			"body": {},
+			"created": 1521038937593,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_937a92c86b8045db89f5088ed6cb0e85",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521038647826.375,
+			"method": "GET",
+			"modified": 1521041531395,
+			"name": "groups/{id}",
+			"parameters": [],
+			"parentId": "fld_fadc49735a074b088828181b238bf459",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/groups/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_38b7595eaee0480ba2887c18625968ad",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"ASS\"\n}"
+			},
+			"created": 1521042854471,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_7479c4b16fb940d2bb71bfc885174252",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_f189d2b9990a4e3d80cfb55b18a17d4a",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521042783157,
+			"method": "PUT",
+			"modified": 1521043375698,
+			"name": "waypoints/{id}",
+			"parameters": [],
+			"parentId": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/waypoints/16",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a3e7f2285ad44f17b718f0a552e76b88",
+			"authentication": {},
+			"body": {},
+			"created": 1521042866340,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_b49e6a857fb3400b8035a8f85767ed42",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521042783132,
+			"method": "DELETE",
+			"modified": 1521043387097,
+			"name": "waypoints{id}",
+			"parameters": [],
+			"parentId": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/waypoints/16",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2b809e441f244e5484e16d8322f8422c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"CDI\"\n}"
+			},
+			"created": 1521042867949,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ee5c35401590486492f16dc1e12b3150",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_89429e0788c744e78a20ae8796c0119b",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1521042783128.875,
+			"method": "POST",
+			"modified": 1521043204161,
+			"name": "waypoints",
+			"parameters": [],
+			"parentId": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/waypoints",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a0b57f57ca09424ba18616fcf1a5e7af",
+			"authentication": {},
+			"body": {},
+			"created": 1521042869772,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_0bf73a1166c4434cbd5bf58f6000aa9f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521042783125.75,
+			"method": "GET",
+			"modified": 1521042950417,
+			"name": "waypoints",
+			"parameters": [],
+			"parentId": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/waypoints",
+			"_type": "request"
+		},
+		{
+			"_id": "req_54491e93822e4ab19638a452eeb726d3",
+			"authentication": {},
+			"body": {},
+			"created": 1521042871700,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_937a92c86b8045db89f5088ed6cb0e85",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1521042783113.25,
+			"method": "GET",
+			"modified": 1521042952042,
+			"name": "waypoints/{id}",
+			"parameters": [],
+			"parentId": "fld_7116dcaac8cd4894961a549c3372a9cd",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/waypoints/1",
 			"_type": "request"
 		}
 	]

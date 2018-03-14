@@ -11,16 +11,18 @@ Here we found the summary of all the documentation for the Runners project.
 
 ### App
 
-1. [Migrations and Seeding](app/migrationAndSeeding.md)
-2. [Note about database](app/database.md)
-3. [App lifecycle](app/lifecycle.md)
-4. [App architecture](app/architecture.md)
-5. [Permissions system](app/permissions.md)
-6. [Status system](app/status.md)
+1. [Migrations and Seeding](app/1_migrationAndSeeding.md)
+2. [Note about database](app/2_database.md)
+3. [App lifecycle](app/3_lifecycle.md)
+4. [App architecture](app/4_architecture.md)
+5. [Permissions system](app/5_permissions.md)
+6. [Status system](app/6_status.md)
 
 ### Api
 
-1. [Api architecture](api/arch.md)
+1. [Architecture](api/1_arch.md)
+2. [Api routes](api/2_routes.md)
+3. [Error handling](api/3_errors.md)
 
 ### Tests
 
@@ -36,6 +38,6 @@ Here we found the summary of all the documentation for the Runners project.
 
 ### Deployment / production installation
 
-1. [Server requirements](deploy/requirements.md)
+1. [Server requirements](deploy/1_requirements.md)
 2. [Manual deploy](deploy/manual.md)
 3. [Using envoy](deploy/envoy.md)

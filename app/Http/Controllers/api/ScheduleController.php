@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Schedule;
+use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Schedules\ScheduleCollection;
+use App\Http\Requests\Schedules\StoreSchedule;
+use App\Http\Resources\Schedules\ScheduleResource;
 
 /**
  * ScheduleController
@@ -32,9 +35,12 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSchedule $request)
     {
-        //
+        $schedule = new Schedule($request->all());
+        $schedule->group()->associate(Group::find($request->group_id));
+        $schedule->save();
+        return (new ScheduleResource($schedule))->response()->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        //
+        return new ScheduleResource($schedule);
     }
 
     /**
@@ -57,7 +63,10 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        $schedule->update($request->all());
+        $schedule->group()->associate(Group::find($request->group_id));
+        $schedule->save();
+        return new ScheduleResource($schedule);
     }
 
     /**
@@ -68,7 +77,8 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+        return response()->json(null, 204);
     }
 
     /**

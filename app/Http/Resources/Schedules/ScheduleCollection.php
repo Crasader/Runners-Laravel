@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Schedules;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\Schedules\ScheduleResource;
 
 /**
  * ScheduleCollection

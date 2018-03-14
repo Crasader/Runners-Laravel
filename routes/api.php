@@ -13,16 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->get('/tutu', function (Request $request) {
+    return "TUTU";
 });
 
+// Some suplementary routes for the resources
+// This declarations must be before the ressource déclaration
 Route::get('/me/workinghours', 'api\ScheduleController@workinghours');
 
+// All the resources déclarations
 Route::apiResources([
     'users'     => 'api\UserController',
     'carTypes'  => 'api\CarTypeController',
     'cars'      => 'api\CarController',
-    'groups'    => 'api\GroupController'
+    'groups'    => 'api\GroupController',
     'schedules' => 'api\ScheduleController'
 ]);

@@ -4,6 +4,7 @@
 
 ```sh
 git clone git@github.com:CPNV-ES/Runners-Laravel.git Runners
+# Your git local instance must have the credentials for this repo
 ```
 
 ## Configure the .env
@@ -20,6 +21,10 @@ Just run :
 # At the root folder of the project
 composer install
 ```
+
+## Generate a fresh app key
+
+Laravel needs a specific unique key, uset to generate authentication tokens, and encription. Use the `php artisan key:generate` to automatically generate and set the key for our project.
 
 ## Install the node.js dependencies
 

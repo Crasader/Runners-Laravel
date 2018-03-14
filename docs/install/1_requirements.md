@@ -30,6 +30,6 @@ If you use an **Unix like** OS (Linux, macOS), we can also use Homestead, but it
 <hr>
 <div align="center">
 
-**[<- Prev](../README.md) // [Summary](../README.md) // [Next ->](install.md)**
+**[<- Prev](../README.md) // [Summary](../README.md) // [Next ->](2_install.md)**
 
 </div>

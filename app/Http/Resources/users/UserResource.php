@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\users;
+namespace App\Http\Resources\Users;
 
 use Illuminate\Http\Resources\Json\Resource;
 
@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\Resource;
  * Translate User model to Json
  *
  * @author Bastien Nicoud
- * @package App\Http\Resources\users
+ * @package App\Http\Resources\Users
  */
 class UserResource extends Resource
 {

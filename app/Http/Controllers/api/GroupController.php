@@ -5,7 +5,17 @@ namespace App\Http\Controllers\api;
 use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Groups\GroupResource;
+use App\Http\Resources\Groups\GroupCollection;
+use App\Http\Requests\StoreGroup;
 
+/**
+ * GroupController
+ * Api ressource controller
+ *
+ * @author Nicolas Henry
+ * @package App\Http\Controllers\api
+ */
 class GroupController extends Controller
 {
     /**
@@ -15,17 +25,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new GroupCollection(Group::paginate(20));
     }
 
     /**
@@ -34,9 +34,11 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGroup $request)
     {
-        //
+        $group = new Group($request->all());
+        $group->save();
+        return (new GroupResource($group))->response()->setStatusCode(201);
     }
 
     /**
@@ -47,18 +49,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Group  $group
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Group $group)
-    {
-        //
+        return new GroupResource($group);
     }
 
     /**
@@ -68,9 +59,11 @@ class GroupController extends Controller
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(StoreGroup $request, Group $group)
     {
-        //
+        $group->fill($request->all());
+        $group->save();
+        return new GroupResource($group);
     }
 
     /**
@@ -81,6 +74,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $group->delete();
+        return response()->json(null, 204);
     }
 }

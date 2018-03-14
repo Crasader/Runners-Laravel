@@ -6,10 +6,10 @@ use Illuminate\Http\Resources\Json\Resource;
 
 /**
  * GroupResource
- * Translate Group model to Json
+ * Api ressource
  *
- * @author Bastien Nicoud
- * @package App\Http\Resources\Groups
+ * @author Nicolas Henry
+ * @package App\Http\Resources\groups
  */
 class GroupResource extends Resource
 {
@@ -22,12 +22,10 @@ class GroupResource extends Resource
     public function toArray($request)
     {
         return [
-            // Base user datas to be serialized
-            'id'         => $this->id,
-            'color'      => $this->color,
-            'name'       => $this->name,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'color'        => $this->color,
+            'name'         => $this->name,
+            'created_at'   => $this->created_at,
+            'updated_at'   => $this->updated_at
         ];
     }
 }

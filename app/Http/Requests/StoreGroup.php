@@ -4,6 +4,13 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * StoreGroup
+ * Validates a store group request
+ *
+ * @author Nicolas Henry
+ * @package App\Http\Requests\
+ */
 class StoreGroup extends FormRequest
 {
     /**
@@ -13,7 +20,7 @@ class StoreGroup extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +31,8 @@ class StoreGroup extends FormRequest
     public function rules()
     {
         return [
-            //
+            'color' => ['required', 'min:6', 'max:6'],
+            'name'  => ['required', 'min:1', 'max:3', 'unique:groups']
         ];
     }
 }

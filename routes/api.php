@@ -23,6 +23,6 @@ Route::apiResources([
     'users'     => 'api\UserController',
     'carTypes'  => 'api\CarTypeController',
     'cars'      => 'api\CarController',
-    'groups'    => 'api\GroupController'
+    'groups'    => 'api\GroupController',
     'schedules' => 'api\ScheduleController'
 ]);

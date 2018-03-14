@@ -41,6 +41,6 @@ npm i
 <hr>
 <div align="center">
 
-**[<- Prev](requirements.md) // [Summary](../README.md) // [Next ->](homestead.md)**
+**[<- Prev](1_requirements.md) // [Summary](../README.md) // [Next ->](3_homestead.md)**
 
 </div>

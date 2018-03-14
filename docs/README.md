@@ -5,10 +5,10 @@ Here we found all the documentation for the Runners project.
 ## Summary
 
 ### Install dev env
-* [Requirements](install/requirements.md)
-* [Installation](install/install.md)
-* [Homestead](install/homestead.md)
-* [Last steps](install/getready.md)
+* [Requirements](install/1_requirements.md)
+* [Installation](install/2_install.md)
+* [Homestead](install/3_homestead.md)
+* [Last steps](install/4_getready.md)
 
 ### App
 * [Migrations and Seeding](app/migrationAndSeeding.md)

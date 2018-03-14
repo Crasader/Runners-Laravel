@@ -1,0 +1,328 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-03-12T10:45:54.137Z",
+	"__export_source": "insomnia.desktop.app:v5.14.9",
+	"resources": [
+		{
+			"_id": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"created": 1518692965674,
+			"description": "# All the api request tests for the runnesr api",
+			"modified": 1520435956337,
+			"name": "Runners",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_3884321f6d884dceb1e99b7a0f62d798",
+			"color": null,
+			"created": 1518692965690,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1518692965690,
+			"name": "New Environment",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_919233fea429489f8c096274fa9d64fe",
+			"cookies": [],
+			"created": 1518692965693,
+			"modified": 1518692965693,
+			"name": "Default Jar",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"created": 1520433832419,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520433832419,
+			"modified": 1520433832419,
+			"name": "users",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"created": 1520600076484,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1520600076484,
+			"modified": 1520600076484,
+			"name": "cartypes",
+			"parentId": "wrk_2b77918e277b4c8d81ff09d74aaa14f0",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_df589487e94647bba981f4a5a12b178b",
+			"authentication": {},
+			"body": {},
+			"created": 1520433862139,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1520433862140,
+			"method": "GET",
+			"modified": 1520433885105,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_2f81c90fe3cc408caa82b5011d38bbe2",
+			"authentication": {},
+			"body": {},
+			"created": 1520434058296,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1520433862190,
+			"method": "GET",
+			"modified": 1520434080841,
+			"name": "users",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_184eb1ffffa34cd6b9fe63739db07935",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"firstname\": \"TestApi\",\n\t\"lastname\": \"ApiTest\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\",\n\t\"email\": \"test@api.com\",\n\t\"phone_number\": \"0792342323\",\n\t\"sex\": \"m\"\n}"
+			},
+			"created": 1520434885462,
+			"description": "Create a user without validation errors",
+			"headers": [
+				{
+					"id": "pair_cc666f3cac534387bfc3af1b524eedad",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_2e908556b3684c258db19786972cb842",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520434885462,
+			"method": "POST",
+			"modified": 1520602563924,
+			"name": "users",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8bc112d1699643779ecfc0c1e3020ab2",
+			"authentication": {},
+			"body": {},
+			"created": 1520439222129,
+			"description": "",
+			"headers": [],
+			"metaSortKey": -1520439222129,
+			"method": "DELETE",
+			"modified": 1520439231634,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/users/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3a1a7c61396f408498e54d4713774cfb",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": ""
+			},
+			"created": 1520439256220,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_343efd278ade4e858a9cea08b2c83673",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1520439256220,
+			"method": "PUT",
+			"modified": 1520600172142,
+			"name": "users/{id}",
+			"parameters": [],
+			"parentId": "fld_49ae373751244fe2bd1e2a247165dcca",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f65117fad6294a7aa0aa3ba114e8c664",
+			"authentication": {},
+			"body": {},
+			"created": 1520600093325,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1cbd7dc6b8d84c16b879ffe1b0363298",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520600093325,
+			"method": "GET",
+			"modified": 1520841767191,
+			"name": "cartypes",
+			"parameters": [],
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/carTypes",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d3ff713cc91d4fce9b5462d43335ae19",
+			"authentication": {},
+			"body": {},
+			"created": 1520600113607,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_f8af5faa2e814ebdb4ed05af62585973",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520600093275,
+			"method": "GET",
+			"modified": 1520843360193,
+			"name": "cartypes/{id}",
+			"parameters": [],
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/carTypes/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4583e11c089740fe8abd7c41bc5994a2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"tutu\",\n\t\"description\": \"Maintutu\",\n\t\"nb_place\": \"4\"\n}"
+			},
+			"created": 1520600128132,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_27090c6da6fd47a38009849be12bf3da",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_5b53362089f14d50b15f78dc4cc9bbba",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1520600093375,
+			"method": "POST",
+			"modified": 1520851499272,
+			"name": "cartypes",
+			"parameters": [],
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/carTypes",
+			"_type": "request"
+		},
+		{
+			"_id": "req_20bc091019444aeb9ac96fe2e2bf3b5c",
+			"authentication": {},
+			"body": {},
+			"created": 1520600142276,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e905e242ff994ed1bd0a6a44bacf9b4f",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				}
+			],
+			"metaSortKey": -1520600093425,
+			"method": "DELETE",
+			"modified": 1520842288062,
+			"name": "cartypes/{id}",
+			"parameters": [],
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/carTypes/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8f15515ad5d24d949f0f5477a55fdfe6",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"tutu2\",\n\t\"description\": \"tutu2\",\n\t\"nb_place\": \"3\"\n}"
+			},
+			"created": 1520600159204,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ee33e063f8c340e8b346cb6f0141afe8",
+					"name": "X-Requested-With",
+					"value": "XMLHttpRequest"
+				},
+				{
+					"id": "pair_cbe20c3ef56a4911879635b52858db29",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1520600093475,
+			"method": "PUT",
+			"modified": 1520842284655,
+			"name": "cartypes/{id}",
+			"parameters": [],
+			"parentId": "fld_0da2e831cf624abd8812b11680b1c21e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "runners-laravel/api/carTypes/1",
+			"_type": "request"
+		}
+	]
+}

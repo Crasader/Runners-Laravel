@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             'api_token'    => str_random(60)
         ]);
         // Asociate the admin role
-        $root->roles()->save(Role::where('slug', 'admin')->first());
+        $root->roles()->save(Role::where('slug', 'root')->first());
 
         /**
          * Create users (coordinators, runners)
@@ -57,7 +57,7 @@ class UsersTableSeeder extends Seeder
             ['Muller',        'Simone',      '4749624639', 'w', 'secret', 'C4', 'coordinator'],
             ['Mingard',       'Laurent',     '4749624639', 'm', 'secret', 'C4', 'coordinator'],
             ['Chaignat',      'Gérald',      '4749624639', 'm', 'secret', 'C5', 'coordinator'],
-            ['Carrel',        'Xavier',      '4749624639', 'm', 'secret', 'C5', 'coordinator'],
+            ['Carrel',        'Xavier',      '4749624639', 'm', 'secret', 'C5', 'admin'],
             // Runners
             // Group A
             ['Angiolili',     'Aude',        '4749624639', 'w', 'secret', 'A',  'runner'],

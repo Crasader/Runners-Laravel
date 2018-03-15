@@ -24,7 +24,7 @@ class SchedulePolicy
      */
     public function before($user, $ability)
     {
-        if ($user->is('admin')) {
+        if ($user->is('root')) {
             return true;
         }
     }

@@ -21,10 +21,32 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         /**
+         * ROOT the superuser role
+         * This user have all access, and it's not possible to remove it's permissions.
+         */
+        Role::create([
+            'name' => 'The superuser',
+            'slug' => 'root',
+            'permissions' => [
+                'start_run'            => true,
+                'end_run'              => true,
+                'force_start_run'      => true,
+                'force_end_run'        => true,
+                'create_runners'       => true,
+                'create_coordinators'  => true,
+                'create_admin'         => true,
+                'destroy_runners'      => true,
+                'destroy_coordinators' => true,
+                'destroy_admin'        => true,
+                'manage-schedules'     => true
+            ]
+        ]);
+
+        /**
          * ADMIN role (basically all the permissions)
          */
         Role::create([
-            'name' => 'Runners superuser',
+            'name' => 'Runners administrator',
             'slug' => 'admin',
             'permissions' => [
                 'start_run'            => true,

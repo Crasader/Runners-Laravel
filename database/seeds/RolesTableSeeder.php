@@ -38,7 +38,8 @@ class RolesTableSeeder extends Seeder
                 'destroy_runners'      => true,
                 'destroy_coordinators' => true,
                 'destroy_admin'        => true,
-                'manage-schedules'     => true
+                'manage_schedules'     => true,
+                'manage_groups'        => true
             ]
         ]);
 
@@ -59,7 +60,8 @@ class RolesTableSeeder extends Seeder
                 'destroy_runners'      => true,
                 'destroy_coordinators' => true,
                 'destroy_admin'        => false,
-                'manage-schedules'     => true
+                'manage_schedules'     => true,
+                'manage_groups'        => true
             ]
         ]);
 
@@ -80,7 +82,8 @@ class RolesTableSeeder extends Seeder
                 'destroy_runners'      => true,
                 'destroy_coordinators' => false,
                 'destroy_admin'        => false,
-                'manage-schedules'     => true
+                'manage_schedules'     => true,
+                'manage_groups'        => true
             ]
         ]);
 
@@ -101,7 +104,8 @@ class RolesTableSeeder extends Seeder
                 'destroy_runners'      => false,
                 'destroy_coordinators' => false,
                 'destroy_admin'        => false,
-                'manage-schedules'     => false
+                'manage_schedules'     => false,
+                'manage_groups'        => false
             ]
         ]);
     }

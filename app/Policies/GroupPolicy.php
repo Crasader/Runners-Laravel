@@ -3,16 +3,16 @@
 namespace App\Policies;
 
 use App\User;
-use App\Schedule;
+use App\Group;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
- * SchedulePolicy
+ * GroupPolicy
  *
  * @author Bastien Nicoud
  * @package App\Policies
  */
-class SchedulePolicy
+class GroupPolicy
 {
     use HandlesAuthorization;
 
@@ -30,49 +30,49 @@ class SchedulePolicy
     }
 
     /**
-     * Determine whether the user can view the schedule.
+     * Determine whether the user can view the group.
      *
      * @param  \App\User  $user
-     * @param  \App\Schedule  $schedule
+     * @param  \App\Group  $group
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, Group $group)
     {
         return true;
     }
 
     /**
-     * Determine whether the user can create schedules.
+     * Determine whether the user can create groups.
      *
      * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        return $user->may('manage_schedules');
+        return $user->may('manage_groups');
     }
 
     /**
-     * Determine whether the user can update the schedule.
+     * Determine whether the user can update the group.
      *
      * @param  \App\User  $user
-     * @param  \App\Schedule  $schedule
+     * @param  \App\Group  $group
      * @return mixed
      */
-    public function update(User $user, Schedule $schedule)
+    public function update(User $user, Group $group)
     {
-        return $user->may('manage_schedules');
+        return $user->may('manage_groups');
     }
 
     /**
-     * Determine whether the user can delete the schedule.
+     * Determine whether the user can delete the group.
      *
      * @param  \App\User  $user
-     * @param  \App\Schedule  $schedule
+     * @param  \App\Group  $group
      * @return mixed
      */
-    public function delete(User $user, Schedule $schedule)
+    public function delete(User $user, Group $group)
     {
-        return $user->may('manage_schedules');
+        return $user->may('manage_groups');
     }
 }

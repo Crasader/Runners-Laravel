@@ -191,4 +191,31 @@ class User extends Authenticatable
             $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
         }
     }
+
+    /**
+     * MODEL METHOD
+     * Checks a specific user permission
+     *
+     * @return string
+     */
+    public function can($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->can($permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * MODEL METHOD
+     * Checks if the user belongs to a role
+     *
+     * @return string
+     */
+    public function is($roleSlug)
+    {
+        return $this->roles()->where('slug', $roleSlug)->count() == 1;
+    }
 }

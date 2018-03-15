@@ -19,7 +19,7 @@ class SchedulePolicy
      */
     public function view(User $user, Schedule $schedule)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SchedulePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->can('manage-schedules');
     }
 
     /**
@@ -42,7 +42,7 @@ class SchedulePolicy
      */
     public function update(User $user, Schedule $schedule)
     {
-        //
+        return $user->can('manage-schedules');
     }
 
     /**
@@ -54,6 +54,6 @@ class SchedulePolicy
      */
     public function delete(User $user, Schedule $schedule)
     {
-        //
+        return $user->can('manage-schedules');
     }
 }

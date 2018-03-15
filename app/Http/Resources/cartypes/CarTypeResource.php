@@ -4,6 +4,13 @@ namespace App\Http\Resources\cartypes;
 
 use Illuminate\Http\Resources\Json\Resource;
 
+/**
+ * CarTypeResource
+ * Api ressource
+ *
+ * @author Nicolas Henry
+ * @package App\Http\Resources\cartypes
+ */
 class CarTypeResource extends Resource
 {
     /**

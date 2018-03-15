@@ -46,14 +46,6 @@ class Schedule extends Model
     ];
 
     /**
-     * MODEL PROPERTY
-     * The storage format of the model's date columns.
-     *
-     * @var string
-     */
-    protected $dateFormat = 'Y-m-d H:i';
-
-    /**
      * MODEL RELATION
      * The group that belong this schedule
      */

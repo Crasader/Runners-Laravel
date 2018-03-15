@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Resources\Users;
+namespace App\Http\Resources\cars;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * UserCollection
- * Translate User model collection to Json collection
+ * CarCollection
+ * Api ressource
  *
- * @author Bastien Nicoud
- * @package App\Http\Resources\Users
+ * @author Nicolas Henry
+ * @package App\Http\Resources\cars
  */
-class UserCollection extends ResourceCollection
+class CarCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -22,7 +22,7 @@ class UserCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => UserResource::collection($this->collection)
+            'data' => CarResource::collection($this->collection),
         ];
     }
 }

@@ -6,9 +6,28 @@ use App\User;
 use App\Schedule;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * SchedulePolicy
+ *
+ * @author Bastien Nicoud
+ * @package App\Policies
+ */
 class SchedulePolicy
 {
     use HandlesAuthorization;
+
+    /**
+     * Check the authorization before all cheks
+     * Used in most case to authorize the admin
+     *
+     * @return mixed
+     */
+    public function before($user, $ability)
+    {
+        if ($user->is('admin')) {
+            return true;
+        }
+    }
 
     /**
      * Determine whether the user can view the schedule.
@@ -17,9 +36,9 @@ class SchedulePolicy
      * @param  \App\Schedule  $schedule
      * @return mixed
      */
-    public function view(User $user, Schedule $schedule)
+    public function view(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +49,7 @@ class SchedulePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->may('manage-schedules');
     }
 
     /**
@@ -42,7 +61,7 @@ class SchedulePolicy
      */
     public function update(User $user, Schedule $schedule)
     {
-        //
+        return $user->may('manage-schedules');
     }
 
     /**
@@ -54,6 +73,6 @@ class SchedulePolicy
      */
     public function delete(User $user, Schedule $schedule)
     {
-        //
+        return $user->may('manage-schedules');
     }
 }

@@ -51,7 +51,7 @@ class Role extends Model
      *
      * @return string
      */
-    public function can(string $permission)
+    public function may(string $permission)
     {
         return $this->permissions[$permission] ?? false;
     }

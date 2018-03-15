@@ -26,6 +26,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Schedule::class);
         return new ScheduleCollection(Schedule::paginate());
     }
 
@@ -37,6 +38,7 @@ class ScheduleController extends Controller
      */
     public function store(StoreSchedule $request)
     {
+        $this->authorize('create', Schedule::class);
         $schedule = new Schedule($request->all());
         $schedule->group()->associate(Group::find($request->group_id));
         $schedule->save();
@@ -51,6 +53,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
+        $this->authorize('view', $schedule);
         return new ScheduleResource($schedule);
     }
 
@@ -63,6 +66,7 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
+        $this->authorize('update', $schedule);
         $schedule->update($request->all());
         $schedule->group()->associate(Group::find($request->group_id));
         $schedule->save();
@@ -77,6 +81,7 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
+        $this->authorize('delete', $schedule);
         $schedule->delete();
         return response()->json(null, 204);
     }

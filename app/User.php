@@ -198,10 +198,10 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function can($permission)
+    public function may($permission)
     {
         foreach ($this->roles as $role) {
-            if ($role->can($permission)) {
+            if ($role->may($permission)) {
                 return true;
             }
         }

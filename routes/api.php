@@ -13,19 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/tutu', function (Request $request) {
-    return "TUTU";
+/**
+ * All the restricted api routes (authentication middleware)
+ */
+Route::group(['middleware' => 'auth:api'], function () {
+    /**
+     * Resources suplementary routes
+     * Must be declared before the resource declaration !
+     */
+    Route::get('/me/workinghours', 'api\ScheduleController@workinghours');
+
+    /**
+     * Ressources declarations
+     */
+    Route::apiResources([
+        'users'     => 'api\UserController',
+        'carTypes'  => 'api\CarTypeController',
+        'cars'      => 'api\CarController',
+        'groups'    => 'api\GroupController',
+        'schedules' => 'api\ScheduleController'
+    ]);
 });
-
-// Some suplementary routes for the resources
-// This declarations must be before the ressource déclaration
-Route::get('/me/workinghours', 'api\ScheduleController@workinghours');
-
-// All the resources déclarations
-Route::apiResources([
-    'users'     => 'api\UserController',
-    'carTypes'  => 'api\CarTypeController',
-    'cars'      => 'api\CarController',
-    'groups'    => 'api\GroupController',
-    'schedules' => 'api\ScheduleController'
-]);

@@ -13,6 +13,14 @@ The `permissions` json is simple, a key with the permission name, and a boolean 
 3. The policy call the model to check the permissions in the database
 4. If the permission is true, the action is authorized, if not laravef fires a `unauthorized` exeption.
 
+## Permissions namming
+
+The permissions name follow a simple pattern :
+
+* If the model not require fine permission, we just want to authorize all actions on this model, we use the `manage` keword to define the permission. (Ex: `manage_groups`)
+* If we want fine permissions for all the actions we use the action keyword to define the permission. (Ex: `create_groups`, `view_groups`...)
+* In specific case, we use specific keywords like `force_start_run`, this situations dond follow the two precedent rules.
+
 ## Permissions list
 
 For the **superuser** :  
@@ -29,7 +37,7 @@ For the **admin** role :
 * 'destroy_runners'      => true
 * 'destroy_coordinators' => true
 * 'destroy_admin'        => false
-* 'manage-schedules'     => true
+* 'manage_schedules'     => true
 
 For the **coordinator** role :
 * 'start_run'            => true
@@ -42,7 +50,7 @@ For the **coordinator** role :
 * 'destroy_runners'      => true
 * 'destroy_coordinators' => false
 * 'destroy_admin'        => false
-* 'manage-schedules'     => true
+* 'manage_schedules'     => true
 
 For the **runner** role :
 * 'start_run'            => true
@@ -55,7 +63,7 @@ For the **runner** role :
 * 'destroy_runners'      => false
 * 'destroy_coordinators' => false
 * 'destroy_admin'        => false
-* 'manage-schedules'     => false
+* 'manage_schedules'     => false
 
 <br>
 <br>

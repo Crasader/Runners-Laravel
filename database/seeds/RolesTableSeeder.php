@@ -39,7 +39,9 @@ class RolesTableSeeder extends Seeder
                 'destroy_coordinators' => true,
                 'destroy_admin'        => true,
                 'manage_schedules'     => true,
-                'manage_groups'        => true
+                'manage_groups'        => true,
+                'manage_cars'          => true,
+                'manage_car_types'     => true
             ]
         ]);
 
@@ -61,7 +63,9 @@ class RolesTableSeeder extends Seeder
                 'destroy_coordinators' => true,
                 'destroy_admin'        => false,
                 'manage_schedules'     => true,
-                'manage_groups'        => true
+                'manage_groups'        => true,
+                'manage_cars'          => true,
+                'manage_car_types'     => true
             ]
         ]);
 
@@ -83,7 +87,9 @@ class RolesTableSeeder extends Seeder
                 'destroy_coordinators' => false,
                 'destroy_admin'        => false,
                 'manage_schedules'     => true,
-                'manage_groups'        => true
+                'manage_groups'        => true,
+                'manage_cars'          => true,
+                'manage_car_types'     => true
             ]
         ]);
 
@@ -105,7 +111,9 @@ class RolesTableSeeder extends Seeder
                 'destroy_coordinators' => false,
                 'destroy_admin'        => false,
                 'manage_schedules'     => false,
-                'manage_groups'        => false
+                'manage_groups'        => false,
+                'manage_cars'          => false,
+                'manage_car_types'     => false
             ]
         ]);
     }

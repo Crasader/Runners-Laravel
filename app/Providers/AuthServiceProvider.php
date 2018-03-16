@@ -12,6 +12,8 @@ use App\Car;
 use App\Policies\CarPolicy;
 use App\CarType;
 use App\Policies\CarTypePolicy;
+use App\User;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model'     => 'App\Policies\ModelPolicy',
+        User::class     => UserPolicy::class,
         Schedule::class => SchedulePolicy::class,
         Group::class    => GroupPolicy::class,
         Car::class      => CarPolicy::class,

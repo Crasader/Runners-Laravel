@@ -39,6 +39,23 @@ class UsersTableSeeder extends Seeder
         $root->roles()->save(Role::where('slug', 'root')->first());
 
         /**
+         * Create a generic user (for tests)
+         */
+        $runner = User::create([
+            'name'         => 'runner',
+            'email'        => 'runner@paleo.ch',
+            'password'     => bcrypt('runner'),
+            'firstname'    => 'Runner',
+            'lastname'     => 'Runner',
+            'phone_number' => '0794657846',
+            'sex'          => 'm',
+            'status'       => 'active',
+            'api_token'    => str_random(60)
+        ]);
+        // Asociate the runner role
+        $runner->roles()->save(Role::where('slug', 'runner')->first());
+
+        /**
          * Create users (coordinators, runners)
          * The position of the parameters in the array are important,
          * some propertys are automatically generated in the create procedure, see them below the $users array

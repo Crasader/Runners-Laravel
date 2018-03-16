@@ -44,4 +44,15 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /**
+     * MODEL METHOD
+     * Return true if the role have access to this specific permission
+     *
+     * @return string
+     */
+    public function may(string $permission)
+    {
+        return $this->permissions[$permission] ?? false;
+    }
 }

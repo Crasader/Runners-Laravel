@@ -37,6 +37,7 @@ class UserController extends Controller
      */
     public function store(StoreUser $request)
     {
+        $this->authorize('create', User::class);
         $user = new User($request->all());
         $user->generateName();
         $user->save();
@@ -51,6 +52,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
         return new UserResource($user);
     }
 
@@ -63,6 +65,7 @@ class UserController extends Controller
      */
     public function update(UpdateUser $request, User $user)
     {
+        $this->authorize('update', $user);
         $user->update($request->all());
         return new UserResource($user);
     }
@@ -75,6 +78,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         $user->delete();
         return response()->json(null, 204);
     }

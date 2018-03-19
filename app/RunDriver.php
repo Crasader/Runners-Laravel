@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\User;
@@ -17,7 +17,7 @@ use App\Car;
  * @author Bastien Nicoud
  * @package App
  */
-class RunDriver extends Model
+class RunDriver extends Pivot
 {
     use SoftDeletes;
 

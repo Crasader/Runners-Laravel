@@ -32,8 +32,6 @@ mix.options({
 // SCSS extraction (from assets to public)
 // JS extraction (from assets to public)... (extract to a separate file the js of libraries)
 mix.js('resources/assets/main.js', 'js')
-  // .sass('resources/assets/main.scss', 'css')
-  .extract(['vue', 'vue-router', 'vuex', 'axios'])
 
 // Create unique hash in production to force browser cache clearing
 if (mix.inProduction()) {

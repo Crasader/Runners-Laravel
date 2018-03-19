@@ -17,15 +17,54 @@ use Illuminate\Http\Request;
  * All the restricted api routes (authentication middleware)
  */
 Route::group(['middleware' => 'auth:api'], function () {
-    /**
-     * Resources suplementary routes
-     * Must be declared before the resource declaration !
-     */
-    Route::get('/me/workinghours', 'api\ScheduleController@workinghours');
 
     /**
-     * Ressources declarations
+     * The current user
      */
+    Route::get('me', 'api\UserController@me');
+
+    /**
+     * Routes prefixed by me
+     * Retrive infos for the connected user
+     */
+    Route::prefix('me')->group(function () {
+        /**
+         * The working hours of the connected user
+         */
+        Route::get('workinghours', 'api\ScheduleController@myWorkingHours');
+        /**
+         * The runs of the current user
+         */
+        Route::get('runs', 'api\RunController@myRuns');
+    });
+
+    /**
+     * Users ressource
+     */
+    Route::apiResource('users', 'api\UserController', ['only' => ['index', 'show']]);
+
+    /**
+     * Shedules ressource
+     */
+    Route::apiResource('shedules', 'api\ScheduleController', ['only' => ['index']]);
+
+    /**
+     * Runs ressource
+     */
+    // Spcific route to start the run
+    Route::post('/runs/{run}/start', 'api\RunController@start');
+    // Specific route to stop the run
+    Route::post('/runs/{run}/stop', 'api\RunController@stop');
+    Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
+    // Specific route to change car or user for a run
+    Route::patch('/runners/{user}', 'api\RunController@runner');
+    // The waypoints nested in the runs
+    Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
+
+    /**
+     * Waypoints ressource
+     */
+    Route::get('waypoints/search');
     Route::apiResources([
         'users'     => 'api\UserController',
         'carTypes'  => 'api\CarTypeController',

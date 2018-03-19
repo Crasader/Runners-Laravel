@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         'cars'      => 'api\CarController',
         'groups'    => 'api\GroupController',
         'schedules' => 'api\ScheduleController',
-        'waypoints' => 'api\WaypointController'
+        'waypoints' => 'api\WaypointController',
+        'runs'      => 'api\RunController'
     ]);
 });

@@ -64,14 +64,19 @@ Route::group(['middleware' => 'auth:api'], function () {
     /**
      * Waypoints ressource
      */
-    Route::get('waypoints/search');
-    Route::apiResources([
-        'users'     => 'api\UserController',
-        'carTypes'  => 'api\CarTypeController',
-        'cars'      => 'api\CarController',
-        'groups'    => 'api\GroupController',
-        'schedules' => 'api\ScheduleController',
-        'waypoints' => 'api\WaypointController',
-        'runs'      => 'api\RunController'
-    ]);
+    // Specific route to search waypoints
+    Route::get('waypoints/search', 'api\WaypointController@search');
+    Route::apiResource('waypoints', 'api\WaypointController', ['only' => ['index', 'show']]);
+
+    /**
+     * Cars resource
+     */
+    Route::apiResource('cars', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
+    // Comments for a car
+    Route::apiResource('cars.comments', 'api\CarCommentController');
+
+    /**
+     * Groups resource
+     */
+    Route::apiResource('groups', 'api\GroupController', ['only' => ['index', 'show']]);
 });

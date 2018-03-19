@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\waypoints\WaypointCollection;
 use App\Http\Resources\waypoints\WaypointResource;
-use App\Http\Requests\StoreWaypoint;
 
 /**
  * WaypointController

@@ -15,6 +15,9 @@
 Route::get('/', 'HomeController@index');
 //Route::view('/', 'index');
 
+// Display the swagger routes
+Route::view('/api', 'swagger');
+
 /*Route::get('/', function () {
     return view('welcome');
 });*/

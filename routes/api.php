@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 /**
  * All the restricted api routes (authentication middleware)
  */
-Route::group(['middleware' => 'auth:api'], function () {
+Route::middleware(['auth:api', 'corsHeaders'])->group(function () {
 
     /**
      * The current user

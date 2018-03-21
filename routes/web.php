@@ -11,21 +11,29 @@
 |
 */
 
-// Return the full vue
-Route::get('/', 'HomeController@index');
-//Route::view('/', 'index');
-
-// Display the swagger routes
-Route::view('/api', 'swagger');
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-Route::get('/chauffeurs', function () {
-    return view('runners');
-});
-
+/**
+ * Routes for the laravel authentication system
+ */
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * Return a swagger view
+ * Descripe all the api routes (generated with the swagger editor)
+ */
+Route::view('/api', 'swagger');
+
+/**
+ * Homepage
+ */
+Route::get('/', 'HomeController@index');
+
+/**
+ * Routes protected by the auth middleware
+ */
+Route::middleware(['auth'])->group(function () {
+
+    /**
+     * Connected home page
+     */
+    Route::get('/home', 'HomeController@home');
+});

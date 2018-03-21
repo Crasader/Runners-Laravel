@@ -1,0 +1,14 @@
+/**
+ * Main css file
+ */
+
+/**
+ * Import the scss bootstrap file
+ * Load the global vars and the css framework
+ */
+@import './scss/bootstrap.scss';
+
+/**
+ * Import global scss
+ */
+@import './scss/globals.scss'

@@ -82,4 +82,16 @@ class UserController extends Controller
         $user->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * Return the current logged-in user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        $this->authorize('view', $request->user());
+        return new UserResource($request->user());
+    }
 }

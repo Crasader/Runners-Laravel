@@ -28,19 +28,6 @@ class WaypointController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreWaypoint $request)
-    {
-        $waypoint = new Waypoint($request->all());
-        $waypoint->save();
-        return (new WaypointResource($waypoint))->response()->setStatusCode(201);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Waypoint  $waypoint
@@ -52,28 +39,14 @@ class WaypointController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Search the waypoints that match the needle (passed in the query string)
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Waypoint  $waypoint
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreWaypoint $request, Waypoint $waypoint)
+    public function search(Request $request)
     {
-        $waypoint->fill($request->all());
-        $waypoint->save();
-        return new WaypointResource($waypoint);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Waypoint  $waypoint
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Waypoint $waypoint)
-    {
-        $waypoint->delete();
-        return response()->json(null, 204);
+        $needle = $request->q;
+        return new WaypointCollection(Waypoint::where('name', 'like', "%$needle%")->get());
     }
 }

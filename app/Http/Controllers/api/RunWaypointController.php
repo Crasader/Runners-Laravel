@@ -5,6 +5,13 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * RunWaypointController
+ * Api ressource controller
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\api
+ */
 class RunWaypointController extends Controller
 {
     /**

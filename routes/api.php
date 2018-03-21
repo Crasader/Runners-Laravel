@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth:api'], function () {
      * The current user
      */
     Route::get('me', 'api\UserController@me');
+    // DEPRECATED old route to get the current user
+    Route::get('users/me', 'api\UserController@me');
 
     /**
      * Routes prefixed by me

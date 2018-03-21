@@ -36,4 +36,11 @@ Route::middleware(['auth'])->group(function () {
      * Connected home page
      */
     Route::get('/home', 'HomeController@home');
+
+    /**
+     * Users ressource
+     */
+    Route::resource('users', 'UserController');
+    // the curently authenticated user
+    Route::get('/me', 'UserController@me')->name('me');
 });

@@ -62,7 +62,7 @@
                     <a class="navbar-item" href="{{ route('register') }}">Register</a>
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/documentation/overview/start/">
+                        <a class="navbar-link" href="{{ route('me') }}">
                             {{ Auth::user()->name }}
                         </a>
                         <div class="navbar-dropdown is-boxed">

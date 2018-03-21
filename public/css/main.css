@@ -11544,3 +11544,13 @@ label.panel-block:hover {
  * Global app styles
  */
 
+/**
+ * Import page specific scss
+ * These scss wil be transpilled in the global css file
+ * Il you want to load it only for specific page, see the docs
+ */
+
+.homepage .notification {
+  padding: 130px 0px;
+}
+

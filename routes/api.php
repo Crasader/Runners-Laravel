@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 /**
  * All the restricted api routes (authentication middleware)
  */
-Route::middleware(['auth:api', 'corsHeaders'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
 
     /**
      * The current user
@@ -57,6 +57,7 @@ Route::middleware(['auth:api', 'corsHeaders'])->group(function () {
     Route::post('/runs/{run}/start', 'api\RunController@start');
     // Specific route to stop the run
     Route::post('/runs/{run}/stop', 'api\RunController@stop');
+    // The ressource
     Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
     // Specific route to change car or user for a run
     Route::patch('/runners/{user}', 'api\RunController@runner');
@@ -74,8 +75,12 @@ Route::middleware(['auth:api', 'corsHeaders'])->group(function () {
      * Cars resource
      */
     Route::apiResource('cars', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
+    // DEPRECATED old route name for cars
+    Route::apiResource('vehicle', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
     // Comments for a car
     Route::apiResource('cars.comments', 'api\CarCommentController');
+    //DEPRECATED old route name for cars comments
+    Route::apiResource('vehicles.comments', 'api\CarCommentController');
 
     /**
      * Groups resource

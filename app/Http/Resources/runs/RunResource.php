@@ -3,6 +3,8 @@
 namespace App\Http\Resources\runs;
 
 use Illuminate\Http\Resources\Json\Resource;
+use App\Http\Resources\waypoints\WaypointCollection;
+use App\Http\Resources\Users\UserCollection;
 
 /**
  * RunResource
@@ -22,17 +24,15 @@ class RunResource extends Resource
     public function toArray($request)
     {
         return [
-            'name'           => $this->name,
-            'status'         => $this->status,
-            'published_at'   => $this->published_at,
-            'planned_at'     => $this->planned_at,
-            'end_planned_at' => $this->end_planned_at,
-            'started_at'     => $this->started_at,
-            'ended_at'       => $this->ended_at,
-            'passengers'     => $this->passengers,
-            'deleted_at'     => $this->deleted_at,
-            'created_at'     => $this->created_at,
-            'updated_at'     => $this->updated_at
+            'id'           => $this->id,
+            'status'       => $this->status,
+            'title'        => $this->name,
+            'begin_at'     => $this->planned_at ? $this->planned_at->toAtomString() : null,
+            'end_at'       => $this->end_planned_at ? $this->end_planned_at->toAtomString() : null,
+            'start_at'     => $this->started_at ? $this->started_at->toAtomString() : null,
+            'nb_passenger' => $this->passengers,
+            'waypoints'    => new WaypointCollection($this->waypoints),
+            'runners'      => new UserCollection($this->runners)
         ];
     }
 }

@@ -21,8 +21,6 @@ class RunCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => RunResource::collection($this->collection),
-        ];
+        return RunResource::collection($this->collection);
     }
 }

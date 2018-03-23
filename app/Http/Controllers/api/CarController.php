@@ -26,7 +26,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return new CarCollection(Car::paginate(10));
+        return new CarCollection(Car::all());
     }
 
     /**

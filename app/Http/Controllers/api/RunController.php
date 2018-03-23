@@ -25,7 +25,7 @@ class RunController extends Controller
      */
     public function index()
     {
-        return new RunCollection(Run::paginate(5));
+        return new RunCollection(Run::all());
     }
 
     /**

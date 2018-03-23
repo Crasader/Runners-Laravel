@@ -14,8 +14,6 @@ class CommentCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => CommentResource::collection($this->collection)
-        ];
+        return CommentResource::collection($this->collection);
     }
 }

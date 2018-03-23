@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Runners;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\Runners\RunnerResource;
 
 /**
  * UserCollection
@@ -21,6 +22,6 @@ class RunnerCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return RunnerResource::collection($this->collection);
     }
 }

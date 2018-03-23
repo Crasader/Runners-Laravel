@@ -59,15 +59,6 @@ class Run extends Model
 
     /**
      * MODEL RELATION
-     * The diffrents stakolders for the run (user, car, car_type)
-     */
-    public function subscriptions()
-    {
-        return $this->hasMany(RunDriver::class, 'run_id');
-    }
-
-    /**
-     * MODEL RELATION
      * The runners who drive this run (via the run_driver)
      */
     public function runners()

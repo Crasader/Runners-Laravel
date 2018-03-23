@@ -4,7 +4,7 @@ namespace App\Http\Resources\runs;
 
 use Illuminate\Http\Resources\Json\Resource;
 use App\Http\Resources\waypoints\WaypointCollection;
-use App\Http\Resources\Users\UserCollection;
+use App\Http\Resources\Runners\RunnerCollection;
 
 /**
  * RunResource
@@ -32,7 +32,7 @@ class RunResource extends Resource
             'start_at'     => $this->started_at ? $this->started_at->toAtomString() : null,
             'nb_passenger' => $this->passengers,
             'waypoints'    => new WaypointCollection($this->waypoints),
-            'runners'      => new UserCollection($this->runners)
+            'runners'      => new RunnerCollection($this->subscriptions)
         ];
     }
 }

@@ -28,9 +28,7 @@ class CarResource extends Resource
             'model'        => $this->model,
             'color'        => $this->color,
             'status'       => $this->status,
-            'type'         => new CarTypeResource($this->type),
-            'created_at'   => $this->created_at,
-            'updated_at'   => $this->updated_at
+            'type'         => new CarTypeResource($this->type)
         ];
     }
 }

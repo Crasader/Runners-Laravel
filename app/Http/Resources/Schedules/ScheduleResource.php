@@ -25,8 +25,8 @@ class ScheduleResource extends Resource
         return [
             // Base user datas to be serialized
             'id'         => $this->id,
-            'start_time' => $this->start_time,
-            'end_time'   => $this->end_time,
+            'start_time' => $this->start_time ? $this->start_time->toAtomString() : null,
+            'end_time'   => $this->end_time ? $this->end_time->toAtomString() : null,
             'group'      => new GroupResource($this->group)
         ];
     }

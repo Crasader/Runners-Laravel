@@ -23,9 +23,7 @@ class GroupResource extends Resource
     {
         return [
             'color'        => $this->color,
-            'name'         => $this->name,
-            'created_at'   => $this->created_at,
-            'updated_at'   => $this->updated_at
+            'name'         => $this->name
         ];
     }
 }

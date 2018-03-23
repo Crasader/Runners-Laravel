@@ -12,6 +12,7 @@ use App\CarType;
 use App\User;
 use App\Comment;
 use App\Artist;
+use App\RunSubscription;
 
 /**
  * Run
@@ -117,6 +118,15 @@ class Run extends Model
     public function artists()
     {
         return $this->belongsToMany(Artist::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * Get all of the run comments
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(RunSubscription::class);
     }
 
     /**

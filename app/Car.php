@@ -10,6 +10,7 @@ use App\Run;
 use App\User;
 use App\Comment;
 use App\Image;
+use App\RunSubscription;
 
 /**
  * Car
@@ -27,7 +28,23 @@ class Car extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'plate_number', 'brand', 'model', 'color', 'nb_places', 'status'
+        'name',
+        'plate_number',
+        'brand',
+        'model',
+        'color',
+        'nb_places',
+        'status'
+    ];
+
+    /**
+     * MODEL PROPERTY
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
     ];
 
     /**
@@ -37,6 +54,15 @@ class Car extends Model
     public function runDrivers()
     {
         return $this->hasMany(RunDriver::class);
+    }
+
+    /**
+     * MODEL RELATION
+     * The subscriptions for this run
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(RunSubscription::class);
     }
 
     /**
@@ -54,7 +80,7 @@ class Car extends Model
      */
     public function runs()
     {
-        return $this->belongsToMany(Run::class)->using(RunDriver::class);
+        return $this->belongsToMany(Run::class, 'run_drivers')->using(RunDriver::class);
     }
 
     /**

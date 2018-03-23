@@ -79,7 +79,7 @@ class Car extends Model
      * MODEL RELATION
      * The images pinned for this car
      */
-    public function userImage()
+    public function carImage()
     {
         return $this->morphMany(Image::class, 'have_image');
     }

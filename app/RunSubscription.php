@@ -2,25 +2,29 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\User;
-use App\Run;
-use App\CarType;
-use App\Car;
-
 /**
- * RuneDriver
- * Model to represent the Pivot table between users, runs, cars
- * It represent the relation (pivot table) and allows you to access pivot table
+ * RunSubscription
+ * This model trick to interacts with the run subscriptions (users, cars...)
+ * Here we fire some events, when you add a user to a run or change a car, you pass via this model
+ * when you just read infos about a run, use the RunDriver relations
  *
  * @author Bastien Nicoud
  * @package App
  */
-class RunDriver extends Pivot
+class RunSubscription extends Model
 {
     use SoftDeletes;
+
+    /**
+     * MODEL PROPERTY
+     * The table name who this model is binded
+     *
+     * @var string
+     */
+    public $table = 'run_drivers';
 
     /**
      * MODEL PROPERTY
@@ -29,8 +33,19 @@ class RunDriver extends Pivot
      * @var array
      */
     protected $fillable = [
-        'status'
+        'status',
+
     ];
+
+    /**
+     * MODEL PROPERTY
+     * Parent models where the timestamp is updated when this model is updated.
+     *
+     * @var array
+     */
+    protected $touches = [
+        "run"
+      ];
 
     /**
      * MODEL PROPERTY
@@ -44,7 +59,7 @@ class RunDriver extends Pivot
 
     /**
      * MODEL RELATION
-     * The user who drive this run_driver
+     * The user who drive this run
      */
     public function user()
     {

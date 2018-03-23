@@ -31,7 +31,14 @@ class Run extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'status', 'published_at', 'planned_at', 'end_planned_at', 'started_at', 'ended_at', 'passengers'
+        'name',
+        'status',
+        'published_at',
+        'planned_at',
+        'end_planned_at',
+        'started_at',
+        'ended_at',
+        'passengers'
     ];
 
     /**

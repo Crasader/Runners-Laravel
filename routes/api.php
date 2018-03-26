@@ -59,10 +59,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/runs/{run}/stop', 'api\RunController@stop');
     // The ressource
     Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
-    // Specific route to change car or user for a run
-    Route::patch('/runners/{user}', 'api\RunController@runner');
     // The waypoints nested in the runs
     Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
+
+    /**
+     * Runners resource
+     * This resource is used to access the run_driver table
+     */
+    // Specific route to change car or user for a run
+    Route::patch('/runners/{user}', 'api\RunController@runner');
 
     /**
      * Waypoints ressource

@@ -21,10 +21,22 @@ class RunController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Check the query params
+        if ($request->has('finished') && ($request->query('finished') == 'true' || $request->query('finished') == 'false')) {
+            // Return finished runs in the query param is true
+            // the unfinished runs if the query is false
+            return new RunCollection(Run::finished($request->query('finished'))->get());
+        } elseif ($request->has('status')) {
+            // Return the runs scoped by his status
+            return new RunCollection(Run::whereStatus($request->query('status'))->get());
+        }
+
+        // Return all the runs, if no query params
         return new RunCollection(Run::all());
     }
 

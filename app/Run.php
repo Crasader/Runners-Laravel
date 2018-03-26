@@ -128,4 +128,36 @@ class Run extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    /**
+     * MODEL SCOPE
+     * Return only the finished runs
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $needle true || flase
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFinished($query, $needle)
+    {
+        if ($needle == 'true') {
+            return $query->where('status', 'finished');
+        } elseif ($needle == 'false') {
+            return $query->where('status', '!=', 'finished');
+        }
+        // If the needle not correspond to expected values
+        return $query;
+    }
+
+    /**
+     * MODEL SCOPE
+     * Return only the run with the corresponding status
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $status The status you want to scope
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

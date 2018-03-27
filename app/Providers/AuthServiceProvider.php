@@ -14,6 +14,8 @@ use App\CarType;
 use App\Policies\CarTypePolicy;
 use App\User;
 use App\Policies\UserPolicy;
+use App\Run;
+use App\Policies\RunPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,7 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         Schedule::class => SchedulePolicy::class,
         Group::class    => GroupPolicy::class,
         Car::class      => CarPolicy::class,
-        CarType::class  => CarTypePolicy::class
+        CarType::class  => CarTypePolicy::class,
+        Run::class      => RunPolicy::class
     ];
 
     /**

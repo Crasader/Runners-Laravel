@@ -26,6 +26,7 @@ class RunController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('view', Run::class);
         /**
          * If 'finished' is present in the query params
          */
@@ -54,6 +55,7 @@ class RunController extends Controller
      */
     public function show(Run $run)
     {
+        $this->authorize('view', $run);
         return new RunResource($run);
     }
 
@@ -65,7 +67,8 @@ class RunController extends Controller
      */
     public function myRuns(Request $request)
     {
-        return new RunResource($request->user()->runs);
+        $this->authorize('view', Run::class);
+        return new RunCollection($request->user()->runs);
     }
 
     /**
@@ -77,7 +80,18 @@ class RunController extends Controller
      */
     public function start(Request $request, Run $run)
     {
-        //
+        // Determine if the run is ready (car and user assigned, all is ok to run)
+        if ($run->ready()) {
+            // Run ready, chek the authorizations
+            $this->authorize('start', $run);
+            $run->start();
+            return response()->json(null, 204);
+        } else {
+            // The run is not ready, we need the authorization to force the run start
+            $this->authorize('forceStart', $run);
+            $run->start();
+            return response()->json(null, 204);
+        }
     }
 
     /**
@@ -89,6 +103,14 @@ class RunController extends Controller
      */
     public function stop(Request $request, Run $run)
     {
-        //
+        // Determine if the run is ready (car and user assigned, all is ok to run)
+        if ($run->started()) {
+            // Run ready, chek the authorizations
+            $this->authorize('stop', $run);
+            $run->stop();
+            return response()->json(null, 204);
+        }
+        // The run is not started
+        return response()->json(null, 405);
     }
 }

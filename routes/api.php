@@ -61,13 +61,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
     // The waypoints nested in the runs
     Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
+    // Crete a run_driver for the user
+    Route::post('/runs/{run}/runners', 'api\RunnerController@store');
 
     /**
      * Runners resource
      * This resource is used to access the run_driver table
      */
-    // Specific route to change car or user for a run
-    Route::patch('/runners/{user}', 'api\RunController@runner');
+    Route::apiResource('runners', 'api\RunnerController', ['only' => ['show', 'update']]);
 
     /**
      * Waypoints ressource
@@ -81,11 +82,17 @@ Route::middleware(['auth:api'])->group(function () {
      */
     Route::apiResource('cars', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
     // DEPRECATED old route name for cars
-    Route::apiResource('vehicles', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
+    Route::apiResource('vehicles', 'api\CarController', [
+        'only' => [
+            'index', 'show', 'store', 'update'
+        ], 'parameters' => [
+            'vehicles' => 'car'
+        ]
+    ]);
     // Comments for a car
     Route::apiResource('cars.comments', 'api\CarCommentController');
     //DEPRECATED old route name for cars comments
-    Route::apiResource('vehicles.comments', 'api\CarCommentController');
+    Route::apiResource('vehicles.comments', 'api\CarCommentController', ['parameters' => ['vehicles' => 'car']]);
 
     /**
      * Groups resource

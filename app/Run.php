@@ -13,6 +13,7 @@ use App\User;
 use App\Comment;
 use App\Artist;
 use App\RunSubscription;
+use Carbon\Carbon;
 
 /**
  * Run
@@ -159,5 +160,73 @@ class Run extends Model
     public function scopeWhereStatus($query, $status)
     {
         return $query->where('status', $status);
+    }
+
+    /**
+     * MODEL SCOPE
+     * Exclude a type of status from the query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $status The status you want to scope
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithoutStatus($query, $status)
+    {
+        return $query->where('status', '!=', $status);
+    }
+
+    /**
+     * MODEL METHOD
+     * Determine if the run is ready to go
+     *
+     * @return bool
+     */
+    public function ready()
+    {
+        if ($this->status == 'published' || $this->status == 'finalizing') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * MODEL METHOD
+     * Determine if the run is started (a runner has click on start run)
+     *
+     * @return bool
+     */
+    public function started()
+    {
+        if ($this->status == 'started') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return bool
+     */
+    public function start()
+    {
+        // Set the run start time and status
+        $this->status = 'started';
+        $this->started_at = Carbon::now();
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Ends a run
+     *
+     * @return bool
+     */
+    public function stop()
+    {
+        $this->status = 'finished';
+        $this->ended_at = Carbon::now();
+        $this->save();
     }
 }

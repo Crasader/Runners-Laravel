@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * RunSubscription
- * This model trick to interacts with the run subscriptions (users, cars...)
+ * This model is a trick to interacts with the run dirvers subscription tu a run (users, cars...)
  * Here we fire some events, when you add a user to a run or change a car, you pass via this model
  * when you just read infos about a run, use the RunDriver relations
  *
@@ -91,5 +91,43 @@ class RunSubscription extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign a run to this subscription
+     *
+     * @param \App\Run $run
+     */
+    public function assignRun($run)
+    {
+        $this->run()->associate($run);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign an user to this subscription
+     *
+     * @param \App\User $user
+     */
+    public function assignUser($user)
+    {
+        $this->user()->associate($user);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign a car to this subscription
+     * (It assign the cartype automaticaly)
+     *
+     * @param \App\Car $car
+     */
+    public function assignCar($car)
+    {
+        $this->car()->associate($car);
+        $this->carType()->associate($car->type);
+        $this->save();
     }
 }

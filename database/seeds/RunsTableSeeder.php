@@ -48,22 +48,24 @@ class RunsTableSeeder extends Seeder
         $status = collect([
             'drafting',
             'drafting',
-            'published',
-            'published',
-            'finalizing',
-            'finalizing',
-            'started',
-            'started',
-            'started',
-            'started',
-            'started',
+            'ready',
+            'ready',
+            'needs_filling',
+            'needs_filling',
+            'gone',
+            'gone',
+            'gone',
+            'gone',
+            'gone',
             'finished',
             'finished',
             'finished',
             'finished',
             'finished',
             'finished',
-            'error'
+            'error',
+            'empty',
+            'missing_cars'
         ]);
 
         /**

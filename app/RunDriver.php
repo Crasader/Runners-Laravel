@@ -24,6 +24,14 @@ class RunDriver extends Pivot
 
     /**
      * MODEL PROPERTY
+     * The table name who this model is binded
+     *
+     * @var string
+     */
+    public $table = 'run_drivers';
+
+    /**
+     * MODEL PROPERTY
      * The attributes that are mass assignable.
      *
      * @var array

@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return new UserCollection(User::paginate());
+        return new UserCollection(User::all());
     }
 
     /**
@@ -52,7 +52,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->authorize('view', $user);
         return new UserResource($user);
     }
 

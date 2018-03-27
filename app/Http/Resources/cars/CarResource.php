@@ -24,7 +24,7 @@ class CarResource extends Resource
     {
         return [
             'id'           => $this->id,
-            'name'         => $this->brand . $this->model,
+            'name'         => "{$this->brand} {$this->model}",
             'plate_number' => $this->plate_number,
             'nb_place'     => $this->type->nb_place,
             'status'       => $this->status,

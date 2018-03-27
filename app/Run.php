@@ -163,6 +163,19 @@ class Run extends Model
     }
 
     /**
+     * MODEL SCOPE
+     * Exclude a type of status from the query
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $status The status you want to scope
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithoutStatus($query, $status)
+    {
+        return $query->where('status', '!=', $status);
+    }
+
+    /**
      * MODEL METHOD
      * Determine if the run is ready to go
      *

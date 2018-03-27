@@ -22,9 +22,8 @@ class CarTypeResource extends Resource
     public function toArray($request)
     {
         return [
-            'name'        => $this->name,
-            'description' => $this->description,
-            'nb_place'    => $this->nb_place,
+            'type'        => $this->name,
+            'description' => $this->description
         ];
     }
 }

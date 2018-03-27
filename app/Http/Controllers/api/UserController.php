@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return new UserCollection(User::paginate());
+        return new UserCollection(User::all());
     }
 
     /**
@@ -52,7 +52,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $this->authorize('view', $user);
         return new UserResource($user);
     }
 
@@ -81,5 +80,17 @@ class UserController extends Controller
         $this->authorize('delete', $user);
         $user->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Return the current logged-in user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function me(Request $request)
+    {
+        $this->authorize('view', $request->user());
+        return new UserResource($request->user());
     }
 }

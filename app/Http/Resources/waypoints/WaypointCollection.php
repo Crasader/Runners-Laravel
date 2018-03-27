@@ -21,8 +21,6 @@ class WaypointCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => WaypointResource::collection($this->collection),
-        ];
+        return WaypointResource::collection($this->collection);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\User;
@@ -13,13 +13,22 @@ use App\Car;
 /**
  * RuneDriver
  * Model to represent the Pivot table between users, runs, cars
+ * It represent the relation (pivot table) and allows you to access pivot table
  *
  * @author Bastien Nicoud
  * @package App
  */
-class RunDriver extends Model
+class RunDriver extends Pivot
 {
     use SoftDeletes;
+
+    /**
+     * MODEL PROPERTY
+     * The table name who this model is binded
+     *
+     * @var string
+     */
+    public $table = 'run_drivers';
 
     /**
      * MODEL PROPERTY

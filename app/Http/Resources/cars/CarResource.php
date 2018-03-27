@@ -4,6 +4,7 @@ namespace App\Http\Resources\cars;
 
 use Illuminate\Http\Resources\Json\Resource;
 use App\Http\Resources\cartypes\CarTypeResource;
+use App\Http\Resources\Comments\CommentCollection;
 
 /**
  * CarResource
@@ -23,14 +24,14 @@ class CarResource extends Resource
     public function toArray($request)
     {
         return [
+            'id'           => $this->id,
+            'name'         => "{$this->brand} {$this->model}",
             'plate_number' => $this->plate_number,
-            'brand'        => $this->brand,
-            'model'        => $this->model,
-            'color'        => $this->color,
+            'nb_place'     => $this->type->nb_place,
             'status'       => $this->status,
+            'user'         => null, // Actually not implemented (return a user curently driving the car)
             'type'         => new CarTypeResource($this->type),
-            'created_at'   => $this->created_at,
-            'updated_at'   => $this->updated_at
+            'comments'     => $this->has('comments') ? new CommentCollection($this->comments) : null
         ];
     }
 }

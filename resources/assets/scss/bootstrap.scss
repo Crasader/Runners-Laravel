@@ -1,0 +1,12 @@
+/**
+ * SCSS bootstrapper, loads all the vars and the css framework (bulma)
+ */
+
+// Import the bulma core
+@import "~bulma/sass/utilities/_all";
+
+// Import our specific vars
+@import './vars.scss';
+
+// Import the css framework
+@import "~bulma";

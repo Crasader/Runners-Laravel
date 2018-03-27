@@ -1,42 +1,44 @@
-{{--
-    INDEX - the base template for the app
-    @author Bastien Nicoud
---}}
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+@section('content')
+    <div class="section homepage">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half">
+                    <a href="#">
+                        <div class="notification is-warning">
+                            <h2 class="title is-2 has-text-centered">Runs</h2>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="column is-half">
+                    <a href="/chauffeurs">
+                        <div class="notification is-primary">
+                            <h2 class="title is-2 has-text-centered">Chauffeurs</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-    <head>
-        {{--  Metas  --}}
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {{--  CSRF token  --}}
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        {{--  App datas  --}}
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="icon" type="image/png" href="icon.png" />
-
-        {{--  Styles  --}}
-        <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
-        <link href="{{ mix('css/main.css') }}" rel="stylesheet">
-    </head>
-
-    <body>
-        <div id="app"></div>
-
-        {{--  App playload  --}}
-        {{--  Laravel pre inject datas here to prevent over requesting the server  --}}
-        <script>
-            window.__INITIAL_STATE__ = {!! json_encode($user) !!}
-        </script>
-
-        {{--  Scripts  --}}
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/main.js') }}"></script>
-    </body>
-
-</html>
+            <div class="columns">
+                <div class="column is-half">
+                    <a href="#">
+                        <div class="notification is-success">
+                            <h2 class="title is-2 has-text-centered">Véhicules</h2>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="column is-half">
+                    <a href="#">
+                        <div class="notification is-info">
+                            <h2 class="title is-2 has-text-centered">Stats</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+@endsection

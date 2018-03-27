@@ -118,7 +118,7 @@ class User extends Authenticatable
      */
     public function runs()
     {
-        return $this->belongsToMany(Run::class)->using(RunDriver::class);
+        return $this->belongsToMany(Run::class, 'run_drivers')->using(RunDriver::class);
     }
 
     /**
@@ -127,7 +127,7 @@ class User extends Authenticatable
      */
     public function cars()
     {
-        return $this->belongsToMany(Car::class)->using(RunDriver::class);
+        return $this->belongsToMany(Car::class, 'run_drivers')->using(RunDriver::class);
     }
 
     /**

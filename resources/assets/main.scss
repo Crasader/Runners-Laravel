@@ -1,15 +1,23 @@
-//
-//--------------------------------------------------------------------------
-// MAIN - bootstrap the css framework
-//--------------------------------------------------------------------------
-//
-// Imports all the scss files to compile the css framework and configuration
-// @author Bastien Nicoud
-//
+/**
+ * Main css file
+ */
 
-// Import the app global vars
-@import './vars.scss';
+/**
+ * Import the scss bootstrap file
+ * Load the global vars and the css framework
+ */
+@import './scss/bootstrap.scss';
 
-// Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+/**
+ * Import global scss
+ */
+@import './scss/globals.scss';
+
+/**
+ * Import page specific scss
+ * These scss wil be transpilled in the global css file
+ * Il you want to load it only for specific page, see the docs
+ */
+
+// Homepage
+@import './scss/pages/homepage.scss'

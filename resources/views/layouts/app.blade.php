@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     @include('layouts.footer')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/main.js') }}"></script>
 </body>
 
 </html>

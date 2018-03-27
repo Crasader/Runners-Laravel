@@ -31,6 +31,17 @@ class ScheduleController extends Controller
     }
 
     /**
+     * Display the schedule fot the connected user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function myWorkingHours(Request $request)
+    {
+        return new ScheduleCollection($request->user()->groups->first()->schedules);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

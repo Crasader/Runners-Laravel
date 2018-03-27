@@ -16,9 +16,10 @@ class CommentResource extends Resource
     public function toArray($request)
     {
         return [
-            'id'      => $this->id,
-            'content' => $this->content,
-            'user'    => new UserResource($this->author)
+            'id'         => $this->id,
+            'content'    => $this->content,
+            'user'       => new UserResource($this->author),
+            'created_at' => $this->created_at ? $this->created_at->toAtomString() : null
         ];
     }
 }

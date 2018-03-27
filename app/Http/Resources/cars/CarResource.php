@@ -4,6 +4,7 @@ namespace App\Http\Resources\cars;
 
 use Illuminate\Http\Resources\Json\Resource;
 use App\Http\Resources\cartypes\CarTypeResource;
+use App\Http\Resources\Comments\CommentCollection;
 
 /**
  * CarResource
@@ -29,7 +30,8 @@ class CarResource extends Resource
             'nb_place'     => $this->type->nb_place,
             'status'       => $this->status,
             'user'         => null, // Actually not implemented (return a user curently driving the car)
-            'type'         => new CarTypeResource($this->type)
+            'type'         => new CarTypeResource($this->type),
+            'comments'     => $this->has('comments') ? new CommentCollection($this->comments) : null
         ];
     }
 }

@@ -27,7 +27,7 @@ class CarCommentController extends Controller
      */
     public function index(Car $car)
     {
-        return new CommentCollection($car->comments()->get());
+        return new CommentCollection($car->comments);
     }
 
     /**
@@ -42,7 +42,7 @@ class CarCommentController extends Controller
         $comment = new Comment($request->all());
         $comment->author()->associate($request->user());
         $car->comments()->save($comment);
-        return new CommentResource($comment);
+        return new CommentCollection($car->comments);
     }
 
     /**
@@ -69,7 +69,7 @@ class CarCommentController extends Controller
     {
         $comment->fill($request->all());
         $comment->save();
-        return new CommentResource($comment);
+        return new CommentCollection($car->comments);
     }
 
     /**

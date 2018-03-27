@@ -68,6 +68,8 @@ Route::middleware(['auth:api'])->group(function () {
      */
     // Specific route to change car or user for a run
     Route::patch('/runners/{user}', 'api\RunController@runner');
+    // Crete a run_driver for the user
+    Route::post('/runs/{run}/runners', 'api\RunController@newRunner');
 
     /**
      * Waypoints ressource

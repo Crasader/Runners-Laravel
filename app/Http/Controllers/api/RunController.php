@@ -26,11 +26,17 @@ class RunController extends Controller
      */
     public function index(Request $request)
     {
-        // Check the query params
+        /**
+         * If 'finished' is present in the query params
+         */
         if ($request->has('finished') && ($request->query('finished') == 'true' || $request->query('finished') == 'false')) {
             // Return finished runs in the query param is true
             // the unfinished runs if the query is false
             return new RunCollection(Run::finished($request->query('finished'))->get());
+        
+        /**
+         * If 'status' is present in the query params
+         */
         } elseif ($request->has('status')) {
             // Return the runs scoped by his status
             return new RunCollection(Run::whereStatus($request->query('status'))->get());
@@ -38,17 +44,6 @@ class RunController extends Controller
 
         // Return all the runs, if no query params
         return new RunCollection(Run::all());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -63,24 +58,36 @@ class RunController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the runs for the curently authenticated user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function myRuns(Request $request)
+    {
+        return new RunResource($request->user()->runs);
+    }
+
+    /**
+     * Start the run passed in parameters
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Run $run)
+    public function start(Request $request, Run $run)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Stop the run passed in parameters
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Run $run)
+    public function stop(Request $request, Run $run)
     {
         //
     }

@@ -92,4 +92,42 @@ class RunSubscription extends Model
     {
         return $this->belongsTo(Car::class);
     }
+
+    /**
+     * MODEL METHOD
+     * Assign a run to this subscription
+     *
+     * @param \App\Run $run
+     */
+    public function assignRun($run)
+    {
+        $this->run()->associate($run);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign an user to this subscription
+     *
+     * @param \App\User $user
+     */
+    public function assignUser($user)
+    {
+        $this->user()->associate($user);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign a car to this subscription
+     * (It assign the cartype automaticaly)
+     *
+     * @param \App\Car $car
+     */
+    public function assignCar($car)
+    {
+        $this->car()->associate($car);
+        $this->carType()->associate($car->type);
+        $this->save();
+    }
 }

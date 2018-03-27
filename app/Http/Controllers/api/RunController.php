@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\runs\RunCollection;
 use App\Http\Resources\runs\RunResource;
 use App\Http\Requests\StoreRun;
-use App\Http\Requests\AssignRunnerToRun;
 
 /**
  * RunController
@@ -67,22 +66,6 @@ class RunController extends Controller
      */
     public function myRuns(Request $request)
     {
-        return new RunCollection($request->user()->runs);
-    }
-
-    /**
-     * Create run driver for the user passed in params
-     *
-     * @param  \App\Http\Requests\AssignRunnerToRun  $request
-     * @param  \App\Run  $run
-     * @return \Illuminate\Http\Response
-     */
-    public function newRunner(AssignRunnerToRun $request, Run $run)
-    {
-        // Create a new subscription to a run
-        $sub = new RunSubscription();
-        $sub->run()->associate($run);
-        $sub->subscribe($request->user);
         return new RunCollection($request->user()->runs);
     }
 

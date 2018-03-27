@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Run;
+use App\RunSubscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\runs\RunCollection;
@@ -27,7 +28,6 @@ class RunController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', Run::class);
         /**
          * If 'finished' is present in the query params
          */
@@ -56,7 +56,6 @@ class RunController extends Controller
      */
     public function show(Run $run)
     {
-        $this->authorize('view', $run);
         return new RunResource($run);
     }
 
@@ -68,7 +67,6 @@ class RunController extends Controller
      */
     public function myRuns(Request $request)
     {
-        $this->authorize('view', Run::class);
         return new RunCollection($request->user()->runs);
     }
 
@@ -81,7 +79,10 @@ class RunController extends Controller
      */
     public function newRunner(AssignRunnerToRun $request, Run $run)
     {
-        
+        // Create a new subscription to a run
+        $sub = new RunSubscription();
+        $sub->run()->associate($run);
+        $sub->subscribe($request->user);
         return new RunCollection($request->user()->runs);
     }
 

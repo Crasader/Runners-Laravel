@@ -83,11 +83,17 @@ Route::middleware(['auth:api'])->group(function () {
      */
     Route::apiResource('cars', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
     // DEPRECATED old route name for cars
-    Route::apiResource('vehicles', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
+    Route::apiResource('vehicles', 'api\CarController', [
+        'only' => [
+            'index', 'show', 'store', 'update'
+        ], 'parameters' => [
+            'vehicles' => 'car'
+        ]
+    ]);
     // Comments for a car
     Route::apiResource('cars.comments', 'api\CarCommentController');
     //DEPRECATED old route name for cars comments
-    Route::apiResource('vehicles.comments', 'api\CarCommentController');
+    Route::apiResource('vehicles.comments', 'api\CarCommentController', ['parameters' => ['vehicles' => 'car']]);
 
     /**
      * Groups resource

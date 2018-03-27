@@ -25,7 +25,7 @@ class FestivalsTableSeeder extends Seeder
         $festivals = [
             ['edition' => '41', 'name' => '40+1',                    'starts_on' => '2016-07-19', 'ends_on' => '2016-07-24'],
             ['edition' => '42', 'name' => '42e Paléo Festival Nyon', 'starts_on' => '2017-07-18', 'ends_on' => '2017-07-23'],
-            ['edition' => '43', 'name' => '43e Paléo Festival Nyon', 'starts_on' => '2018-07-17', 'ends_on' => '2018-07-22']
+            ['edition' => '43', 'name' => '43e Paléo Festival Nyon', 'starts_on' => '2018-03-26', 'ends_on' => '2018-04-01']
         ];
 
         // insert this festivals in the db

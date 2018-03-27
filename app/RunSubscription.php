@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * RunSubscription
- * This model trick to interacts with the run subscriptions (users, cars...)
+ * This model is a trick to interacts with the run dirvers subscription tu a run (users, cars...)
  * Here we fire some events, when you add a user to a run or change a car, you pass via this model
  * when you just read infos about a run, use the RunDriver relations
  *

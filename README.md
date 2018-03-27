@@ -6,20 +6,18 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
 
-## Version changelog **v2.0.0-alpha.1**
-
-First release for the new runners app.
+## Version changelog **v2.0.0-alpha.2**
 
 Break changes :
-* Not all the api routes are implemented yet
+* Roles names changes
 * The back-office is not present in this release
 
 Changes :
-* Updated laravel version to **5.5 LTS**
-* App cleaning
+* Adding all the cruds for the mobile app
+* Cleaning the redundant cruds (only a few routes are preserved to maintain backward compatibility)
 
 Improuvments :
-* Code base cleaning
+* x
 
 Bux fixes :
 * x

@@ -13,6 +13,7 @@ use App\User;
 use App\Comment;
 use App\Artist;
 use App\RunSubscription;
+use Carbon\Carbon;
 
 /**
  * Run
@@ -197,7 +198,10 @@ class Run extends Model
      */
     public function start()
     {
-        
+        // Set the run start time and status
+        $this->status = 'started';
+        $this->started_at = Carbon::now();
+        $this->save();
     }
 
     /**
@@ -208,6 +212,8 @@ class Run extends Model
      */
     public function stop()
     {
-        
+        $this->status = 'finished';
+        $this->ended_at = Carbon::now();
+        $this->save();
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\runs\RunCollection;
 use App\Http\Resources\runs\RunResource;
 use App\Http\Requests\StoreRun;
+use App\Http\Requests\AssignRunnerToRun;
 
 /**
  * RunController
@@ -72,6 +73,19 @@ class RunController extends Controller
     }
 
     /**
+     * Create run driver for the user passed in params
+     *
+     * @param  \App\Http\Requests\AssignRunnerToRun  $request
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function newRunner(AssignRunnerToRun $request, Run $run)
+    {
+        
+        return new RunCollection($request->user()->runs);
+    }
+
+    /**
      * Start the run passed in parameters
      *
      * @param  \Illuminate\Http\Request  $request
@@ -85,13 +99,15 @@ class RunController extends Controller
             // Run ready, chek the authorizations
             $this->authorize('start', $run);
             $run->start();
-            return response()->json(null, 204);
+            return new RunResource($run);
         } else {
             // The run is not ready, we need the authorization to force the run start
             $this->authorize('forceStart', $run);
             $run->start();
-            return response()->json(null, 204);
+            return new RunResource($run);
         }
+        // The run cannot be started
+        return response()->json(null, 405);
     }
 
     /**
@@ -108,7 +124,7 @@ class RunController extends Controller
             // Run ready, chek the authorizations
             $this->authorize('stop', $run);
             $run->stop();
-            return response()->json(null, 204);
+            return new RunResource($run);
         }
         // The run is not started
         return response()->json(null, 405);

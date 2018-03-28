@@ -43,4 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', 'UserController');
     // the curently authenticated user
     Route::get('/me', 'UserController@me')->name('me');
+
+    Route::resource('cars', 'car\CarController');
+    Route::resource('cartypes', 'car\CarTypeController');
 });

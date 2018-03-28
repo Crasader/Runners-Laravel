@@ -64,8 +64,7 @@ class RunsTableSeeder extends Seeder
             'finished',
             'finished',
             'error',
-            'empty',
-            'missing_cars'
+            'empty'
         ]);
 
         /**
@@ -155,7 +154,7 @@ class RunsTableSeeder extends Seeder
 
 
                 // IF the run is started or finished we have to generate a started_at
-                if ($run['status'] === 'started' || $run['status'] === 'finished') {
+                if ($run['status'] === 'gone' || $run['status'] === 'finished') {
 
                     // create a start time with 0 to 30 minutes of delay from the planned at time
                     $runStartedTimeTmp = clone $runPlannedTimeTmp;

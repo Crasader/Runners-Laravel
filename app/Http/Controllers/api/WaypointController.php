@@ -24,7 +24,7 @@ class WaypointController extends Controller
      */
     public function index()
     {
-        return new WaypointCollection(Waypoint::paginate(5));
+        return new WaypointCollection(Waypoint::all());
     }
 
     /**

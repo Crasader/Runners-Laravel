@@ -18,6 +18,13 @@ class AppServiceProvider extends ServiceProvider
          * Disable the api ressources wrapping to a 'data' key
          */
         Resource::withoutWrapping();
+
+        /**
+         * Log all the sql queries in a log file
+         */
+        \DB::listen(function ($query) {
+            \Log::info($query->sql, $query->bindings);
+        });
     }
 
     /**

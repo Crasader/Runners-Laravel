@@ -24,15 +24,15 @@
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/vehicules">
+                    <a class="navbar-link" href="/cars">
                         Véhicules
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/vehicule/create">
+                        <a class="navbar-item" href="/cars/create">
                             Créer véhicule
                         </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item" href="/vehicule/create">
+                        <a class="navbar-item" href="/cars/create">
                             Créer type de véhicule
                         </a>
                     </div>
@@ -65,6 +65,10 @@
                             {{ Auth::user()->name }}
                         </a>
                         <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="/vehicule/create">
+                                Mon compte
+                            </a>
+                            <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 Logout

@@ -9,12 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Schedules\ScheduleCollection;
 use App\Http\Requests\Schedules\StoreSchedule;
 use App\Http\Resources\Schedules\ScheduleResource;
+use Illuminate\Support\Carbon;
 
 /**
  * ScheduleController
  * Api ressource controller
  *
- * @author Bastien Nicoud
+ * @author Bastien Nicoud, Henry Nicolas
  * @package App\Http\Controllers\api
  */
 class ScheduleController extends Controller

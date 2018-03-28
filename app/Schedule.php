@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 use App\Group;
 use App\User;
@@ -11,7 +12,7 @@ use App\User;
  * Schedule
  * Schedules model
  *
- * @author Bastien Nicoud
+ * @author Bastien Nicoud, Nicolas Henry
  * @package App
  */
 class Schedule extends Model
@@ -61,5 +62,19 @@ class Schedule extends Model
     public function users()
     {
         return $this->hasManyThrough(User::class, Group::class);
+    }
+
+    /**
+     * MODEL SCOPE
+     * Get all the schedule between the specified date
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Carbon $start
+     * @param Carbon $end
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBetween($query, $start, $end)
+    {
+        return $query->where('start_time', '<', $end)->where('end_time', '>', $start);
     }
 }

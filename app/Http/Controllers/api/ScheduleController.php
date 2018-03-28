@@ -26,8 +26,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Schedule::class);
-        return new ScheduleCollection(Schedule::paginate());
+        return new ScheduleCollection(Schedule::all());
     }
 
     /**
@@ -36,24 +35,9 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function myWorkingHours(Request $request)
+    public function workingHours(Request $request)
     {
         return new ScheduleCollection($request->user()->groups->first()->schedules);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSchedule $request)
-    {
-        $this->authorize('create', Schedule::class);
-        $schedule = new Schedule($request->all());
-        $schedule->group()->associate(Group::find($request->group_id));
-        $schedule->save();
-        return (new ScheduleResource($schedule))->response()->setStatusCode(201);
     }
 
     /**
@@ -66,44 +50,5 @@ class ScheduleController extends Controller
     {
         $this->authorize('view', $schedule);
         return new ScheduleResource($schedule);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Schedule $schedule)
-    {
-        $this->authorize('update', $schedule);
-        $schedule->update($request->all());
-        $schedule->group()->associate(Group::find($request->group_id));
-        $schedule->save();
-        return new ScheduleResource($schedule);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Schedule $schedule)
-    {
-        $this->authorize('delete', $schedule);
-        $schedule->delete();
-        return response()->json(null, 204);
-    }
-
-    /**
-     * Return the working ours of the current user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function workinghours()
-    {
-        //
     }
 }

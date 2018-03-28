@@ -33,7 +33,7 @@ Route::middleware(['auth:api'])->group(function () {
         /**
          * The working hours of the connected user
          */
-        Route::get('workinghours', 'api\ScheduleController@myWorkingHours');
+        Route::get('workinghours', 'api\ScheduleController@workinghours');
         /**
          * The runs of the current user
          */

@@ -13,7 +13,27 @@ class UsersCrudTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testIndexUsersTest()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testShowUserTest()
+    {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testShowAuthenticatedUserTest()
     {
         $this->assertTrue(true);
     }

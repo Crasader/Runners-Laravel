@@ -9,7 +9,7 @@ It's also possible to use other tools, like [postman](https://www.getpostman.com
 
 ## Feature testing
 
-Comming...
+Comming
 
 <br>
 <br>

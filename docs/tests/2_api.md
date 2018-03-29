@@ -7,7 +7,7 @@ You can find our insomnia test configuration in the `/tests/ApiCrudTests` folder
 
 It's also possible to use other tools, like [postman](https://www.getpostman.com/) another popular client.
 
-## End to end testing
+## Feature testing
 
 Comming...
 
@@ -21,6 +21,6 @@ Comming...
 <hr>
 <div align="center">
 
-**[<- Prev](../README.md) // [Summary](../README.md) // [Next ->](../README.md)**
+**[<- Prev](1_tests.md) // [Summary](../README.md) // [Next ->](../README.md)**
 
 </div>

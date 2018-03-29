@@ -26,7 +26,8 @@ Here we found the summary of all the documentation for the Runners project.
 
 ### Tests
 
-1. [Testing api](tests/1_api.md)
+1. [Tests workflow](tests/1_tests.md)
+1. [Testing api](tests/2_api.md)
 
 ### Diagrams
 

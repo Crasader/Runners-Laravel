@@ -20,7 +20,7 @@ Auth::routes();
  * Return a swagger view
  * Descripe all the api routes (generated with the swagger editor)
  */
-Route::view('/api', 'swagger');
+//Route::view('/api', 'swagger');
 
 /**
  * Homepage

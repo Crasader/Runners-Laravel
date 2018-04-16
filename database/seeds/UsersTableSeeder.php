@@ -23,40 +23,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         /**
-         * Create the superuser
-         */
-        $root = User::create([
-            'name'         => 'root',
-            'email'        => 'root.toor@paleo.ch',
-            'password'     => bcrypt('secret'),
-            'firstname'    => 'Root',
-            'lastname'     => 'Toor',
-            'phone_number' => '0794657846',
-            'sex'          => 'm',
-            'status'       => 'active',
-            'api_token'    => str_random(60)
-        ]);
-        // Asociate the admin role
-        $root->roles()->save(Role::where('slug', 'root')->first());
-
-        /**
-         * Create a generic user (for tests)
-         */
-        $runner = User::create([
-            'name'         => 'runner',
-            'email'        => 'runner@paleo.ch',
-            'password'     => bcrypt('runner'),
-            'firstname'    => 'Runner',
-            'lastname'     => 'Runner',
-            'phone_number' => '0794657846',
-            'sex'          => 'm',
-            'status'       => 'active',
-            'api_token'    => str_random(60)
-        ]);
-        // Asociate the runner role
-        $runner->roles()->save(Role::where('slug', 'runner')->first());
-
-        /**
          * Create users (coordinators, runners)
          * The position of the parameters in the array are important,
          * some propertys are automatically generated in the create procedure, see them below the $users array
@@ -129,6 +95,42 @@ class UsersTableSeeder extends Seeder
             ['Pouilly',       'Bertrand',    '4749624639', 'm', 'secret', 'H',  'runner'],
             ['Schumacher',    'Paul',        '4749624639', 'm', 'secret', 'H',  'runner']
         ];
+
+        /**
+         * Create the superuser
+         */
+        $root = User::create([
+            'name'         => 'root',
+            'email'        => 'root.toor@paleo.ch',
+            'password'     => bcrypt('secret'),
+            'firstname'    => 'Root',
+            'lastname'     => 'Toor',
+            'phone_number' => '0794657846',
+            'sex'          => 'm',
+            'status'       => 'active',
+            'api_token'    => str_random(60)
+        ]);
+        // Asociate the admin role
+        $root->roles()->save(Role::where('slug', 'root')->first());
+        $root->groups()->save(Group::orderBy('id', 'desc')->first());
+
+        /**
+         * Create a generic user (for tests)
+         */
+        $runner = User::create([
+            'name'         => 'runner',
+            'email'        => 'runner@paleo.ch',
+            'password'     => bcrypt('runner'),
+            'firstname'    => 'Runner',
+            'lastname'     => 'Runner',
+            'phone_number' => '0794657846',
+            'sex'          => 'm',
+            'status'       => 'active',
+            'api_token'    => str_random(60)
+        ]);
+        // Asociate the runner role
+        $runner->roles()->save(Role::where('slug', 'runner')->first());
+        $runner->groups()->save(Group::first());
 
         /**
          * loop all the users and insert it in the database

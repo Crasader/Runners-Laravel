@@ -12,7 +12,7 @@ Here we found the summary of all the documentation for the Runners project.
 ### App
 
 1. [Migrations and Seeding](app/1_migrationAndSeeding.md)
-2. [Note about database](app/2_database.md)
+2. [Assets](app/2_assets.md)
 3. [App lifecycle](app/3_lifecycle.md)
 4. [App architecture](app/4_architecture.md)
 5. [Permissions system](app/5_permissions.md)

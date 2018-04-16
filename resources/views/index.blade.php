@@ -23,7 +23,7 @@
 
             <div class="columns">
                 <div class="column is-half">
-                    <a href="#">
+                    <a href="{{ route('cars.index')}}">
                         <div class="notification is-success">
                             <h2 class="title is-2 has-text-centered">Véhicules</h2>
                         </div>

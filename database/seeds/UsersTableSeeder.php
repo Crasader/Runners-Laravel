@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
 use App\Group;
+use App\Festival;
 
 /**
  * UsersTableSeeder
@@ -21,40 +22,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        /**
-         * Create the superuser
-         */
-        $root = User::create([
-            'name'         => 'root',
-            'email'        => 'root.toor@paleo.ch',
-            'password'     => bcrypt('secret'),
-            'firstname'    => 'Root',
-            'lastname'     => 'Toor',
-            'phone_number' => '0794657846',
-            'sex'          => 'm',
-            'status'       => 'active',
-            'api_token'    => str_random(60)
-        ]);
-        // Asociate the admin role
-        $root->roles()->save(Role::where('slug', 'root')->first());
-
-        /**
-         * Create a generic user (for tests)
-         */
-        $runner = User::create([
-            'name'         => 'runner',
-            'email'        => 'runner@paleo.ch',
-            'password'     => bcrypt('runner'),
-            'firstname'    => 'Runner',
-            'lastname'     => 'Runner',
-            'phone_number' => '0794657846',
-            'sex'          => 'm',
-            'status'       => 'active',
-            'api_token'    => str_random(60)
-        ]);
-        // Asociate the runner role
-        $runner->roles()->save(Role::where('slug', 'runner')->first());
-
         /**
          * Create users (coordinators, runners)
          * The position of the parameters in the array are important,
@@ -130,6 +97,42 @@ class UsersTableSeeder extends Seeder
         ];
 
         /**
+         * Create the superuser
+         */
+        $root = User::create([
+            'name'         => 'root',
+            'email'        => 'root.toor@paleo.ch',
+            'password'     => bcrypt('secret'),
+            'firstname'    => 'Root',
+            'lastname'     => 'Toor',
+            'phone_number' => '0794657846',
+            'sex'          => 'm',
+            'status'       => 'free',
+            'api_token'    => str_random(60)
+        ]);
+        // Asociate the admin role
+        $root->roles()->save(Role::where('slug', 'root')->first());
+        $root->groups()->save(Group::orderBy('id', 'desc')->first());
+
+        /**
+         * Create a generic user (for tests)
+         */
+        $runner = User::create([
+            'name'         => 'runner',
+            'email'        => 'runner@paleo.ch',
+            'password'     => bcrypt('runner'),
+            'firstname'    => 'Runner',
+            'lastname'     => 'Runner',
+            'phone_number' => '0794657846',
+            'sex'          => 'm',
+            'status'       => 'free',
+            'api_token'    => str_random(60)
+        ]);
+        // Asociate the runner role
+        $runner->roles()->save(Role::where('slug', 'runner')->first());
+        $runner->groups()->save(Group::first());
+
+        /**
          * loop all the users and insert it in the database
          */
         foreach ($users as $user) {
@@ -149,9 +152,11 @@ class UsersTableSeeder extends Seeder
             // Attach the right role and group for this user
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());
             $tmpUser->groups()->save(Group::where('name', $user[5])->first());
-            // Attatch the 2016 and 2017 edition of pale to this user
+            // Attatch the 2016 and 2017 edition of paleo to this user
             // (for dev we assume all user have participed to all editions)
-            $tmpUser->festivals()->attach([1, 2]);
+            Festival::all()->each(function ($item, $key) use ($tmpUser) {
+                $tmpUser->festivals()->attach($item->id);
+            });
         }
     }
 }

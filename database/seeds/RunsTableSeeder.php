@@ -64,20 +64,13 @@ class RunsTableSeeder extends Seeder
             'finished',
             'finished',
             'error',
-            'empty',
-            'missing_cars'
+            'empty'
         ]);
 
         /**
          * Create runs randomly using the datas indicated above
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
          */
-
-        // TODO:
-        // Create the run
-        // Associate waypoints
-        // Add a status (define the published at if the run is published)
-        // Add a planned at and end_planned at
 
         // Get the amounnt of festivals (in the festivals table) to define how many time we have to generates custom runs
         $festivalsAmount = Festival::all()->count();
@@ -103,6 +96,10 @@ class RunsTableSeeder extends Seeder
              */
             for ($i = 0; $i < $runsAmount; $i++) {
 
+
+                // TODO:
+                //If the run is before the date, his finished
+                //If after the date drafting or other status..
                 /**
                  * Here we genaerates all the datas for one run
                  */
@@ -155,7 +152,7 @@ class RunsTableSeeder extends Seeder
 
 
                 // IF the run is started or finished we have to generate a started_at
-                if ($run['status'] === 'started' || $run['status'] === 'finished') {
+                if ($run['status'] === 'gone' || $run['status'] === 'finished') {
 
                     // create a start time with 0 to 30 minutes of delay from the planned at time
                     $runStartedTimeTmp = clone $runPlannedTimeTmp;

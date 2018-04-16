@@ -33,18 +33,40 @@ class RunController extends Controller
         if ($request->has('finished') && ($request->query('finished') == 'true' || $request->query('finished') == 'false')) {
             // Return finished runs in the query param is true
             // the unfinished runs if the query is false
-            return new RunCollection(Run::finished($request->query('finished'))->get());
+            return new RunCollection(
+                Run::finished($request->query('finished'))
+                ->withoutStatus('drafting')->with([
+                    'waypoints',
+                    'subscriptions.user',
+                    'subscriptions.car',
+                    'subscriptions.carType',
+                    'subscriptions.car.type'
+                ])->get()
+            );
         
         /**
          * If 'status' is present in the query params
          */
         } elseif ($request->has('status')) {
             // Return the runs scoped by his status
-            return new RunCollection(Run::whereStatus($request->query('status'))->get());
+            return new RunCollection(Run::whereStatus($request->query('status'))
+            ->withoutStatus('drafting')->with([
+                'waypoints',
+                'subscriptions.user',
+                'subscriptions.car',
+                'subscriptions.carType',
+                'subscriptions.car.type'
+            ])->get());
         }
 
         // Return all the runs, if no query params
-        return new RunCollection(Run::all());
+        return new RunCollection(Run::withoutStatus('drafting')->with([
+            'waypoints',
+            'subscriptions.user',
+            'subscriptions.car',
+            'subscriptions.carType',
+            'subscriptions.car.type'
+        ])->get());
     }
 
     /**

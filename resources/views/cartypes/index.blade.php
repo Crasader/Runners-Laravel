@@ -12,6 +12,7 @@
                         <th>name</th>
                         <th>description</th>
                         <th>number place</th>
+                        <th><a href="{{ Route('cartypes.create') }}" class="button is-info">Create a car type</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                             <td>{{$cartype->name}}</td>
                             <td>{{$cartype->description}}</td>
                             <td>{{$cartype->nb_place}}</td>
+                            <td><a href="" class="button is-warning"></a><a href="" class="button is-danger"></a></td>
                         </tr>
                     @endforeach
                 </tbody>

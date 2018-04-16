@@ -16,71 +16,43 @@
                 <form id="txt" class="form-horizontal" method="POST" action="{{ route('cartypes.store') }}">
                     {{ csrf_field() }}
 
-                    <div class="field form-group{{ $errors->has('plate_number') ? ' has-error' : '' }}">
-                        <label for="plate_number" class="col-md-4 control-label label">plate number</label>
+                    <div class="field form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name" class="col-md-4 control-label label">Name</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="plate_number" value="" required autofocus>
+                            <input type="text" class="form-control input is-info" name="name" value="" required autofocus>
                             
-                            @if ($errors->has('plate_number'))
+                            @if ($errors->has('name'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('plate_number') }}</strong>
+                                    <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('brand') ? ' has-error' : '' }}">
-                        <label for="brand" class="col-md-4 control-label label">brand</label>
+                    <div class="field form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                        <label for="description" class="col-md-4 control-label label">Description</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="brand" value="" required autofocus>
+                            <input type="text" class="form-control input is-info" name="description" value="" required autofocus>
                             
-                            @if ($errors->has('brand'))
+                            @if ($errors->has('description'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('brand') }}</strong>
+                                    <strong>{{ $errors->first('description') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('model') ? ' has-error' : '' }}">
-                        <label for="model" class="col-md-4 control-label label">model</label>
+                    <div class="field form-group{{ $errors->has('nb_place') ? ' has-error' : '' }}">
+                        <label for="nb_place" class="col-md-4 control-label label">Number place</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="model" value="" required autofocus>
+                            <input type="text" class="form-control input is-info" name="nb_place" value="" required autofocus>
                             
-                            @if ($errors->has('model'))
+                            @if ($errors->has('nb_place'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('model') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="field form-group{{ $errors->has('color') ? ' has-error' : '' }}">
-                        <label for="color" class="col-md-4 control-label label">color</label>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="color" value="" required autofocus>
-                            
-                            @if ($errors->has('color'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('color') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="field form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                        <label for="status" class="col-md-4 control-label label">status</label>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="status" value="" required autofocus>
-                            
-                            @if ($errors->has('status'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('status') }}</strong>
+                                    <strong>{{ $errors->first('nb_place') }}</strong>
                                 </span>
                             @endif
                         </div>

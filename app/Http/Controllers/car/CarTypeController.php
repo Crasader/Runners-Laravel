@@ -44,7 +44,9 @@ class CarTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cartypes = new CarType($request->all());
+        $cartypes->save();
+        return redirect()->route('cartypes.index');
     }
 
     /**

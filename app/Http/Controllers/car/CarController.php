@@ -80,8 +80,8 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        $cars->fill($request->all());
-        $cars->save();
+        $car->fill($request->all());
+        $car->save();
         return redirect()->route('cars.index');
     }
 
@@ -93,7 +93,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        $cars->delete();
+        $car->delete();
         return redirect()->route('cars.index');
     }
 }

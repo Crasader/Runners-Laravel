@@ -216,7 +216,11 @@ class Run extends Model
         $this->started_at = Carbon::now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
-            $item->status = "gone";
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "taken";
             $item->save();
         });
         $this->save();
@@ -234,6 +238,10 @@ class Run extends Model
         $this->ended_at = Carbon::now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
             $item->status = "free";
             $item->save();
         });

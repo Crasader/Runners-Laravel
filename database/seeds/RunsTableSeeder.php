@@ -72,12 +72,6 @@ class RunsTableSeeder extends Seeder
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
          */
 
-        // TODO:
-        // Create the run
-        // Associate waypoints
-        // Add a status (define the published at if the run is published)
-        // Add a planned at and end_planned at
-
         // Get the amounnt of festivals (in the festivals table) to define how many time we have to generates custom runs
         $festivalsAmount = Festival::all()->count();
 
@@ -102,6 +96,10 @@ class RunsTableSeeder extends Seeder
              */
             for ($i = 0; $i < $runsAmount; $i++) {
 
+
+                // TODO:
+                //If the run is before the date, his finished
+                //If after the date drafting or other status..
                 /**
                  * Here we genaerates all the datas for one run
                  */

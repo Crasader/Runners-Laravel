@@ -107,7 +107,7 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Toor',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'active',
+            'status'       => 'free',
             'api_token'    => str_random(60)
         ]);
         // Asociate the admin role
@@ -125,7 +125,7 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Runner',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'active',
+            'status'       => 'free',
             'api_token'    => str_random(60)
         ]);
         // Asociate the runner role

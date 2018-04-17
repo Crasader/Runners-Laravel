@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
+/**
+ * UserController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
     /**
@@ -14,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('users/index');
     }
 
     /**

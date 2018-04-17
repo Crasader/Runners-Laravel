@@ -1,9 +1,16 @@
+{{--
+  -- Cars edition
+  --
+  -- @author Nicolas Henry
+  --}}
+
 @extends('layouts.app')
 
 @section('content')
 <div class="section">
+    <div class="container">
         <div class="columns">
-            <div class="column panel panel-default is-6 is-offset-3">
+            <div class="column is-12">
                 <div class="title is-2">Modify car {{ $car->plate_number }}</div>
                 <hr>
                 <div class="panel-body">
@@ -17,18 +24,18 @@
                         {{ csrf_field() }}
 
                         <div class="field form-group{{ $errors->has('plate_number') ? ' has-error' : '' }}">
-                                <label for="plate_number" class="col-md-4 control-label label">plate number</label>
+                            <label for="plate_number" class="col-md-4 control-label label">plate number</label>
         
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control input is-info" name="plate_number" value="{{ $car->plate_number}}" required autofocus>
-                                    
-                                    @if ($errors->has('plate_number'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('plate_number') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control input is-info" name="plate_number" value="{{ $car->plate_number}}" required autofocus>
+                                
+                                @if ($errors->has('plate_number'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('plate_number') }}</strong>
+                                    </span>
+                                @endif
                             </div>
+                        </div>
 
                         <div class="field form-group{{ $errors->has('brand') ? ' has-error' : '' }}">
                         <label for="brand" class="col-md-4 control-label label">brand</label>

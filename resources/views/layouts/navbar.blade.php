@@ -38,11 +38,11 @@
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/chauffeurs">
+                    <a class="navbar-link" href="/users">
                         Chauffeurs
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/chauffeurs/create">
+                        <a class="navbar-item" href="/users/create">
                             Créer chauffeurs
                         </a>
                     </div>

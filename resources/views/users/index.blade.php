@@ -15,7 +15,7 @@
                 <h1 class="title is-2">Liste des runners</h1>
             </div>
             <div class="column is-4">
-                <a href="{{ route('cars.create') }}" class="button is-info">Nouvel utilisateur</a>
+                <a href="{{ route('cars.create') }}" class="button is-info is-pulled-right">Nouvel utilisateur</a>
             </div>
         </div>
         <div class="columns">
@@ -56,17 +56,13 @@
                                 <td>{{ $user->phone_number }}</td>
                                 <td>{{ $user->status }}</td>
                                 <td>
-                                    <div class="field has-addons">
-                                        <p class="control">
-                                            <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-warning is-link">
-                                                Edit
-                                            </a>
-                                        </p>
-                                        <p class="control">
-                                            <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-success is-link">
-                                                Show
-                                            </a>
-                                        </p>
+                                    <div class="buttons has-addons is-right">
+                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-warning is-link">
+                                            Edit
+                                        </a>
+                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-success is-link">
+                                            Show
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

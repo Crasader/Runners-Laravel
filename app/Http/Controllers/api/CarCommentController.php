@@ -42,7 +42,8 @@ class CarCommentController extends Controller
         $comment = new Comment($request->all());
         $comment->author()->associate($request->user());
         $car->comments()->save($comment);
-        return new CommentCollection($car->comments);
+        //return new CommentCollection($car->comments);
+        return new CommentResource($comment);
     }
 
     /**
@@ -69,7 +70,8 @@ class CarCommentController extends Controller
     {
         $comment->fill($request->all());
         $comment->save();
-        return new CommentCollection($car->comments);
+        //return new CommentCollection($car->comments);
+        return new CommentResource($comment);
     }
 
     /**

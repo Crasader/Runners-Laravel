@@ -13,10 +13,27 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
 
 <body>
     @include('layouts.navbar')
+
+    <div class="container">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                <li>
+                    <a href="/">
+                        <span class="icon is-small">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                        </span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                @yield('breadcrum')
+            </ul>
+        </nav>
+    </div>
 
     @yield('content')
 

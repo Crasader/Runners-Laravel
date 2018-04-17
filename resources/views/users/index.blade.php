@@ -6,6 +6,10 @@
 
 @extends('layouts.app')
 
+@section('breadcrum')
+<li class="is-active"><a href="#" aria-current="page">Utilisateurs</a></li>
+@endsection
+
 @section('content')
 
 <div class="section">

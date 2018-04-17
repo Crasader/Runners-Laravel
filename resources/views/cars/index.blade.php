@@ -11,7 +11,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <div class="title is-2">Car list</div>
+                <h1 class="title is-2">Car list</h1>
                 <hr>
                 <table class="table is-fullwidth">
                     <thead>

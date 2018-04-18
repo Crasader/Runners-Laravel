@@ -6,13 +6,18 @@
 
 @extends('layouts.app')
 
+@section('breadcrum')
+<li><a href="{{ route('cars.index') }}">Véhicules</a></li>
+<li class="is-active"><a href="#" aria-current="page">Modifier un véhicule</a></li>
+@endsection
+
 @section('content')
+
 <div class="section">
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <div class="title is-2">Modify car {{ $car->plate_number }}</div>
-                <hr>
+                <div class="title is-2">Modify car {{ $car->model }}</div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -95,15 +100,10 @@
 
                         <button type="submit" class="button is-info">Modify</button>
                     </form>
-                    <form method="POST" class="form-horizontal" action="{{ route('cars.destroy', ['car' => $car->id]) }}">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <button type="submit" class="button is-danger">Delete</button>
-                    </form>
-                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

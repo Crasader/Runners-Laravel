@@ -31,7 +31,11 @@
         @break
 
     @case('free')
-        <span class="tag is-success">Free</span>
+        <span class="tag is-success">Libre</span>
+        @break
+
+    @case('problem')
+        <span class="tag is-danger">Problème</span>
         @break
 
     @default

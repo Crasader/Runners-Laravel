@@ -14,10 +14,8 @@
 
 | status key name | displayable value                                      |
 |-----------------|--------------------------------------------------------|
-| active          | Actif                                                  |
 | taken           | Utilisé                                                |
 | free            | Disponible                                             |
-| gone            | Parti                                                  |
 | problem         | La voiture n'est pas en état de fonctionnement  |
 
 ## Lib\Models\Run

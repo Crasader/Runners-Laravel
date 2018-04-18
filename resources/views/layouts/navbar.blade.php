@@ -35,10 +35,10 @@
                         Véhicules
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/cars">
+                        <a class="navbar-item" href="{{ route('cars.index') }}">
                             Afficher véhicules
                         </a>
-                        <a class="navbar-item" href="/cars/create">
+                        <a class="navbar-item" href="{{ route('cars.create') }}">
                             Créer véhicule
                         </a>
                         <hr class="navbar-divider">

@@ -22,8 +22,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
-        return view('cars/index')->with(compact('cars'));
+        $cars = Car::orderBy('model', 'asc')->paginate(20);
+        return view('cars.index')->with(compact('cars'));
     }
 
     /**

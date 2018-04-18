@@ -30,6 +30,10 @@
         <span class="tag is-danger">Pas présent</span>
         @break
 
+    @case('free')
+        <span class="tag is-success">Free</span>
+        @break
+
     @default
         <span class="tag is-light">Aucun status</span>
 @endswitch

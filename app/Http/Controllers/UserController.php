@@ -21,7 +21,6 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::orderBy('firstname', 'asc')->paginate(20);
-        $request->session()->flash('success', 'Un message flash de test');
         return view('users/index')->with(compact('users'));
     }
 

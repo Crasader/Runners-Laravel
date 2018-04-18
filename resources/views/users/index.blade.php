@@ -60,15 +60,14 @@
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
                                     @component('components/status_tag', ['status' => $user->status])
-                                        {{ $user->status }}
                                     @endcomponent
                                 </td>
                                 <td>
                                     <div class="buttons has-addons is-right">
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-warning is-link">
+                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-link">
                                             Edit
                                         </a>
-                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-success is-link">
+                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-link">
                                             Show
                                         </a>
                                     </div>

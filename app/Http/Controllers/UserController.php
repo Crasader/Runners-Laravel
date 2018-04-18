@@ -33,7 +33,7 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create', User::class);
-        return view('users/create');
+        return view('users.create');
     }
 
     /**
@@ -45,7 +45,11 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $this->authorize('create', User::class);
-        dd($request->all());
+        $user = new User($request->all());
+        $user->save();
+        return redirect()
+            ->route('users.show', ['user' => $user->id])
+            ->with('success', "L'utilisateur {$user->name} a bien été crée");
     }
 
     /**
@@ -56,7 +60,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.show')->with(compact('user'));
     }
 
     /**

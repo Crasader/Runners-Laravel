@@ -29,9 +29,11 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Informations</label>
+                        <label class="label">Nom</label>
                     </div>
                     <div class="field-body">
+
+                        {{-- LASTNAME --}}
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input {{ $errors->has('lastname') ? ' is-danger' : '' }}"
@@ -47,6 +49,8 @@
                                 <p class="help is-danger">{{ $errors->first('lastname') }}</p>
                             @endif
                         </div>
+
+                        {{-- FIRSTNAME --}}
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input {{ $errors->has('firstname') ? ' is-danger' : '' }}"
@@ -62,12 +66,15 @@
                                 <p class="help is-danger">{{ $errors->first('firstname') }}</p>
                             @endif
                         </div>
+
                     </div>
                 </div>
 
                 <div class="field is-horizontal">
                     <div class="field-label"></div>
                     <div class="field-body">
+
+                        {{-- USERNAME --}}
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}"
@@ -83,12 +90,17 @@
                                 <p class="help is-danger">{{ $errors->first('name') }}</p>
                             @endif
                         </div>
+
                     </div>
                 </div>
 
                 <div class="field is-horizontal">
-                    <div class="field-label"></div>
+                    <div class="field-label is-normal">
+                        <label class="label">Coordonées</label>
+                    </div>
                     <div class="field-body">
+
+                        {{-- PHONE NUMBER --}}
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input {{ $errors->has('phone_number') ? ' is-danger' : '' }}"
@@ -104,6 +116,8 @@
                                 <p class="help is-danger">{{ $errors->first('phone_number') }}</p>
                             @endif
                         </div>
+
+                        {{-- EMAIL --}}
                         <div class="field">
                             <p class="control is-expanded has-icons-left">
                                 <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}"
@@ -119,12 +133,17 @@
                                 <p class="help is-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
+
                     </div>
                 </div>
 
                 <div class="field is-horizontal">
-                    <div class="field-label is-normal"></div>
+                    <div class="field-label is-normal">
+                        <label class="label">Sexe</label>
+                    </div>
                     <div class="field-body">
+
+                        {{-- SEX --}}
                         <div class="field is-narrow">
                             <div class="control">
                                 <div class="select is-fullwidth">
@@ -135,26 +154,27 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
                 <div class="field is-horizontal">
-                    <div class="field-label">
-                        <!-- Left empty for spacing -->
-                    </div>
+                    <div class="field-label"></div>
                     <div class="field-body">
-                        <div class="field is-grouped">
+
+                        {{-- SUBMIT BUTTONS --}}
+                        <div class="field">
                             <div class="control">
                                 <button type="submit" class="button is-primary">
                                     Créer l'utilisateur
                                 </button>
                             </div>
-                            <div class="control">
-                                <a href="{{ route('users.index') }}" class="button is-text">
-                                    Cancel
-                                </a>
-                            </div>
+                            <p class="help">
+                                Par défault les nouveaux utilisateurs sont crées sans mot de passes.
+                                Il faut qu'ils confirment leur participation pour créer un login.
+                            </p>
                         </div>
+                        
                     </div>
                 </div>
 

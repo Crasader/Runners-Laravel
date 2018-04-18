@@ -28,12 +28,15 @@
 
     @include('layouts.breadcrum')
 
+    @include('layouts.flash_message')
+
     @yield('content')
 
     @include('layouts.footer')
 
     {{-- Scripts --}}
     <script src="{{ mix('js/main.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

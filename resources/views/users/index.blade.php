@@ -19,7 +19,9 @@
                 <h1 class="title is-2">Liste des runners</h1>
             </div>
             <div class="column is-4">
-                <a href="{{ route('cars.create') }}" class="button is-info is-pulled-right">Nouvel utilisateur</a>
+                @can('create', App\User::class)
+                    <a href="{{ route('users.create') }}" class="button is-info is-pulled-right">Nouvel utilisateur</a>
+                @endcan
             </div>
         </div>
         <div class="columns">

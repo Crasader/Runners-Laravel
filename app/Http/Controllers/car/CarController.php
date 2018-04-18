@@ -95,6 +95,11 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        if ($car->runDrivers()->exists()) {
+            return redirect()
+                ->back()
+                ->with('error', "Ce véhicule ne peux être supprimé car il est en cours d'utilisation.");
+        }
         $car->delete();
         return redirect()->route('cars.index');
     }

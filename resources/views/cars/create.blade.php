@@ -38,7 +38,7 @@
                                 
                                 @if ($errors->has('plate_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('plate_number') }}</strong>
+                                        <strong class="has-text-danger">{{ $errors->first('plate_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -52,7 +52,7 @@
                                 
                                 @if ($errors->has('brand'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('brand') }}</strong>
+                                        <strong class="has-text-danger">{{ $errors->first('brand') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -66,7 +66,7 @@
                                 
                                 @if ($errors->has('model'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('model') }}</strong>
+                                        <strong class="has-text-danger">{{ $errors->first('model') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -80,7 +80,7 @@
                                 
                                 @if ($errors->has('color'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('color') }}</strong>
+                                        <strong class="has-text-danger">{{ $errors->first('color') }}</strong>
                                     </span>
                                 @endif
                             </div>

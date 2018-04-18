@@ -27,7 +27,6 @@
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Nom d'utilisateur</th>
@@ -39,7 +38,6 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Nom d'utilisateur</th>
@@ -52,7 +50,6 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
                                 <th>{{ $user->firstname }}</th>
                                 <td>{{ $user->lastname }}</td>
                                 <td>{{ $user->name }}</td>

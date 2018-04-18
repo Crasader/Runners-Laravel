@@ -5,6 +5,7 @@ namespace App\Http\Controllers\car;
 use App\Car;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCar;
 
 /**
  * CarController
@@ -39,10 +40,10 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCar  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCar $request)
     {
         $cars = new Car($request->all());
         $cars->save();
@@ -68,17 +69,18 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
+        //dd($car->status);
         return view('cars.edit')->with(compact('car'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCar  $request
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(StoreCar $request, Car $car)
     {
         $car->fill($request->all());
         $car->save();

@@ -88,7 +88,30 @@
                         <label for="status" class="col-md-4 control-label label">status</label>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="status" value="{{ $car->status}}" required autofocus>
+                            <div class="control">
+                                <div class="select is-info">
+                                    <select class="form-control" name="status">
+                                        @switch($car->status)
+                                            @case('problem')
+                                                <option value="free">Libre</option>
+                                                <option value="problem" selected>Problème</option>
+                                                <option value="taken">En run</option>
+                                                @break
+
+                                            @case('taken')
+                                                <option value="free">Libre</option>
+                                                <option value="problem">Problème</option>
+                                                <option value="taken" selected>En run</option>
+                                                @break
+                                        
+                                            @default
+                                                <option value="free" selected>Libre</option>
+                                                <option value="problem">Problème</option>
+                                                <option value="taken">En run</option>
+                                        @endswitch
+                                    </select>
+                                </div>
+                            </div>
                             
                             @if ($errors->has('status'))
                                 <span class="help-block">

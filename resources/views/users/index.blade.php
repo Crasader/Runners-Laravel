@@ -58,7 +58,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->status }}</td>
+                                <td>
+                                    @component('components/status_tag', ['status' => $user->status])
+                                        {{ $user->status }}
+                                    @endcomponent
+                                </td>
                                 <td>
                                     <div class="buttons has-addons is-right">
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-warning is-link">

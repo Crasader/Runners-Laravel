@@ -11805,6 +11805,10 @@ label.panel-block:hover {
  * Global app styles
  */
 
+.breadcrum-spacing {
+  margin: 10px auto;
+}
+
 /**
  * Import page specific scss
  * These scss wil be transpilled in the global css file

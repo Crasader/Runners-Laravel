@@ -10,7 +10,7 @@
         <div class="column is-12">
             {{-- Display success messages --}}
             @if (session('success'))
-                <article class="message is-primary">
+                <article class="message is-success">
                     <div class="message-body">
                         {{ session('success') }}
                     </div>

@@ -5,7 +5,7 @@
   -- @author Bastien Nicoud
   --}}
 
-<div class="container">
+<div class="container breadcrum-spacing">
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li>

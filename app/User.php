@@ -152,9 +152,18 @@ class User extends Authenticatable
      * MODEL RELATION
      * Gets the profile picture for this user
      */
-    public function profilePicture()
+    public function profilePictures()
     {
-        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'profilePicture');
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'profile');
+    }
+
+    /**
+     * MODEL RELATION
+     * Gets the profile picture for this user
+     */
+    public function licencePictures()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'licence');
     }
 
     /**

@@ -26,6 +26,7 @@ class RunnerResource extends Resource
     {
         return [
             'id' => $this->id,
+            'run' => $this->run,
             'user' => new UserResource($this->user),
             'vehicle_category' => new CarTypeResource($this->carType),
             'vehicle' => new CarResource($this->car)

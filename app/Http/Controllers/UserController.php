@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
+/**
+ * UserController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers
+ */
 class UserController extends Controller
 {
     /**
@@ -12,9 +18,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = User::orderBy('firstname', 'asc')->paginate(20);
+        return view('users/index')->with(compact('users'));
     }
 
     /**

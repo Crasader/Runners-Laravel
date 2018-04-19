@@ -10,6 +10,10 @@
         <span class="tag is-success">Disponible</span>
         @break
 
+    @case('free')
+        <span class="tag is-success">Disponible</span>
+        @break
+
     @case('accepted')
         <span class="tag is-success">Accepté</span>
         @break

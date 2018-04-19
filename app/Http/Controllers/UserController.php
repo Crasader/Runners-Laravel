@@ -57,7 +57,9 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $user = new User($request->all());
+        $user->generateName();
         $user->save();
+        $user->generateDefaultPictures();
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->name} a bien été crée");

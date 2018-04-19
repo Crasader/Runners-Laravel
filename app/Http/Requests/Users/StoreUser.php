@@ -35,7 +35,7 @@ class StoreUser extends FormRequest
     {
         return [
             // If the name is not specified, it will be auto generated with the first and lastname
-            'name'          => ['sometimes', 'filled', 'string', 'min:2', 'max:100'],
+            'name'          => ['nullable', 'string', 'min:2', 'max:100'],
             'firstname'     => ['required', 'string', 'min:2', 'max:100'],
             'lastname'      => ['required', 'string', 'min:2', 'max:100'],
             'email'         => ['required', 'string', 'email', 'max:200', 'unique:users'],

@@ -16,7 +16,9 @@
 <div class="section">
     <div class="container">
 
-        {{-- HEADER --}}
+        {{-- --------------------- --}}
+        {{-- HEADER                --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
@@ -42,6 +44,10 @@
             </div>
         </div>
 
+
+        {{-- --------------------- --}}
+        {{-- TITLES                --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
                 <h2 class="title is-3">QR code</h2>
@@ -51,7 +57,9 @@
             </div>
         </div>
 
-        {{-- QR code infos --}}
+        {{-- --------------------- --}}
+        {{-- QR code infos         --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
                 @if ($user->qrCode()->exists())
@@ -71,7 +79,9 @@
                 @endif
             </div>
 
-            {{-- User infos --}}
+            {{-- --------------------- --}}
+            {{-- USER INFOS            --}}
+            {{-- --------------------- --}}
             <div class="column is-8">
                 <div class="columns">
                     <div class="column is-4">
@@ -145,6 +155,9 @@
 
             <div class="column is-8">
 
+                {{-- --------------------- --}}
+                {{-- COMMENTS LISTING      --}}
+                {{-- --------------------- --}}
                 <div class="columns">
                     <div class="column is-12">
                         @if ($user->comments()->exists())
@@ -152,30 +165,17 @@
                                 <article class="media">
                                     <figure class="media-left">
                                         <p class="image is-64x64">
-                                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                                            <img src="{{ asset(Storage::url($comment->author->profilePictures->first()->path)) }}">
                                         </p>
                                     </figure>
                                     <div class="media-content">
                                         <div class="content">
                                             <p>
-                                                <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                                                <strong>{{ $comment->author->fullname }}</strong> <small>{{ $comment->created_at->diffForHumans() }}</small>
                                                 <br>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                                {{ $comment->content }}
                                             </p>
-                                    </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-left">
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                                            </a>
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                                            </a>
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                            </a>
-                                            </div>
-                                        </nav>
+                                        </div>
                                     </div>
                                     <div class="media-right">
                                         <button class="delete"></button>
@@ -188,9 +188,14 @@
                     </div>
                 </div>
 
+
+                {{-- --------------------- --}}
+                {{-- COMMENT FORM          --}}
+                {{-- --------------------- --}}
                 <div class="columns">
                     <div class="column is-12">
                         <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
+                            {{ csrf_field() }}
                             <article class="media">
                                 <figure class="media-left">
                                     <p class="image is-64x64">
@@ -200,13 +205,16 @@
                                 <div class="media-content">
                                     <div class="field">
                                         <p class="control">
-                                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                                            <textarea class="textarea {{ $errors->has('content') ? ' is-danger' : '' }}" name="content" placeholder="Ajouter un commentaire..."></textarea>
                                         </p>
+                                        @if ($errors->has('content'))
+                                            <p class="help is-danger">{{ $errors->first('content') }}</p>
+                                        @endif
                                     </div>
                                     <nav class="level">
                                         <div class="level-left">
                                             <div class="level-item">
-                                                <a class="button is-info">Submit</a>
+                                                <button type="submit" class="button is-info">Ajouter</button>
                                             </div>
                                         </div>
                                     </nav>
@@ -215,6 +223,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\Users\StoreUserComment;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * UserCommentController
@@ -36,12 +39,17 @@ class UserCommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Users\StoreUserComment  $request
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserComment $request, User $user)
     {
-        //
+        $comment = new Comment($request->all());
+        $comment->author()->associate(Auth::user());
+        $comment->save();
+        $user->comments()->save($comment);
+        return redirect()->route('users.show', ['user' => $user->id]);
     }
 
     /**

@@ -28,19 +28,21 @@
                 </h1>
             </div>
             <div class="column">
-                @can('create', App\User::class)
-                    <div class="field is-grouped is-pulled-right">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $user)
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-info">Modifier l'utilisateur</a>
+                            <a href="{{ route('users.update', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
+                        </p>
+                    @endcan
+                    @can('create', App\User::class)
+                        <p class="control">
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
                         </p>
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-warning">Générer QR code</a>
+                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer Identifiants</a>
                         </p>
-                        <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-warning">Générer Identifiants</a>
-                        </p>
-                    </div>
-                @endcan
+                    @endcan
+                </div>
             </div>
         </div>
 
@@ -153,78 +155,99 @@
                 tutu
             </div>
 
-            <div class="column is-8">
 
-                {{-- --------------------- --}}
-                {{-- COMMENTS LISTING      --}}
-                {{-- --------------------- --}}
-                <div class="columns">
-                    <div class="column is-12">
-                        @if ($user->comments()->exists())
-                            @foreach ($user->comments as $comment)
-                                <article class="media">
-                                    <figure class="media-left">
-                                        <p class="image is-64x64">
-                                            <img src="{{ asset(Storage::url($comment->author->profilePictures->first()->path)) }}">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p>
-                                                <strong>{{ $comment->author->fullname }}</strong> <small>{{ $comment->created_at->diffForHumans() }}</small>
-                                                <br>
-                                                {{ $comment->content }}
+            @can('view', App\Comment::class)
+                <div class="column is-8">
+
+
+                    {{-- --------------------- --}}
+                    {{-- COMMENTS LISTING      --}}
+                    {{-- --------------------- --}}
+                    <div class="columns">
+                        <div class="column is-12">
+                            @if ($user->comments()->exists())
+                                @foreach ($user->comments as $comment)
+                                    <article class="media">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                <img src="{{ asset(Storage::url($comment->author->profilePictures->first()->path)) }}">
                                             </p>
-                                        </div>
-                                    </div>
-                                    <div class="media-right">
-                                        <button class="delete"></button>
-                                    </div>
-                                </article>
-                            @endforeach
-                        @else
-                            <p>Aucun commentaires</p>
-                        @endif
-                    </div>
-                </div>
-
-
-                {{-- --------------------- --}}
-                {{-- COMMENT FORM          --}}
-                {{-- --------------------- --}}
-                <div class="columns">
-                    <div class="column is-12">
-                        <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
-                            {{ csrf_field() }}
-                            <article class="media">
-                                <figure class="media-left">
-                                    <p class="image is-64x64">
-                                        <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="field">
-                                        <p class="control">
-                                            <textarea class="textarea {{ $errors->has('content') ? ' is-danger' : '' }}" name="content" placeholder="Ajouter un commentaire..."></textarea>
-                                        </p>
-                                        @if ($errors->has('content'))
-                                            <p class="help is-danger">{{ $errors->first('content') }}</p>
-                                        @endif
-                                    </div>
-                                    <nav class="level">
-                                        <div class="level-left">
-                                            <div class="level-item">
-                                                <button type="submit" class="button is-info">Ajouter</button>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <strong>{{ $comment->author->fullname }}</strong> <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                                    <br>
+                                                    {{ $comment->content }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </nav>
-                                </div>
-                            </article>
-                        </form>
+                                        @can('delete', $comment)
+                                            <div class="media-right">
+                                                <button onclick="event.preventDefault();
+                                                    document.getElementById('delete-comment-form').submit();"
+                                                    class="delete"></button>
+                                                <form id="delete-comment-form"
+                                                    action="{{ route('users.comments.destroy', ['user' => $user->id, 'comment' => $comment->id]) }}"
+                                                        method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </article>
+                                @endforeach
+                            @else
+                                <p>Aucun commentaires</p>
+                            @endif
+                        </div>
                     </div>
-                </div>
 
-            </div>
+
+                    {{-- --------------------- --}}
+                    {{-- COMMENT FORM          --}}
+                    {{-- --------------------- --}}
+                    @can('create', App\Comment::class)
+                        <div class="columns">
+                            <div class="column is-12">
+                                <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <article class="media">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                            </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea {{ $errors->has('content') ? ' is-danger' : '' }}" name="content" placeholder="Ajouter un commentaire..."></textarea>
+                                                </p>
+                                                @if ($errors->has('content'))
+                                                    <p class="help is-danger">{{ $errors->first('content') }}</p>
+                                                @endif
+                                            </div>
+                                            <nav class="level">
+                                                <div class="level-left">
+                                                    <div class="level-item">
+                                                        <button type="submit" class="button is-info">Ajouter</button>
+                                                    </div>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </article>
+                                </form>
+                            </div>
+                        </div>
+                    @endcan
+
+                </div>
+            @else
+                <div class="column is-8">
+                    <p>Vous ne pouvez pas voir les commentaires</p>
+                </div>
+            @endcan
+
         </div>
     </div>
 </div>

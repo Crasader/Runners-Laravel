@@ -28,19 +28,22 @@ class RolesTableSeeder extends Seeder
             'name' => 'The superuser',
             'slug' => 'root',
             'permissions' => [
-                'start_run'            => true,
-                'end_run'              => true,
-                'force_start_run'      => true,
-                'force_end_run'        => true,
-                'manage_runs'          => true,
-                'create_users'         => true,
-                'delete_users'         => true,
-                'manage_schedules'     => true,
-                'manage_groups'        => true,
-                'manage_roles'         => true,
-                'manage_cars'          => true,
-                'manage_car_types'     => true,
-                'manage_other_users'   => true
+                'start_run'                  => true,
+                'end_run'                    => true,
+                'force_start_run'            => true,
+                'force_end_run'              => true,
+                'manage_runs'                => true,
+                'create_users'               => true,
+                'delete_users'               => true,
+                'manage_schedules'           => true,
+                'manage_groups'              => true,
+                'manage_roles'               => true,
+                'manage_cars'                => true,
+                'manage_car_types'           => true,
+                'manage_other_users'         => true,
+                'manage_my_comments'         => true,
+                'manage_other_user_comments' => true,
+                'view_comments'              => true
             ]
         ]);
 
@@ -51,19 +54,22 @@ class RolesTableSeeder extends Seeder
             'name' => 'Runners administrator',
             'slug' => 'admin',
             'permissions' => [
-                'start_run'            => true,
-                'end_run'              => true,
-                'force_start_run'      => true,
-                'force_end_run'        => true,
-                'manage_runs'          => true,
-                'manage_schedules'     => true,
-                'manage_groups'        => true,
-                'manage_roles'         => true,
-                'manage_cars'          => true,
-                'manage_car_types'     => true,
-                'create_users'         => true,
-                'delete_users'         => true,
-                'manage_other_users'   => true
+                'start_run'                  => true,
+                'end_run'                    => true,
+                'force_start_run'            => true,
+                'force_end_run'              => true,
+                'manage_runs'                => true,
+                'manage_schedules'           => true,
+                'manage_groups'              => true,
+                'manage_roles'               => true,
+                'manage_cars'                => true,
+                'manage_car_types'           => true,
+                'create_users'               => true,
+                'delete_users'               => true,
+                'manage_other_users'         => true,
+                'manage_my_comments'         => true,
+                'manage_other_user_comments' => true,
+                'view_comments'              => true
             ]
         ]);
 
@@ -74,19 +80,22 @@ class RolesTableSeeder extends Seeder
             'name' => 'Runners coordinator',
             'slug' => 'coordinator',
             'permissions' => [
-                'start_run'            => true,
-                'end_run'              => true,
-                'force_start_run'      => true,
-                'force_end_run'        => true,
-                'manage_runs'          => true,
-                'manage_schedules'     => true,
-                'manage_groups'        => true,
-                'manage_roles'         => true,
-                'manage_cars'          => true,
-                'manage_car_types'     => true,
-                'create_users'         => true,
-                'delete_users'         => false,
-                'manage_other_users'   => true
+                'start_run'                  => true,
+                'end_run'                    => true,
+                'force_start_run'            => true,
+                'force_end_run'              => true,
+                'manage_runs'                => true,
+                'manage_schedules'           => true,
+                'manage_groups'              => true,
+                'manage_roles'               => true,
+                'manage_cars'                => true,
+                'manage_car_types'           => true,
+                'create_users'               => true,
+                'delete_users'               => false,
+                'manage_other_users'         => true,
+                'manage_my_comments'         => true,
+                'manage_other_user_comments' => false,
+                'view_comments'              => true
             ]
         ]);
 
@@ -97,19 +106,22 @@ class RolesTableSeeder extends Seeder
             'name' => 'Runner',
             'slug' => 'runner',
             'permissions' => [
-                'start_run'            => true,
-                'end_run'              => true,
-                'force_start_run'      => false,
-                'force_end_run'        => false,
-                'manage_runs'          => false,
-                'manage_schedules'     => false,
-                'manage_groups'        => false,
-                'manage_roles'         => true,
-                'manage_cars'          => false,
-                'manage_car_types'     => false,
-                'create_users'         => false,
-                'delete_users'         => false,
-                'manage_other_users'   => false
+                'start_run'                  => true,
+                'end_run'                    => true,
+                'force_start_run'            => false,
+                'force_end_run'              => false,
+                'manage_runs'                => false,
+                'manage_schedules'           => false,
+                'manage_groups'              => false,
+                'manage_roles'               => true,
+                'manage_cars'                => false,
+                'manage_car_types'           => false,
+                'create_users'               => false,
+                'delete_users'               => false,
+                'manage_other_users'         => false,
+                'manage_my_comments'         => true,
+                'manage_other_user_comments' => false,
+                'view_comments'              => true
             ]
         ]);
     }

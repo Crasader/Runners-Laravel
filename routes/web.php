@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Users ressource
      */
+    Route::get('users/{user}/generate-qr-code', 'UserController@generateQrCode')->name('users.generate-qr-code');
+    Route::get('users/{user}/generate-credentials', 'UserController@generateCredentials')->name('users.generate-credentials');
     Route::resource('users', 'UserController');
     Route::resource('users.comments', 'UserCommentController');
     // the curently authenticated user

@@ -85,6 +85,11 @@
                 <a class="navbar-item" href="/horaires">
                     Horaires
                 </a>
+
+                {{-- Kiéla? menu --}}
+                <a class="navbar-item" href="/horaires">
+                    Kiéla?
+                </a>
             </div>
 
             <div class="navbar-end">

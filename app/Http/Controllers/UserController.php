@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\StoreUser;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * UserController
@@ -19,10 +20,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $users = User::orderBy('firstname', 'asc')->paginate(20);
         return view('users/index')->with(compact('users'));
+    }
+
+    /**
+     * Display the personal page of the connected user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function me()
+    {
+        return redirect()->route('users.show', ['user' => Auth::user()->id]);
     }
 
     /**
@@ -46,7 +57,9 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $user = new User($request->all());
+        $user->generateName();
         $user->save();
+        $user->generateDefaultPictures();
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->name} a bien été crée");

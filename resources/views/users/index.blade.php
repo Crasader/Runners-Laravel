@@ -14,16 +14,34 @@
 
 <div class="section">
     <div class="container">
+
+        {{-- Title and controls --}}
         <div class="columns">
-            <div class="column is-8">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Liste des runners</h1>
             </div>
-            <div class="column is-4">
+            <div class="column">
                 @can('create', App\User::class)
-                    <a href="{{ route('users.create') }}" class="button is-info is-pulled-right">Nouvel utilisateur</a>
+                    <div class="field is-grouped is-pulled-right">
+                        <p class="control">
+                            <a href="{{ route('users.create') }}" class="button is-info">Nouvel utilisateur</a>
+                        </p>
+                        <p class="control">
+                            <a href="{{ route('users.create') }}" class="button is-primary">Importer une liste</a>
+                        </p>
+                    </div>
                 @endcan
             </div>
         </div>
+
+        {{-- Filters --}}
+        <div class="columns">
+            <div class="column is-12">
+
+            </div>
+        </div>
+
+        {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
                 <table class="table is-striped is-hoverable is-fullwidth">

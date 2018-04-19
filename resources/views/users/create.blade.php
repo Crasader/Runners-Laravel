@@ -34,38 +34,24 @@
                     <div class="field-body">
 
                         {{-- LASTNAME --}}
-                        <div class="field">
-                            <p class="control is-expanded has-icons-left">
-                                <input class="input {{ $errors->has('lastname') ? ' is-danger' : '' }}"
-                                    type="text"
-                                    name="lastname"
-                                    value="{{ old('lastname') }}"
-                                    placeholder="Nom">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </p>
-                            @if ($errors->has('lastname'))
-                                <p class="help is-danger">{{ $errors->first('lastname') }}</p>
-                            @endif
-                        </div>
+                        @component('components/horizontal_form_input', [
+                            'name'        => 'lastname',
+                            'placeholder' => 'Nom',
+                            'type'        => 'text',
+                            'icon'        => 'fa-user',
+                            'errors'      => $errors
+                            ])
+                        @endcomponent
 
                         {{-- FIRSTNAME --}}
-                        <div class="field">
-                            <p class="control is-expanded has-icons-left">
-                                <input class="input {{ $errors->has('firstname') ? ' is-danger' : '' }}"
-                                    type="text"
-                                    name="firstname"
-                                    value="{{ old('firstname') }}"
-                                    placeholder="Prénom">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </p>
-                            @if ($errors->has('firstname'))
-                                <p class="help is-danger">{{ $errors->first('firstname') }}</p>
-                            @endif
-                        </div>
+                        @component('components/horizontal_form_input', [
+                            'name'        => 'firstname',
+                            'placeholder' => 'Prénom',
+                            'type'        => 'text',
+                            'icon'        => 'fa-user',
+                            'errors'      => $errors
+                            ])
+                        @endcomponent
 
                     </div>
                 </div>
@@ -75,21 +61,14 @@
                     <div class="field-body">
 
                         {{-- USERNAME --}}
-                        <div class="field">
-                            <p class="control is-expanded has-icons-left">
-                                <input class="input {{ $errors->has('name') ? ' is-danger' : '' }}"
-                                    type="text"
-                                    name="name"
-                                    value="{{ old('name') }}"
-                                    placeholder="Nom d'utilisateur">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </p>
-                            @if ($errors->has('name'))
-                                <p class="help is-danger">{{ $errors->first('name') }}</p>
-                            @endif
-                        </div>
+                        @component('components/horizontal_form_input', [
+                            'name'        => 'name',
+                            'placeholder' => "Nom d'utilisateur",
+                            'type'        => 'text',
+                            'icon'        => 'fa-user',
+                            'errors'      => $errors
+                            ])
+                        @endcomponent
 
                     </div>
                 </div>
@@ -101,38 +80,24 @@
                     <div class="field-body">
 
                         {{-- PHONE NUMBER --}}
-                        <div class="field">
-                            <p class="control is-expanded has-icons-left">
-                                <input class="input {{ $errors->has('phone_number') ? ' is-danger' : '' }}"
-                                    type="text"
-                                    name="phone_number"
-                                    value="{{ old('phone_number') }}"
-                                    placeholder="Numéro de téléphone">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-phone"></i>
-                                </span>
-                            </p>
-                            @if ($errors->has('phone_number'))
-                                <p class="help is-danger">{{ $errors->first('phone_number') }}</p>
-                            @endif
-                        </div>
+                        @component('components/horizontal_form_input', [
+                            'name'        => 'phone_number',
+                            'placeholder' => "Numéro de téléphone",
+                            'type'        => 'text',
+                            'icon'        => 'fa-phone',
+                            'errors'      => $errors
+                            ])
+                        @endcomponent
 
                         {{-- EMAIL --}}
-                        <div class="field">
-                            <p class="control is-expanded has-icons-left">
-                                <input class="input {{ $errors->has('email') ? ' is-danger' : '' }}"
-                                    type="text"
-                                    name="email"
-                                    value="{{ old('email') }}"
-                                    placeholder="Adresse e-mail">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                            </p>
-                            @if ($errors->has('email'))
-                                <p class="help is-danger">{{ $errors->first('email') }}</p>
-                            @endif
-                        </div>
+                        @component('components/horizontal_form_input', [
+                            'name'        => 'email',
+                            'placeholder' => "Adresse e-mail",
+                            'type'        => 'text',
+                            'icon'        => 'fa-envelope',
+                            'errors'      => $errors
+                            ])
+                        @endcomponent
 
                     </div>
                 </div>

@@ -96,6 +96,14 @@ class UsersTableSeeder extends Seeder
             ['Schumacher',    'Paul',        '4749624639', 'm', 'secret', 'H',  'runner']
         ];
 
+        // List of users status
+        $status = collect([
+            'free',
+            'not-requested',
+            'not-present',
+            'requested'
+        ]);
+
         /**
          * Create the superuser
          */
@@ -147,7 +155,8 @@ class UsersTableSeeder extends Seeder
                 'firstname'    => $user[1],
                 'phone_number' => $user[2],
                 'sex'          => $user[3],
-                'api_token'    => str_random(60)
+                'api_token'    => str_random(60),
+                'status'       => $status->random()
             ]);
             // Attach the right role and group for this user
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());

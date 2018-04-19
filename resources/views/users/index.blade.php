@@ -17,19 +17,17 @@
 
         {{-- Title and controls --}}
         <div class="columns">
-            <div class="column is-8">
+            <div class="column is-6">
                 <h1 class="title is-2">Liste des runners</h1>
             </div>
-            <div class="column is-4">
+            <div class="column is-6">
                 @can('create', App\User::class)
                     <div class="field is-grouped is-pulled-right">
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-link is-info">Nouvel utilisateur</a>
+                            <a href="{{ route('users.create') }}" class="button is-info">Nouvel utilisateur</a>
                         </p>
                         <p class="control">
-                            <a class="button">
-                                Cancel
-                            </a>
+                            <a href="{{ route('users.create') }}" class="button is-primary">Importer une liste</a>
                         </p>
                     </div>
                 @endcan

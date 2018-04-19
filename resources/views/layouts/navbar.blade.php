@@ -67,9 +67,19 @@
                 </div>
 
                 {{-- Groups menu --}}
-                <a class="navbar-item" href="/groupes">
-                    Groupes
-                </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="/users">
+                        Groupes
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="/users">
+                            Afficher les groupes
+                        </a>
+                        <a class="navbar-item" href="/users/create">
+                            Créer un groupe
+                        </a>
+                    </div>
+                </div>
 
                 {{-- Schedule menu --}}
                 <a class="navbar-item" href="/horaires">
@@ -78,18 +88,33 @@
             </div>
 
             <div class="navbar-end">
-                <!-- Authentication Links -->
+                {{-- Groups menu --}}
+                <a class="navbar-item" href="https://github.com/CPNV-ES/Runners-Laravel">
+                    <strong>v2.0.0-alpha.3</strong>
+                </a>
+
+                {{-- Authentication Links --}}
                 @guest
                     <a class="navbar-item" href="{{ route('login') }}">Login</a>
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="{{ route('me') }}">
-                            {{ Auth::user()->name }}
+                            <span class="icon">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <span>
+                                {{ Auth::user()->name }}
+                            </span>
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
                             <a class="navbar-item" href="/vehicule/create">
                                 Mon compte
                             </a>
+                            @can('view', App\Role::class)
+                                <a class="navbar-item" href="/vehicule/create">
+                                    Gèrer les roles
+                                </a>
+                            @endcan
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">

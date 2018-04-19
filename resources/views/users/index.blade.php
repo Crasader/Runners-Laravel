@@ -17,10 +17,10 @@
 
         {{-- Title and controls --}}
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Liste des runners</h1>
             </div>
-            <div class="column is-6">
+            <div class="column">
                 @can('create', App\User::class)
                     <div class="field is-grouped is-pulled-right">
                         <p class="control">

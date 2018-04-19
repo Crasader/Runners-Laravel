@@ -168,6 +168,15 @@ class User extends Authenticatable
     }
 
     /**
+     * MODEL RELATION
+     * Gets the driver qrcode
+     */
+    public function qrCode()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'qrcode');
+    }
+
+    /**
      * MODEL ACCESSOR
      * Get the user's full name.
      *

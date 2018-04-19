@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
      * Users ressource
      */
     Route::resource('users', 'UserController');
+    Route::resource('users.comments', 'UserCommentController');
     // the curently authenticated user
     Route::get('/me', 'UserController@me')->name('me');
 

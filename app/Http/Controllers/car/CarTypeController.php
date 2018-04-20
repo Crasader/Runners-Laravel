@@ -22,8 +22,8 @@ class CarTypeController extends Controller
      */
     public function index()
     {
-        $cartypes = CarType::all();
-        return view('cartypes/index')->with(compact('cartypes'));
+        $carTypes = CarType::orderBy('name', 'asc')->paginate(20);
+        return view('carTypes.index')->with(compact('carTypes'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CarTypeController extends Controller
      */
     public function create()
     {
-        return view('cartypes.create');
+        return view('carTypes.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class CarTypeController extends Controller
     {
         $cartypes = new CarType($request->all());
         $cartypes->save();
-        return redirect()->route('cartypes.index');
+        return redirect()->route('carTypes.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class CarTypeController extends Controller
      */
     public function show(CarType $carType)
     {
-        //
+        return view('carTypes.show')->with(compact('carType'));
     }
 
     /**
@@ -68,7 +68,7 @@ class CarTypeController extends Controller
      */
     public function edit(CarType $carType)
     {
-        //
+        return view('carTypes.edit')->with(compact('carType'));
     }
 
     /**
@@ -80,7 +80,9 @@ class CarTypeController extends Controller
      */
     public function update(Request $request, CarType $carType)
     {
-        //
+        $cartype->fill($request->all());
+        $cartype->save();
+        return redirect()->route('carTypes.index');
     }
 
     /**

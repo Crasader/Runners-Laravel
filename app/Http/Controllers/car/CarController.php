@@ -69,7 +69,6 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //dd($car->status);
         return view('cars.edit')->with(compact('car'));
     }
 

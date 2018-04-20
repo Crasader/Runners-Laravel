@@ -50,5 +50,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/me', 'UserController@me')->name('me');
 
     Route::resource('cars', 'car\CarController');
-    Route::resource('cartypes', 'car\CarTypeController');
+    Route::resource('carTypes', 'car\CarTypeController');
 });

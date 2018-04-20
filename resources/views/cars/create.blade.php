@@ -17,7 +17,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <h1 class="title is-2">Create a car</h1>
+                <h1 class="title is-2">Créer un véhicule</h1>
             </div>
         </div>
 

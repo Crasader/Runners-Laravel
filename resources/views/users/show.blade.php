@@ -8,7 +8,7 @@
 
 @section('breadcrum')
 <li><a href="{{ route('users.index') }}">Utilisateur</a></li>
-<li class="is-active"><a href="#" aria-current="page">{{ $user->name }}</a></li>
+<li class="is-active"><a href="#" aria-current="page">{{ $user->fullname }}</a></li>
 @endsection
   
 @section('content')
@@ -31,7 +31,7 @@
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
                         <p class="control">
-                            <a href="{{ route('users.update', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
+                            <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
                         </p>
                     @endcan
                     @can('create', App\User::class)
@@ -68,6 +68,11 @@
                     <figure class="image">
                         <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
                     </figure>
+                    <article class="message is-info">
+                        <div class="message-body">
+                            Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
+                        </div>
+                    </article>
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
@@ -114,7 +119,7 @@
                 <div class="columns">
                     <div class="column is-4">
                         <figure class="image">
-                            <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                            <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
                         </figure>
                     </div>
                     <div class="column is-3 has-text-right">

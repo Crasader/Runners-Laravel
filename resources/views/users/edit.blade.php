@@ -1,5 +1,5 @@
 {{--
-  -- Users creation
+  -- Show specified user
   --
   -- @author Bastien Nicoud
   --}}
@@ -7,17 +7,49 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('users.index') }}">Utilisateurs</a></li>
-<li class="is-active"><a href="#" aria-current="page">Nouvel utilisateur</a></li>
+<li><a href="{{ route('users.index') }}">Utilisateur</a></li>
+<li><a href="{{ route('users.show', ['user' => $user->id]) }}">{{ $user->fullname }}</a></li>
+<li class="is-active"><a href="#" aria-current="page">Edition</a></li>
 @endsection
-
+  
 @section('content')
 
 <div class="section">
     <div class="container">
+
+        {{-- --------------------- --}}
+        {{-- HEADER                --}}
+        {{-- --------------------- --}}
         <div class="columns">
-            <div class="column is-12">
-                <h1 class="title is-2">Nouvel utilisateur</h1>
+            <div class="column is-narrow">
+                <h1 class="title is-2">
+                    {{ $user->fullname }}
+                    @component('components/status_tag', ['status' => $user->status])
+                    @endcomponent
+                </h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $user)
+                        <p class="control">
+                            <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
+                        </p>
+                    @endcan
+                    @can('create', App\User::class)
+                        <p class="control">
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
+                        </p>
+                        <p class="control">
+                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer Identifiants</a>
+                        </p>
+                    @endcan
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                
             </div>
         </div>
 

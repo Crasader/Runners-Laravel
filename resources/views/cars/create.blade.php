@@ -8,7 +8,7 @@
 
 @section('breadcrum')
 <li><a href="{{ route('cars.index') }}">Véhicules</a></li>
-<li class="is-active"><a href="#" aria-current="page">Créer</a></li>
+<li class="is-active"><a href="#" aria-current="page">Créer un véhicule</a></li>
 @endsection
 
 @section('content')
@@ -78,7 +78,7 @@
                                 'name'        => 'model',
                                 'placeholder' => 'Modèle',
                                 'type'        => 'text',
-                                'icon'        => 'fa-user',
+                                'icon'        => 'fa-car',
                                 'errors'      => $errors
                                 ])
                             @endcomponent
@@ -130,22 +130,21 @@
                     {{-- end form --}}
 
                     <div class="field is-horizontal">
-                            <div class="field-label"></div>
-                            <div class="field-body">
-    
-                                {{-- Submit button --}}
-                                <div class="field">
-                                    <div class="control">
-                                        <button type="submit" class="button is-primary">
-                                            Créer le véhicule
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                </form>
+                        <div class="field-label"></div>
+                        <div class="field-body">
 
+                            {{-- Submit button --}}
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary">
+                                        Créer le véhicule
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

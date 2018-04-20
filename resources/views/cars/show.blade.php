@@ -1,5 +1,5 @@
 {{--
-  -- Cars index
+  -- Show specified car
   --
   -- @author Nicolas Henry
   --}}

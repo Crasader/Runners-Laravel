@@ -13,85 +13,115 @@
 
 @section('content')
 
+
 <div class="section">
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <div class="title is-2">Modify car {{ $car->model }}</div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                <h1 class="title is-2">Modifier un véhicule</h1>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+
+                <form action="{{ route('cars.update', ['car' => $car->id]) }}" method="POST">
+                    {{ method_field('PUT') }}
+                    {{ csrf_field() }}
+
+                    {{-- Form create car --}}
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Numéro de plaque</label>
                         </div>
-                    @endif
-                    <form method="POST" class="form-horizontal" action="{{ route('cars.update', ['car' => $car->id]) }}">
-                        {{ method_field('PUT') }}
-                        {{ csrf_field() }}
+                        <div class="field-body">
 
-                        <div class="field form-group{{ $errors->has('plate_number') ? ' has-error' : '' }}">
-                            <label for="plate_number" class="col-md-4 control-label label">plate number</label>
-        
-                            <div class="col-md-6">
-                                <input type="text" class="form-control input is-info" name="plate_number" value="{{ $car->plate_number}}" required autofocus>
-                                
-                                @if ($errors->has('plate_number'))
-                                    <span class="help-block">
-                                        <strong class="has-text-danger">{{ $errors->first('plate_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                            {{-- Plate number --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'plate_number',
+                                'placeholder' => 'Numéro de plaque',
+                                'value'       => $car->plate_number,
+                                'type'        => 'text',
+                                'icon'        => 'fa-id-card',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
 
-                        <div class="field form-group{{ $errors->has('brand') ? ' has-error' : '' }}">
-                        <label for="brand" class="col-md-4 control-label label">brand</label>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="brand" value="{{ $car->brand}}" required autofocus>
-                            
-                            @if ($errors->has('brand'))
-                                <span class="help-block">
-                                    <strong class="has-text-danger">{{ $errors->first('brand') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('model') ? ' has-error' : '' }}">
-                        <label for="model" class="col-md-4 control-label label">model</label>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Marque</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="model" value="{{ $car->model}}" required autofocus>
-                            
-                            @if ($errors->has('model'))
-                                <span class="help-block">
-                                    <strong class="has-text-danger">{{ $errors->first('model') }}</strong>
-                                </span>
-                            @endif
+                            {{-- Brand --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'brand',
+                                'placeholder' => 'Prénom',
+                                'value'       => $car->brand,
+                                'type'        => 'text',
+                                'icon'        => 'fa-car',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('color') ? ' has-error' : '' }}">
-                        <label for="color" class="col-md-4 control-label label">color</label>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Modèle</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="color" value="{{ $car->color}}" required autofocus>
-                            
-                            @if ($errors->has('color'))
-                                <span class="help-block">
-                                    <strong class="has-text-danger">{{ $errors->first('color') }}</strong>
-                                </span>
-                            @endif
+                            {{-- Model --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'model',
+                                'placeholder' => 'Modèle',
+                                'value'       => $car->model,
+                                'type'        => 'text',
+                                'icon'        => 'fa-car',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                        <label for="status" class="col-md-4 control-label label">status</label>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Couleur</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <div class="control">
-                                <div class="select is-info">
-                                    <select class="form-control" name="status">
-                                        @switch($car->status)
+                            {{-- Color --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'color',
+                                'placeholder' => 'Couleur',
+                                'value'       => $car->color,
+                                'type'        => 'text',
+                                'icon'        => 'fa-thumbtack',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Status</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Status --}}
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select name="status">
+                                             @switch($car->status)
                                             @case('problem')
                                                 <option value="free">Libre</option>
                                                 <option value="problem" selected>Problème</option>
@@ -109,21 +139,32 @@
                                                 <option value="problem">Problème</option>
                                                 <option value="taken">En run</option>
                                         @endswitch
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            @if ($errors->has('status'))
-                                <span class="help-block">
-                                    <strong class="has-text-danger">{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
+
                         </div>
                     </div>
 
-                        <button type="submit" class="button is-info">Modify</button>
-                    </form>
-                </div>
+                    {{-- end form --}}
+
+                    <div class="field is-horizontal">
+                        <div class="field-label"></div>
+                        <div class="field-body">
+
+                            {{-- Submit button --}}
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary">
+                                        Modifier le véhicule
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

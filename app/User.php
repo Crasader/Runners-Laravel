@@ -16,6 +16,9 @@ use App\Car;
 use App\Attachment;
 use App\Festival;
 use Illuminate\Support\Facades\Auth;
+use \BaconQrCode\Renderer\Image\Png;
+use BaconQrCode\Writer;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * User
@@ -263,11 +266,58 @@ class User extends Authenticatable
         }
     }
 
-    public function generateQrCode()
+    /**
+     * MODEL METHOD
+     * Generates a fresh api token for the user
+     *
+     * @return string
+     */
+    public function generateFreshApiToken()
     {
-        # code...
+        $this->api_token = str_random(60);
+        $this->save();
     }
 
+    /**
+     * MODEL METHOD
+     * Generates a fresh qr code and save it to the storage
+     *
+     * @return string
+     */
+    public function generateQrCode()
+    {
+        // Delete the old qr code
+        if ($this->qrCode()->exists()) {
+            Storage::delete('public/' . $this->qrCode->first()->path);
+            $this->qrCode()->delete();
+        }
+
+        // Regenerate the api token (for security reasons we re-generate the api token each new qr code versions)
+        $this->generateFreshApiToken();
+
+        // Generate the filename
+        $filename = 'qrcodes/' . $this->slug . str_random(20) . '.png';
+
+        // Generate the QR code
+        $renderer = new Png();
+        $renderer->setHeight(256);
+        $renderer->setWidth(256);
+        $writer = new Writer($renderer);
+        $writer->writeFile($this->api_token, '../storage/app/public/' . $filename);
+
+        // Attach it to the user
+        $qrcode = new Attachment(['type' => 'qrcode', 'path' => $filename]);
+        $qrcode->owner()->associate(Auth::user());
+        $qrcode->save();
+        $this->attachments()->save($qrcode);
+    }
+
+    /**
+     * MODEL METHOD
+     * Removes the current user qr-code
+     *
+     * @return string
+     */
     public function deleteQrCode()
     {
         # code...

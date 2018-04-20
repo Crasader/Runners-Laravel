@@ -218,8 +218,12 @@
                         </div>
                     </article>
                     <div class="field has-addons">
-                        <a class="button is-warning">Regénérer QR code</a>
-                        <a class="button is-danger">Supprimer QR code</a>
+                        <p class="control">
+                            <a class="button is-warning is-small">Regénérer QR code</a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-danger is-small">Supprimer QR code</a>
+                        </p>
                     </div>
                 @else
                     <article class="message is-warning">

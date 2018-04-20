@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\Users\StoreUser;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * UserController
@@ -18,10 +20,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $users = User::orderBy('firstname', 'asc')->paginate(20);
         return view('users/index')->with(compact('users'));
+    }
+
+    /**
+     * Display the personal page of the connected user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function me()
+    {
+        return redirect()->route('users.show', ['user' => Auth::user()->id]);
     }
 
     /**
@@ -31,18 +43,26 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', User::class);
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\Users\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
-        //
+        $this->authorize('create', User::class);
+        $user = new User($request->all());
+        $user->generateName();
+        $user->save();
+        $user->generateDefaultPictures();
+        return redirect()
+            ->route('users.show', ['user' => $user->id])
+            ->with('success', "L'utilisateur {$user->name} a bien été crée");
     }
 
     /**
@@ -53,7 +73,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.show')->with(compact('user'));
     }
 
     /**
@@ -64,7 +84,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $this->authorize('update', $user);
+        return view('users.edit')->with(compact('user'));
     }
 
     /**
@@ -76,7 +97,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->authorize('update', $user);
+        return 'true';
     }
 
     /**
@@ -87,6 +109,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);
+        return 'true';
     }
 }

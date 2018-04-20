@@ -15,6 +15,7 @@ use App\Run;
 use App\Car;
 use App\Attachment;
 use App\Festival;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * User
@@ -159,11 +160,20 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * Gets the profile picture for this user
+     * Gets the driver license for this user
      */
     public function licencePictures()
     {
         return $this->morphMany(Attachment::class, 'attachable')->where('type', 'licence');
+    }
+
+    /**
+     * MODEL RELATION
+     * Gets the driver qrcode
+     */
+    public function qrCode()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'qrcode');
     }
 
     /**
@@ -198,6 +208,31 @@ class User extends Authenticatable
     {
         if (empty($this->name)) {
             $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates the default set of pictures for new users
+     *
+     * @return string
+     */
+    public function generateDefaultPictures()
+    {
+        // Generate a record with default profile picture
+        if (!$this->profilePictures()->exists()) {
+            $profilePicture = new Attachment(['type' => 'profile', 'path' => 'profiles/default.jpg']);
+            $profilePicture->owner()->associate(Auth::user());
+            $profilePicture->save();
+            $this->attachments()->save($profilePicture);
+        }
+
+        // Generate a new record with default liscence picture
+        if (!$this->profilePictures()->exists()) {
+            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licence/default.jpg']);
+            $driversLicence->owner()->associate(Auth::user());
+            $driversLicence->save();
+            $this->attachments()->save($driversLicence);
         }
     }
 

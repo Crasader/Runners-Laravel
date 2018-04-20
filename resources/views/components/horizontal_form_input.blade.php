@@ -10,7 +10,11 @@
         <input class="input {{ $errors->has($name) ? ' is-danger' : '' }}"
             type="{{ $type }}"
             name="{{ $name }}"
-            value="{{ old($name) }}"
+            @if(old($name))
+                value="{{ old($name) }}"
+            @elseif(isset($value))
+                value="{{ $value }}"
+            @endif
             placeholder="{{ $placeholder }}">
         <span class="icon is-small is-left">
             <i class="fas {{ $icon }}"></i>

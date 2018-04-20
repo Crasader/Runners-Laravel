@@ -200,6 +200,33 @@ class User extends Authenticatable
 
     /**
      * MODEL METHOD
+     * Checks a specific user permission
+     *
+     * @return string
+     */
+    public function may($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->may($permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * MODEL METHOD
+     * Checks if the user belongs to a role
+     *
+     * @return string
+     */
+    public function is($roleSlug)
+    {
+        return $this->roles()->where('slug', $roleSlug)->count() == 1;
+    }
+
+    /**
+     * MODEL METHOD
      * Generates a name if its not specified
      *
      * @return string
@@ -236,30 +263,13 @@ class User extends Authenticatable
         }
     }
 
-    /**
-     * MODEL METHOD
-     * Checks a specific user permission
-     *
-     * @return string
-     */
-    public function may($permission)
+    public function generateQrCode()
     {
-        foreach ($this->roles as $role) {
-            if ($role->may($permission)) {
-                return true;
-            }
-        }
-        return false;
+        # code...
     }
 
-    /**
-     * MODEL METHOD
-     * Checks if the user belongs to a role
-     *
-     * @return string
-     */
-    public function is($roleSlug)
+    public function deleteQrCode()
     {
-        return $this->roles()->where('slug', $roleSlug)->count() == 1;
+        # code...
     }
 }

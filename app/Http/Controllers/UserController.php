@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\StoreUser;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Users\UpdateUser;
 
 /**
  * UserController
@@ -62,7 +63,7 @@ class UserController extends Controller
         $user->generateDefaultPictures();
         return redirect()
             ->route('users.show', ['user' => $user->id])
-            ->with('success', "L'utilisateur {$user->name} a bien été crée");
+            ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
     }
 
     /**
@@ -91,14 +92,17 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Users\UpdateUser  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUser $request, User $user)
     {
         $this->authorize('update', $user);
-        return 'true';
+
+        return redirect()
+            ->route('users.edit', ['user' => $user->id])
+            ->with('success', "L'utilisateur {$user->fullname} a bien été modifié");
     }
 
     /**
@@ -111,5 +115,33 @@ class UserController extends Controller
     {
         $this->authorize('delete', $user);
         return 'true';
+    }
+
+    /**
+     * Create a fresh QR code for the specified user
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function generateQrCode(User $user)
+    {
+        $user->generateQrCode();
+        return redirect()
+            ->back()
+            ->with('success', "Un QR code pour {$user->fullname} a bien été généré.");
+    }
+
+    /**
+     * Create a fresh QR code for the specified user
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteQrCode(User $user)
+    {
+        $user->deleteQrCode();
+        return redirect()
+            ->back()
+            ->with('success', "Le QR code de {$user->fullname} a bien supprimmer, il ne peut plus se connecter a l'app mobile.");
     }
 }

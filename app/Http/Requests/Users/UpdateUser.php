@@ -33,11 +33,13 @@ class UpdateUser extends FormRequest
     {
         return [
             // If the name is not specified, it will be auto generated with the first and lastname
-            'name'          => ['sometimes', 'filled', 'string', 'min:2', 'max:100'],
+            'name'          => ['sometimes', 'nullable', 'filled', 'string', 'min:2', 'max:100'],
             'firstname'     => ['sometimes', 'string', 'min:2', 'max:100'],
             'lastname'      => ['sometimes', 'string', 'min:2', 'max:100'],
             'password'      => ['sometimes', 'string', 'confirmed', 'min:6', 'max:100'],
-            'email'         => ['sometimes', 'string', 'email', 'max:200', 'unique:users'],
+            'email'         => [
+                'sometimes', 'string', 'email', 'max:200', Rule::unique('users')->ignore(request()->user->id)
+            ],
             'phone_number'  => ['sometimes', 'min:2', 'max:100'],
             'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])]
         ];

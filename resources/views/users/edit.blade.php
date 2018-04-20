@@ -219,10 +219,10 @@
                     </article>
                     <div class="field has-addons">
                         <p class="control">
-                            <a class="button is-warning is-small">Regénérer QR code</a>
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning is-small">Regénérer QR code</a>
                         </p>
                         <p class="control">
-                            <a class="button is-danger is-small">Supprimer QR code</a>
+                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger is-small">Supprimer QR code</a>
                         </p>
                     </div>
                 @else

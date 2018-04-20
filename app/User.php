@@ -320,6 +320,10 @@ class User extends Authenticatable
      */
     public function deleteQrCode()
     {
-        # code...
+        // Delete the old qr code
+        if ($this->qrCode()->exists()) {
+            Storage::delete('public/' . $this->qrCode->first()->path);
+            $this->qrCode()->delete();
+        }
     }
 }

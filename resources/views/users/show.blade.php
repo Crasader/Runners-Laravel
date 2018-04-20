@@ -8,7 +8,7 @@
 
 @section('breadcrum')
 <li><a href="{{ route('users.index') }}">Utilisateur</a></li>
-<li class="is-active"><a href="#" aria-current="page">{{ $user->name }}</a></li>
+<li class="is-active"><a href="#" aria-current="page">{{ $user->fullname }}</a></li>
 @endsection
   
 @section('content')
@@ -16,7 +16,9 @@
 <div class="section">
     <div class="container">
 
-        {{-- HEADER --}}
+        {{-- --------------------- --}}
+        {{-- HEADER                --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
@@ -26,22 +28,28 @@
                 </h1>
             </div>
             <div class="column">
-                @can('create', App\User::class)
-                    <div class="field is-grouped is-pulled-right">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $user)
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-info">Modifier l'utilisateur</a>
+                            <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
+                        </p>
+                    @endcan
+                    @can('create', App\User::class)
+                        <p class="control">
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
                         </p>
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-warning">Générer QR code</a>
+                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer Identifiants</a>
                         </p>
-                        <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-small is-warning">Générer Identifiants</a>
-                        </p>
-                    </div>
-                @endcan
+                    @endcan
+                </div>
             </div>
         </div>
 
+
+        {{-- --------------------- --}}
+        {{-- TITLES                --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
                 <h2 class="title is-3">QR code</h2>
@@ -51,13 +59,20 @@
             </div>
         </div>
 
-        {{-- QR code infos --}}
+        {{-- --------------------- --}}
+        {{-- QR code infos         --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
                 @if ($user->qrCode()->exists())
                     <figure class="image">
                         <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
                     </figure>
+                    <article class="message is-info">
+                        <div class="message-body">
+                            Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
+                        </div>
+                    </article>
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
@@ -71,7 +86,9 @@
                 @endif
             </div>
 
-            {{-- User infos --}}
+            {{-- --------------------- --}}
+            {{-- USER INFOS            --}}
+            {{-- --------------------- --}}
             <div class="column is-8">
                 <div class="columns">
                     <div class="column is-4">
@@ -102,7 +119,7 @@
                 <div class="columns">
                     <div class="column is-4">
                         <figure class="image">
-                            <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                            <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
                         </figure>
                     </div>
                     <div class="column is-3 has-text-right">
@@ -143,79 +160,99 @@
                 tutu
             </div>
 
-            <div class="column is-8">
 
-                <div class="columns">
-                    <div class="column is-12">
-                        @if ($user->comments()->exists())
-                            @foreach ($user->comments as $comment)
-                                <article class="media">
-                                    <figure class="media-left">
-                                        <p class="image is-64x64">
-                                            <img src="https://bulma.io/images/placeholders/128x128.png">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p>
-                                                <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                                <br>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+            @can('view', App\Comment::class)
+                <div class="column is-8">
+
+
+                    {{-- --------------------- --}}
+                    {{-- COMMENTS LISTING      --}}
+                    {{-- --------------------- --}}
+                    <div class="columns">
+                        <div class="column is-12">
+                            @if ($user->comments()->exists())
+                                @foreach ($user->comments as $comment)
+                                    <article class="media">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                <img src="{{ asset(Storage::url($comment->author->profilePictures->first()->path)) }}">
                                             </p>
-                                    </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-left">
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                                            </a>
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                                            </a>
-                                            <a class="level-item">
-                                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                            </a>
-                                            </div>
-                                        </nav>
-                                    </div>
-                                    <div class="media-right">
-                                        <button class="delete"></button>
-                                    </div>
-                                </article>
-                            @endforeach
-                        @else
-                            <p>Aucun commentaires</p>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="columns">
-                    <div class="column is-12">
-                        <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
-                            <article class="media">
-                                <figure class="media-left">
-                                    <p class="image is-64x64">
-                                        <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="field">
-                                        <p class="control">
-                                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                                        </p>
-                                    </div>
-                                    <nav class="level">
-                                        <div class="level-left">
-                                            <div class="level-item">
-                                                <a class="button is-info">Submit</a>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <strong>{{ $comment->author->fullname }}</strong> <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                                    <br>
+                                                    {{ $comment->content }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </nav>
-                                </div>
-                            </article>
-                        </form>
+                                        @can('delete', $comment)
+                                            <div class="media-right">
+                                                <button onclick="event.preventDefault();
+                                                    document.getElementById('delete-comment-form').submit();"
+                                                    class="delete"></button>
+                                                <form id="delete-comment-form"
+                                                    action="{{ route('users.comments.destroy', ['user' => $user->id, 'comment' => $comment->id]) }}"
+                                                        method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                </form>
+                                            </div>
+                                        @endcan
+                                    </article>
+                                @endforeach
+                            @else
+                                <p>Aucun commentaires</p>
+                            @endif
+                        </div>
                     </div>
+
+
+                    {{-- --------------------- --}}
+                    {{-- COMMENT FORM          --}}
+                    {{-- --------------------- --}}
+                    @can('create', App\Comment::class)
+                        <div class="columns">
+                            <div class="column is-12">
+                                <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <article class="media">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                            </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea {{ $errors->has('content') ? ' is-danger' : '' }}" name="content" placeholder="Ajouter un commentaire..."></textarea>
+                                                </p>
+                                                @if ($errors->has('content'))
+                                                    <p class="help is-danger">{{ $errors->first('content') }}</p>
+                                                @endif
+                                            </div>
+                                            <nav class="level">
+                                                <div class="level-left">
+                                                    <div class="level-item">
+                                                        <button type="submit" class="button is-info">Ajouter</button>
+                                                    </div>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </article>
+                                </form>
+                            </div>
+                        </div>
+                    @endcan
+
                 </div>
-            </div>
+            @else
+                <div class="column is-8">
+                    <p>Vous ne pouvez pas voir les commentaires</p>
+                </div>
+            @endcan
+
         </div>
     </div>
 </div>

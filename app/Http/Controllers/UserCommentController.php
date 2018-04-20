@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Requests\Users\StoreUserComment;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * UserCommentController
@@ -36,12 +39,20 @@ class UserCommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Users\StoreUserComment  $request
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserComment $request, User $user)
     {
-        //
+        // Create the comment
+        $comment = new Comment($request->all());
+        $comment->author()->associate(Auth::user());
+        $comment->save();
+        // Associate the comment to the commented user
+        $user->comments()->save($comment);
+        // Redirect to the consulted user page
+        return redirect()->route('users.show', ['user' => $user->id]);
     }
 
     /**
@@ -81,11 +92,13 @@ class UserCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\User  $user
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(User $user, Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->route('users.show', ['user' => $user->id]);
     }
 }

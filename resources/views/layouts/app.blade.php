@@ -17,7 +17,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link href="/favicon.png" rel="icon" data-n-head="true" type="image/png">
+    
     {{-- Styles --}}
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>

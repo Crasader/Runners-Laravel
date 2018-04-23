@@ -8,7 +8,7 @@
 
 @section('breadcrum')
 <li><a href="{{ route('carTypes.index') }}">Types de véhicules</a></li>
-<li class="is-active"><a href="#" aria-current="page">Modifier le type</a></li>
+<li class="is-active"><a href="#" aria-current="page">Modifier le type de véhicule</a></li>
 @endsection
 
 @section('content')
@@ -29,20 +29,60 @@
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
 
-                    {{-- Form edit car --}}
+                    {{-- Form edit car type --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
                             <label class="label">Nom</label>
                         </div>
                         <div class="field-body">
 
-                            {{-- Plate number --}}
+                            {{-- name --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'name',
                                 'placeholder' => 'Nom',
                                 'value'       => $carType->name,
                                 'type'        => 'text',
                                 'icon'        => 'fa-id-card',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Description</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- description --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'description',
+                                'placeholder' => 'Description',
+                                'value'       => $carType->description,
+                                'type'        => 'text',
+                                'icon'        => 'fa-pencil-alt',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Nombre de place</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- nb_place --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'nb_place',
+                                'placeholder' => 'Nombre de place',
+                                'value'       => $carType->nb_place,
+                                'type'        => 'text',
+                                'icon'        => 'fa-sort-numeric-up',
                                 'errors'      => $errors
                                 ])
                             @endcomponent

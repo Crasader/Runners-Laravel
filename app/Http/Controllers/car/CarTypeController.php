@@ -5,6 +5,7 @@ namespace App\Http\Controllers\car;
 use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCarType;
 
 /**
  * CarTypeController
@@ -39,10 +40,10 @@ class CarTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCarType  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarType $request)
     {
         $cartypes = new CarType($request->all());
         $cartypes->save();
@@ -74,14 +75,14 @@ class CarTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCarType  $request
      * @param  \App\CarType  $carType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CarType $carType)
+    public function update(StoreCarType $request, CarType $carType)
     {
-        $cartype->fill($request->all());
-        $cartype->save();
+        $carType->fill($request->all());
+        $carType->save();
         return redirect()->route('carTypes.index');
     }
 
@@ -93,6 +94,7 @@ class CarTypeController extends Controller
      */
     public function destroy(CarType $carType)
     {
-        //
+        $carType->delete();
+        return redirect()->route('carTypes.index');
     }
 }

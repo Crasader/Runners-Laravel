@@ -33,7 +33,7 @@ class StoreCarType extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:30'],
             'description' => ['required', 'min:5', 'max:255'],
-            'nb_place' => ['required', 'numeric', 'min:1', 'max:8']
+            'nb_place' => ['required', 'numeric', 'min:1', 'max:15']
         ];
     }
 }

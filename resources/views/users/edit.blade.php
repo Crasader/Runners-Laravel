@@ -193,6 +193,11 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
 
         <div class="columns">
             <div class="column is-4">
@@ -268,7 +273,7 @@
                         <div class="field">
                             <div class="file has-name is-boxed">
                                 <label class="file-label">
-                                    <input id="user-picture-field" class="file-input" type="file" name="resume">
+                                    <input id="user-picture-field" class="file-input" type="file" name="profile-picture">
                                     <span class="file-cta">
                                         <span class="file-icon">
                                             <i class="fas fa-upload"></i>
@@ -310,9 +315,58 @@
             {{-- Liscence picture managment --}}
             {{-- -------------------------- --}}
             <div class="column is-4">
-                <figure class="image box">
-                    <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
-                </figure>
+                @if ($user->licencePictures()->exists())
+                    <figure class="image box">
+                        <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
+                    </figure>
+                @else
+                    <article class="message is-warning">
+                        <div class="message-body">
+                            L'utilisateur le possède pas de photo de son permis. Ajoutez en une.
+                        </div>
+                    </article>
+                @endif
+                @can('update', $user)
+                    <form action="{{ route('users.licence-picture.store', ['user' => $user->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="field">
+                            <div class="file has-name is-boxed">
+                                <label class="file-label">
+                                    <input id="user-licence-field" class="file-input" type="file" name="licence-picture">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose a file…
+                                        </span>
+                                    </span>
+                                    <span id="user-licence-name" class="file-name">
+                                        Aucun fichier
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-success">Ajouter</button>
+                            </div>
+                            <div class="control">
+                                <button onclick="event.preventDefault();
+                                    document.getElementById('delete-user-licence-form').submit();"
+                                    class="button is-danger">
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form id="delete-user-licence-form"
+                        method="POST"
+                        action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'profile_picture' => $user->profilePictures->first()->id]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+                @endcan
             </div>
         </div>
 

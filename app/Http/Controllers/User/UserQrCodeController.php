@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Attachment;
 use App\User;
+use App\Attachment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

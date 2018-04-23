@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use App\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests\Users\StoreUserComment;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Users\StoreUserComment;
 
 /**
  * UserCommentController

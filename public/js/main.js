@@ -89,6 +89,12 @@ document.getElementById('user-picture-field').addEventListener('change', functio
   }
 });
 
+document.getElementById('user-licence-field').addEventListener('change', function () {
+  if (this.files.length > 0) {
+    document.getElementById('user-licence-name').innerHTML = this.files[0].name;
+  }
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use App\Attachment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\StorePicture;
 
 /**
  * UserLicencePictureController
@@ -15,78 +17,32 @@ use App\Http\Controllers\Controller;
 class UserLicencePictureController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Users\StorePicture  $request
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePicture $request, User $user)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Attachment $attachment)
-    {
-        //
+        if ($request->file('picture')->isValid()) {
+            return 'toto';
+        } else {
+            return redirect()
+                ->back()
+                ->with('warning', "L'image n'a pas été correctement transférée");
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\User  $user
      * @param  \App\Attachment  $attachment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attachment $attachment)
+    public function destroy(User $user, Attachment $attachment)
     {
-        //
+        return 'tutu';
     }
 }

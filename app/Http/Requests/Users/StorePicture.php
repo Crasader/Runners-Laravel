@@ -30,7 +30,7 @@ class StorePicture extends FormRequest
     public function rules()
     {
         return [
-            'picture' => ['file']
+            'picture' => ['required', 'image']
         ];
     }
 }

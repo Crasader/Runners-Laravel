@@ -79,7 +79,7 @@
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }}, 
                             la connexion a l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
-                                <strong>Vous pouvez en <a href="{{ route('users.create') }}">générer un</a>.</strong>
+                                <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
                             @endcan
                         </div>
                     </article>

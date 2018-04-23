@@ -206,7 +206,12 @@
             </div>
         </div>
 
+
         <div class="columns">
+
+            {{-- --------------------- --}}
+            {{-- QR code managment     --}}
+            {{-- --------------------- --}}
             <div class="column is-4">
                 @if ($user->qrCode()->exists())
                     <figure class="image box">
@@ -235,14 +240,62 @@
                             @endcan
                         </div>
                     </article>
-                    <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Génerer QR code</a>
+                    @can('create', App\User::class)
+                        <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Génerer QR code</a>
+                    @endcan
                 @endif
             </div>
+
+
+            {{-- ------------------------- --}}
+            {{-- Profile picture managment --}}
+            {{-- ------------------------- --}}
             <div class="column is-4">
-                <figure class="image box">
-                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                </figure>
+                @if ($user->profilePictures()->exists())
+                    <figure class="image box">
+                        <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                    </figure>
+                @else
+                    <article class="message is-warning">
+                        <div class="message-body">
+                            L'utilisateur le possède pas de photo de profile. Ajoutez en une.
+                        </div>
+                    </article>
+                @endif
+                <form action="">
+                    <div class="field">
+                        <div class="file has-name is-boxed">
+                            <label class="file-label">
+                                <input id="user-picture-field" class="file-input" type="file" name="resume">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Choose a file…
+                                    </span>
+                                </span>
+                                <span id="user-picture-name" class="file-name">
+                                    Aucun fichier
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Submit</button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-text">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+
+
+            {{-- -------------------------- --}}
+            {{-- Liscence picture managment --}}
+            {{-- -------------------------- --}}
             <div class="column is-4">
                 <figure class="image box">
                     <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">

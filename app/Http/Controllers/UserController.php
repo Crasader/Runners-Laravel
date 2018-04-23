@@ -114,7 +114,12 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
-        return 'true';
+
+        $user->delete();
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', "{$user->fullname} a bien été supprimé !");
     }
 
     /**
@@ -125,7 +130,10 @@ class UserController extends Controller
      */
     public function generateQrCode(User $user)
     {
+        $this->authorize('create', User::class);
+
         $user->generateQrCode();
+
         return redirect()
             ->back()
             ->with('success', "Un QR code pour {$user->fullname} a bien été généré.");
@@ -139,10 +147,13 @@ class UserController extends Controller
      */
     public function deleteQrCode(User $user)
     {
+        $this->authorize('create', User::class);
+
         $user->deleteQrCode();
+
         return redirect()
             ->back()
-            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmer,
+            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmé,
                 il ne peut plus se connecter a l'app mobile.");
     }
 }

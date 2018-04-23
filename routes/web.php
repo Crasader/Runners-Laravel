@@ -51,8 +51,16 @@ Route::middleware(['auth'])->group(function () {
     // Ressources
     Route::resource('users', 'User\UserController');
     Route::resource('users.comments', 'User\UserCommentController', ['only' => ['store', 'destroy']]);
-    Route::resource('users.profile-picture', 'User\UserProfilePictureController', ['only' => ['store', 'destroy']]);
-    Route::resource('users.licence-picture', 'User\UserLicencePictureController', ['only' => ['store', 'destroy']]);
+    Route::resource(
+        'users.profile-picture',
+        'User\UserProfilePictureController',
+        ['only' => ['store', 'destroy'], 'parameters' => ['profile-picture' => 'attachment']]
+    );
+    Route::resource(
+        'users.licence-picture',
+        'User\UserLicencePictureController',
+        ['only' => ['store', 'destroy'], 'parameters' => ['licence-picture' => 'attachment']]
+    );
     // the curently authenticated user
     Route::get('/me', 'User\UserController@me')->name('me');
 

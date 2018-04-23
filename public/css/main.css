@@ -11806,7 +11806,7 @@ label.panel-block:hover {
  */
 
 .breadcrum-spacing {
-  margin-top: 10px;
+  margin: 10px auto;
 }
 
 /**

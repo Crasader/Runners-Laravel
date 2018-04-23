@@ -59,7 +59,7 @@
         </div>
 
         <div class="columns">
-            <div class="column is-4">
+            <div class="column is-narrow">
                 <h2 class="title is-3">Information générales</h2>
             </div>
         </div>
@@ -173,6 +173,22 @@
                         </div>
                     </div>
 
+                    <div class="field is-horizontal">
+                        <div class="field-label"></div>
+                        <div class="field-body">
+
+                            {{-- SUBMIT BUTTONS --}}
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-success">
+                                        Valider les modifications
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
                 </form>
 
             </div>
@@ -180,7 +196,57 @@
 
         <div class="columns">
             <div class="column is-4">
-                <h2 class="title is-3">Images</h2>
+                <h2 class="title is-3">QR code</h2>
+            </div>
+            <div class="column is-4">
+                <h2 class="title is-3">Photo de profile</h2>
+            </div>
+            <div class="column is-4">
+                <h2 class="title is-3">Permis</h2>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-4">
+                @if ($user->qrCode()->exists())
+                    <figure class="image box">
+                        <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
+                    </figure>
+                    <article class="message is-info">
+                        <div class="message-body">
+                            Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
+                        </div>
+                    </article>
+                    <div class="field has-addons">
+                        <p class="control">
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning is-small">Regénérer QR code</a>
+                        </p>
+                        <p class="control">
+                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger is-small">Supprimer QR code</a>
+                        </p>
+                    </div>
+                @else
+                    <article class="message is-warning">
+                        <div class="message-body">
+                            Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }}, 
+                            la connexion a l'app mobile n'est donc pas possible.
+                            @can('create', App\User::class)
+                                <strong>Vous pouvez en <a href="{{ route('users.create') }}">générer un</a>.</strong>
+                            @endcan
+                        </div>
+                    </article>
+                    <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Génerer QR code</a>
+                @endif
+            </div>
+            <div class="column is-4">
+                <figure class="image box">
+                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                </figure>
+            </div>
+            <div class="column is-4">
+                <figure class="image box">
+                    <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
+                </figure>
             </div>
         </div>
 

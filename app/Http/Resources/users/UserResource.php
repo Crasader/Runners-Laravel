@@ -32,7 +32,7 @@ class UserResource extends Resource
             'phone_number'  => $this->phone_number,
             'sex'           => $this->sex,
             'status'        => $this->status,
-            'image_profile' => asset(Storage::url($this->profilePictures->first()->path))
+            'image_profile' => asset(Storage::url($this->profilePictures()->first()->path))
         ];
     }
 }

@@ -26,7 +26,7 @@
             @endif
             {{-- Display warning messages --}}
             @if (session('warning'))
-                <article class="message is-danger">
+                <article class="message is-warning">
                     <div class="message-body">
                         {{ session('warning') }}
                     </div>

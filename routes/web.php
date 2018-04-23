@@ -40,15 +40,27 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Users ressource
      */
+    // Qr codes management
     Route::get('users/{user}/generate-qr-code', 'UserController@generateQrCode')
         ->name('users.generate-qr-code');
+    Route::get('users/{user}/delete-qr-code', 'UserController@deleteQrCode')
+        ->name('users.delete-qr-code');
+    // Credentials managment
     Route::get('users/{user}/generate-credentials', 'UserController@generateCredentials')
         ->name('users.generate-credentials');
+    // Ressources
     Route::resource('users', 'UserController');
     Route::resource('users.comments', 'UserCommentController');
     // the curently authenticated user
     Route::get('/me', 'UserController@me')->name('me');
 
+    /**
+     * Cars ressource
+     */
     Route::resource('cars', 'car\CarController');
+
+    /**
+     * CarTypes ressource
+     */
     Route::resource('cartypes', 'car\CarTypeController');
 });

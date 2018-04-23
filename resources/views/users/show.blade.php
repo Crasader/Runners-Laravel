@@ -65,7 +65,7 @@
         <div class="columns">
             <div class="column is-4">
                 @if ($user->qrCode()->exists())
-                    <figure class="image">
+                    <figure class="image box">
                         <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
                     </figure>
                     <article class="message is-info">
@@ -92,7 +92,7 @@
             <div class="column is-8">
                 <div class="columns">
                     <div class="column is-4">
-                        <figure class="image">
+                        <figure class="image box">
                             <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                         </figure>
                     </div>
@@ -118,7 +118,7 @@
 
                 <div class="columns">
                     <div class="column is-4">
-                        <figure class="image">
+                        <figure class="image box">
                             <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
                         </figure>
                     </div>

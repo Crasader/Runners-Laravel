@@ -220,7 +220,7 @@
                                     <article class="media">
                                         <figure class="media-left">
                                             <p class="image is-64x64">
-                                                <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                                <img src="{{ asset(Storage::url(Auth::user()->profilePictures->first()->path)) }}">
                                             </p>
                                         </figure>
                                         <div class="media-content">

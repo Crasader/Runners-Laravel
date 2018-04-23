@@ -11,6 +11,10 @@
 <li><a href="{{ route('users.show', ['user' => $user->id]) }}">{{ $user->fullname }}</a></li>
 <li class="is-active"><a href="#" aria-current="page">Edition</a></li>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/pages/users/edit.js') }}"></script>
+@endpush
   
 @section('content')
 
@@ -227,12 +231,12 @@
                             Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
                         </div>
                     </article>
-                    <div class="field has-addons">
+                    <div class="field is-grouped">
                         <p class="control">
-                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning is-small">Regénérer QR code</a>
+                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
                         </p>
                         <p class="control">
-                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger is-small">Supprimer QR code</a>
+                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
                         </p>
                     </div>
                 @else

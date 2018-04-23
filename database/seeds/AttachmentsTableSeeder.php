@@ -32,7 +32,7 @@ class AttachmentsTableSeeder extends Seeder
 
             // Create attachment (driver licence and profile picture)
             $profilePicture = new Attachment(['type' => 'profile', 'path' => 'profiles/default.jpg']);
-            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licence/default.jpg']);
+            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licences/default.jpg']);
 
             // Set the owner of this attachments
             $profilePicture->owner()->associate($user);

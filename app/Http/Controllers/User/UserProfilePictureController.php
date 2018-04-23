@@ -42,7 +42,7 @@ class UserProfilePictureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'tutu';
     }
 
     /**
@@ -87,6 +87,6 @@ class UserProfilePictureController extends Controller
      */
     public function destroy(Attachment $attachment)
     {
-        //
+        return 'tutu';
     }
 }

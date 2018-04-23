@@ -50,9 +50,9 @@ Route::middleware(['auth'])->group(function () {
         ->name('users.generate-credentials');
     // Ressources
     Route::resource('users', 'User\UserController');
-    Route::resource('users.comments', 'User\UserCommentController');
-    Route::resource('users.profile-picture', 'User\UserProfilePictureController');
-    Route::resource('users.liscence-picture', 'User\UserLicencePictureController');
+    Route::resource('users.comments', 'User\UserCommentController', ['only' => ['store', 'destroy']]);
+    Route::resource('users.profile-picture', 'User\UserProfilePictureController', ['only' => ['store', 'destroy']]);
+    Route::resource('users.liscence-picture', 'User\UserLicencePictureController', ['only' => ['store', 'destroy']]);
     // the curently authenticated user
     Route::get('/me', 'User\UserController@me')->name('me');
 

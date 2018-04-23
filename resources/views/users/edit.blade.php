@@ -263,7 +263,8 @@
                     </article>
                 @endif
                 @can('update', $user)
-                    <form action="{{ route('users.profile-picture.create', ['user' => $user->id]) }}">
+                    <form action="{{ route('users.profile-picture.store', ['user' => $user->id]) }}" method="POST">
+                        {{ csrf_field() }}
                         <div class="field">
                             <div class="file has-name is-boxed">
                                 <label class="file-label">
@@ -287,9 +288,19 @@
                                 <button type="submit" class="button is-success">Ajouter</button>
                             </div>
                             <div class="control">
-                                <button class="button is-danger">Supprimer</button>
+                                <button onclick="event.preventDefault();
+                                    document.getElementById('delete-user-picture-form').submit();"
+                                    class="button is-danger">
+                                    Supprimer
+                                </button>
                             </div>
                         </div>
+                    </form>
+                    <form id="delete-user-picture-form"
+                        method="POST"
+                        action="{{ route('users.profile-picture.destroy', ['user' => $user->id, 'profile_picture' => $user->profilePictures->first()->id]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
                     </form>
                 @endcan
             </div>

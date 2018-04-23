@@ -262,34 +262,36 @@
                         </div>
                     </article>
                 @endif
-                <form action="">
-                    <div class="field">
-                        <div class="file has-name is-boxed">
-                            <label class="file-label">
-                                <input id="user-picture-field" class="file-input" type="file" name="resume">
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fas fa-upload"></i>
+                @can('update', $user)
+                    <form action="">
+                        <div class="field">
+                            <div class="file has-name is-boxed">
+                                <label class="file-label">
+                                    <input id="user-picture-field" class="file-input" type="file" name="resume">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose a file…
+                                        </span>
                                     </span>
-                                    <span class="file-label">
-                                        Choose a file…
+                                    <span id="user-picture-name" class="file-name">
+                                        Aucun fichier
                                     </span>
-                                </span>
-                                <span id="user-picture-name" class="file-name">
-                                    Aucun fichier
-                                </span>
-                            </label>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button class="button is-link">Submit</button>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-success">Ajouter</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-danger">Supprimer</button>
+                            </div>
                         </div>
-                        <div class="control">
-                            <button class="button is-text">Cancel</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                @endcan
             </div>
 
 

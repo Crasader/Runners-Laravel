@@ -324,6 +324,8 @@ class User extends Authenticatable
         if ($this->qrCode()->exists()) {
             Storage::delete('public/' . $this->qrCode->first()->path);
             $this->qrCode()->delete();
+            $this->api_token = '';
+            $this->save();
         }
     }
 }

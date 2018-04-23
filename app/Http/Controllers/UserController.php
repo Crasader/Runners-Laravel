@@ -142,6 +142,7 @@ class UserController extends Controller
         $user->deleteQrCode();
         return redirect()
             ->back()
-            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmer, il ne peut plus se connecter a l'app mobile.");
+            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmer,
+                il ne peut plus se connecter a l'app mobile.");
     }
 }

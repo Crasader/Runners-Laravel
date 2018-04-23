@@ -263,7 +263,7 @@
                     </article>
                 @endif
                 @can('update', $user)
-                    <form action="">
+                    <form action="{{ route('users.profile-picture.create', ['user' => $user->id]) }}">
                         <div class="field">
                             <div class="file has-name is-boxed">
                                 <label class="file-label">

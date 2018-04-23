@@ -3,84 +3,50 @@
 namespace App\Http\Controllers\User;
 
 use App\Attachment;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * UserQrCodeController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\User
+ */
 class UserQrCodeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a fresh QR code for the specified user
      *
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function store(User $user)
     {
-        //
+        $this->authorize('create', User::class);
+
+        $user->generateQrCode();
+
+        return redirect()
+            ->back()
+            ->with('success', "Un QR code pour {$user->fullname} a bien été généré.");
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Delete the qr code for the user
      *
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function destroy(User $user)
     {
-        //
-    }
+        $this->authorize('create', User::class);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $user->deleteQrCode();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Attachment $attachment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Attachment  $attachment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Attachment $attachment)
-    {
-        //
+        return redirect()
+            ->back()
+            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmé,
+                il ne peut plus se connecter a l'app mobile.");
     }
 }

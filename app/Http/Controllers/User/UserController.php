@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\StoreUser;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UpdateUser;
 
 /**
  * UserController
  *
  * @author Bastien Nicoud
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\User
  */
 class UserController extends Controller
 {
@@ -120,40 +121,5 @@ class UserController extends Controller
         return redirect()
             ->route('users.index')
             ->with('success', "{$user->fullname} a bien été supprimé !");
-    }
-
-    /**
-     * Create a fresh QR code for the specified user
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function generateQrCode(User $user)
-    {
-        $this->authorize('create', User::class);
-
-        $user->generateQrCode();
-
-        return redirect()
-            ->back()
-            ->with('success', "Un QR code pour {$user->fullname} a bien été généré.");
-    }
-
-    /**
-     * Create a fresh QR code for the specified user
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteQrCode(User $user)
-    {
-        $this->authorize('create', User::class);
-
-        $user->deleteQrCode();
-
-        return redirect()
-            ->back()
-            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmé,
-                il ne peut plus se connecter a l'app mobile.");
     }
 }

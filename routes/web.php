@@ -41,18 +41,20 @@ Route::middleware(['auth'])->group(function () {
      * Users ressource
      */
     // Qr codes management
-    Route::get('users/{user}/generate-qr-code', 'UserController@generateQrCode')
+    Route::get('users/{user}/generate-qr-code', 'User\UserQrCodeController@store')
         ->name('users.generate-qr-code');
-    Route::get('users/{user}/delete-qr-code', 'UserController@deleteQrCode')
+    Route::get('users/{user}/delete-qr-code', 'User\UserQrCodeController@destroy')
         ->name('users.delete-qr-code');
     // Credentials managment
-    Route::get('users/{user}/generate-credentials', 'UserController@generateCredentials')
+    Route::get('users/{user}/generate-credentials', 'User\UserController@generateCredentials')
         ->name('users.generate-credentials');
     // Ressources
-    Route::resource('users', 'UserController');
-    Route::resource('users.comments', 'UserCommentController');
+    Route::resource('users', 'User\UserController');
+    Route::resource('users.comments', 'User\UserCommentController');
+    Route::resource('users.profile-picture', 'User\UserProfilePictureController');
+    Route::resource('users.liscence-picture', 'User\UserLicencePictureController');
     // the curently authenticated user
-    Route::get('/me', 'UserController@me')->name('me');
+    Route::get('/me', 'User\UserController@me')->name('me');
 
     /**
      * Cars ressource

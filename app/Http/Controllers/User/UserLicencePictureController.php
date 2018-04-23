@@ -6,6 +6,12 @@ use App\Attachment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * UserLicencePictureController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\User
+ */
 class UserLicencePictureController extends Controller
 {
     /**

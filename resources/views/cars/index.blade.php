@@ -32,6 +32,7 @@
                             <th>plate number</th>
                             <th>color</th>
                             <th>status</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <th>plate number</th>
                             <th>color</th>
                             <th>status</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -52,6 +54,7 @@
                                 <td>{{$car->brand}}</td>
                                 <td>{{$car->plate_number}}</td>
                                 <td>{{$car->color}}</td>
+                                <td>{{$car->type->name}}</td>
                                 <td>
                                     @component('components/status_tag', ['status' => $car->status])
                                     @endcomponent

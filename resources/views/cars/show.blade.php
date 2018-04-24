@@ -27,6 +27,7 @@
                                 <th>plate number</th>
                                 <th>color</th>
                                 <th>status</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,7 @@
                                     @component('components/status_tag', ['status' => $car->status])
                                     @endcomponent
                                 </td>
+                                <td>{{ $car->type->name }}</td>
                             </tr>
                         </tbody>
                     </table>

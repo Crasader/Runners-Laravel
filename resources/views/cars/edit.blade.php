@@ -121,7 +121,7 @@
                                 <div class="control">
                                     <div class="select is-fullwidth">
                                         <select name="status">
-                                             @switch($car->status)
+                                            @switch($car->status)
                                             @case('problem')
                                                 <option value="free">Libre</option>
                                                 <option value="problem" selected>Problème</option>
@@ -139,6 +139,29 @@
                                                 <option value="problem">Problème</option>
                                                 <option value="taken">En run</option>
                                         @endswitch
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Type</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Status --}}
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select name="status">
+                                            @foreach (App\CarType::all() as $cartype)
+                                                <option value="free" {{ $car->type->id === $cartype->id ? 'selected' : '' }}>{{$cartype->name}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>

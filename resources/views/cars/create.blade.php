@@ -127,6 +127,29 @@
                         </div>
                     </div>
 
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Type</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Status --}}
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select name="status">
+                                            @foreach (App\CarType::all() as $cartype)
+                                                <option value="free" >{{$cartype->name}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                     {{-- end form --}}
 
                     <div class="field is-horizontal">

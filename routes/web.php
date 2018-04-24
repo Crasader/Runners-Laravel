@@ -17,12 +17,6 @@
 Auth::routes();
 
 /**
- * Return a swagger view
- * Descripe all the api routes (generated with the swagger editor)
- */
-//Route::view('/api', 'swagger');
-
-/**
  * Homepage
  */
 Route::get('/', 'HomeController@index');
@@ -48,14 +42,20 @@ Route::middleware(['auth'])->group(function () {
     // Credentials managment
     Route::get('users/{user}/generate-credentials', 'User\UserController@generateCredentials')
         ->name('users.generate-credentials');
-    // Ressources
+    // Import system (csv file)
+    Route::get('users/import', 'User\UserController@import')->name('users.import-form');
+    Route::post('users/import', 'User\UserController@import')->name('users.import');
+    // The user crud
     Route::resource('users', 'User\UserController');
+    // User comments crud
     Route::resource('users.comments', 'User\UserCommentController', ['only' => ['store', 'destroy']]);
+    // User profile picture crud
     Route::resource(
         'users.profile-picture',
         'User\UserProfilePictureController',
         ['only' => ['store', 'destroy'], 'parameters' => ['profile-picture' => 'attachment']]
     );
+    // User licence picture crud
     Route::resource(
         'users.licence-picture',
         'User\UserLicencePictureController',

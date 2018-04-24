@@ -3,21 +3,21 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Run;
+use App\Car;
 use App\Role;
 use App\Group;
 use App\Comment;
-use App\RunDriver;
-use App\Schedule;
-use App\Run;
-use App\Car;
-use App\Attachment;
 use App\Festival;
+use App\Schedule;
+use App\RunDriver;
+use App\Attachment;
+use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Auth;
 use \BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Storage;
 
 /**

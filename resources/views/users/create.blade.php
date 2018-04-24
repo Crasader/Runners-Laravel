@@ -24,7 +24,7 @@
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('users.store') }}" method="post">
+                <form action="{{ route('users.store') }}" method="POST">
 
                     {{ csrf_field() }}
 

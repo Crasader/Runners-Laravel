@@ -138,4 +138,17 @@ class UserController extends Controller
             ->back()
             ->with('warning', "La génération des credentials n'est pas encore implémentée !");
     }
+
+    /**
+     * Import a list of users direct from a csv file
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        return redirect()
+            ->back()
+            ->with('warning', "L'importation des credentials par csv n'est pas encore implémentée !");
+    }
 }

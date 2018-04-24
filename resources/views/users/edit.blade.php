@@ -32,6 +32,7 @@
                     @endcomponent
                 </h1>
             </div>
+            {{-- Controls buttons on the top --}}
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
@@ -68,6 +69,9 @@
             </div>
         </div>
 
+        {{-- --------------------- --}}
+        {{-- Edition fields        --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column">
 

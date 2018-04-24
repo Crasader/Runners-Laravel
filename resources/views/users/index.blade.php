@@ -27,7 +27,7 @@
                             <a href="{{ route('users.create') }}" class="button is-info">Nouvel utilisateur</a>
                         </p>
                         <p class="control">
-                            <a href="{{ route('users.create') }}" class="button is-primary">Importer une liste</a>
+                            <a href="{{ route('users.import-form') }}" class="button is-primary">Importer une liste</a>
                         </p>
                     </div>
                 @endcan
@@ -37,7 +37,7 @@
         {{-- Filters --}}
         <div class="columns">
             <div class="column is-12">
-
+                filters
             </div>
         </div>
 
@@ -76,10 +76,12 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
+                                    {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $user->status])
                                     @endcomponent
                                 </td>
                                 <td>
+                                    {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-link">
                                             Edit
@@ -95,7 +97,10 @@
                 </table>
             </div>
         </div>
+
+        {{-- Pagination links --}}
         {{ $users->links() }}
+
     </div>
 </div>
 

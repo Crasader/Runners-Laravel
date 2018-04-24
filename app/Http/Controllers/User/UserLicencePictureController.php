@@ -25,12 +25,31 @@ class UserLicencePictureController extends Controller
      */
     public function store(StorePicture $request, User $user)
     {
+        $this->authorize('update', $user);
+
         if ($request->file('picture')->isValid()) {
-            return 'toto';
-        } else {
+            // Delete the old picture
+            if ($user->licencePictures()->exists()) {
+                Storage::delete($user->licencePictures->first()->path);
+                $user->licencePictures()->delete();
+            }
+            // Store the picture on the storage
+            $path = $request->picture->store('public/licences');
+            // Create the new attachment
+            $attachment = new Attachment(['type' => 'licence', 'path' => $path]);
+            $attachment->owner()->associate(Auth::user());
+            $attachment->save();
+            // Associate this attachment to the edited user
+            $user->attachments()->save($attachment);
+            // Success message
             return redirect()
                 ->back()
-                ->with('warning', "L'image n'a pas été correctement transférée");
+                ->with('success', "Le photo du permis a corréctement été modifiée.");
+        } else {
+            // In invalid request case
+            return redirect()
+                ->back()
+                ->with('danger', "L'image n'a pas été correctement transférée.");
         }
     }
 
@@ -43,6 +62,22 @@ class UserLicencePictureController extends Controller
      */
     public function destroy(User $user, Attachment $attachment)
     {
-        return 'tutu';
+        $this->authorize('update', $user);
+
+        // Delete the old picture
+        if ($user->licencePictures()->exists()) {
+            Storage::delete($user->licencePictures->first()->path);
+            $user->licencePictures()->delete();
+            
+            // Success message
+            return redirect()
+                ->back()
+                ->with('success', "L'image a été correctement suprimée.");
+        } else {
+            // In invalid request case
+            return redirect()
+                ->back()
+                ->with('danger', "Image inéxistante.");
+        }
     }
 }

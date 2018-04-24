@@ -64,9 +64,9 @@
         {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
-                @if ($user->qrCode()->exists())
+                @if ($user->qrCodes()->exists())
                     <figure class="image box">
-                        <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
+                        <img src="{{ asset(Storage::url($user->qrCodes->first()->path)) }}">
                     </figure>
                     <article class="message is-info">
                         <div class="message-body">

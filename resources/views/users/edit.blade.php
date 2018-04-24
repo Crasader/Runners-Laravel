@@ -222,23 +222,25 @@
             {{-- QR code managment     --}}
             {{-- --------------------- --}}
             <div class="column is-4">
-                @if ($user->qrCode()->exists())
+                @if ($user->qrCodes()->exists())
                     <figure class="image box">
-                        <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
+                        <img src="{{ asset(Storage::url($user->qrCodes->first()->path)) }}">
                     </figure>
                     <article class="message is-info">
                         <div class="message-body">
                             Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
                         </div>
                     </article>
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
-                        </p>
-                        <p class="control">
-                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
-                        </p>
-                    </div>
+                    @can('update', $user)
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
+                            </p>
+                            <p class="control">
+                                <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
+                            </p>
+                        </div>
+                    @endcan
                 @else
                     <article class="message is-warning">
                         <div class="message-body">

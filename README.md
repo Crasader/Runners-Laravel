@@ -6,21 +6,22 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
 
-## Version changelog **v2.0.0-alpha.3**
+## Version changelog **v2.0.0-alpha.4**
 
 Break changes :
-* Roles names changes
+* x
 
 Changes :
-* Adding back office (login working corectly)
-* Seeders improvments
-* Status changes (users, cars, runs) to fill the status suported by the mobile app
+* Add the cars and car types cruds
+* Add the user cruds
+* Add qr codes generation
+* Add cruds to manage licence and profile pictures
 
 Improuvments :
 * x
 
 Bux fixes :
-* Status support for the mobile app
+* x
 
 ## Start developping
 

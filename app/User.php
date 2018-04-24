@@ -3,18 +3,22 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Run;
+use App\Car;
 use App\Role;
 use App\Group;
 use App\Comment;
-use App\RunDriver;
-use App\Schedule;
-use App\Run;
-use App\Car;
-use App\Attachment;
 use App\Festival;
+use App\Schedule;
+use App\RunDriver;
+use App\Attachment;
+use BaconQrCode\Writer;
+use Illuminate\Support\Facades\Auth;
+use \BaconQrCode\Renderer\Image\Png;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * User
@@ -159,11 +163,20 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * Gets the profile picture for this user
+     * Gets the driver license for this user
      */
     public function licencePictures()
     {
         return $this->morphMany(Attachment::class, 'attachable')->where('type', 'licence');
+    }
+
+    /**
+     * MODEL RELATION
+     * Gets the driver qrcode
+     */
+    public function qrCodes()
+    {
+        return $this->morphMany(Attachment::class, 'attachable')->where('type', 'qrcode');
     }
 
     /**
@@ -186,19 +199,6 @@ class User extends Authenticatable
     public function getSlugAttribute()
     {
         return str_slug("{$this->firstname} {$this->lastname}");
-    }
-
-    /**
-     * MODEL METHOD
-     * Generates a name if its not specified
-     *
-     * @return string
-     */
-    public function generateName()
-    {
-        if (empty($this->name)) {
-            $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
-        }
     }
 
     /**
@@ -226,5 +226,106 @@ class User extends Authenticatable
     public function is($roleSlug)
     {
         return $this->roles()->where('slug', $roleSlug)->count() == 1;
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a name if its not specified
+     *
+     * @return string
+     */
+    public function generateName()
+    {
+        if (empty($this->name)) {
+            $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates the default set of pictures for new users
+     *
+     * @return string
+     */
+    public function generateDefaultPictures()
+    {
+        // Generate a record with default profile picture
+        if (!$this->profilePictures()->exists()) {
+            $profilePicture = new Attachment(['type' => 'profile', 'path' => 'profiles/default.jpg']);
+            $profilePicture->owner()->associate(Auth::user());
+            $profilePicture->save();
+            $this->attachments()->save($profilePicture);
+        }
+
+        // Generate a new record with default liscence picture
+        if (!$this->profilePictures()->exists()) {
+            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licence/default.jpg']);
+            $driversLicence->owner()->associate(Auth::user());
+            $driversLicence->save();
+            $this->attachments()->save($driversLicence);
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a fresh api token for the user
+     *
+     * @return string
+     */
+    public function generateFreshApiToken()
+    {
+        $this->api_token = str_random(60);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a fresh qr code and save it to the storage
+     *
+     * @return string
+     */
+    public function generateQrCode()
+    {
+        // Delete the old qr code
+        if ($this->qrCodes()->exists()) {
+            Storage::delete('public/' . $this->qrCodes->first()->path);
+            $this->qrCodes()->delete();
+        }
+
+        // Regenerate the api token (for security reasons we re-generate the api token each new qr code versions)
+        $this->generateFreshApiToken();
+
+        // Generate the filename
+        $filename = 'qrcodes/' . $this->slug . str_random(20) . '.png';
+
+        // Generate the QR code
+        $renderer = new Png();
+        $renderer->setHeight(256);
+        $renderer->setWidth(256);
+        $writer = new Writer($renderer);
+        $writer->writeFile($this->api_token, '../storage/app/public/' . $filename);
+
+        // Attach it to the user
+        $qrcode = new Attachment(['type' => 'qrcode', 'path' => $filename]);
+        $qrcode->owner()->associate(Auth::user());
+        $qrcode->save();
+        $this->attachments()->save($qrcode);
+    }
+
+    /**
+     * MODEL METHOD
+     * Removes the current user qr-code
+     *
+     * @return string
+     */
+    public function deleteQrCode()
+    {
+        // Delete the old qr code
+        if ($this->qrCodes()->exists()) {
+            Storage::delete('public/' . $this->qrCodes->first()->path);
+            $this->qrCodes()->delete();
+            $this->api_token = '';
+            $this->save();
+        }
     }
 }

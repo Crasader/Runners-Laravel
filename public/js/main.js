@@ -81,6 +81,9 @@ module.exports = __webpack_require__(2);
 
 console.log('TUTU');
 
+// Change the filename on file uploads
+// User profile picture form
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {

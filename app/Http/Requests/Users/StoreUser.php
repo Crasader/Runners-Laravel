@@ -4,6 +4,8 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 /**
  * StoreUser
@@ -21,7 +23,7 @@ class StoreUser extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->can('create', User::class);
     }
 
     /**
@@ -33,10 +35,9 @@ class StoreUser extends FormRequest
     {
         return [
             // If the name is not specified, it will be auto generated with the first and lastname
-            'name'          => ['sometimes', 'filled', 'string', 'min:2', 'max:100'],
+            'name'          => ['nullable', 'string', 'min:2', 'max:100'],
             'firstname'     => ['required', 'string', 'min:2', 'max:100'],
             'lastname'      => ['required', 'string', 'min:2', 'max:100'],
-            'password'      => ['required', 'string', 'confirmed', 'min:6', 'max:100'],
             'email'         => ['required', 'string', 'email', 'max:200', 'unique:users'],
             'phone_number'  => ['required', 'min:2', 'max:100'],
             'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])]

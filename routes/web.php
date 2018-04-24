@@ -17,12 +17,6 @@
 Auth::routes();
 
 /**
- * Return a swagger view
- * Descripe all the api routes (generated with the swagger editor)
- */
-//Route::view('/api', 'swagger');
-
-/**
  * Homepage
  */
 Route::get('/', 'HomeController@index');
@@ -40,10 +34,43 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Users ressource
      */
-    Route::resource('users', 'UserController');
+    // Qr codes management
+    Route::get('users/{user}/generate-qr-code', 'User\UserQrCodeController@store')
+        ->name('users.generate-qr-code');
+    Route::get('users/{user}/delete-qr-code', 'User\UserQrCodeController@destroy')
+        ->name('users.delete-qr-code');
+    // Credentials managment
+    Route::get('users/{user}/generate-credentials', 'User\UserController@generateCredentials')
+        ->name('users.generate-credentials');
+    // Import system (csv file)
+    Route::get('users/import', 'User\UserController@import')->name('users.import-form');
+    Route::post('users/import', 'User\UserController@import')->name('users.import');
+    // The user crud
+    Route::resource('users', 'User\UserController');
+    // User comments crud
+    Route::resource('users.comments', 'User\UserCommentController', ['only' => ['store', 'destroy']]);
+    // User profile picture crud
+    Route::resource(
+        'users.profile-picture',
+        'User\UserProfilePictureController',
+        ['only' => ['store', 'destroy'], 'parameters' => ['profile-picture' => 'attachment']]
+    );
+    // User licence picture crud
+    Route::resource(
+        'users.licence-picture',
+        'User\UserLicencePictureController',
+        ['only' => ['store', 'destroy'], 'parameters' => ['licence-picture' => 'attachment']]
+    );
     // the curently authenticated user
-    Route::get('/me', 'UserController@me')->name('me');
+    Route::get('/me', 'User\UserController@me')->name('me');
 
+    /**
+     * Cars ressource
+     */
     Route::resource('cars', 'car\CarController');
-    Route::resource('cartypes', 'car\CarTypeController');
+
+    /**
+     * CarTypes ressource
+     */
+    Route::resource('carTypes', 'car\CarTypeController');
 });

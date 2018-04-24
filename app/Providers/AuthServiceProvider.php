@@ -16,6 +16,10 @@ use App\User;
 use App\Policies\UserPolicy;
 use App\Run;
 use App\Policies\RunPolicy;
+use App\Role;
+use App\Policies\RolePolicy;
+use App\Comment;
+use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,13 +29,14 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model'     => 'App\Policies\ModelPolicy',
         User::class     => UserPolicy::class,
         Schedule::class => SchedulePolicy::class,
         Group::class    => GroupPolicy::class,
         Car::class      => CarPolicy::class,
         CarType::class  => CarTypePolicy::class,
-        Run::class      => RunPolicy::class
+        Run::class      => RunPolicy::class,
+        Role::class     => RolePolicy::class,
+        Comment::class  => CommentPolicy::class
     ];
 
     /**

@@ -11,6 +11,10 @@
 <li><a href="{{ route('users.show', ['user' => $user->id]) }}">{{ $user->fullname }}</a></li>
 <li class="is-active"><a href="#" aria-current="page">Edition</a></li>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/pages/users/edit.js') }}"></script>
+@endpush
   
 @section('content')
 
@@ -28,6 +32,7 @@
                     @endcomponent
                 </h1>
             </div>
+            {{-- Controls buttons on the top --}}
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
@@ -64,6 +69,9 @@
             </div>
         </div>
 
+        {{-- --------------------- --}}
+        {{-- Edition fields        --}}
+        {{-- --------------------- --}}
         <div class="columns">
             <div class="column">
 
@@ -193,6 +201,11 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
 
         <div class="columns">
             <div class="column is-4">
@@ -206,25 +219,32 @@
             </div>
         </div>
 
+
         <div class="columns">
+
+            {{-- --------------------- --}}
+            {{-- QR code managment     --}}
+            {{-- --------------------- --}}
             <div class="column is-4">
-                @if ($user->qrCode()->exists())
+                @if ($user->qrCodes()->exists())
                     <figure class="image box">
-                        <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
+                        <img src="{{ asset(Storage::url($user->qrCodes->first()->path)) }}">
                     </figure>
                     <article class="message is-info">
                         <div class="message-body">
                             Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
                         </div>
                     </article>
-                    <div class="field has-addons">
-                        <p class="control">
-                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning is-small">Regénérer QR code</a>
-                        </p>
-                        <p class="control">
-                            <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger is-small">Supprimer QR code</a>
-                        </p>
-                    </div>
+                    @can('update', $user)
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
+                            </p>
+                            <p class="control">
+                                <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
+                            </p>
+                        </div>
+                    @endcan
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
@@ -235,18 +255,150 @@
                             @endcan
                         </div>
                     </article>
-                    <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Génerer QR code</a>
+                    @can('create', App\User::class)
+                        <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Génerer QR code</a>
+                    @endcan
                 @endif
             </div>
+
+
+            {{-- ------------------------- --}}
+            {{-- Profile picture managment --}}
+            {{-- ------------------------- --}}
             <div class="column is-4">
-                <figure class="image box">
-                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                </figure>
+                @if ($user->profilePictures()->exists())
+                    <figure class="image box">
+                        <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                    </figure>
+                @else
+                    <article class="message is-warning">
+                        <div class="message-body">
+                            L'utilisateur le possède pas de photo de profile. Ajoutez en une.
+                        </div>
+                    </article>
+                @endif
+                @can('update', $user)
+                    <form
+                        action="{{ route('users.profile-picture.store', ['user' => $user->id]) }}"
+                        method="POST"
+                        enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="field">
+                            <div class="file has-name is-boxed {{ $errors->has('picture') ? ' is-danger' : '' }}">
+                                <label class="file-label">
+                                    <input id="user-picture-field" class="file-input" type="file" name="picture">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose a file…
+                                        </span>
+                                    </span>
+                                    <span id="user-picture-name" class="file-name">
+                                        Aucun fichier
+                                    </span>
+                                </label>
+                            </div>
+                            @if ($errors->has('picture'))
+                                <p class="help is-danger">{{ $errors->first('picture') }}</p>
+                            @endif
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-success">Ajouter</button>
+                            </div>
+                            @if ($user->profilePictures()->exists())
+                                <div class="control">
+                                    <button onclick="event.preventDefault();
+                                        document.getElementById('delete-user-picture-form').submit();"
+                                        class="button is-danger">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                    </form>
+                    @if ($user->profilePictures()->exists())
+                        <form id="delete-user-picture-form"
+                            method="POST"
+                            action="{{ route('users.profile-picture.destroy', ['user' => $user->id, 'attachment' => $user->profilePictures->first()->id]) }}"
+                            style="display: none;">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                    @endif
+                @endcan
             </div>
+
+
+            {{-- -------------------------- --}}
+            {{-- Liscence picture managment --}}
+            {{-- -------------------------- --}}
             <div class="column is-4">
-                <figure class="image box">
-                    <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
-                </figure>
+                @if ($user->licencePictures()->exists())
+                    <figure class="image box">
+                        <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
+                    </figure>
+                @else
+                    <article class="message is-warning">
+                        <div class="message-body">
+                            L'utilisateur le possède pas de photo de son permis. Ajoutez en une.
+                        </div>
+                    </article>
+                @endif
+                @can('update', $user)
+                    <form
+                        action="{{ route('users.licence-picture.store', ['user' => $user->id]) }}"
+                        method="POST"
+                        enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="field">
+                            <div class="file has-name is-boxed {{ $errors->has('picture') ? ' is-danger' : '' }}">
+                                <label class="file-label">
+                                    <input id="user-licence-field" class="file-input" type="file" name="picture">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose a file…
+                                        </span>
+                                    </span>
+                                    <span id="user-licence-name" class="file-name">
+                                        Aucun fichier
+                                    </span>
+                                </label>
+                            </div>
+                            @if ($errors->has('picture'))
+                                <p class="help is-danger">{{ $errors->first('picture') }}</p>
+                            @endif
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-success">Ajouter</button>
+                            </div>
+                            @if ($user->licencePictures()->exists())
+                                <div class="control">
+                                    <button onclick="event.preventDefault();
+                                        document.getElementById('delete-user-licence-form').submit();"
+                                        class="button is-danger">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                    </form>
+                    @if ($user->licencePictures()->exists())
+                        <form id="delete-user-licence-form"
+                            method="POST"
+                            action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'attachment' => $user->licencePictures->first()->id]) }}"
+                            style="display: none;">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                    @endif
+                @endcan
             </div>
         </div>
 

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\User;
 use App\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests\Users\StoreUserComment;
-use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Users\StoreUserComment;
 
 /**
  * UserCommentController
  *
  * @author Bastien Nicoud
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\User
  */
 class UserCommentController extends Controller
 {

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\Users\StoreUser;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 
 /**
  * UserController
  *
  * @author Bastien Nicoud
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\User
  */
 class UserController extends Controller
 {
@@ -100,6 +101,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
+        $user->fill($request->all());
+        $user->save();
+
         return redirect()
             ->route('users.edit', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été modifié");
@@ -114,35 +118,37 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
-        return 'true';
+
+        $user->delete();
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', "{$user->fullname} a bien été supprimé !");
     }
 
     /**
-     * Create a fresh QR code for the specified user
+     * Send a credentials request to the user
      *
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function generateQrCode(User $user)
+    public function generateCredentials(Request $request)
     {
-        $user->generateQrCode();
         return redirect()
             ->back()
-            ->with('success', "Un QR code pour {$user->fullname} a bien été généré.");
+            ->with('warning', "La génération des credentials n'est pas encore implémentée !");
     }
 
     /**
-     * Create a fresh QR code for the specified user
+     * Import a list of users direct from a csv file
      *
-     * @param  \App\User  $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function deleteQrCode(User $user)
+    public function import(Request $request)
     {
-        $user->deleteQrCode();
         return redirect()
             ->back()
-            ->with('warning', "Le QR code de {$user->fullname} a bien supprimmer,
-                il ne peut plus se connecter a l'app mobile.");
+            ->with('warning', "L'importation des credentials par csv n'est pas encore implémentée !");
     }
 }

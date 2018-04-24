@@ -60,35 +60,40 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(4);
 
 
 /***/ }),
-/* 1 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
- * Main js file for all pages
- */
+* Script fot the edit page
+*
+* @author Bastien Nicoud
+*/
 
-console.log('TUTU');
+document.getElementById('user-picture-field').addEventListener('change', function () {
+  if (this.files.length > 0) {
+    document.getElementById('user-picture-name').innerHTML = this.files[0].name;
+  }
+});
 
-// Change the filename on file uploads
-// User profile picture form
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+document.getElementById('user-licence-field').addEventListener('change', function () {
+  if (this.files.length > 0) {
+    document.getElementById('user-licence-name').innerHTML = this.files[0].name;
+  }
+});
 
 /***/ })
 /******/ ]);

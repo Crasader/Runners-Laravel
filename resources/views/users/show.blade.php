@@ -64,9 +64,9 @@
         {{-- --------------------- --}}
         <div class="columns">
             <div class="column is-4">
-                @if ($user->qrCode()->exists())
+                @if ($user->qrCodes()->exists())
                     <figure class="image box">
-                        <img src="{{ asset(Storage::url($user->qrCode->first()->path)) }}">
+                        <img src="{{ asset(Storage::url($user->qrCodes->first()->path)) }}">
                     </figure>
                     <article class="message is-info">
                         <div class="message-body">
@@ -79,7 +79,7 @@
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }}, 
                             la connexion a l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
-                                <strong>Vous pouvez en <a href="{{ route('users.create') }}">générer un</a>.</strong>
+                                <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
                             @endcan
                         </div>
                     </article>
@@ -220,7 +220,7 @@
                                     <article class="media">
                                         <figure class="media-left">
                                             <p class="image is-64x64">
-                                                <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                                <img src="{{ asset(Storage::url(Auth::user()->profilePictures->first()->path)) }}">
                                             </p>
                                         </figure>
                                         <div class="media-content">

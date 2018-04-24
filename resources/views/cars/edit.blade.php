@@ -153,15 +153,14 @@
                         </div>
                         <div class="field-body">
 
-                            {{-- Status --}}
+                            {{-- type_id --}}
                             <div class="field is-narrow">
                                 <div class="control">
                                     <div class="select is-fullwidth">
-                                        <select name="status">
+                                        <select name="type_id">
                                             @foreach (App\CarType::all() as $cartype)
-                                                <option value="free" {{ $car->type->id === $cartype->id ? 'selected' : '' }}>{{$cartype->name}}</option>
+                                                <option value="{{ $cartype->id }}" {{ $car->type->id === $cartype->id ? 'selected' : '' }}>{{$cartype->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
                                 </div>

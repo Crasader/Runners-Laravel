@@ -133,13 +133,13 @@
                         </div>
                         <div class="field-body">
 
-                            {{-- Status --}}
+                            {{-- type_id --}}
                             <div class="field is-narrow">
                                 <div class="control">
                                     <div class="select is-fullwidth">
-                                        <select name="status">
+                                        <select name="type_id">
                                             @foreach (App\CarType::all() as $cartype)
-                                                <option value="free" >{{$cartype->name}}</option>
+                                                <option value="{{$cartype->id}}" >{{$cartype->name}}</option>
                                             @endforeach
 
                                         </select>

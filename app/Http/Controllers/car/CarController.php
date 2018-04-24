@@ -6,6 +6,7 @@ use App\Car;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCar;
+use App\CarType;
 
 /**
  * CarController
@@ -46,6 +47,7 @@ class CarController extends Controller
     public function store(StoreCar $request)
     {
         $cars = new Car($request->all());
+        $cars->type()->associate(CarType::find($request->type_id));
         $cars->save();
         return redirect()->route('cars.index');
     }
@@ -82,6 +84,7 @@ class CarController extends Controller
     public function update(StoreCar $request, Car $car)
     {
         $car->fill($request->all());
+        $car->type()->associate(CarType::find($request->type_id));
         $car->save();
         return redirect()->route('cars.index');
     }

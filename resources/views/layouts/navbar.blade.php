@@ -31,21 +31,21 @@
 
                 {{-- Cars menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/cars">
+                    <a class="navbar-link" href="{{ route('cars.index') }}">
                         Véhicules
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/cars">
+                        <a class="navbar-item" href="{{ route('cars.index') }}">
                             Afficher véhicules
                         </a>
-                        <a class="navbar-item" href="/cars/create">
+                        <a class="navbar-item" href="{{ route('cars.create') }}">
                             Créer véhicule
                         </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item" href="/cartype">
+                        <a class="navbar-item" href="{{ route('carTypes.index') }}">
                             Afficher type de véhicule
                         </a>
-                        <a class="navbar-item" href="/carstype/create">
+                        <a class="navbar-item" href="{{ route('carTypes.create') }}">
                             Créer type de véhicule
                         </a>
                     </div>
@@ -53,14 +53,14 @@
 
                 {{-- Runners menu (users) --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/users">
+                    <a class="navbar-link" href="{{ route('users.index') }}">
                         Chauffeurs
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/users">
+                        <a class="navbar-item" href="{{ route('users.index') }}">
                             Afficher chauffeurs
                         </a>
-                        <a class="navbar-item" href="/users/create">
+                        <a class="navbar-item" href="{{ route('users.create') }}">
                             Créer chauffeurs
                         </a>
                     </div>

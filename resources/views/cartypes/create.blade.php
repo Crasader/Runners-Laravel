@@ -1,68 +1,112 @@
+{{--
+  -- Cars type creation
+  --
+  -- @author Nicolas Henry
+  --}}
+
 @extends('layouts.app')
 
-@section('content')
-<div class="section">
-    <div class="columns">
-        <div class="column panel panel-default is-6 is-offset-3">
-            <div class="title is-2">Create a car</div>
-            <hr>
-            <div class="panel-body">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+@section('breadcrum')
+<li><a href="{{ route('carTypes.index') }}">Types de véhicules</a></li>
+<li class="is-active"><a href="#" aria-current="page">Créer un type véhicule</a></li>
+@endsection
 
-                <form id="txt" class="form-horizontal" method="POST" action="{{ route('cartypes.store') }}">
+@section('content')
+
+<div class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <h1 class="title is-2">Créer un type véhicule</h1>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+
+                <form action="{{ route('carTypes.store') }}" method="POST">
+
                     {{ csrf_field() }}
 
-                    <div class="field form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name" class="col-md-4 control-label label">Name</label>
+                    {{-- Form create car type --}}
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Nom</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="name" value="" required autofocus>
-                            
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
+                            {{-- name --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'name',
+                                'placeholder' => 'Nom',
+                                'type'        => 'text',
+                                'icon'        => 'fa-id-card',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                        <label for="description" class="col-md-4 control-label label">Description</label>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Description</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="description" value="" required autofocus>
-                            
-                            @if ($errors->has('description'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('description') }}</strong>
-                                </span>
-                            @endif
+                            {{-- description --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'description',
+                                'placeholder' => 'Description',
+                                'type'        => 'text',
+                                'icon'        => 'fa-pencil-alt',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 
-                    <div class="field form-group{{ $errors->has('nb_place') ? ' has-error' : '' }}">
-                        <label for="nb_place" class="col-md-4 control-label label">Number place</label>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Nombre de place</label>
+                        </div>
+                        <div class="field-body">
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control input is-info" name="nb_place" value="" required autofocus>
-                            
-                            @if ($errors->has('nb_place'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('nb_place') }}</strong>
-                                </span>
-                            @endif
+                            {{-- nb_place --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'nb_place',
+                                'placeholder' => 'Nombre de place',
+                                'type'        => 'text',
+                                'icon'        => 'fa-sort-numeric-up',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 
-                    <button type="submit" class="button is-info">Submit</button>
+                    {{-- end form --}}
+
+                    <div class="field is-horizontal">
+                        <div class="field-label"></div>
+                        <div class="field-body">
+
+                            {{-- Submit button --}}
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary">
+                                        Créer le type de véhicule
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
+
 @endsection

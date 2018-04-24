@@ -5,6 +5,8 @@ namespace App\Http\Controllers\car;
 use App\Car;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCar;
+use App\CarType;
 
 /**
  * CarController
@@ -22,8 +24,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
-        return view('cars/index')->with(compact('cars'));
+        $cars = Car::orderBy('model', 'asc')->paginate(20);
+        return view('cars.index')->with(compact('cars'));
     }
 
     /**
@@ -39,12 +41,13 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCar  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCar $request)
     {
         $cars = new Car($request->all());
+        $cars->type()->associate(CarType::find($request->type_id));
         $cars->save();
         return redirect()->route('cars.index');
     }
@@ -74,13 +77,14 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCar  $request
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(StoreCar $request, Car $car)
     {
         $car->fill($request->all());
+        $car->type()->associate(CarType::find($request->type_id));
         $car->save();
         return redirect()->route('cars.index');
     }
@@ -93,6 +97,11 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        if ($car->runDrivers()->exists()) {
+            return redirect()
+                ->back()
+                ->with('error', "Ce véhicule ne peux être supprimé car il est en cours d'utilisation.");
+        }
         $car->delete();
         return redirect()->route('cars.index');
     }

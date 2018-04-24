@@ -34,6 +34,14 @@
         <span class="tag is-danger">Pas présent</span>
         @break
 
+    @case('free')
+        <span class="tag is-success">Libre</span>
+        @break
+
+    @case('problem')
+        <span class="tag is-danger">Problème</span>
+        @break
+
     @default
         <span class="tag is-light">Aucun status</span>
 @endswitch

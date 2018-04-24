@@ -62,5 +62,5 @@ Route::middleware(['auth'])->group(function () {
     /**
      * CarTypes ressource
      */
-    Route::resource('cartypes', 'car\CarTypeController');
+    Route::resource('carTypes', 'car\CarTypeController');
 });

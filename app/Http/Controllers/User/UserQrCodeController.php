@@ -23,7 +23,7 @@ class UserQrCodeController extends Controller
      */
     public function store(User $user)
     {
-        $this->authorize('create', User::class);
+        $this->authorize('update', User::class);
 
         $user->generateQrCode();
 
@@ -40,7 +40,7 @@ class UserQrCodeController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('create', User::class);
+        $this->authorize('update', User::class);
 
         $user->deleteQrCode();
 

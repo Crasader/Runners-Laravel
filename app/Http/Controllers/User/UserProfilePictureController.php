@@ -7,6 +7,7 @@ use App\Attachment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Users\StorePicture;
 
 /**
@@ -26,23 +27,31 @@ class UserProfilePictureController extends Controller
      */
     public function store(StorePicture $request, User $user)
     {
+        $this->authorize('update', $user);
+
         if ($request->file('picture')->isValid()) {
             // Delete the old picture
             if ($user->profilePictures()->exists()) {
+                Storage::delete($user->profilePictures->first()->path);
                 $user->profilePictures()->delete();
             }
             // Store the picture on the storage
-            $path = $request->picture->store('public/licences');
+            $path = $request->picture->store('public/profiles');
             // Create the new attachment
             $attachment = new Attachment(['type' => 'profile', 'path' => $path]);
             $attachment->owner()->associate(Auth::user());
             $attachment->save();
             // Associate this attachment to the edited user
             $user->attachments()->save($attachment);
-        } else {
+            // Success message
             return redirect()
                 ->back()
-                ->with('warning', "L'image n'a pas été correctement transférée");
+                ->with('success', "La photo de profil a corréctement été modifiée.");
+        } else {
+            // In invalid request case
+            return redirect()
+                ->back()
+                ->with('danger', "L'image n'a pas été correctement transférée.");
         }
     }
 
@@ -55,6 +64,22 @@ class UserProfilePictureController extends Controller
      */
     public function destroy(User $user, Attachment $attachment)
     {
-        return 'tutu';
+        $this->authorize('update', $user);
+
+        // Delete the old picture
+        if ($user->profilePictures()->exists()) {
+            Storage::delete($user->profilePictures->first()->path);
+            $user->profilePictures()->delete();
+            
+            // Success message
+            return redirect()
+                ->back()
+                ->with('success', "L'image a été correctement suprimée.");
+        } else {
+            // In invalid request case
+            return redirect()
+                ->back()
+                ->with('danger', "Image inéxistante.");
+        }
     }
 }

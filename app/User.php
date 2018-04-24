@@ -3,21 +3,21 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Run;
+use App\Car;
 use App\Role;
 use App\Group;
 use App\Comment;
-use App\RunDriver;
-use App\Schedule;
-use App\Run;
-use App\Car;
-use App\Attachment;
 use App\Festival;
+use App\Schedule;
+use App\RunDriver;
+use App\Attachment;
+use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Auth;
 use \BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -174,7 +174,7 @@ class User extends Authenticatable
      * MODEL RELATION
      * Gets the driver qrcode
      */
-    public function qrCode()
+    public function qrCodes()
     {
         return $this->morphMany(Attachment::class, 'attachable')->where('type', 'qrcode');
     }
@@ -287,9 +287,9 @@ class User extends Authenticatable
     public function generateQrCode()
     {
         // Delete the old qr code
-        if ($this->qrCode()->exists()) {
-            Storage::delete('public/' . $this->qrCode->first()->path);
-            $this->qrCode()->delete();
+        if ($this->qrCodes()->exists()) {
+            Storage::delete('public/' . $this->qrCodes->first()->path);
+            $this->qrCodes()->delete();
         }
 
         // Regenerate the api token (for security reasons we re-generate the api token each new qr code versions)
@@ -321,9 +321,9 @@ class User extends Authenticatable
     public function deleteQrCode()
     {
         // Delete the old qr code
-        if ($this->qrCode()->exists()) {
-            Storage::delete('public/' . $this->qrCode->first()->path);
-            $this->qrCode()->delete();
+        if ($this->qrCodes()->exists()) {
+            Storage::delete('public/' . $this->qrCodes->first()->path);
+            $this->qrCodes()->delete();
             $this->api_token = '';
             $this->save();
         }

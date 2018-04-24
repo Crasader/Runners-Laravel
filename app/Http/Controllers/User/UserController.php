@@ -101,6 +101,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
+        $user->fill($request->all());
+        $user->save();
+
         return redirect()
             ->route('users.edit', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été modifié");
@@ -121,5 +124,18 @@ class UserController extends Controller
         return redirect()
             ->route('users.index')
             ->with('success', "{$user->fullname} a bien été supprimé !");
+    }
+
+    /**
+     * Send a credentials request to the user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function generateCredentials(Request $request)
+    {
+        return redirect()
+            ->back()
+            ->with('warning', "La génération des credentials n'est pas encore implémentée !");
     }
 }

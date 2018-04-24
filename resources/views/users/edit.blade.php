@@ -388,7 +388,7 @@
                     @if ($user->licencePictures()->exists())
                         <form id="delete-user-licence-form"
                             method="POST"
-                            action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'attachment' => $user->profilePictures->first()->id]) }}"
+                            action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'attachment' => $user->licencePictures->first()->id]) }}"
                             style="display: none;">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}

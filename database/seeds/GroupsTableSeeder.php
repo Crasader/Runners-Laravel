@@ -24,20 +24,20 @@ class GroupsTableSeeder extends Seeder
          */
         $groups = [
             // Runners groups
-            ['color' => 'ff9933', 'name' => 'A'],
-            ['color' => 'ffff00', 'name' => 'B'],
-            ['color' => 'ff0000', 'name' => 'C'],
-            ['color' => '00ffff', 'name' => 'D'],
-            ['color' => 'a6a6a6', 'name' => 'E'],
-            ['color' => '00ff00', 'name' => 'F'],
-            ['color' => 'ff99ff', 'name' => 'G'],
-            ['color' => '0033cc', 'name' => 'H'],
+            ['color' => '1abc9c', 'name' => 'A'],
+            ['color' => '2ecc71', 'name' => 'B'],
+            ['color' => '3498db', 'name' => 'C'],
+            ['color' => '9b59b6', 'name' => 'D'],
+            ['color' => 'f1c40f', 'name' => 'E'],
+            ['color' => 'e67e22', 'name' => 'F'],
+            ['color' => 'e74c3c', 'name' => 'G'],
+            ['color' => 'ecf0f1', 'name' => 'H'],
             // Coordinators groups
-            ['color' => 'dd0806', 'name' => 'C1'],
-            ['color' => '1fb714', 'name' => 'C2'],
-            ['color' => '3366ff', 'name' => 'C3'],
-            ['color' => 'f20884', 'name' => 'C4'],
-            ['color' => 'fcf305', 'name' => 'C5']
+            ['color' => '1abc9c', 'name' => 'C1'],
+            ['color' => '2ecc71', 'name' => 'C2'],
+            ['color' => '3498db', 'name' => 'C3'],
+            ['color' => '9b59b6', 'name' => 'C4'],
+            ['color' => 'f1c40f', 'name' => 'C5']
         ];
 
         /**

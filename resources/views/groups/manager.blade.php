@@ -26,22 +26,40 @@
             </div>
         </div>
 
-        <div class="columns is-multiline">
-            @foreach($groups as $group)
-                <div class="column is-4">
-                    <div class="box">
-                        <div class="content">
-                            <h2>{{ $group->name }}</h2>
-                            <ul>
-                                @foreach($group->users as $user)
-                                    <li>{{ $user->fullname }}</li>
-                                @endforeach
-                            </ul>
+        {{-- Filters --}}
+        <div class="columns">
+            <div class="column is-12">
+                filters
+            </div>
+        </div>
+
+        <form action="{{ route('groups.manager.update') }}" method="POST">
+
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+
+            <div class="columns is-multiline">
+                @foreach($groups as $group)
+                    <div class="column is-4">
+                        <div class="box" style="background-color: #{{ $group->color }};">
+                            <div class="content">
+                                <h2>{{ $group->name }}</h2>
+                                <ul id="group{{ $group->id }}">
+                                    @foreach($group->users as $user)
+                                        <li name="user[{{ $user->id }}]" class="cursor-pointer">{{ $user->fullname }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                @endforeach
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <button class="button" type="submit">Envoyer</button>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        </form>
 
     </div>
 </div>

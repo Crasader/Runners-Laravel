@@ -11809,6 +11809,10 @@ label.panel-block:hover {
   margin: 10px auto;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 /**
  * Import page specific scss
  * These scss wil be transpilled in the global css file

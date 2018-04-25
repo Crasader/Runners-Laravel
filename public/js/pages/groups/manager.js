@@ -89,7 +89,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 * @author Bastien Nicoud
 */
 
+// Import the library to simply sort the elements
 
+
+// Get all the groups elements on the page
+var elements = document.querySelectorAll('[id^="group"]');
+
+// Create the sortable instance
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var el = _step.value;
+
+    __WEBPACK_IMPORTED_MODULE_0_sortablejs___default.a.create(el, {
+      group: 'manager',
+      animation: 100
+    });
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator.return) {
+      _iterator.return();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
 
 /***/ }),
 /* 7 */

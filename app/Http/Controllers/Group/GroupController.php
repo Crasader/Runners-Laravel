@@ -85,6 +85,18 @@ class GroupController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Group  $group
+     * @return \Illuminate\Http\Response
+     */
+    public function managerUpdate(Request $request, Group $group)
+    {
+        dd($request->all());
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Group  $group

@@ -6,6 +6,12 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * RoleController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Role
+ */
 class RoleController extends Controller
 {
     /**
@@ -28,7 +34,9 @@ class RoleController extends Controller
     public function create()
     {
         $this->authorize('create', Role::class);
-        return view('roles.create');
+        $role = Role::first();
+        $permissions = $role->permissions;
+        return view('roles.create')->with(compact('permissions'));
     }
 
     /**
@@ -39,7 +47,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Role::class);
+        dd($request->all());
     }
 
     /**

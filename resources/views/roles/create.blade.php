@@ -63,24 +63,57 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Sexe</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- SEX --}}
-                            <div class="field is-narrow">
-                                <div class="control">
-                                    <div class="select is-fullwidth">
-                                        <select name="sex">
-                                            <option value="m">Homme</option>
-                                            <option value="w">Femme</option>
-                                        </select>
+                    {{-- Display all the permissions with a little select to athorize or not the permission for this role --}}
+                    <div class="columns">
+                        <dim class="column">
+                            <h2 class="title is-4">Choissisez les permissions autorisées pour ce role :</h2>
+                        </dim>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-half">
+                            @foreach ($permissions as $key => $value)
+                                @break($loop->index == 9)
+                                <div class="field is-horizontal">
+                                    <div class="field-body">
+                                        <div class="field is-narrow">
+                                            <div class="control">
+                                                <div class="select is-fullwidth">
+                                                    <select name="permission[{{ $key }}]">
+                                                        <option value="true">Autorisé à :</option>
+                                                        <option value="false" selected>Non Autorisé à :</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field-label is-normal">
+                                        <label class="label">{{ $key }}</label>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endforeach
+                        </div>
+                        <div class="column is-half">
+                            @foreach ($permissions as $key => $value)
+                                @continue($loop->index <= 8)
+                                <div class="field is-horizontal">
+                                    <div class="field-body">
+                                        <div class="field is-narrow">
+                                            <div class="control">
+                                                <div class="select is-fullwidth">
+                                                    <select name="permission[{{ $key }}]">
+                                                        <option value="true">Autorisé à :</option>
+                                                        <option value="false" selected>Non Autorisé à :</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field-label is-normal">
+                                        <label class="label">{{ $key }}</label>
+                                    </div>
+                                </div>
+                                @break($loop->index == 8)
+                            @endforeach
                         </div>
                     </div>
 

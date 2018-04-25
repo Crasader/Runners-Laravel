@@ -24,6 +24,19 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">Gestion des groupes</h1>
             </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', App\Group::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('update-groups-form').submit();"
+                                class="button is-success">
+                                Valider les modifications
+                            </button>
+                        </p>
+                    @endcan
+                </div>
+            </div>
         </div>
 
         {{-- Filters --}}
@@ -33,7 +46,7 @@
             </div>
         </div>
 
-        <form action="{{ route('groups.manager.update') }}" method="POST">
+        <form id="update-groups-form" action="{{ route('groups.manager.update') }}" method="POST">
 
             {{ csrf_field() }}
             {{ method_field('PUT') }}
@@ -44,9 +57,12 @@
                         <div class="box" style="background-color: #{{ $group->color }};">
                             <div class="content">
                                 <h2>{{ $group->name }}</h2>
-                                <ul id="group{{ $group->id }}">
+                                <ul data-group-id="{{ $group->id }}">
                                     @foreach($group->users as $user)
-                                        <li name="user[{{ $user->id }}]" class="cursor-pointer">{{ $user->fullname }}</li>
+                                        <li class="cursor-pointer">
+                                            <input type="text" name="user[{{ $user->id }}]" value="{{ $group->id }}" style="display: none;">
+                                            {{ $user->fullname }}
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

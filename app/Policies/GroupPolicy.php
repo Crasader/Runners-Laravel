@@ -36,7 +36,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function view(User $user, Group $group)
+    public function view(User $user)
     {
         return true;
     }
@@ -59,7 +59,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function update(User $user, Group $group)
+    public function update(User $user)
     {
         return $user->may('manage_groups');
     }
@@ -71,7 +71,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function delete(User $user, Group $group)
+    public function delete(User $user)
     {
         return $user->may('manage_groups');
     }

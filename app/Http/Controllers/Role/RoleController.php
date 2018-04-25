@@ -73,19 +73,23 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $this->authorize('update', Role::class);
+        return view('roles.edit')->with(compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Roles\StoreRole  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(StoreRole $request, Role $role)
     {
-        //
+        $this->authorize('update', Role::class);
+        $role->fill($request->all());
+        $role->save();
+        return redirect()->route('roles.show', ['role' => $role->id])->with('success', 'Le role à bien été modifié !');
     }
 
     /**

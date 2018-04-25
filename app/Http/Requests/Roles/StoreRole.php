@@ -33,8 +33,14 @@ class StoreRole extends FormRequest
     public function rules()
     {
         return [
-            // The regex is used to validate the slug format
-            'slug' => ['required', 'string', 'max:50', 'unique:roles', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'slug' => [
+                'required',
+                'string',
+                'max:50',
+                // The regex is used to validate the slug format
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+                Rule::unique('roles')->ignore(request()->role->id)
+            ],
             'name' => ['required', 'string', 'max:50'],
             'permissions.*' => [Rule::in(['true', 'false'])]
         ];

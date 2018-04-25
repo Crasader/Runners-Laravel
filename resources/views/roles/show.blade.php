@@ -75,7 +75,7 @@
                         @foreach ($role->permissions as $permission => $state)
                             <tr>
                                 <th>{{ $permission }}</th>
-                                <td>{{ $state === true ? 'Autorisé' : 'Non autorisé' }}</td>
+                                <td>{{ $state == 'true' ? 'Autorisé' : 'Non autorisé' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

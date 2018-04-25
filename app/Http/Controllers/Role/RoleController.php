@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Role;
 use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\StoreRole;
 
 /**
  * RoleController
@@ -42,13 +43,14 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Roles\StoreRole  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRole $request)
     {
         $this->authorize('create', Role::class);
-        dd($request->all());
+        Role::create($request->all());
+        return redirect()->route('roles.index')->with('success', 'Le role à bien été crée');
     }
 
     /**
@@ -59,7 +61,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $this->authorize('view', Role::class);
+        return view('roles.show')->with(compact('role'));
     }
 
     /**

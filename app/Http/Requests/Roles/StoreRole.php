@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Roles;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Role;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * StoreRole
@@ -32,9 +33,9 @@ class StoreRole extends FormRequest
     public function rules()
     {
         return [
-            'slug' => [],
-            'name' => [],
-            'permission.*' => []
+            'slug' => ['required', 'string', 'max:50', 'unique:roles', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'name' => ['required', 'string', 'max:50'],
+            'permissions.*' => [Rule::in(['true', 'false'])]
         ];
     }
 }

@@ -39,11 +39,11 @@
                                 'name'        => 'slug',
                                 'placeholder' => 'Slug',
                                 'type'        => 'text',
-                                'icon'        => 'fa-user',
+                                'icon'        => 'fa-bookmark',
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
-                                    Le slug ne possède que des minuscules.
+                                    Le slug ne possède que des minuscules et des tirets.
                                 </p>
                             @endcomponent
 
@@ -52,7 +52,7 @@
                                 'name'        => 'name',
                                 'placeholder' => 'Nom du role',
                                 'type'        => 'text',
-                                'icon'        => 'fa-user',
+                                'icon'        => 'fa-i-cursor',
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
@@ -78,7 +78,7 @@
                                         <div class="field is-narrow">
                                             <div class="control">
                                                 <div class="select is-fullwidth">
-                                                    <select name="permission[{{ $key }}]">
+                                                    <select name="permissions[{{ $key }}]">
                                                         <option value="true">Autorisé à :</option>
                                                         <option value="false" selected>Non Autorisé à :</option>
                                                     </select>
@@ -100,7 +100,7 @@
                                         <div class="field is-narrow">
                                             <div class="control">
                                                 <div class="select is-fullwidth">
-                                                    <select name="permission[{{ $key }}]">
+                                                    <select name="permissions[{{ $key }}]">
                                                         <option value="true">Autorisé à :</option>
                                                         <option value="false" selected>Non Autorisé à :</option>
                                                     </select>
@@ -117,19 +117,11 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer le nouveau role
-                                    </button>
-                                </div>
-                            </div>
-                            
+                    <div class="field is-grouped is-grouped-centered">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">
+                                Créer le nouveau role
+                            </button>
                         </div>
                     </div>
 

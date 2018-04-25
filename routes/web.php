@@ -78,4 +78,9 @@ Route::middleware(['auth'])->group(function () {
      * CarTypes ressource
      */
     Route::resource('carTypes', 'car\CarTypeController');
+
+    /**
+     * Groups ressource
+     */
+    Route::resource('groups', 'Group\GroupController');
 });

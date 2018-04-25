@@ -15,7 +15,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view', Role::class);
+        $roles = Role::all();
+        return view('roles.index')->with(compact('roles'));
     }
 
     /**
@@ -25,7 +27,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Role::class);
+        return view('roles.create');
     }
 
     /**

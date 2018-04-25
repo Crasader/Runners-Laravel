@@ -3,3 +3,5 @@
 *
 * @author Bastien Nicoud
 */
+
+import Sortable from 'sortablejs'

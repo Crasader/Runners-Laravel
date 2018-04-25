@@ -19,6 +19,17 @@ class GroupController extends Controller
     }
 
     /**
+     * Display the group manage (drag n drop system)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manager()
+    {
+        $groups = Group::with('users')->get();
+        return view('groups.manager')->with(compact('groups'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

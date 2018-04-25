@@ -82,5 +82,6 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Groups ressource
      */
+    Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');
     Route::resource('groups', 'Group\GroupController');
 });

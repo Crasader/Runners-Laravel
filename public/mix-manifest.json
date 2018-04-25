@@ -1,5 +1,6 @@
 {
     "/js/main.js": "/js/main.js",
     "/css/main.css": "/css/main.css",
+    "/js/pages/groups/manager.js": "/js/pages/groups/manager.js",
     "/js/pages/users/edit.js": "/js/pages/users/edit.js"
 }

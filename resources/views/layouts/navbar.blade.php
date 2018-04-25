@@ -68,14 +68,17 @@
 
                 {{-- Groups menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/users">
+                    <a class="navbar-link" href="{{ route('groups.manager') }}">
                         Groupes
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/users">
-                            Afficher les groupes
+                        <a class="navbar-item" href="{{ route('groups.manager') }}">
+                            Manager de groupes
                         </a>
-                        <a class="navbar-item" href="/users/create">
+                        <a class="navbar-item" href="{{ route('groups.index') }}">
+                            Liste des groupes
+                        </a>
+                        <a class="navbar-item" href="{{ route('groups.create') }}">
                             Créer un groupe
                         </a>
                     </div>

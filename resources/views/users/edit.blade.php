@@ -48,7 +48,7 @@
                         <p class="control">
                             <form id="delete-user-form"
                                 action="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                    method="POST" style="display: none;">
+                                method="POST" style="display: none;">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                             </form>

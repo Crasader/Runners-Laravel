@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('users.index') }}">Gestion des roles</a></li>
+<li><a href="{{ route('roles.index') }}">Gestion des roles</a></li>
 <li class="is-active"><a href="#" aria-current="page">Nouveau role</a></li>
 @endsection
 

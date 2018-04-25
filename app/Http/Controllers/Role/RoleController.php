@@ -96,6 +96,13 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $this->authorize('delete', $role);
+        if (!$role->users()->exists()) {
+            $role->delete();
+            return redirect()
+                ->route('roles.index')
+                ->with('success', "{$role->name} a bien été supprimé !");
+        }
+        return redirect()->back()->with('danger', 'Ce role est utilisé, vous ne pouvez pas le supprimer.');
     }
 }

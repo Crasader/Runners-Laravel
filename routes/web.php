@@ -65,6 +65,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/me', 'User\UserController@me')->name('me');
 
     /**
+     * Role crud
+     */
+    Route::resource('roles', 'Role\RoleController');
+
+    /**
      * Cars ressource
      */
     Route::resource('cars', 'car\CarController');

@@ -116,7 +116,7 @@
                                 Mon compte
                             </a>
                             @can('view', App\Role::class)
-                                <a class="navbar-item" href="/vehicule/create">
+                                <a class="navbar-item" href="{{ route('roles.index') }}">
                                     Gèrer les roles
                                 </a>
                             @endcan

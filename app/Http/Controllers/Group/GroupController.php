@@ -15,6 +15,7 @@ class GroupController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Group::class);
         $groups = Group::all();
         return view('groups.index')->with(compact('groups'));
     }
@@ -26,6 +27,7 @@ class GroupController extends Controller
      */
     public function manager()
     {
+        $this->authorize('view', Group::class);
         $groups = Group::with('users')->get();
         return view('groups.manager')->with(compact('groups'));
     }
@@ -59,7 +61,8 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        $this->authorize('view', Group::class);
+        return view('groups.show')->with(compact('group'));
     }
 
     /**

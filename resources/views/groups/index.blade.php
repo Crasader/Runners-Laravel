@@ -80,6 +80,9 @@
             </div>
         </div>
 
+        {{-- Pagination links --}}
+        {{ $groups->links() }}
+
     </div>
 </div>
 

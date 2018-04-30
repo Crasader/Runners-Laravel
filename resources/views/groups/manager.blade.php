@@ -72,7 +72,7 @@
             </div>
             <div class="columns">
                 <div class="column">
-                    <button class="button" type="submit">Envoyer</button>
+                    <button class="button is-success" type="submit">Valider les modifications</button>
                 </div>
             </div>
         </form>

@@ -112,7 +112,6 @@
                                         <label class="label">{{ $key }}</label>
                                     </div>
                                 </div>
-                                @break($loop->index == 8)
                             @endforeach
                         </div>
                     </div>

@@ -16,7 +16,7 @@ class GroupController extends Controller
     public function index()
     {
         $this->authorize('view', Group::class);
-        $groups = Group::all();
+        $groups = Group::paginate(20);
         return view('groups.index')->with(compact('groups'));
     }
 
@@ -39,7 +39,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('groups.create');
     }
 
     /**

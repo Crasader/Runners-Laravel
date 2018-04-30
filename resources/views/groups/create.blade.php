@@ -36,7 +36,7 @@
 
                             {{-- GROUP NAME --}}
                             @component('components/horizontal_form_input', [
-                                'name'        => 'lastname',
+                                'name'        => 'name',
                                 'placeholder' => 'Nom du groupe',
                                 'type'        => 'text',
                                 'icon'        => 'fa-tag',
@@ -46,12 +46,15 @@
 
                             {{-- GROUP COLOR --}}
                             @component('components/horizontal_form_input', [
-                                'name'        => 'firstname',
-                                'placeholder' => 'Prénom',
+                                'name'        => 'color',
+                                'placeholder' => 'Couleur',
                                 'type'        => 'text',
-                                'icon'        => 'fa-user',
+                                'icon'        => 'fa-adjust',
                                 'errors'      => $errors
                                 ])
+                                <p class="help">
+                                    La couleur doit être au format hexadécimal (ex: 554ef3).
+                                </p>
                             @endcomponent
 
                         </div>
@@ -65,13 +68,9 @@
                             <div class="field">
                                 <div class="control">
                                     <button type="submit" class="button is-primary">
-                                        Créer l'utilisateur
+                                        Créer le groupe
                                     </button>
                                 </div>
-                                <p class="help">
-                                    Par défault les nouveaux utilisateurs sont crées sans mot de passes.
-                                    Il faut qu'ils confirment leur participation pour créer un login.
-                                </p>
                             </div>
                             
                         </div>

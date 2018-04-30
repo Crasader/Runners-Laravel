@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Group;
 use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Groups\StoreGroup;
 
 class GroupController extends Controller
 {
@@ -45,12 +46,12 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Groups\StoreGroup  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGroup $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

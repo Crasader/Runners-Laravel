@@ -91,6 +91,7 @@ class GroupController extends Controller
      */
     public function update(UpdateGroup $request, Group $group)
     {
+        $this->authorize('update', $group);
         $group->fill($request->all());
         $group->save();
         return redirect()
@@ -102,10 +103,9 @@ class GroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function managerUpdate(Request $request, Group $group)
+    public function managerUpdate(Request $request)
     {
         dd($request->all());
     }
@@ -118,6 +118,10 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $this->authorize('delete', $group);
+        $group->delete();
+        return redirect()
+            ->route('groups.index')
+            ->with('success', "Le groupe {$group->name} a bien été supprimé !");
     }
 }

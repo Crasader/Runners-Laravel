@@ -31,6 +31,21 @@
                             <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="button is-info">Modifier le groupe</a>
                         </p>
                     @endcan
+                    @can('delete', $group)
+                        <form id="delete-group-form"
+                            action="{{ route('groups.destroy', ['group' => $group->id]) }}"
+                            method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('delete-group-form').submit();"
+                                class="button is-danger">
+                                Supprimer le groupe : {{ $group->name }}
+                            </button>
+                        </p>
+                    @endcan
                 </div>
             </div>
         </div>

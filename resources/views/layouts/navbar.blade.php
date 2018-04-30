@@ -98,7 +98,7 @@
             <div class="navbar-end">
                 {{-- Groups menu --}}
                 <a class="navbar-item" href="https://github.com/CPNV-ES/Runners-Laravel">
-                    <strong>v2.0.0-alpha.3</strong>
+                    <strong>{{ config('version') }}</strong>
                 </a>
 
                 {{-- Authentication Links --}}

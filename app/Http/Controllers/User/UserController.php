@@ -35,6 +35,7 @@ class UserController extends Controller
      */
     public function me()
     {
+        // Redirect to the user page with the id of the authenticated user
         return redirect()->route('users.show', ['user' => Auth::user()->id]);
     }
 

@@ -6,6 +6,7 @@ use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
+use App\Http\Requests\Groups\UpdateGroup;
 
 class GroupController extends Controller
 {
@@ -84,13 +85,17 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Groups\UpdateGroup  $request
      * @param  \App\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(UpdateGroup $request, Group $group)
     {
-        //
+        $group->fill($request->all());
+        $group->save();
+        return redirect()
+            ->route('groups.show', ['group' => $group->id])
+            ->with('success', 'Le groupe a bien été modifié !');
     }
 
     /**

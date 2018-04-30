@@ -25,9 +25,10 @@
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('groups.store') }}" method="POST">
+                <form action="{{ route('groups.update', ['group' => $group->id]) }}" method="POST">
 
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">

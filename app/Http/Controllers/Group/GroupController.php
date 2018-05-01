@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
 use App\Http\Requests\Groups\UpdateGroup;
 
+/**
+ * GroupController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Group
+ */
 class GroupController extends Controller
 {
     /**

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
 use App\Http\Requests\Groups\UpdateGroup;
+use App\Http\Requests\Groups\UpdateGroupUserAssociations;
+use App\User;
 
 /**
  * GroupController
@@ -108,12 +110,24 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Groups\UpdateGroupUserAssociations  $request
      * @return \Illuminate\Http\Response
      */
-    public function managerUpdate(Request $request)
+    public function managerUpdate(UpdateGroupUserAssociations $request)
     {
-        dd($request->all());
+        // The request contains association between users and groups
+        // Get all the users have a group change
+        $userGroupChanges = collect($request->user);
+        // Get all the coresponding user
+        $users = User::find($userGroupChanges->keys());
+        // Iteraites each users
+        $users->each(function ($user) use ($userGroupChanges) {
+            // Sync the association
+            $user->groups()->sync([$userGroupChanges->get($user->id)]);
+        });
+        return redirect()
+            ->back()
+            ->with('success', "Les modifications ont correctement étés enregistrées.");
     }
 
     /**

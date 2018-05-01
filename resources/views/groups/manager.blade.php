@@ -46,6 +46,11 @@
             </div>
         </div>
 
+        {{--
+            All the manager is surounded by a form, when we drag an element to another group
+            sortable.js change his value to match the new group.
+            Then when all the changes are done, the form send to the controller all asociation (user-id => group-id)
+            --}}
         <form id="update-groups-form" action="{{ route('groups.manager.update') }}" method="POST">
 
             {{ csrf_field() }}

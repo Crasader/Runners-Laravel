@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
 use App\Http\Requests\Groups\UpdateGroup;
+use App\Http\Requests\Groups\UpdateGroupUserAssociations;
 
 /**
  * GroupController
@@ -108,11 +109,12 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Groups\UpdateGroupUserAssociations  $request
      * @return \Illuminate\Http\Response
      */
-    public function managerUpdate(Request $request)
+    public function managerUpdate(UpdateGroupUserAssociations $request)
     {
+        // The request contains association between users and groups
         dd($request->all());
     }
 

@@ -98,7 +98,7 @@
             <div class="navbar-end">
                 {{-- Groups menu --}}
                 <a class="navbar-item" href="https://github.com/CPNV-ES/Runners-Laravel">
-                    <strong>v2.0.0-alpha.4</strong>
+                    <strong>{{ config('app.version') }}</strong>
                 </a>
 
                 {{-- Authentication Links --}}
@@ -115,7 +115,7 @@
                             </span>
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
-                            <a class="navbar-item" href="/vehicule/create">
+                            <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>
                             @can('view', App\Role::class)

@@ -60,7 +60,8 @@
                         @foreach ($groups as $group)
                             <tr>
                                 <th>{{ $group->name }}</th>
-                                <td>{{ $group->color }}</td>
+                                {{-- Display a tag with the group background color --}}
+                                <td><span class="tag" style="background-color: #{{ $group->color }};">{{ $group->color }}</span></td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
@@ -78,6 +79,9 @@
                 </table>
             </div>
         </div>
+
+        {{-- Pagination links --}}
+        {{ $groups->links() }}
 
     </div>
 </div>

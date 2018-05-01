@@ -57,7 +57,7 @@
                         <div class="box" style="background-color: #{{ $group->color }};">
                             <div class="content">
                                 <h2>{{ $group->name }}</h2>
-                                <ul data-group-id="{{ $group->id }}">
+                                <ul id="group[{{ $group->id }}]" data-group-id="{{ $group->id }}">
                                     @foreach($group->users as $user)
                                         <li class="cursor-pointer">
                                             <input type="text" name="user[{{ $user->id }}]" value="{{ $group->id }}" style="display: none;">
@@ -72,7 +72,7 @@
             </div>
             <div class="columns">
                 <div class="column">
-                    <button class="button" type="submit">Envoyer</button>
+                    <button class="button is-success" type="submit">Valider les modifications</button>
                 </div>
             </div>
         </form>

@@ -65,6 +65,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/me', 'User\UserController@me')->name('me');
 
     /**
+     * Role crud
+     */
+    Route::resource('roles', 'Role\RoleController');
+
+    /**
      * Cars ressource
      */
     Route::resource('cars', 'car\CarController');
@@ -73,4 +78,11 @@ Route::middleware(['auth'])->group(function () {
      * CarTypes ressource
      */
     Route::resource('carTypes', 'car\CarTypeController');
+
+    /**
+     * Groups ressource
+     */
+    Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');
+    Route::put('groups/manager', 'Group\GroupController@managerUpdate')->name('groups.manager.update');
+    Route::resource('groups', 'Group\GroupController');
 });

@@ -68,14 +68,17 @@
 
                 {{-- Groups menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/users">
+                    <a class="navbar-link" href="{{ route('groups.manager') }}">
                         Groupes
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/users">
-                            Afficher les groupes
+                        <a class="navbar-item" href="{{ route('groups.manager') }}">
+                            Manager de groupes
                         </a>
-                        <a class="navbar-item" href="/users/create">
+                        <a class="navbar-item" href="{{ route('groups.index') }}">
+                            Liste des groupes
+                        </a>
+                        <a class="navbar-item" href="{{ route('groups.create') }}">
                             Créer un groupe
                         </a>
                     </div>
@@ -95,7 +98,7 @@
             <div class="navbar-end">
                 {{-- Groups menu --}}
                 <a class="navbar-item" href="https://github.com/CPNV-ES/Runners-Laravel">
-                    <strong>v2.0.0-alpha.3</strong>
+                    <strong>{{ config('app.version') }}</strong>
                 </a>
 
                 {{-- Authentication Links --}}
@@ -112,11 +115,11 @@
                             </span>
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
-                            <a class="navbar-item" href="/vehicule/create">
+                            <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>
                             @can('view', App\Role::class)
-                                <a class="navbar-item" href="/vehicule/create">
+                                <a class="navbar-item" href="{{ route('roles.index') }}">
                                     Gèrer les roles
                                 </a>
                             @endcan

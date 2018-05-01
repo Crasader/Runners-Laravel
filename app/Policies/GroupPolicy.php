@@ -36,7 +36,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function view(User $user, Group $group)
+    public function view(User $user)
     {
         return true;
     }

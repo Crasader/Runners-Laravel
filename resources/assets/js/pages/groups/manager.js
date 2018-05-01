@@ -22,8 +22,14 @@ for (let el of elements) {
       // We change the value of the input of the user to match his new group
       // We get the id of the new group
       let newGroup = event.to.getAttribute('data-group-id')
-      // Get the element dragged, and set his new attribute
-      event.item.getElementsByTagName('input')[0].setAttribute('value', newGroup)
+      // Get the element dragged
+      let element = event.item.getElementsByTagName('input')[0]
+      // Gets the id of the user coresponding to this element
+      let userId = element.getAttribute('data-user-id')
+      // Sets the new group id
+      element.setAttribute('value', newGroup)
+      // Change the input name for the form submission
+      element.setAttribute('name', `user[${userId}]`)
     }
   })
 }

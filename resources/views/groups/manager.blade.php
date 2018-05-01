@@ -70,7 +70,7 @@
                                             {{--<span class="icon">
                                                 <i class="fas fa-arrows-alt"></i>
                                             </span>--}}
-                                            <input type="text" name="user[{{ $user->id }}]" value="{{ $group->id }}" style="display: none;">
+                                            <input type="text" data-user-id="{{ $user->id }}" name="unused[{{ $user->id }}]" value="not-changed" style="display: none;">
                                             {{ $user->fullname }}
                                         </li>
                                     @endforeach

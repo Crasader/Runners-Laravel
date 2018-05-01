@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Groups;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -32,7 +33,8 @@ class UpdateGroupUserAssociations extends FormRequest
     public function rules()
     {
         return [
-            'user.*' => ['numeric', 'exists:groups,id']
+            'unused.*' => [Rule::in(['not-changed'])],
+            'user.*' => ['integer', 'exists:groups,id']
         ];
     }
 }

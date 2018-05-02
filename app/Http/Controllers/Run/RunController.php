@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Run;
 
 use App\Run;
+use App\Artist;
+use App\Waypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,7 +45,10 @@ class RunController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Run::class);
+        $artists = Artist::all();
+        $waypoints = Waypoint::all();
+        return view('runs.create')->with(compact('waypoints', 'artists'));
     }
 
     /**

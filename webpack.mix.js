@@ -20,6 +20,7 @@ mix
   .js('resources/assets/main.js', 'js')
   .js('resources/assets/js/pages/users/edit.js', 'js/pages/users')
   .js('resources/assets/js/pages/groups/manager.js', 'js/pages/groups')
+  .js('resources/assets/js/pages/runs/create.js', 'js/pages/runs')
   .sass('resources/assets/main.scss', 'css')
 
 // Create unique hash in production to force browser cache clearing

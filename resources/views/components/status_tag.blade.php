@@ -42,6 +42,34 @@
         <span class="tag is-danger">Problème</span>
         @break
 
+    @case('finished')
+        <span class="tag is-success">Términé</span>
+        @break
+
+    @case('empty')
+        <span class="tag is-warning">Vide</span>
+        @break
+
+    @case('needs_filling')
+        <span class="tag is-warning">A compléter</span>
+        @break
+    
+    @case('gone')
+        <span class="tag is-success">Démarré</span>
+        @break
+
+    @case('ready')
+        <span class="tag is-success">Prét</span>
+        @break
+
+    @case('drafting')
+        <span class="tag is-light">En préparation</span>
+        @break
+
+    @case('error')
+        <span class="tag is-danger">Erreur</span>
+        @break
+
     @default
         <span class="tag is-light">Aucun status</span>
 @endswitch

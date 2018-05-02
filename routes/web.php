@@ -19,7 +19,7 @@ Auth::routes();
 /**
  * Homepage
  */
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('index');
 
 /**
  * Routes protected by the auth middleware
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Connected home page
      */
-    Route::get('/home', 'HomeController@home');
+    Route::get('/home', 'HomeController@home')->name('home');
 
     /**
      * Users ressource
@@ -85,4 +85,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');
     Route::put('groups/manager', 'Group\GroupController@managerUpdate')->name('groups.manager.update');
     Route::resource('groups', 'Group\GroupController');
+
+    /**
+     * Runs ressource
+     */
+    Route::resource('runs', 'Run\RunController');
+
+    /**
+     * Stats crud
+     */
+    Route::get('stats', 'Stats\StatsController@index')->name('stats.index');
 });

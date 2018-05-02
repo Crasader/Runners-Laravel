@@ -115,6 +115,9 @@
                             </span>
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
+                            <a class="navbar-item" href="{{ route('home') }}">
+                                Home
+                            </a>
                             <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>

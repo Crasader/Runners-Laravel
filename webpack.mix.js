@@ -17,10 +17,15 @@ mix.disableNotifications()
 // SCSS extraction (from assets to public)
 // JS extraction (from assets to public)... (extract to a separate file the js of libraries)
 mix
+  // MAIN
   .js('resources/assets/main.js', 'js')
+  // PAGES
   .js('resources/assets/js/pages/users/edit.js', 'js/pages/users')
   .js('resources/assets/js/pages/groups/manager.js', 'js/pages/groups')
   .js('resources/assets/js/pages/runs/create.js', 'js/pages/runs')
+  // FEATURES
+  .js('resources/assets/js/features/search-field.js', 'js/features')
+  // SCSS
   .sass('resources/assets/main.scss', 'css')
 
 // Create unique hash in production to force browser cache clearing

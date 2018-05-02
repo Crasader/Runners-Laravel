@@ -11,6 +11,10 @@
 <li class="is-active"><a href="#" aria-current="page">Nouveau run</a></li>
 @endsection
 
+@push('scripts')
+    <script src="{{ mix('js/pages/runs/create.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class="section">
@@ -48,11 +52,13 @@
                             @endcomponent
 
                             {{-- ARTIST --}}
-                            @component('components/horizontal_form_input', [
+                            {{-- SEARCH FIELD --}}
+                            @component('components/horizontal_search_input', [
                                 'name'        => 'artist',
-                                'placeholder' => 'Prénom',
+                                'placeholder' => 'Artiste',
                                 'type'        => 'text',
-                                'icon'        => 'fa-user',
+                                'icon'        => 'fa-search',
+                                'apiUrl'      => '/tutu',
                                 'errors'      => $errors
                                 ])
                             @endcomponent

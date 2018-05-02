@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
      * Runs ressource
      */
     Route::resource('runs', 'Run\RunController');
+    Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
 
     /**
      * Stats crud

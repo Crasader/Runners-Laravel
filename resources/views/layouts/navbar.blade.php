@@ -16,15 +16,25 @@
 
                 {{-- Runs menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/runs">
+                    <a class="navbar-link" href="{{ route('runs.index') }}">
                         Runs
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/runs">
+                        <a class="navbar-item" href="{{ route('runs.big') }}">
+                            Grand affichage
+                        </a>
+                        <a class="navbar-item" href="{{ route('runs.index') }}">
                             Afficher runs
                         </a>
-                        <a class="navbar-item" href="/runs/create">
+                        <a class="navbar-item" href="{{ route('runs.create') }}">
                             Créer run
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ route('runs.index') }}">
+                            Afficher les waypoints
+                        </a>
+                        <a class="navbar-item" href="{{ route('runs.create') }}">
+                            Créer un waypoint
                         </a>
                     </div>
                 </div>
@@ -62,6 +72,9 @@
                         </a>
                         <a class="navbar-item" href="{{ route('users.create') }}">
                             Créer chauffeurs
+                        </a>
+                        <a class="navbar-item" href="{{ route('users.import-form') }}">
+                            Importer chauffeurs
                         </a>
                     </div>
                 </div>

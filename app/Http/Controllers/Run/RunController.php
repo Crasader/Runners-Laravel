@@ -6,6 +6,12 @@ use App\Run;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * RunController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Run
+ */
 class RunController extends Controller
 {
     /**
@@ -15,7 +21,19 @@ class RunController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view', Run::class);
+        $runs = Run::paginate(20);
+        return view('runs.index')->with(compact('runs'));
+    }
+
+    /**
+     * Display the runs with special layout for big screens
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function big()
+    {
+        return 'tutu';
     }
 
     /**

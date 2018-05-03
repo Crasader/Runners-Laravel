@@ -10,16 +10,58 @@
 
 console.log('SEARCH FIELD AUTOCOMPLETE')
 
+let search = (apiUrl, needle) => {
+  return new Promise((resolve, reject) => {
+    fetch(apiUrl, {
+      method: 'post',
+      credentials: 'same-origin',
+      headers: {
+        'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content,
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        needle: needle
+      })
+    })
+      .then((response) => response.json())
+      .then((datas) => resolve(datas))
+      .catch((error) => reject(error))
+  })
+}
+
 // Scan the page and get all the serch fields
-let searchFields = document.querySelectorAll('[id^="search-field-"]')
+let searchFields = document.querySelectorAll('[id^="search-input-"]')
 
 // Initialize all the search fields
 for (let searchField of searchFields) {
-  console.log(searchField.name)
-  console.log(searchField.getAttribute('data-search-api-url'))
-
+  // Hook events on each search fields
   searchField.addEventListener('input', (e) => {
-    console.log('Input')
-    console.log(e)
+    let el = e.target
+    let resultEl = document.getElementById(`search-field-${el.name}`)
+    let apiUrl = el.getAttribute('data-search-api-url')
+
+    search(apiUrl, el.value).then((datas) => {
+      if (document.getElementById(`search-results-${el.name}`)) {
+        document.getElementById(`search-results-${el.name}`).remove()
+      }
+
+      let content = document.createElement('div')
+      content.className = 'dropdown-content'
+
+      for (let result of datas) {
+        let el = document.createElement('div')
+        el.className = 'dropdown-item'
+        el.innerHTML = result.name
+        content.appendChild(el)
+      }
+
+      let results = document.createElement('div')
+      results.className = 'dropdown-menu'
+      results.id = `search-results-${el.name}`
+      results.appendChild(content)
+
+      resultEl.appendChild(results)
+    })
   })
 }

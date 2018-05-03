@@ -6,6 +6,12 @@ use App\Waypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * WaypointController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Waypoints
+ */
 class WaypointController extends Controller
 {
     /**

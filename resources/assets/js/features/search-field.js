@@ -50,10 +50,10 @@ for (let searchField of searchFields) {
       content.className = 'dropdown-content'
 
       for (let result of datas) {
-        let el = document.createElement('div')
-        el.className = 'dropdown-item'
-        el.innerHTML = result.name
-        content.appendChild(el)
+        let resultElement = document.createElement('div')
+        resultElement.className = 'dropdown-item'
+        resultElement.innerHTML = result.name
+        content.appendChild(resultElement)
       }
 
       let results = document.createElement('div')
@@ -62,6 +62,13 @@ for (let searchField of searchFields) {
       results.appendChild(content)
 
       resultEl.appendChild(results)
+
+      for (let searchResult of content.children) {
+        searchResult.addEventListener('click', (e) => {
+          document.getElementById(`search-input-${el.name}`).value = e.target.innerText
+          document.getElementById(`search-results-${el.name}`).remove()
+        })
+      }
     })
   })
 }

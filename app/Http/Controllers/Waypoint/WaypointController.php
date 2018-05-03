@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Waypoints;
+namespace App\Http\Controllers\Waypoint;
 
 use App\Waypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\waypoints\WaypointSearchResource;
 
 /**
  * WaypointController
  *
  * @author Bastien Nicoud
- * @package App\Http\Controllers\Waypoints
+ * @package App\Http\Controllers\Waypoint
  */
 class WaypointController extends Controller
 {
@@ -54,6 +55,24 @@ class WaypointController extends Controller
     public function show(Waypoint $waypoint)
     {
         //
+    }
+
+    /**
+     * Search in the model, return json
+     * This method is designed to be used with the search fields (see the search field component)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if ($request->needle) {
+            // Case insensitive search
+            $results = Waypoint::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
+            return WaypointSearchResource::collection($results);
+        } else {
+            return response()->json(null, 400);
+        }
     }
 
     /**

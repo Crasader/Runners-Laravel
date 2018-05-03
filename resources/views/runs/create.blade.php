@@ -60,7 +60,7 @@
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
-                                'apiUrl'      => '/tutu',
+                                'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])
                             @endcomponent
@@ -89,7 +89,7 @@
                                 'placeholder' => 'Lieux de départ',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
-                                'apiUrl'      => '/tutu',
+                                'searchUrl'   => route('waypoints.search'),
                                 'errors'      => $errors
                                 ])
                             @endcomponent

@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Waypoints crud
      */
+    // Specific route for the autocomplete fields
     Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
     Route::resource('waypoints', 'Waypoint\WaypointController');
 });

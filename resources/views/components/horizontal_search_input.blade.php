@@ -16,7 +16,7 @@
         {{-- The input, with specific ID and data-atribute to be detected by javascript --}}
         <input
             id="search-field-{{ $name }}" 
-            data-search-api-url="{{ $apiUrl }}"
+            data-search-api-url="{{ $searchUrl }}"
             class="input {{ $errors->has($name) ? ' is-danger' : '' }}"
             type="{{ $type }}"
             name="{{ $name }}"

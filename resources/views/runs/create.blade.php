@@ -13,6 +13,8 @@
 
 @push('scripts')
     <script src="{{ mix('js/pages/runs/create.js') }}"></script>
+    {{-- Script for the search fields nesesary for right work of the component --}}
+    <script src="{{ mix('js/features/search-field.js') }}"></script>
 @endpush
 
 @section('content')
@@ -76,6 +78,18 @@
                                 'placeholder' => "Nom d'utilisateur",
                                 'type'        => 'text',
                                 'icon'        => 'fa-user',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                            {{-- WAYPOINT --}}
+                            {{-- SEARCH FIELD --}}
+                            @component('components/horizontal_search_input', [
+                                'name'        => 'waypoint[1]',
+                                'placeholder' => 'Lieux de départ',
+                                'type'        => 'text',
+                                'icon'        => 'fa-search',
+                                'apiUrl'      => '/tutu',
                                 'errors'      => $errors
                                 ])
                             @endcomponent

@@ -96,4 +96,17 @@ Route::middleware(['auth'])->group(function () {
      * Stats crud
      */
     Route::get('stats', 'Stats\StatsController@index')->name('stats.index');
+
+    /**
+     * Artists crud
+     */
+    // Specific route for the autocomplete fields
+    Route::post('artists/search', 'Artist\ArtistController@search')->name('artists.search');
+    Route::resource('artists', 'Artist\ArtistController');
+    
+    /**
+     * Waypoints crud
+     */
+    Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
+    Route::resource('waypoints', 'Waypoint\WaypointController');
 });

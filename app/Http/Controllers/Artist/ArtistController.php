@@ -89,19 +89,25 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        $this->authorize('create', Artist::class);
+        $this->authorize('update', Artist::class);
+        return view('artists.edit')->with(compact('artist'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Artists\StoreArtist  $request
      * @param  \App\Artist  $artist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Artist $artist)
+    public function update(StoreArtist $request, Artist $artist)
     {
-        $this->authorize('create', Artist::class);
+        $this->authorize('update', Artist::class);
+        $artist->fill($request->all());
+        $artist->save();
+        return redirect()
+            ->route('artists.show', ['artist' => $artist->id])
+            ->with('success', "L'artiste a bien été modifié !");
     }
 
     /**
@@ -112,6 +118,10 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        $this->authorize('create', Artist::class);
+        $this->authorize('delete', Artist::class);
+        $artist->delete();
+        return redirect()
+            ->route('artists.index')
+            ->with('success', "L'artiste : {$artist->name} a bien été supprimé !");
     }
 }

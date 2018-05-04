@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Artists;
+namespace App\Http\Requests\Waypoints;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * StoreArtist
+ * StoreWaypoint
  *
  * @author Bastien Nicoud
- * @package App\Http\Requests\Artists
+ * @package App\Http\Requests\Waypoints
  */
-class StoreArtist extends FormRequest
+class StoreWaypoint extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

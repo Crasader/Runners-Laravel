@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Waypoint;
 use App\Waypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Waypoints\StoreWaypoint;
 use App\Http\Resources\waypoints\WaypointSearchResource;
 
 /**
@@ -22,7 +23,7 @@ class WaypointController extends Controller
      */
     public function index()
     {
-        $waypoints = Waypoint::paginate(20);
+        $waypoints = Waypoint::orderBy('name', 'asc')->paginate(20);
         return view('waypoints.index')->with(compact('waypoints'));
     }
 
@@ -33,18 +34,21 @@ class WaypointController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Waypoint::class);
+        return view('waypoints.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Waypoints\StoreWaypoint  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreWaypoint $request)
     {
-        //
+        $this->authorize('create', Waypoint::class);
+        Waypoint::create($request->all());
+        return redirect()->route('waypoints.index')->with('success', "Le lieux a bien été ajouté.");
     }
 
     /**
@@ -55,7 +59,7 @@ class WaypointController extends Controller
      */
     public function show(Waypoint $waypoint)
     {
-        //
+        return view('waypoints.show')->with(compact('waypoint'));
     }
 
     /**
@@ -84,7 +88,8 @@ class WaypointController extends Controller
      */
     public function edit(Waypoint $waypoint)
     {
-        //
+        $this->authorize('update', Waypoint::class);
+        return view('waypoints.edit')->with(compact('waypoint'));
     }
 
     /**
@@ -96,7 +101,12 @@ class WaypointController extends Controller
      */
     public function update(Request $request, Waypoint $waypoint)
     {
-        //
+        $this->authorize('update', Waypoint::class);
+        $waypoint->fill($request->all());
+        $waypoint->save();
+        return redirect()
+            ->route('waypoints.show', ['waypoint' => $waypoint->id])
+            ->with('success', "Le lieux a bien été modifié !");
     }
 
     /**
@@ -107,6 +117,10 @@ class WaypointController extends Controller
      */
     public function destroy(Waypoint $waypoint)
     {
-        //
+        $this->authorize('delete', Waypoint::class);
+        $waypoint->delete();
+        return redirect()
+            ->route('waypoints.index')
+            ->with('success', "Le lieu : {$waypoint->name} a bien été supprimé !");
     }
 }

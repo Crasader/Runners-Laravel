@@ -22,7 +22,8 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artist::paginate(20);
+        return view('artists.index')->with(compact('artists'));
     }
 
     /**

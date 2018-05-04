@@ -30,11 +30,18 @@
                             Créer run
                         </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item" href="{{ route('runs.index') }}">
+                        <a class="navbar-item" href="{{ route('waypoints.index') }}">
                             Afficher les waypoints
                         </a>
-                        <a class="navbar-item" href="{{ route('runs.create') }}">
+                        <a class="navbar-item" href="{{ route('waypoints.create') }}">
                             Créer un waypoint
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ route('artists.index') }}">
+                            Afficher les artistes
+                        </a>
+                        <a class="navbar-item" href="{{ route('artists.create') }}">
+                            Créer un artiste
                         </a>
                     </div>
                 </div>

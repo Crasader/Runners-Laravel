@@ -100,6 +100,9 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Artists crud
      */
+    // Import system (csv file)
+    Route::get('artists/import', 'Artist\ArtistController@import')->name('artists.import-form');
+    Route::post('artists/import', 'Artist\ArtistController@import')->name('artists.import');
     // Specific route for the autocomplete fields
     Route::post('artists/search', 'Artist\ArtistController@search')->name('artists.search');
     Route::resource('artists', 'Artist\ArtistController');

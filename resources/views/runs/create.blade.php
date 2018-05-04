@@ -30,7 +30,7 @@
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('users.store') }}" method="POST">
+                <form action="{{ route('runs.store') }}" method="POST">
 
                     {{ csrf_field() }}
 
@@ -88,11 +88,11 @@
                                 'errors'      => $errors
                                 ])
                                 @slot('button')
-                                    <a class="button is-info">
+                                    <button id="add-waypoint" data-waypoint-index="1" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>
-                                    </a>
+                                    </button>
                                 @endslot
                             @endcomponent
 

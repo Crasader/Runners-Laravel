@@ -110,6 +110,9 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Waypoints crud
      */
+    // Import system (csv file)
+    Route::get('waypoints/import', 'Waypoint\WaypointController@import')->name('waypoints.import-form');
+    Route::post('waypoints/import', 'Waypoint\WaypointController@import')->name('waypoints.import');
     // Specific route for the autocomplete fields
     Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
     Route::resource('waypoints', 'Waypoint\WaypointController');

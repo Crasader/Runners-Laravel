@@ -22,7 +22,8 @@ class WaypointController extends Controller
      */
     public function index()
     {
-        //
+        $waypoints = Waypoint::paginate(20);
+        return view('waypoints.index')->with(compact('waypoints'));
     }
 
     /**

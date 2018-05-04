@@ -71,7 +71,7 @@ class WaypointController extends Controller
             $results = Waypoint::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
             return WaypointSearchResource::collection($results);
         } else {
-            return response()->json(null, 400);
+            return response()->json(null, 204);
         }
     }
 

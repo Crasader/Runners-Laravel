@@ -63,30 +63,53 @@
                                 'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])
+                                <p class="help">
+                                    Si inéxistant, il sera ajouté a la base de données.
+                                </p>
                             @endcomponent
 
                         </div>
                     </div>
 
                     <div class="field is-horizontal">
-                        <div class="field-label"></div>
+                        <div class="field-label is-normal">
+                            <label class="label">Départ</label>
+                        </div>
                         <div class="field-body">
-
-                            {{-- USERNAME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'name',
-                                'placeholder' => "Nom d'utilisateur",
-                                'type'        => 'text',
-                                'icon'        => 'fa-user',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
 
                             {{-- WAYPOINT --}}
                             {{-- SEARCH FIELD --}}
                             @component('components/horizontal_search_input', [
                                 'name'        => 'waypoint[1]',
                                 'placeholder' => 'Lieux de départ',
+                                'type'        => 'text',
+                                'icon'        => 'fa-search',
+                                'searchUrl'   => route('waypoints.search'),
+                                'errors'      => $errors
+                                ])
+                                @slot('button')
+                                    <a class="button is-info">
+                                        <span class="icon">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </a>
+                                @endslot
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Arrivée</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- WAYPOINT --}}
+                            {{-- SEARCH FIELD --}}
+                            @component('components/horizontal_search_input', [
+                                'name'        => 'waypoint[2]',
+                                'placeholder' => "Lieux d'arrivée",
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
                                 'searchUrl'   => route('waypoints.search'),

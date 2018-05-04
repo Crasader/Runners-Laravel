@@ -41,34 +41,42 @@ for (let searchField of searchFields) {
     let resultEl = document.getElementById(`search-field-${el.name}`)
     let apiUrl = el.getAttribute('data-search-api-url')
 
-    search(apiUrl, el.value).then((datas) => {
+    if (e.data !== null) {
+      search(apiUrl, el.value).then((datas) => {
+        if (document.getElementById(`search-results-${el.name}`)) {
+          document.getElementById(`search-results-${el.name}`).remove()
+        }
+
+        if (datas.length !== 0) {
+          let content = document.createElement('div')
+          content.className = 'dropdown-content'
+
+          for (let result of datas) {
+            let resultElement = document.createElement('div')
+            resultElement.className = 'dropdown-item'
+            resultElement.innerHTML = result.name
+            content.appendChild(resultElement)
+          }
+
+          let results = document.createElement('div')
+          results.className = 'dropdown-menu'
+          results.id = `search-results-${el.name}`
+          results.appendChild(content)
+
+          resultEl.appendChild(results)
+
+          for (let searchResult of content.children) {
+            searchResult.addEventListener('click', (e) => {
+              document.getElementById(`search-input-${el.name}`).value = e.target.innerText
+              document.getElementById(`search-results-${el.name}`).remove()
+            })
+          }
+        }
+      })
+    } else {
       if (document.getElementById(`search-results-${el.name}`)) {
         document.getElementById(`search-results-${el.name}`).remove()
       }
-
-      let content = document.createElement('div')
-      content.className = 'dropdown-content'
-
-      for (let result of datas) {
-        let resultElement = document.createElement('div')
-        resultElement.className = 'dropdown-item'
-        resultElement.innerHTML = result.name
-        content.appendChild(resultElement)
-      }
-
-      let results = document.createElement('div')
-      results.className = 'dropdown-menu'
-      results.id = `search-results-${el.name}`
-      results.appendChild(content)
-
-      resultEl.appendChild(results)
-
-      for (let searchResult of content.children) {
-        searchResult.addEventListener('click', (e) => {
-          document.getElementById(`search-input-${el.name}`).value = e.target.innerText
-          document.getElementById(`search-results-${el.name}`).remove()
-        })
-      }
-    })
+    }
   })
 }

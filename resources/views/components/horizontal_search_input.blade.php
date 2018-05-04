@@ -11,7 +11,7 @@
   -- @author Bastien Nicoud
   --}}
 
-<div class="field">
+<div class="field {{ isset($button) ? 'is-grouped' : '' }}">
     <p id="search-field-{{ $name }}" class="autocomplete control is-expanded has-icons-left">
         {{-- The input, with specific ID and data-atribute to be detected by javascript --}}
         <input
@@ -30,6 +30,13 @@
             <i class="fas {{ $icon }}"></i>
         </span>
     </p>
+    {{-- Display a right button if the slot button is defined --}}
+    @if(isset($button))
+        <p class="control">
+            {{ $button }}
+        </p>
+    @endif
+    {{-- Error display --}}
     @if ($errors->has($name))
         <p class="help is-danger">{{ $errors->first($name) }}</p>
     @endif

@@ -71,8 +71,9 @@ class ArtistController extends Controller
             $results = Artist::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
             return ArtistResource::collection($results);
         } else {
-            return response()->json(null, 400);
+            return response()->json([], 200);
         }
+        return response()->json([], 200);
     }
 
     /**

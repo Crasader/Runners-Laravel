@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Artist;
 use App\Artist;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Artists\StoreArtist;
 use App\Http\Resources\Artists\ArtistResource;
 
 /**
@@ -22,7 +23,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = Artist::paginate(20);
+        $artists = Artist::orderBy('name', 'asc')->paginate(25);
         return view('artists.index')->with(compact('artists'));
     }
 
@@ -33,18 +34,21 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Artist::class);
+        return view('artists.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Artists\StoreArtist  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArtist $request)
     {
-        //
+        $this->authorize('create', Artist::class);
+        Artist::create($request->all());
+        return redirect()->route('artists.index')->with('success', "L'artiste a bien été crée !");
     }
 
     /**
@@ -55,7 +59,7 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        //
+        return view('artists.show');
     }
 
     /**
@@ -85,7 +89,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        //
+        $this->authorize('create', Artist::class);
     }
 
     /**
@@ -97,7 +101,7 @@ class ArtistController extends Controller
      */
     public function update(Request $request, Artist $artist)
     {
-        //
+        $this->authorize('create', Artist::class);
     }
 
     /**
@@ -108,6 +112,6 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        //
+        $this->authorize('create', Artist::class);
     }
 }

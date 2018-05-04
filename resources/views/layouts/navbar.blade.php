@@ -33,16 +33,20 @@
                         <a class="navbar-item" href="{{ route('waypoints.index') }}">
                             Afficher les waypoints
                         </a>
-                        <a class="navbar-item" href="{{ route('waypoints.create') }}">
-                            Créer un waypoint
-                        </a>
+                        @can('create', App\Artist::class)
+                            <a class="navbar-item" href="{{ route('waypoints.create') }}">
+                                Créer un waypoint
+                            </a>
+                        @endcan
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('artists.index') }}">
                             Afficher les artistes
                         </a>
-                        <a class="navbar-item" href="{{ route('artists.create') }}">
-                            Créer un artiste
-                        </a>
+                        @can('create', App\Waypoint::class)
+                            <a class="navbar-item" href="{{ route('artists.create') }}">
+                                Créer un artiste
+                            </a>
+                        @endcan
                     </div>
                 </div>
 

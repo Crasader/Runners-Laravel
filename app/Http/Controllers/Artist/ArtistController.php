@@ -59,7 +59,7 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        return view('artists.show');
+        return view('artists.show')->with(compact('artist'));
     }
 
     /**

@@ -7,8 +7,8 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('groups.index') }}">Groupes</a></li>
-<li class="is-active"><a href="#" aria-current="page">{{ $group->name }}</a></li>
+<li><a href="{{ route('artists.index') }}">Artistes</a></li>
+<li class="is-active"><a href="#" aria-current="page">{{ $artist->name }}</a></li>
 @endsection
 
 @section('content')
@@ -19,30 +19,27 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Groupe <span class="tag is-large" style="background-color: #{{ $group->color }};">{{ $group->name }}</span></h1>
+                <h1 class="title is-2">{{ $artist->name }}</h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="{{ route('groups.create') }}" class="button is-info">Horaire du groupe</a>
-                    </p>
-                    @can('update', $group)
+                    @can('update', $artist)
                         <p class="control">
-                            <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="button is-info">Modifier le groupe</a>
+                            <a href="{{ route('artists.edit', ['artist' => $artist->id]) }}" class="button is-info">Modifier l'artiste</a>
                         </p>
                     @endcan
-                    @can('delete', $group)
-                        <form id="delete-group-form"
-                            action="{{ route('groups.destroy', ['group' => $group->id]) }}"
+                    @can('delete', $artist)
+                        <form id="delete-artist-form"
+                            action="{{ route('artists.destroy', ['artist' => $artist->id]) }}"
                             method="POST" style="display: none;">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                         </form>
                         <p class="control">
                             <button onclick="event.preventDefault();
-                                document.getElementById('delete-group-form').submit();"
+                                document.getElementById('delete-artist-form').submit();"
                                 class="button is-danger">
-                                Supprimer le groupe : {{ $group->name }}
+                                Supprimer : {{ $artist->name }}
                             </button>
                         </p>
                     @endcan
@@ -52,7 +49,7 @@
 
         <div class="columns">
             <div class="column">
-                <h2 class="title is-3">Utilisateurs appartenant au groupe</h2>
+                <h2 class="title is-3">Runs pour le groupe</h2>
             </div>
         </div>
 
@@ -70,30 +67,43 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Départ prévu à</th>
+                            <th>A démarré</th>
+                            <th>A terminé</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Départ prévu à</th>
+                            <th>A démarré</th>
+                            <th>A terminé</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($group->users as $user)
+                        @foreach ($artist->runs as $run)
                             <tr>
-                                <th>{{ $user->fullname }}</th>
+                                <th>{{ $run->name }}</th>
                                 {{-- Display a tag with the group background color --}}
-                                <td>{{ $user->email }}</td>
+                                <th>
+                                    {{-- Status tag (see related component) --}}
+                                    @component('components/status_tag', ['status' => $run->status])
+                                    @endcomponent
+                                </th>
+                                <td>{{ $run->planned_at->format(' j F Y H:i:s') }}</td>
+                                <td>{{ $run->started_at->format(' j F Y H:i:s') }}</td>
+                                <td>{{ $run->ended_at->format(' j F Y H:i:s') }}</td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-link">
+                                        <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-small is-link">
                                             Edit
                                         </a>
-                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-link">
+                                        <a href="{{ route('runs.show', ['run' => $run->id]) }}" class="button is-small is-link">
                                             Show
                                         </a>
                                     </div>

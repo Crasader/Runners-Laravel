@@ -22,7 +22,7 @@
                 <h1 class="title is-2">Liste des runns</h1>
             </div>
             <div class="column">
-                @can('create', App\User::class)
+                @can('create', App\Run::class)
                     <div class="field is-grouped is-pulled-right">
                         <p class="control">
                             <a href="{{ route('runs.create') }}" class="button is-info">Nouveau run</a>

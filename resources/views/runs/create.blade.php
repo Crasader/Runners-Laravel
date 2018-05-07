@@ -22,8 +22,15 @@
 <div class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Nouveau run</h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    <p class="control">
+                        <a href="#" class="button is-success">Créer le run</a>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -33,6 +40,8 @@
                 <form action="{{ route('runs.store') }}" method="POST">
 
                     {{ csrf_field() }}
+
+                    <h2 class="title is-4">Informations générales</h3>
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
@@ -83,7 +92,7 @@
                                 'name'        => 'waypoint[1]',
                                 'placeholder' => 'Lieux de départ',
                                 'type'        => 'text',
-                                'icon'        => 'fa-search',
+                                'icon'        => 'fa-map-signs',
                                 'searchUrl'   => route('waypoints.search'),
                                 'errors'      => $errors
                                 ])
@@ -111,7 +120,7 @@
                                 'name'        => 'waypoint[2]',
                                 'placeholder' => "Lieux d'arrivée",
                                 'type'        => 'text',
-                                'icon'        => 'fa-search',
+                                'icon'        => 'fa-map-marker-alt',
                                 'searchUrl'   => route('waypoints.search'),
                                 'errors'      => $errors
                                 ])
@@ -122,26 +131,76 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Coordonées</label>
+                            <label class="label">Horaires</label>
                         </div>
                         <div class="field-body">
 
-                            {{-- PHONE NUMBER --}}
+                            {{-- CAR TYPE --}}
                             @component('components/horizontal_form_input', [
-                                'name'        => 'phone_number',
-                                'placeholder' => "Numéro de téléphone",
-                                'type'        => 'text',
-                                'icon'        => 'fa-phone',
+                                'name'        => 'planned_at',
+                                'placeholder' => "Type de véhicule",
+                                'type'        => 'datetime-local',
+                                'icon'        => 'fa-clock',
                                 'errors'      => $errors
                                 ])
                             @endcomponent
 
-                            {{-- EMAIL --}}
+                            {{-- CAR --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'end_planned_at',
+                                'placeholder' => "Véhicule",
+                                'type'        => 'datetime-local',
+                                'icon'        => 'fa-clock',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <h2 class="title is-4">Conducteurs</h3>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Runner</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- CAR TYPE --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'phone_number',
+                                'placeholder' => "Conducteur",
+                                'type'        => 'text',
+                                'icon'        => 'fa-user',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Véhicule</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- CAR TYPE --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'phone_number',
+                                'placeholder' => "Type de véhicule",
+                                'type'        => 'text',
+                                'icon'        => 'fa-truck',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                            {{-- CAR --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'email',
-                                'placeholder' => "Adresse e-mail",
+                                'placeholder' => "Véhicule",
                                 'type'        => 'text',
-                                'icon'        => 'fa-envelope',
+                                'icon'        => 'fa-car',
                                 'errors'      => $errors
                                 ])
                             @endcomponent
@@ -156,15 +215,15 @@
                         <div class="field-body">
 
                             {{-- SEX --}}
-                            <div class="field is-narrow">
-                                <div class="control">
-                                    <div class="select is-fullwidth">
-                                        <select name="sex">
-                                            <option value="m">Homme</option>
-                                            <option value="w">Femme</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="field is-pulled-right">
+                                <p class="control">
+                                    <a class="button is-info">
+                                        <span class="icon">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                        <span>Ajouter un runner</span>
+                                    </a>
+                                </p>
                             </div>
 
                         </div>

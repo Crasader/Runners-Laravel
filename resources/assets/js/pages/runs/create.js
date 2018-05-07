@@ -6,9 +6,18 @@
 
 console.log('RUNS CREATE')
 
-// ads new waypoint field when click on plus button
-document.getElementById('add-waypoint').addEventListener('click', (e) => {
-  e.preventDefault()
-  console.log(e)
-  console.log(e.target.getAttribute('data-waypoint-index'))
-})
+let observeNewWaypoint = function (element) {
+  console.log(`Observe waypoint : ${element.id}`)
+  element.addEventListener('click', (e) => {
+    e.preventDefault()
+    console.log(e)
+  })
+}
+
+// Select all the buttons to add waypoints
+let waypointsAddButtons = document.querySelectorAll('[id^="add-waypoint-"]')
+
+// Initialize all observers
+for (let waypointAddButton of waypointsAddButtons) {
+  observeNewWaypoint(waypointAddButton)
+}

@@ -97,7 +97,7 @@
                                 'errors'      => $errors
                                 ])
                                 @slot('button')
-                                    <button id="add-waypoint" data-waypoint-index="1" class="button is-info">
+                                    <button id="add-waypoint-1" data-waypoint-index="1" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="field-body">
 
-                            {{-- CAR TYPE --}}
+                            {{-- START TIME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'planned_at',
                                 'placeholder' => "Type de véhicule",
@@ -145,7 +145,7 @@
                                 ])
                             @endcomponent
 
-                            {{-- CAR --}}
+                            {{-- END TIME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'end_planned_at',
                                 'placeholder' => "Véhicule",
@@ -166,7 +166,7 @@
                         </div>
                         <div class="field-body">
 
-                            {{-- CAR TYPE --}}
+                            {{-- RUNNER --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'phone_number',
                                 'placeholder' => "Conducteur",

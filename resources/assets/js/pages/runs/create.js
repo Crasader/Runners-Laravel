@@ -17,9 +17,10 @@ for (let waypointAddButton of waypointsAddButtons) {
 }
 
 // Scan the page and get all the serch fields
-let searchFields = document.querySelectorAll('[id^="search-input-"]')
+let fields = document.querySelectorAll('[id^="search-input-"]')
 
 // Initialize all the search fields
-for (let el of searchFields) {
-  SearchField.observe(el)
+for (let el of fields) {
+  let field = new SearchField()
+  field.observe(el)
 }

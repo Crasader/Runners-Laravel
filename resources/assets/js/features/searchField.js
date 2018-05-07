@@ -5,9 +5,17 @@
 *
 * !! WARNING !! The search fields dosen't use api routes, because is not the same authentication system
 *
+* TODO:
+* - Rewrite the modue more "object orented"
+*
 * @author Bastien Nicoud
 */
 export class SearchField {
+  /**
+   * Observe
+   *
+   * @param {Element} searchField The fiels on wich to graft the search
+   */
   observe (searchField) {
     // Hook events on each search fields
     searchField.addEventListener('input', (e) => {
@@ -55,6 +63,11 @@ export class SearchField {
     })
   }
 
+  /**
+   * Make the call to the server to gets the results
+   * @param {string} apiUrl The url to the api
+   * @param {string} needle The needle to pass in the query
+   */
   search (apiUrl, needle) {
     return new Promise((resolve, reject) => {
       fetch(apiUrl, {

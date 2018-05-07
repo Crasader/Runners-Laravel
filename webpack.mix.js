@@ -23,8 +23,6 @@ mix
   .js('resources/assets/js/pages/users/edit.js', 'js/pages/users')
   .js('resources/assets/js/pages/groups/manager.js', 'js/pages/groups')
   .js('resources/assets/js/pages/runs/create.js', 'js/pages/runs')
-  // FEATURES
-  .js('resources/assets/js/features/search-field.js', 'js/features')
   // SCSS
   .sass('resources/assets/main.scss', 'css')
 

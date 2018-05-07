@@ -13,8 +13,6 @@
 
 @push('scripts')
     <script src="{{ mix('js/pages/runs/create.js') }}"></script>
-    {{-- Script for the search fields nesesary for right work of the component --}}
-    <script src="{{ mix('js/features/search-field.js') }}"></script>
 @endpush
 
 @section('content')

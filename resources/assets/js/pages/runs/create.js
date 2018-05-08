@@ -3,12 +3,24 @@
 *
 * @author Bastien Nicoud
 */
+import { observeNewWaypoint } from '../../features/waypointsFields'
+import { SearchField } from '../../features/searchField'
 
 console.log('RUNS CREATE')
 
-// ads new waypoint field when click on plus button
-document.getElementById('add-waypoint').addEventListener('click', (e) => {
-  e.preventDefault()
-  console.log(e)
-  console.log(e.target.getAttribute('data-waypoint-index'))
-})
+// Select all the buttons to add waypoints
+let waypointsAddButtons = document.querySelectorAll('[id^="add-waypoint-"]')
+
+// Initialize all observers
+for (let waypointAddButton of waypointsAddButtons) {
+  observeNewWaypoint(waypointAddButton)
+}
+
+// Scan the page and get all the serch fields
+let fields = document.querySelectorAll('[id^="search-input-"]')
+
+// Initialize all the search fields
+for (let el of fields) {
+  let field = new SearchField()
+  field.observe(el)
+}

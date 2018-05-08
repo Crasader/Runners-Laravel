@@ -46,9 +46,7 @@ class RunController extends Controller
     public function create()
     {
         $this->authorize('create', Run::class);
-        $artists = Artist::all();
-        $waypoints = Waypoint::all();
-        return view('runs.create')->with(compact('waypoints', 'artists'));
+        return view('runs.create'); //->with(compact('waypoints', 'artists'));
     }
 
     /**

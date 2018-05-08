@@ -27,6 +27,7 @@ npm run watch # yarn watch
 **Helpful links :**
 
 * [Laravel-mix docs](https://laravel.com/docs/5.5/mix)
+* [Yarn](https://yarnpkg.com/en/)
 
 <hr>
 <div align="center">

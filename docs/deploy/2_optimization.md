@@ -29,9 +29,11 @@ To prevent PHP from reinterpreting all files at each request, it is important to
 
 **Helpful links :**
 
+* [PHP opcache](http://php.net/manual/fr/book.opcache.php)
+
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](./1_requirements.md) // [Summary](../README.md) // [Next ->](../README.md)**
 
 </div>

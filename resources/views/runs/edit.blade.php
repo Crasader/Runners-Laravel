@@ -1,5 +1,5 @@
 {{--
-  -- Runs creation
+  -- Runs edition
   --
   -- @author Bastien Nicoud
   --}}
@@ -8,7 +8,8 @@
 
 @section('breadcrum')
 <li><a href="{{ route('runs.index') }}">Runs</a></li>
-<li class="is-active"><a href="#" aria-current="page">Nouveau run</a></li>
+<li><a href="{{ route('runs.show', ['run' => $run->id]) }}">{{ $run->name }}</a></li>
+<li class="is-active"><a href="#" aria-current="page">Edition</a></li>
 @endsection
 
 @push('scripts')
@@ -21,12 +22,19 @@
     <div class="container">
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Nouveau run</h1>
+                <h1 class="title is-2">
+                    Edition du run {{ $run->name }}
+                    @component('components/status_tag', ['status' => $run->status])
+                    @endcomponent
+                </h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     <p class="control">
-                        <a href="#" class="button is-success">Créer le run</a>
+                        <a href="#" class="button is-success">Valider les modifications</a>
+                    </p>
+                    <p class="control">
+                        <a href="#" class="button is-danger">Supprimer ce run</a>
                     </p>
                 </div>
             </div>
@@ -35,9 +43,10 @@
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('runs.store') }}" method="POST">
+                <form id="update-run-form" action="{{ route('runs.update', ['run' => $run->id]) }}" method="POST">
 
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
 
                     <h2 class="title is-4">Informations générales</h3>
 
@@ -53,6 +62,7 @@
                                 'placeholder' => 'Nom du run',
                                 'type'        => 'text',
                                 'icon'        => 'fa-bookmark',
+                                'value'       => $run->name,
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
@@ -67,6 +77,7 @@
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
+                                'value'       => $run->artists->first()->name,
                                 'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])
@@ -78,33 +89,45 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Départ</label>
-                        </div>
-                        <div class="field-body">
+                    {{-- WAYPOINTS --}}
 
-                            {{-- WAYPOINT --}}
-                            {{-- SEARCH FIELD --}}
-                            @component('components/horizontal_search_input', [
-                                'name'        => 'waypoint[1]',
-                                'placeholder' => 'Lieux de départ',
-                                'type'        => 'text',
-                                'icon'        => 'fa-map-signs',
-                                'searchUrl'   => route('waypoints.search'),
-                                'errors'      => $errors
-                                ])
-                                @slot('button')
-                                    <button id="add-waypoint-1" data-waypoint-index="1" class="button is-info">
-                                        <span class="icon">
-                                            <i class="fas fa-plus"></i>
-                                        </span>
-                                    </button>
-                                @endslot
-                            @endcomponent
+                    @foreach($run->waypoints as $waypoint)
 
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                @if($loop->first)
+                                    <label class="label">Départ</label>
+                                @elseif($loop->last)
+                                    <label class="label">Arrivée</label>
+                                @else
+                                    <label class="label">Lieux {{ $waypoint->pivot->order }}</label>
+                                @endif
+                            </div>
+                            <div class="field-body">
+
+                                {{-- WAYPOINT --}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "waypoint[{$waypoint->pivot->order}]",
+                                    'placeholder' => 'Lieux de départ',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-map-signs',
+                                    'searchUrl'   => route('waypoints.search'),
+                                    'errors'      => $errors
+                                    ])
+                                    @slot('button')
+                                        <button id="add-waypoint-1" data-waypoint-index="1" class="button is-info">
+                                            <span class="icon">
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    @endslot
+                                @endcomponent
+
+                            </div>
                         </div>
-                    </div>
+
+                    @endforeach
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">

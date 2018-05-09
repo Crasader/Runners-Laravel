@@ -6,7 +6,7 @@
 * !! WARNING !! The search fields dosen't use api routes, because is not the same authentication system
 *
 * TODO:
-* - Rewrite the modue more "object orented"
+* - Rewrite the modue more "object oriented"
 *
 * @author Bastien Nicoud
 */

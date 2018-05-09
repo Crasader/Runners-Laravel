@@ -31,7 +31,7 @@ Laravel needs a specific unique key, uset to generate authentication tokens, and
 Just run :
 ```bash
 # At the root folder of the project
-npm i
+npm i # Or yarn
 ```
 
 
@@ -42,6 +42,7 @@ npm i
 
 **Helpful links :**
 * [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Composer](https://getcomposer.org/)
 
 <hr>
 <div align="center">

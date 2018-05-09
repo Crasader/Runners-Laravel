@@ -5,7 +5,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-half">
-                    <a href="#">
+                    <a href="{{ route('runs.index') }}">
                         <div class="notification is-warning">
                             <h2 class="title is-2 has-text-centered">Runs</h2>
                         </div>
@@ -13,7 +13,7 @@
                 </div>
                 
                 <div class="column is-half">
-                    <a href="/chauffeurs">
+                    <a href="{{ route('users.index') }}">
                         <div class="notification is-primary">
                             <h2 class="title is-2 has-text-centered">Chauffeurs</h2>
                         </div>
@@ -31,7 +31,7 @@
                 </div>
                 
                 <div class="column is-half">
-                    <a href="#">
+                    <a href="{{ route('stats.index') }}">
                         <div class="notification is-info">
                             <h2 class="title is-2 has-text-centered">Stats</h2>
                         </div>

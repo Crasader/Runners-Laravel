@@ -26,7 +26,7 @@
                     <p class="control">
                         <a href="{{ route('groups.create') }}" class="button is-info">Horaire du groupe</a>
                     </p>
-                    @can('update', App\Group::class)
+                    @can('update', $group)
                         <p class="control">
                             <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="button is-info">Modifier le groupe</a>
                         </p>
@@ -47,6 +47,12 @@
                         </p>
                     @endcan
                 </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                <h2 class="title is-3">Utilisateurs appartenant au groupe</h2>
             </div>
         </div>
 

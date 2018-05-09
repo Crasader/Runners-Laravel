@@ -7,8 +7,6 @@
 // Import the library to simply sort the elements
 import Sortable from 'sortablejs'
 
-console.log('SORTABLE')
-
 // Get all the groups elements on the page
 let elements = document.querySelectorAll('[id^="group"]')
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Group;
 
+use App\User;
 use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
 use App\Http\Requests\Groups\UpdateGroup;
 use App\Http\Requests\Groups\UpdateGroupUserAssociations;
-use App\User;
 
 /**
  * GroupController
@@ -115,6 +115,7 @@ class GroupController extends Controller
      */
     public function managerUpdate(UpdateGroupUserAssociations $request)
     {
+        $this->authorize('manage', Group::class);
         // The request contains association between users and groups
         // Get all the users have a group change
         $userGroupChanges = collect($request->user);

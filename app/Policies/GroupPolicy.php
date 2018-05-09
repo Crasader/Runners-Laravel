@@ -65,6 +65,17 @@ class GroupPolicy
     }
 
     /**
+     * Determine whether the user can manage the groups (user for the manager page).
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function manage(User $user)
+    {
+        return $user->may('manage_groups');
+    }
+
+    /**
      * Determine whether the user can delete the group.
      *
      * @param  \App\User  $user

@@ -14,6 +14,11 @@
 @import './scss/globals.scss';
 
 /**
+ * Import css for specific site functionalitys
+ */
+@import './scss/features/search-field.scss';
+
+/**
  * Import page specific scss
  * These scss wil be transpilled in the global css file
  * Il you want to load it only for specific page, see the docs

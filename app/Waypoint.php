@@ -43,4 +43,33 @@ class Waypoint extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    /**
+     * MODEL METHOD
+     * Return the position of this waypoit
+     * Use it only when the waypoint is retrived via eloquent relation, otherwise the pivot is not assigned
+     *
+     * @return int
+     */
+    public function position()
+    {
+        return $this->pivot->order;
+    }
+
+    /**
+     * MODEL METHOD
+     * Return a formated string with the position of the waypoint like : "Premier lieux" or "Lieux n° 3"
+     *
+     * @return string
+     */
+    public function positionToString()
+    {
+        if ($this->position() === 1) {
+            return "Lieux de départ";
+        } elseif ($this->position() === Run::find($this->pivot->run_id)->waypoints->count()) {
+            return "Lieux d'arrivée";
+        } else {
+            return "Lieux n° {$this->position()}";
+        }
+    }
 }

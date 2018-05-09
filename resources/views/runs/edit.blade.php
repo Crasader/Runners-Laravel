@@ -108,7 +108,7 @@
                                 {{-- WAYPOINT --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => 'waypoint[1]',
+                                    'name'        => "waypoint[{$waypoint->pivot->order}]",
                                     'placeholder' => 'Lieux de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',

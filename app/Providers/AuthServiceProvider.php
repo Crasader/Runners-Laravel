@@ -2,24 +2,28 @@
 
 namespace App\Providers;
 
+use App\Run;
+use App\Car;
+use App\User;
+use App\Role;
+use App\Group;
+use App\Artist;
+use App\Comment;
+use App\CarType;
+use App\Schedule;
+use App\Waypoint;
+use App\Policies\RunPolicy;
+use App\Policies\CarPolicy;
+use App\Policies\RolePolicy;
+use App\Policies\UserPolicy;
+use App\Policies\GroupPolicy;
+use App\Policies\ArtistPolicy;
+use App\Policies\CommentPolicy;
+use App\Policies\CarTypePolicy;
+use App\Policies\SchedulePolicy;
+use App\Policies\WaypointPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Schedule;
-use App\Group;
-use App\Policies\SchedulePolicy;
-use App\Policies\GroupPolicy;
-use App\Car;
-use App\Policies\CarPolicy;
-use App\CarType;
-use App\Policies\CarTypePolicy;
-use App\User;
-use App\Policies\UserPolicy;
-use App\Run;
-use App\Policies\RunPolicy;
-use App\Role;
-use App\Policies\RolePolicy;
-use App\Comment;
-use App\Policies\CommentPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -36,7 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         CarType::class  => CarTypePolicy::class,
         Run::class      => RunPolicy::class,
         Role::class     => RolePolicy::class,
-        Comment::class  => CommentPolicy::class
+        Comment::class  => CommentPolicy::class,
+        Artist::class   => ArtistPolicy::class,
+        Waypoint::class => WaypointPolicy::class
     ];
 
     /**

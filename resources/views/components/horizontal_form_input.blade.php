@@ -23,4 +23,5 @@
     @if ($errors->has($name))
         <p class="help is-danger">{{ $errors->first($name) }}</p>
     @endif
+    {{ $slot }}
 </div>

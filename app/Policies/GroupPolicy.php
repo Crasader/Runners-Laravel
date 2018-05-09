@@ -36,7 +36,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function view(User $user, Group $group)
+    public function view(User $user)
     {
         return true;
     }
@@ -60,6 +60,17 @@ class GroupPolicy
      * @return mixed
      */
     public function update(User $user, Group $group)
+    {
+        return $user->may('manage_groups');
+    }
+
+    /**
+     * Determine whether the user can manage the groups (user for the manager page).
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function manage(User $user)
     {
         return $user->may('manage_groups');
     }

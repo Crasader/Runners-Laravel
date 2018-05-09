@@ -40,5 +40,4 @@ Here we found the summary of all the documentation for the Runners project.
 ### Deployment / production installation
 
 1. [Server requirements](deploy/1_requirements.md)
-2. [Manual deploy](deploy/manual.md)
-3. [Using envoy](deploy/envoy.md)
+2. [Manual deploy](deploy/2_optimization.md)

@@ -16,16 +16,37 @@
 
                 {{-- Runs menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/runs">
+                    <a class="navbar-link" href="{{ route('runs.index') }}">
                         Runs
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/runs">
+                        <a class="navbar-item" href="{{ route('runs.big') }}">
+                            Grand affichage
+                        </a>
+                        <a class="navbar-item" href="{{ route('runs.index') }}">
                             Afficher runs
                         </a>
-                        <a class="navbar-item" href="/runs/create">
+                        <a class="navbar-item" href="{{ route('runs.create') }}">
                             Créer run
                         </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ route('waypoints.index') }}">
+                            Afficher les waypoints
+                        </a>
+                        @can('create', App\Artist::class)
+                            <a class="navbar-item" href="{{ route('waypoints.create') }}">
+                                Créer un waypoint
+                            </a>
+                        @endcan
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ route('artists.index') }}">
+                            Afficher les artistes
+                        </a>
+                        @can('create', App\Waypoint::class)
+                            <a class="navbar-item" href="{{ route('artists.create') }}">
+                                Créer un artiste
+                            </a>
+                        @endcan
                     </div>
                 </div>
 
@@ -63,19 +84,25 @@
                         <a class="navbar-item" href="{{ route('users.create') }}">
                             Créer chauffeurs
                         </a>
+                        <a class="navbar-item" href="{{ route('users.import-form') }}">
+                            Importer chauffeurs
+                        </a>
                     </div>
                 </div>
 
                 {{-- Groups menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/users">
+                    <a class="navbar-link" href="{{ route('groups.manager') }}">
                         Groupes
                     </a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/users">
-                            Afficher les groupes
+                        <a class="navbar-item" href="{{ route('groups.manager') }}">
+                            Manager de groupes
                         </a>
-                        <a class="navbar-item" href="/users/create">
+                        <a class="navbar-item" href="{{ route('groups.index') }}">
+                            Liste des groupes
+                        </a>
+                        <a class="navbar-item" href="{{ route('groups.create') }}">
                             Créer un groupe
                         </a>
                     </div>
@@ -95,7 +122,7 @@
             <div class="navbar-end">
                 {{-- Groups menu --}}
                 <a class="navbar-item" href="https://github.com/CPNV-ES/Runners-Laravel">
-                    <strong>v2.0.0-alpha.3</strong>
+                    <strong>{{ config('app.version') }}</strong>
                 </a>
 
                 {{-- Authentication Links --}}
@@ -112,11 +139,14 @@
                             </span>
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
-                            <a class="navbar-item" href="/vehicule/create">
+                            <a class="navbar-item" href="{{ route('home') }}">
+                                Home
+                            </a>
+                            <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>
                             @can('view', App\Role::class)
-                                <a class="navbar-item" href="/vehicule/create">
+                                <a class="navbar-item" href="{{ route('roles.index') }}">
                                     Gèrer les roles
                                 </a>
                             @endcan

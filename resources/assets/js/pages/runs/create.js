@@ -13,8 +13,8 @@ let waypointsAddButtons = document.querySelectorAll('[id^="add-waypoint-"]')
 
 // Initialize all observers (for the waypoints fields)
 for (let waypointAddButton of waypointsAddButtons) {
-  let waypointField = new WaypointField()
-  waypointField.observe(waypointAddButton)
+  let waypointField = new WaypointField(waypointAddButton)
+  waypointField.observe()
 }
 
 // Scan the page and get all the serch fields

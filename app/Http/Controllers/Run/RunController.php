@@ -79,7 +79,8 @@ class RunController extends Controller
      */
     public function edit(Run $run)
     {
-        //
+        $this->authorize('update', $run);
+        return view('runs.edit')->with(compact('run'));
     }
 
     /**

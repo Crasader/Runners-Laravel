@@ -20,6 +20,9 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">{{ $festival->name }}</h1>
             </div>
+            <div class="column is-4">
+                <a href="{{ route('schedules.create') }}" class="button is-info is-pulled-right">Nouvel horaire</a>
+            </div>
             <div class="column">
                 tutu
             </div>
@@ -28,38 +31,56 @@
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
-                <table class="table is-striped is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            {{$begin = (new Illuminate\Support\Carbon)->parse($festival->starts_on)}}
-                            {{$begin->subDay()}}
-                            {{$begin2 = (new Illuminate\Support\Carbon)->parse($festival->starts_on)}}
-                            {{$begin2->subDay()}}
-
-                            {{$range = $festival->starts_on->diffInDays($festival->ends_on)+1}}
-                            @for ($i = 0; $i < $range; $i++)
-                                <th>{{$begin->addDay()->format('l jS F Y')}}</th>
-                            @endfor
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            @for ($i = 0; $i < $range; $i++)
-                                <th>{{$begin2->addDay()->format('l jS F Y')}}</th>
-                            @endfor
-                        </tr>
-                    </tfoot>
-                    <tbody>
+                @for ($i = 0; $i < $range; $i++)
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                            <h2 class="title is-3">{{$beginFest->addDay()->format('l jS F Y')}}</h2>
+                        <thead>
+                            <tr>
+                                <th>Groupe</th>
+                                @for ($t = 0; $t < 47; $t++)
+                                    <th>{{$someTime->addMinutes(30)->toTimeString()}}</th>
+                                @endfor
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Groupe</th>
+                                @for ($t = 0; $t < 47; $t++)  
+                                    <th>{{$someTime->addMinutes(30)->toTimeString()}}</th>
+                                @endfor
+                            </tr>
+                        </tfoot>
                         
-                    </tbody>
-                </table>
+                        <tbody>
+                            
+                            
+                            @foreach ($groups as $group)
+                                <tr id="{{$group->name}}">
+                                    <td>{{$group->name}}</td>
+                                    @for ($t = 0; $t < 47; $t++)
+                                        <td style></td>
+                                    @endfor
+                                </tr>
+                            @endforeach
+                            @foreach ($schedules as $schedule)
+                                @if ($schedule->start_time >= '2018-04-17 00:00:00' && $schedule->start_time <= '2018-04-17 23:59:59')
+                                    @foreach ($groups as $group)
+                                        @if ($schedule->group_id === $group->id)
+                                            (({{$group->name}}-{{$schedule->start_time->toTimeString()}}-{{$schedule->end_time->toTimeString()}})) //
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endfor
+                </div>
             </div>
         </div>
-
     </div>
-</div>
-
-
+    
+    
+    
 
 
 @endsection

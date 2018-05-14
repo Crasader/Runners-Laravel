@@ -114,7 +114,7 @@
                 </a>
 
                 {{-- Kiéla? menu --}}
-                <a class="navbar-item" href="/horaires">
+                <a class="navbar-item" href="{{ route('kiela.index') }}">
                     Kiéla?
                 </a>
             </div>

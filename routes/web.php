@@ -80,6 +80,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('carTypes', 'car\CarTypeController');
 
     /**
+     * Schedules ressource
+     */
+    Route::resource('schedules', 'schedule\ScheduleController');
+
+    /**
      * Groups ressource
      */
     Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');

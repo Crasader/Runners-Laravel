@@ -119,7 +119,7 @@
                                     'errors'      => $errors
                                     ])
                                     @slot('button')
-                                        <button id="add-waypoint-1" data-waypoint-index="1" class="button is-info">
+                                        <button type="submit" name="addWaypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
                                             <span class="icon">
                                                 <i class="fas fa-plus"></i>
                                             </span>
@@ -172,20 +172,20 @@
                         </div>
                     </div>
 
-                    <h2 class="title is-4">Conducteurs</h3>
-
                     @foreach($run->subscriptions as $subscription)
+
+                        <h2 class="title is-4">Runner {{ $loop->index + 1 }}</h3>
 
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
-                                <label class="label">Runner {{ $loop->index + 1 }}</label>
+                                <label class="label">Runner</label>
                             </div>
                             <div class="field-body">
 
                                 {{-- Runner--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[user][{$subscription->user->id}]",
+                                    'name'        => "subscription[{$subscription->id}][user]",
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
@@ -204,10 +204,10 @@
                             </div>
                             <div class="field-body">
 
-                                {{-- Runner--}}
+                                {{-- CATYPE--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[carType][{$subscription->carType->id}]",
+                                    'name'        => "subscription[{$subscription->id}][carType]",
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
@@ -217,22 +217,15 @@
                                     ])
                                 @endcomponent
 
-                                {{-- CAR TYPE --}}
-                                @component('components/horizontal_form_input', [
-                                    'name'        => 'phone_number',
-                                    'placeholder' => "Type de véhicule",
-                                    'type'        => 'text',
-                                    'icon'        => 'fa-truck',
-                                    'errors'      => $errors
-                                    ])
-                                @endcomponent
-
                                 {{-- CAR --}}
-                                @component('components/horizontal_form_input', [
-                                    'name'        => 'email',
-                                    'placeholder' => "Véhicule",
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "subscription[{$subscription->id}][car]",
+                                    'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',
+                                    'value'       => $subscription->car->name,
+                                    'searchUrl'   => route('cars.search'),
                                     'errors'      => $errors
                                     ])
                                 @endcomponent
@@ -244,14 +237,13 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Sexe</label>
                         </div>
                         <div class="field-body">
 
                             {{-- SEX --}}
                             <div class="field is-pulled-right">
                                 <p class="control">
-                                    <a class="button is-info">
+                                    <button type="submit" value="addRunner" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>

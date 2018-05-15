@@ -10,6 +10,15 @@
 <li><a href="#">Horaires</a></li>
 @endsection
 
+@push('styles')
+    <link href="css/calendar/fullcalendar.css" rel="stylesheet">
+    <link href="css/calendar/scheduler.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+    <script src="{{ mix('js/pages/schedules/index.js') }}"></script>
+@endpush
+
 @section('content')
 
 <div class="section">
@@ -45,15 +54,15 @@
                         <tfoot>
                             <tr>
                                 <th>Groupe</th>
-                                @for ($t = 0; $t < 47; $t++)  
+                                @for ($t = 0; $t < 47; $t++)
                                     <th>{{$someTime->addMinutes(30)->toTimeString()}}</th>
                                 @endfor
                             </tr>
                         </tfoot>
-                        
+
                         <tbody>
-                            
-                            
+
+
                             @foreach ($groups as $group)
                                 <tr id="{{$group->name}}">
                                     <td>{{$group->name}}</td>
@@ -78,10 +87,9 @@
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
 
 
 @endsection
-  

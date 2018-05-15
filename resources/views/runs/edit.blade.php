@@ -204,6 +204,19 @@
                             </div>
                             <div class="field-body">
 
+                                {{-- Runner--}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "subscription[carType][{$subscription->carType->id}]",
+                                    'placeholder' => 'Type de véhicule',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-truck',
+                                    'value'       => $subscription->carType->name,
+                                    'searchUrl'   => route('carTypes.search'),
+                                    'errors'      => $errors
+                                    ])
+                                @endcomponent
+
                                 {{-- CAR TYPE --}}
                                 @component('components/horizontal_form_input', [
                                     'name'        => 'phone_number',

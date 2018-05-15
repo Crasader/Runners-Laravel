@@ -74,11 +74,15 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Cars ressource
      */
+    // Car route for searching in users table (used by search field)
+    Route::post('cars/search', 'car\CarController@search')->name('cars.search');
     Route::resource('cars', 'car\CarController');
 
     /**
      * CarTypes ressource
      */
+    // CarTypes route for searching in users table (used by search field)
+    Route::post('carTypes/search', 'car\CarTypeController@search')->name('carTypes.search');
     Route::resource('carTypes', 'car\CarTypeController');
 
     /**

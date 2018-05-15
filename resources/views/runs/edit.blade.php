@@ -89,6 +89,8 @@
                         </div>
                     </div>
 
+                    <h2 class="title is-4">Lieux de passage</h3>
+
                     {{-- WAYPOINTS --}}
 
                     @foreach($run->waypoints as $waypoint)
@@ -112,11 +114,12 @@
                                     'placeholder' => 'Lieux de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
+                                    'value'       => $waypoint->name,
                                     'searchUrl'   => route('waypoints.search'),
                                     'errors'      => $errors
                                     ])
                                     @slot('button')
-                                        <button id="add-waypoint-1" data-waypoint-index="1" class="button is-info">
+                                        <button type="submit" name="addWaypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
                                             <span class="icon">
                                                 <i class="fas fa-plus"></i>
                                             </span>
@@ -129,30 +132,11 @@
 
                     @endforeach
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Arrivée</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- WAYPOINT --}}
-                            {{-- SEARCH FIELD --}}
-                            @component('components/horizontal_search_input', [
-                                'name'        => 'waypoint[2]',
-                                'placeholder' => "Lieux d'arrivée",
-                                'type'        => 'text',
-                                'icon'        => 'fa-map-marker-alt',
-                                'searchUrl'   => route('waypoints.search'),
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
+                    <h2 class="title is-4">Horaires</h3>
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Horaires</label>
+                            <label class="label">Début</label>
                         </div>
                         <div class="field-body">
 
@@ -165,6 +149,15 @@
                                 'errors'      => $errors
                                 ])
                             @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Fin</label>
+                        </div>
+                        <div class="field-body">
 
                             {{-- END TIME --}}
                             @component('components/horizontal_form_input', [
@@ -179,66 +172,78 @@
                         </div>
                     </div>
 
-                    <h2 class="title is-4">Conducteurs</h3>
+                    @foreach($run->subscriptions as $subscription)
+
+                        <h2 class="title is-4">Runner {{ $loop->index + 1 }}</h3>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Runner</label>
+                            </div>
+                            <div class="field-body">
+
+                                {{-- Runner--}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "subscription[{$subscription->id}][user]",
+                                    'placeholder' => 'Conducteur',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-user',
+                                    'value'       => $subscription->user->name,
+                                    'searchUrl'   => route('users.search'),
+                                    'errors'      => $errors
+                                    ])
+                                @endcomponent
+
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Véhicule</label>
+                            </div>
+                            <div class="field-body">
+
+                                {{-- CATYPE--}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "subscription[{$subscription->id}][carType]",
+                                    'placeholder' => 'Type de véhicule',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-truck',
+                                    'value'       => $subscription->carType->name,
+                                    'searchUrl'   => route('carTypes.search'),
+                                    'errors'      => $errors
+                                    ])
+                                @endcomponent
+
+                                {{-- CAR --}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "subscription[{$subscription->id}][car]",
+                                    'placeholder' => 'Véhicule',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-car',
+                                    'value'       => $subscription->car->name,
+                                    'searchUrl'   => route('cars.search'),
+                                    'errors'      => $errors
+                                    ])
+                                @endcomponent
+
+                            </div>
+                        </div>
+
+                    @endforeach
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Runner</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- RUNNER --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'phone_number',
-                                'placeholder' => "Conducteur",
-                                'type'        => 'text',
-                                'icon'        => 'fa-user',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Véhicule</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- CAR TYPE --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'phone_number',
-                                'placeholder' => "Type de véhicule",
-                                'type'        => 'text',
-                                'icon'        => 'fa-truck',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                            {{-- CAR --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'email',
-                                'placeholder' => "Véhicule",
-                                'type'        => 'text',
-                                'icon'        => 'fa-car',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Sexe</label>
                         </div>
                         <div class="field-body">
 
                             {{-- SEX --}}
                             <div class="field is-pulled-right">
                                 <p class="control">
-                                    <a class="button is-info">
+                                    <button type="submit" value="addRunner" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -257,16 +262,12 @@
                             {{-- SUBMIT BUTTONS --}}
                             <div class="field">
                                 <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer l'utilisateur
+                                    <button type="submit" class="button is-success">
+                                        Modifier le run
                                     </button>
                                 </div>
-                                <p class="help">
-                                    Par défault les nouveaux utilisateurs sont crées sans mot de passes.
-                                    Il faut qu'ils confirment leur participation pour créer un login.
-                                </p>
                             </div>
-                            
+
                         </div>
                     </div>
 

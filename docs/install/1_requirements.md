@@ -12,7 +12,7 @@
 * JS
     * node.js > 8
 * Databse
-    * MySQL (or mariaDB)
+    * MySQL (^14.14)
 
 ## Dev env
 

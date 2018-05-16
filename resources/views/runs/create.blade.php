@@ -1,5 +1,5 @@
 {{--
-  -- Users creation
+  -- Runs creation
   --
   -- @author Bastien Nicoud
   --}}

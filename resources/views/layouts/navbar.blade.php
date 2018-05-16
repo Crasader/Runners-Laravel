@@ -109,7 +109,7 @@
                 </div>
 
                 {{-- Schedule menu --}}
-                <a class="navbar-item" href="/horaires">
+                <a class="navbar-item" href="{{ route('schedules.index')}}">
                     Horaires
                 </a>
 

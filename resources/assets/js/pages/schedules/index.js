@@ -4,8 +4,11 @@
 *
 * @author Bastien Nicoud
 */
+// jQuery is needed for fullcalendar
 import $ from 'jquery'
 import 'fullcalendar'
 import 'fullcalendar-scheduler'
 
-console.log('SCHEDULE INDEX')
+$(function () {
+  console.log('SCHEDULE INDEX')
+})

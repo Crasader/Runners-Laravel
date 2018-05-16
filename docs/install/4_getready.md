@@ -8,6 +8,18 @@ Dont forget to install the french locale on our system, example on ubuntu :
 sudo locale-gen fr_FR.UTF-8
 ```
 
+## Generating the transpilled assets
+
+All the assets (js, css) needs to be transpiled into the public folder. We use webpack to automate transpiling, and modules loading. Here 3 useful commands for working with assets.
+```sh
+# Run on the root folder of the project
+npm run dev # OR yarn dev # Will compoile the assets (non minifed) and generate source map (useful for dev)
+
+npm run watch # OR yarn watch # Will run the dev command on each file change
+
+npm run prod # yarn prod # will generate minified and versionned files for production deployment
+```
+
 ## Migrate the database
 
 ```sh
@@ -38,7 +50,7 @@ To lint **php** we use the [PHP_codesniffer](https://github.com/squizlabs/PHP_Co
 
 ### Editor configuration
 
-**VS code :**  
+**VS code :**
 Instal the [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [phpcs](https://marketplace.visualstudio.com/items?itemName=ikappas.phpcs) extensions.
 Eslint will direcly work, for phpcs just add these line in your vs code project settings :
 
@@ -50,7 +62,7 @@ Eslint will direcly work, for phpcs just add these line in your vs code project 
 }
 ```
 
-**Other :**  
+**Other :**
 You can easealy find extensions to use these linters with many editors.
 
 <br>

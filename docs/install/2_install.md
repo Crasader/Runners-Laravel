@@ -1,5 +1,29 @@
 # Install the project
 
+## Environment
+
+If you vant to run the app on your local machine, make sure to have installed all required dependencies.
+
+On macOS you can use [brew](https://brew.sh/index_fr) to easily install all dependencies.
+```sh
+# Install latest php
+brew install php
+# Install mySQL
+brew install mysql
+# Install composer
+brew install composer
+# Install node
+brew install node
+```
+
+On Linux (debian based), you can user aptitude.
+```sh
+apt-get install php
+apt-get install mysql
+apt-get install node
+```
+!! Warning, the packages on apt are not necessary the latest version.
+
 ## Get the sources
 
 ```sh

@@ -7,12 +7,18 @@
 // jQuery is needed for fullcalendar
 import $ from 'jquery'
 import 'fullcalendar'
+import 'fullcalendar/dist/locale/fr-ch.js'
 
 $(function () {
   // Initialize the calendar
   $('#schedule-calendar').fullCalendar({
+    locale: 'fr-ch',
     // Sets the default view of the calendar
     defaultView: 'agendaWeek',
+    // Options for the view
+    slotEventOverlap: false,
+    slotLabelFormat: 'H:mm',
+    scrollTime: '10:00:00',
     // Specify the source to load events vie ajax request
     events: {
       url: '/schedules/events',

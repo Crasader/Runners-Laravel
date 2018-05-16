@@ -12,7 +12,6 @@
 
 @push('styles')
     <link href="css/calendar/fullcalendar.css" rel="stylesheet">
-    <link href="css/calendar/scheduler.css" rel="stylesheet">
 @endpush
 
 @push('scripts')

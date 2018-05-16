@@ -27,7 +27,7 @@ php artisan migrate:fresh --seed
 ```
 
 This command will create a fresh database with the seeds specified in the `database/seeds` folder.
-If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/migrationAndSeeding.md) doc page.
+If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/1_migrationAndSeeding.md) doc page.
 
 ## Runners is ready
 
@@ -71,6 +71,10 @@ You can easealy find extensions to use these linters with many editors.
 <hr>
 
 **Helpful links :**
+
+* [Laravel mix (assets managment)](https://laravel.com/docs/5.5/mix)
+* [Laravel migrations](https://laravel.com/docs/5.5/migrations)
+* [Laravel seeding](https://laravel.com/docs/5.5/seeding)
 
 <hr>
 <div align="center">

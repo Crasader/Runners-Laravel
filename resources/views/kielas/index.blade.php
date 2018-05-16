@@ -17,8 +17,8 @@
             <div class="columns">
                 <div class="column is-12">
                     <h1 class="title is-2">Kiéla?</h1>
-                    {{$festival->name}}
-                    {{$now}}
+                    <h2 class="title is-3">{{$festival->name}}</h2>
+                    <b>Il est {{$now}}</b>
                 </div>
             </div>
             <div class="columns">
@@ -29,13 +29,9 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    <div class="title is-4">Présents :<hr></div>
                                     @foreach ($groups as $group)
-                                    
-                                        {{$group->name}}<br>
+                                        {{$group->name}} - {{$group->schedules->last()->group_id}} - {{$group->schedules->first()->start_time}}<br>
                                     @endforeach
-                                    <hr>
-                                    <div class="title is-4">Hors service :<hr></div>
                                 </div>
                             </div>
                         </article>
@@ -50,22 +46,36 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    <div class="title is-4">Présents :<hr></div>
                                     @foreach ($users as $user)
-
+                                        
                                         @if ($user->status == 'free')
-                                            {{$user->firstname}} - {{$user->status}}<br>
-                                        @elseif ($user->status == 'gone')
-                                            {{$user->firstname}} - {{$user->status}}<br>
-                                        @elseif ($user->status == 'not-present' || $user->status == 'not-requested')
-                                            {{$user->firstname}} - {{$user->status}}<br>
+                                            {{$user->firstname}} {{$user->lastname}}
+
+                                            @component('components/status_tag', ['status' => $user->status])
+                                            @endcomponent
+                                            <br><hr>
+
+                                        @endif
+
+                                        @if ($user->status == 'gone')
+
+                                            {{$user->firstname}} {{$user->lastname}}
+                                            @component('components/status_tag', ['status' => 'taken'])
+                                            @endcomponent
+                                            <br><hr>
+
+                                        @endif
+                                        @if ($user->status == 'not-present' || $user->status == 'not-requested')
+
+                                            {{$user->firstname}} {{$user->lastname}}
+                                            @component('components/status_tag', ['status' => 'hors_service'])
+                                            @endcomponent
+                                            <br><hr>
+
                                         @endif
 
 
                                     @endforeach
-                                    <hr>
-                                    <div class="title is-4">En run :<hr></div>
-                                    <div class="title is-4">Hors service :<hr></div>
                                 </div>
                             </div>
                         </article>
@@ -80,22 +90,32 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    <div class="title is-4">Présents :<hr></div>
                                     @foreach ($cars as $car)
 
                                         @if ($car->status == 'free')
-                                            {{$car->plate_number}} - {{$car->status}}<br> 
+
+                                             {{$car->model}} {{$car->plate_number}}
+                                            @component('components/status_tag', ['status' => $car->status])
+                                            @endcomponent
+                                            <br><hr>
+
                                         @elseif ($car->status == 'taken')
-                                            {{$car->plate_number}} - {{$car->status}}<br>
+
+                                            {{$car->model}} {{$car->plate_number}}
+                                            @component('components/status_tag', ['status' => $car->status])
+                                            @endcomponent
+                                            <br><hr>
+
                                         @else
-                                            {{$car->plate_number}} - {{$car->status}}<br>
+
+                                            {{$car->model}} {{$car->plate_number}}
+                                            @component('components/status_tag', ['status' => $car->status])
+                                            @endcomponent
+                                            <br><hr>
+
                                         @endif
                                         
                                     @endforeach
-                                    <hr>
-                                    <div class="title is-4">En run :<hr></div>
-                                    <div class="title is-4">Hors service :<hr></div>
-                                    <div class="title is-4">Problèmes :<hr></div>
                                 </div>
                             </div>
                         </article>

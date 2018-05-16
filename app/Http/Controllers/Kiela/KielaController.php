@@ -27,8 +27,8 @@ class KielaController extends Controller
     {
         $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
         $now = new Carbon();   
-        $users = User::orderBy('id', 'asc')->get();
-        $cars = Car::orderBy('id', 'asc')->get();
+        $users = User::orderBy('status', 'asc')->get();
+        $cars = Car::orderBy('status', 'asc')->get();
         $groups = Group::orderBy('id', 'asc')->get();
         
         return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'now'));

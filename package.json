@@ -24,6 +24,9 @@
     },
     "dependencies": {
         "bulma": "^0.7.0",
+        "fullcalendar": "^3.9.0",
+        "fullcalendar-scheduler": "^1.9.4",
+        "jquery": "^3.3.1",
         "sortablejs": "^1.7.0"
     }
 }

@@ -8,7 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Group;
+use App\Http\Resources\Schedules\CalendarFormatScheduleResource;
 
+/**
+ * ScheduleController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Schedule
+ */
 class ScheduleController extends Controller
 {
     /**
@@ -18,21 +25,19 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
-        $schedules = Schedule::orderBy('start_time', 'desc')->get();
-        $groups = Group::orderBy('name','asc')->get();
-        //New data to generate header of table with date
-        $beginFest = (new Carbon)->parse($festival->starts_on);
-        $beginFest = $beginFest->subDay();
-        //New data to generate footer of table with date
-        $beginFest2 = (new Carbon)->parse($festival->starts_on);
-        $beginFest2 = $beginFest2->subDay();
-        //Count the number of day for the festival
-        $range = $festival->starts_on->diffInDays($festival->ends_on)+1;
-        //New hour for table
-        $someTime = Carbon::createFromFormat('H:i', '00:00');
+        return view('schedules.index');
+    }
 
-        return view('schedules.index')->with(compact(['festival', 'schedules', 'beginFest', 'beginFest2', 'range', 'groups', 'someTime']));
+    /**
+     * Return all events at json format for the calendar
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function events(Request $request)
+    {
+        $events = Schedule::with('group')->get();
+        return CalendarFormatScheduleResource::collection($events);
     }
 
     /**

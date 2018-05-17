@@ -23,8 +23,10 @@ mix
   .js('resources/assets/js/pages/users/edit.js', 'js/pages/users')
   .js('resources/assets/js/pages/groups/manager.js', 'js/pages/groups')
   .js('resources/assets/js/pages/runs/create.js', 'js/pages/runs')
+  .js('resources/assets/js/pages/schedules/index.js', 'js/pages/schedules')
   // SCSS
   .sass('resources/assets/main.scss', 'css')
+  .copy('node_modules/fullcalendar/dist/fullcalendar.min.css', 'public/css/calendar/fullcalendar.css')
 
 // Create unique hash in production to force browser cache clearing
 if (mix.inProduction()) {

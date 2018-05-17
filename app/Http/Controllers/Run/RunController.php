@@ -92,7 +92,7 @@ class RunController extends Controller
      */
     public function update(Request $request, Run $run)
     {
-        //
+        dd($request->all());
     }
 
     /**

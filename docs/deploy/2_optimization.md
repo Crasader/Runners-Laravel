@@ -22,6 +22,14 @@ php artisan route:cache
 
 To prevent PHP from reinterpreting all files at each request, it is important to enable opcache. This will cache the OPcode, and sinificativly improuve the app performances.
 
+## Minified assets
+
+To generate minified and versionned javascript/css files, use the production command :
+```sh
+# In the root folder of the project
+npm run prod # OR yarn prod
+```
+
 <br>
 <br>
 <br>

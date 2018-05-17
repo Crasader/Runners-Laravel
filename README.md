@@ -6,22 +6,23 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
 
-## Version changelog **v2.0.0-alpha.6**
+## Version changelog **v2.0.0-alpha.7**
 
 Break changes :
 * x
 
 Changes :
-* Add show route for run crud
-
-Improuvments :
-* Little docs change
-
-Bux fixes :
 * x
 
+Improuvments :
+* x
+
+Bux fixes :
+* Missing commands in the docs
+
 In progress :
-* Creation and Edition of runs
+* Edit and create page for the run crud
+* Schedule system
 
 ## Start developping
 
@@ -39,8 +40,3 @@ If you seeded the database, you will have a couple users, but a few are importan
 |----------|---------------------|----------|
 | root     | root.toor@paleo.ch  | secret   |
 | runner   | runner@paleo.ch     | runner   |
-
-## Api
-
-Please refer to the [documentation](docs/README.md)
-And `/api` to get a listing of all available endpoints.

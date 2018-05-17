@@ -14,11 +14,8 @@ All the assets (js, css) needs to be transpiled into the public folder. We use w
 ```sh
 # Run on the root folder of the project
 npm run dev # OR yarn dev # Will compoile the assets (non minifed) and generate source map (useful for dev)
-
-npm run watch # OR yarn watch # Will run the dev command on each file change
-
-npm run prod # yarn prod # will generate minified and versionned files for production deployment
 ```
+[**More infos about assets managment**](../app/2_assets.md)
 
 ## Migrate the database
 
@@ -27,7 +24,15 @@ php artisan migrate:fresh --seed
 ```
 
 This command will create a fresh database with the seeds specified in the `database/seeds` folder.
-If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/migrationAndSeeding.md) doc page.
+If you want more infos about the seeding and the migrations, read the [migration and seeding](../app/1_migrationAndSeeding.md) doc page.
+
+## Storage
+
+Laravel store dynamic files in the storage folder. In `storage/app/public` we store all files that must be accesible by the client. To make this files reachable, we need to link the folder in the public repertory.
+```sh
+# In the root folder of the project
+php artisan storage:link
+```
 
 ## Runners is ready
 
@@ -71,6 +76,10 @@ You can easealy find extensions to use these linters with many editors.
 <hr>
 
 **Helpful links :**
+
+* [Laravel mix (assets managment)](https://laravel.com/docs/5.5/mix)
+* [Laravel migrations](https://laravel.com/docs/5.5/migrations)
+* [Laravel seeding](https://laravel.com/docs/5.5/seeding)
 
 <hr>
 <div align="center">

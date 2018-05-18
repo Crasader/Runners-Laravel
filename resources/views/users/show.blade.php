@@ -10,7 +10,7 @@
 <li><a href="{{ route('users.index') }}">Utilisateur</a></li>
 <li class="is-active"><a href="#" aria-current="page">{{ $user->fullname }}</a></li>
 @endsection
-  
+
 @section('content')
 
 <div class="section">
@@ -73,10 +73,20 @@
                             Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
                         </div>
                     </article>
+                    @can('update', $user)
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
+                            </p>
+                            <p class="control">
+                                <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
+                            </p>
+                        </div>
+                    @endcan
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
-                            Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }}, 
+                            Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
                             la connexion a l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
                                 <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
@@ -149,7 +159,7 @@
             <div class="column is-4">
                 <h2 class="title is-3">Derniers runs</h2>
             </div>
-    
+
             <div class="column is-8">
                 <h2 class="title is-3">Commentaires</h2>
             </div>
@@ -157,7 +167,7 @@
 
         <div class="columns">
             <div class="column is-4">
-                tutu
+                Pas encore implémenté.
             </div>
 
 

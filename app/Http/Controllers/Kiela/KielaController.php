@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Kiela;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\User;
-use App\Festival;
-use Illuminate\Support\Carbon;
 use App\Car;
+use App\User;
 use App\Group;
+use App\Festival;
+use App\Schedule;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 
 /**
  * KielaController
@@ -26,12 +27,14 @@ class KielaController extends Controller
     public function index()
     {
         $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
-        $now = new Carbon();   
+        $now = new Carbon();
         $users = User::orderBy('status', 'asc')->get();
         $cars = Car::orderBy('status', 'asc')->get();
         $groups = Group::orderBy('id', 'asc')->get();
+        $schedules = Schedule::orderBy('start_time', 'asc')->get();
+        $presentGroup = $groups->whereNotIn('schedule->start_time', $now);
         
-        return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'now'));
+        return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'schedules', 'now'));
     }
 
     /**

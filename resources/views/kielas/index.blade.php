@@ -1,5 +1,5 @@
 {{--
-  -- Cars index
+  -- Kiela index
   --
   -- @author Nicolas Henry
   --}}
@@ -18,7 +18,7 @@
                 <div class="column is-12">
                     <h1 class="title is-2">Kiéla?</h1>
                     <h2 class="title is-3">{{$festival->name}}</h2>
-                    <b>Il est {{$now}}</b>
+                    <b>Il est {{$now->format('H:i')}}</b>
                 </div>
             </div>
             <div class="columns">
@@ -30,7 +30,13 @@
                             <div class="media-content">
                                 <div class="content">
                                     @foreach ($groups as $group)
-                                        {{$group->name}} - {{$group->schedules->last()->group_id}} - {{$group->schedules->first()->start_time}}<br>
+                                        @if ($group->schedules->first()->start_time >= $now)
+
+                                            {{$group->name}}
+                                            @component('components/status_tag', ['status' => 'free'])
+                                            @endcomponent
+                                            <br><hr>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

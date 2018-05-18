@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="#">Horaires</a></li>
+    <li><a href="#">Horaires</a></li>
 @endsection
 
 @push('styles')

@@ -15,7 +15,7 @@
 @push('scripts')
     <script src="{{ mix('js/pages/users/edit.js') }}"></script>
 @endpush
-  
+
 @section('content')
 
 <div class="section">
@@ -44,21 +44,23 @@
                             </button>
                         </p>
                     @endcan
-                    @can('delete', $user)
-                        <p class="control">
-                            <form id="delete-user-form"
-                                action="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            </form>
-                            <button onclick="event.preventDefault();
-                                document.getElementById('delete-user-form').submit();"
-                                class="button is-danger">
-                                Supprimer {{ $user->fullname }}
-                            </button>
-                        </p>
-                    @endcan
+                    @unless($user->id === Auth::user()->id)
+                        @can('delete', $user)
+                            <p class="control">
+                                <form id="delete-user-form"
+                                    action="{{ route('users.destroy', ['user' => $user->id]) }}"
+                                    method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                </form>
+                                <button onclick="event.preventDefault();
+                                    document.getElementById('delete-user-form').submit();"
+                                    class="button is-danger">
+                                    Supprimer {{ $user->fullname }}
+                                </button>
+                            </p>
+                        @endcan
+                    @endunless
                 </div>
             </div>
         </div>
@@ -182,6 +184,28 @@
                     </div>
 
                     <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Role</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- ROLE --}}
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select name="role">
+                                            @foreach($roles as $role)
+                                                <option value="{{ $role->slug }}" {{ ($role->slug === $user->roles->first()->slug) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
                         <div class="field-label"></div>
                         <div class="field-body">
 
@@ -193,7 +217,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -248,7 +272,7 @@
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
-                            Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }}, 
+                            Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
                             la connexion a l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
                                 <strong>Vous pouvez en <a href="{{ route('users.create') }}">générer un</a>.</strong>

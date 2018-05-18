@@ -65,6 +65,7 @@ class UserController extends Controller
         $user->generateName();
         $user->save();
         $user->generateDefaultPictures();
+        $user->addRole($request->role);
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été crée");

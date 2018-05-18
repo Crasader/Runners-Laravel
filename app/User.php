@@ -278,7 +278,7 @@ class User extends Authenticatable
         if ($roleSlug === null) {
             $this->roles()->attach(Role::where('slug', 'runner')->first());
         } else {
-            $this->roles()->attach(Role::where('slug', $roleSlug)->first());
+            $this->roles()->sync([Role::where('slug', $roleSlug)->first()->id]);
         }
     }
 

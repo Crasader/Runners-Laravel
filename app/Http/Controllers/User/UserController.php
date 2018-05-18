@@ -10,6 +10,7 @@ use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
+use App\Role;
 
 /**
  * UserController
@@ -49,7 +50,8 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create', User::class);
-        return view('users.create');
+        $roles = Role::assignablesRoles()->get();
+        return view('users.create')->with(compact('roles'));
     }
 
     /**
@@ -110,7 +112,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        return view('users.edit')->with(compact('user'));
+        $roles = Role::assignablesRoles()->get();
+        return view('users.edit')->with(compact('user', 'roles'));
     }
 
     /**
@@ -126,6 +129,7 @@ class UserController extends Controller
 
         $user->fill($request->all());
         $user->save();
+        $user->addRole($request->role);
 
         return redirect()
             ->route('users.edit', ['user' => $user->id])

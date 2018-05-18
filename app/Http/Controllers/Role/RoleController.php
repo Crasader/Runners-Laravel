@@ -23,7 +23,7 @@ class RoleController extends Controller
     public function index()
     {
         $this->authorize('view', Role::class);
-        $roles = Role::all();
+        $roles = Role::assignablesRoles()->get();
         return view('roles.index')->with(compact('roles'));
     }
 

@@ -88,6 +88,8 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Schedules ressource
      */
+    // This route return all the events in json format for the calendar system
+    Route::post('schedules/events', 'schedule\ScheduleController@events')->name('schedules.events');
     Route::resource('schedules', 'schedule\ScheduleController');
 
     /**

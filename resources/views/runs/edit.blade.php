@@ -136,7 +136,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Début</label>
+                            <label class="label">Début prévu à :</label>
                         </div>
                         <div class="field-body">
 
@@ -146,7 +146,8 @@
                                 'placeholder' => "Type de véhicule",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
-                                'errors'      => $errors
+                                'errors'      => $errors,
+                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 
@@ -155,7 +156,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Fin</label>
+                            <label class="label">Fin prévue a :</label>
                         </div>
                         <div class="field-body">
 
@@ -165,7 +166,8 @@
                                 'placeholder' => "Véhicule",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
-                                'errors'      => $errors
+                                'errors'      => $errors,
+                                'value'       => $run->end_planned_at->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 

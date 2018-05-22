@@ -29,14 +29,15 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
+                                    
                                     @foreach ($groups as $group)
-                                        @if ($group->schedules->first()->start_time >= $now)
-
-                                            {{$group->name}}
+                                        @foreach ($group->schedules->where('start_time', '>=', $now)->unique() as $present)
+                                            
+                                            Groupe {{$group->name}}
                                             @component('components/status_tag', ['status' => 'free'])
-                                            @endcomponent
-                                            <br><hr>
-                                        @endif
+                                            @endcomponent<br><hr>
+                                    
+                                        @endforeach
                                     @endforeach
                                 </div>
                             </div>

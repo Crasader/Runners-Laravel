@@ -32,9 +32,14 @@ class KielaController extends Controller
         $cars = Car::orderBy('status', 'asc')->get();
         $groups = Group::orderBy('id', 'asc')->get();
         $schedules = Schedule::orderBy('start_time', 'asc')->get();
-        $presentGroup = $groups->whereNotIn('schedule->start_time', $now);
+
+        foreach($groups as $group){
+            foreach($group->schedules->where('start_time', '>=', $now)->unique() as $present){
+                $group->name;
+            }
+        }
         
-        return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'schedules', 'now'));
+        return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'schedules', 'now', 'present'));
     }
 
     /**

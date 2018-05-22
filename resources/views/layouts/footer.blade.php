@@ -28,10 +28,14 @@
         {{-- Copyright --}}
         <div class="content has-text-centered">
             <p>
-                <strong><a href="https://github.com/CPNV-ES/Runners-Laravel">Runners</a></strong> by 
-                <a href="https://github.com/bastiennicoud">Bastien Nicoud</a> and
-                <a href="https://github.com/NicolasHenryCPNV"> Nicolas Henry</a>
-                ©CPNV - {{ date("Y") }}
+                <strong><a href="https://github.com/CPNV-ES/Runners-Laravel">Runners</a></strong>
+                ©CPNV-ES {{ date("Y") }}
+            </p>
+        </div>
+
+        <div class="content has-text-centered">
+            <p>
+                Laravel : {{ App::VERSION() }} - Runners : {{ config('app.version') }}
             </p>
         </div>
 

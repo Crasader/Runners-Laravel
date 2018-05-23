@@ -87,13 +87,16 @@ class RunController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Runs\StoreNewRun  $request
      * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Run $run)
+    public function update(StoreNewRun $request, Run $run)
     {
-        dd($request->all());
+        $run->saveDatas($request->all());
+        // Save the run datas
+        // Save the artist and waypoints linked to the run
+        // Save the run drivers
     }
 
     /**

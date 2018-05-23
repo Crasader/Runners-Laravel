@@ -177,6 +177,22 @@ class Run extends Model
 
     /**
      * MODEL METHOD
+     * Save run datas
+     *
+     * @param array $runDatas the datas for the run creation
+     * @return bool
+     */
+    public function saveDatas($runDatas)
+    {
+        // Fill the run datas (we font use $this->fill because the date format not work)
+        $this->name           = $runDatas['name'];
+        $this->planned_at     = Carbon::parse($runDatas['planned_at']);
+        $this->end_planned_at = Carbon::parse($runDatas['end_planned_at']);
+        dd($runDatas);
+    }
+
+    /**
+     * MODEL METHOD
      * Determine if the run is ready to go
      *
      * @return bool

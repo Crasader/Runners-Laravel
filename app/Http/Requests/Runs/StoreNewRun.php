@@ -35,10 +35,10 @@ class StoreNewRun extends FormRequest
             'artist'                 => ['required_if:name,', 'string', 'min:1', 'max:200'],
             'planned_at'             => ['nullable', 'date'],
             'end_planned_at'         => ['nullable', 'date'],
-            'waypoint.*'             => ['sometimes', 'string'],
-            'subscription.*.user'    => ['sometimes', 'string', 'exists:users,name'],
-            'subscription.*.carType' => ['sometimes', 'string', 'exists:car_types,name'],
-            'subscription.*.car'     => ['sometimes', 'string', 'exists:cars,name']
+            'waypoints.*'             => ['sometimes', 'string'],
+            'subscriptions.*.user'    => ['sometimes', 'string', 'exists:users,name'],
+            'subscriptions.*.carType' => ['sometimes', 'string', 'exists:car_types,name'],
+            'subscriptions.*.car'     => ['sometimes', 'string', 'exists:cars,name']
         ];
     }
 }

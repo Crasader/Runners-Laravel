@@ -188,6 +188,7 @@ class Run extends Model
         $this->saveArtist($runDatas['artist']);
         $this->saveName($runDatas['name']);
         $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
+        $this->saveWaypoints($runDatas['waypoints']);
         dd($runDatas);
     }
 

@@ -193,8 +193,16 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Save the name (get it from the artist if nod)
+     * Save the name (get it from the artist if not set)
      */
+    public function saveName($name)
+    {
+        if (empty($name)) {
+            $this->name = $name;
+        } else {
+            $this->name = $this->artists->first()->name;
+        }
+    }
 
     /**
      * MODEL METHOD

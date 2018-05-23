@@ -186,10 +186,15 @@ class Run extends Model
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
-        $this->name = $runDatas['name'];
+        $this->saveName($runDatas['name']);
         $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
         dd($runDatas);
     }
+
+    /**
+     * MODEL METHOD
+     * Save the name (get it from the artist if nod)
+     */
 
     /**
      * MODEL METHOD

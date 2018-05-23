@@ -14,6 +14,7 @@ use App\Comment;
 use App\Artist;
 use App\RunSubscription;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * Run
@@ -188,13 +189,39 @@ class Run extends Model
         $this->saveArtist($runDatas['artist']);
         $this->saveName($runDatas['name']);
         $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
-        $this->saveWaypoints($runDatas['waypoints']);
+        $this->saveWaypoints(collect($runDatas['waypoints']));
         dd($runDatas);
     }
 
     /**
      * MODEL METHOD
+     * Save the waypoints for this run with the right order
+     *
+     * @param \Illuminate\Support\Collection $waypoints
+     * @return void
+     */
+    public function saveWaypoints($waypoints)
+    {
+        // Initialize an index to save the waypoints order
+        $i = 1;
+        $waypoints->each(function ($waypoint) use ($i) {
+            // Check if the waypoint exists in the database
+            if ($waypointDb = Waypoint::where('name', $waypoint)->first()) {
+                $this->waypoints()->sync([$waypointDb->id => ['order' => $i]]);
+            } else {
+                $newWaypoint = Waypoint::create(['name' => $waypoint]);
+                $this->waypoints()->sync([$newWaypoint->id => ['order' => $i]]);
+            }
+            $i++;
+        });
+    }
+
+    /**
+     * MODEL METHOD
      * Save the name (get it from the artist if not set)
+     *
+     * @param string $name
+     * @return void
      */
     public function saveName($name)
     {

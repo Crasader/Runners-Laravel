@@ -185,10 +185,29 @@ class Run extends Model
     public function saveDatas($runDatas)
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
-        $this->name           = $runDatas['name'];
-        $this->planned_at     = Carbon::parse($runDatas['planned_at']);
-        $this->end_planned_at = Carbon::parse($runDatas['end_planned_at']);
+        $this->name = $runDatas['name'];
+        $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
         dd($runDatas);
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the planned dates of a run (if specified)
+     *
+     * @param string|null $planned_at
+     * @param string|null $end_planned_at
+     * @return void
+     */
+    public function savePlannedDates($planned_at, $end_planned_at)
+    {
+        // Parse the dates with carbon pare because the HTML5 datetime-local input is usuported
+        // by the default createFromFormat method user by eloquent to parse the dates
+        if (!empty($planned_at)) {
+            $this->planned_at = Carbon::parse($planned_at);
+        }
+        if (!empty($end_planned_at)) {
+            $this->end_planned_at = Carbon::parse($end_planned_at);
+        }
     }
 
     /**

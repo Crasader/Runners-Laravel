@@ -185,9 +185,33 @@ class Run extends Model
     public function saveDatas($runDatas)
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
+        $this->saveArtist($runDatas['artist']);
         $this->name = $runDatas['name'];
         $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
         dd($runDatas);
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the artist if exists
+     * Create new artist if not exists in the db
+     *
+     * @param string|null $artistName
+     * @return void
+     */
+    public function saveArtist($artistName)
+    {
+        if (!empty($artistName)) {
+            // If the artist exists
+            if ($artist = Artist::where('name', $artistName)->first()) {
+                // Attach it
+                $this->artists()->sync([$artist->id]);
+            } else {
+                // If not, create it
+                $newArtist = Artist::create(['name' => $artistName]);
+                $this->artists()->sync([$newArtist->id]);
+            }
+        }
     }
 
     /**

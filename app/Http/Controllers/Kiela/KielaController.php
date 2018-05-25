@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Kiela;
 
 use App\Car;
 use App\User;
-use App\Group;
 use App\Festival;
 use App\Schedule;
 use Illuminate\Http\Request;
@@ -26,20 +25,21 @@ class KielaController extends Controller
      */
     public function index()
     {
-        $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
+        //Set now time to show the hour
         $now = new Carbon();
-        $users = User::orderBy('status', 'asc')->get();
-        $cars = Car::orderBy('status', 'asc')->get();
-        $groups = Group::orderBy('id', 'asc')->get();
-        $schedules = Schedule::orderBy('start_time', 'asc')->get();
 
-        foreach($groups as $group){
-            foreach($group->schedules->where('start_time', '>=', $now)->unique() as $present){
-                $group->name;
-            }
-        }
+        //Select all cars and show by current status
+        $cars = Car::orderBy('status', 'asc')->get();
+
+        //Select all users and show by current status
+        $users = User::orderBy('status', 'asc')->get();
+
+        //Get current festival
+        $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
         
-        return view('kielas.index')->with(compact('users', 'cars', 'groups', 'festival', 'schedules', 'now', 'present'));
+        //Query to get groups here now
+        $present = Schedule::orderBy('group_id', 'asc')->with(['group', 'group.users'])->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
+        return view('kielas.index')->with(compact('now', 'cars', 'users', 'festival', 'present'));
     }
 
     /**

@@ -29,15 +29,8 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    
-                                    @foreach ($groups as $group)
-                                        @foreach ($group->schedules->where('start_time', '>=', $now)->unique() as $present)
-                                            
-                                            Groupe {{$group->name}}
-                                            @component('components/status_tag', ['status' => 'free'])
-                                            @endcomponent<br><hr>
-                                    
-                                        @endforeach
+                                    @foreach ($present as $schedule)
+                                        <a href="#"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span></a>
                                     @endforeach
                                 </div>
                             </div>
@@ -53,35 +46,16 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    @foreach ($users as $user)
+                                    @foreach ($present as $schedule)
+                                        @foreach ($schedule->group->users as $user)
                                         
-                                        @if ($user->status == 'free')
-                                            {{$user->firstname}} {{$user->lastname}}
+                                                {{$user->firstname}} {{$user->lastname}}
 
-                                            @component('components/status_tag', ['status' => $user->status])
-                                            @endcomponent
-                                            <br><hr>
-
-                                        @endif
-
-                                        @if ($user->status == 'gone')
-
-                                            {{$user->firstname}} {{$user->lastname}}
-                                            @component('components/status_tag', ['status' => 'taken'])
-                                            @endcomponent
-                                            <br><hr>
-
-                                        @endif
-                                        @if ($user->status == 'not-present' || $user->status == 'not-requested')
-
-                                            {{$user->firstname}} {{$user->lastname}}
-                                            @component('components/status_tag', ['status' => 'hors_service'])
-                                            @endcomponent
-                                            <br><hr>
-
-                                        @endif
-
-
+                                                @component('components/status_tag', ['status' => $user->status])
+                                                @endcomponent
+                                                <br><hr>
+                                                
+                                        @endforeach
                                     @endforeach
                                 </div>
                             </div>
@@ -130,6 +104,17 @@
                     
                 </div>
             </div>
+
+            <div class="field is-narrow">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="type_id">
+                            <option value="now">Maintenant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

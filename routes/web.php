@@ -128,6 +128,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource(
         'kiela',
         'Kiela\KielaController',
-        ['only' => ['index']]
+        ['only' => ['index', 'create', 'store' ,'destroy']]
     );
 });

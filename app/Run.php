@@ -2,19 +2,18 @@
 
 namespace App;
 
+use App\Car;
+use App\User;
+use App\Artist;
+use App\Comment;
+use App\CarType;
+use App\Waypoint;
+use App\RunDriver;
+use Carbon\Carbon;
+use App\RunSubscription;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-use App\RunDriver;
-use App\Waypoint;
-use App\Car;
-use App\CarType;
-use App\User;
-use App\Comment;
-use App\Artist;
-use App\RunSubscription;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 
 /**
  * Run
@@ -181,7 +180,7 @@ class Run extends Model
      * Save run datas
      *
      * @param array $runDatas the datas for the run creation
-     * @return bool
+     * @return void
      */
     public function saveDatas($runDatas)
     {
@@ -190,7 +189,27 @@ class Run extends Model
         $this->saveName($runDatas['name']);
         $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
         $this->saveWaypoints(collect($runDatas['waypoints']));
+        $this->saveSubscriptions(collect($runDatas['subscriptions']));
         dd($runDatas);
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the subscription to this run
+     *
+     * @param \Illuminate\Support\Collection $subscriptions
+     * @return void
+     */
+    public function saveSubscriptions($subscriptions)
+    {
+        $subscriptions->each(function ($subscription, $key) {
+            // Create the subscription if not exist
+            if (!$sub = RunSubscription::find($key)) {
+                $sub = new RunSubscription();
+                $sub->run()->associate($this);
+            }
+            $sub->saveDatas($subscription);
+        });
     }
 
     /**

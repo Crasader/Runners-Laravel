@@ -34,7 +34,6 @@ class RunSubscription extends Model
      */
     protected $fillable = [
         'status',
-
     ];
 
     /**
@@ -128,9 +127,6 @@ class RunSubscription extends Model
     {
         $this->car()->associate($car);
         $this->carType()->associate($car->type);
-        // Temporary sets the status (in the future we use events)
-        $this->run->status = "ready";
-        $this->run->save();
         $this->save();
     }
 }

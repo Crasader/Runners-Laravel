@@ -32,7 +32,7 @@
                     {{-- Form edit car --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Numéro de plaque</label>
+                            <label class="label">Nom</label>
                         </div>
                         <div class="field-body">
 

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\car;
 
 use App\Car;
+use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCar;
-use App\CarType;
+use App\Http\Requests\Cars\StoreCar;
 use App\Http\Resources\cars\CarSearchResource;
+use App\Http\Requests\Cars\UpdateCar;
 
 /**
  * CarController
@@ -42,7 +43,7 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCar  $request
+     * @param  \App\Http\Requests\Cars\StoreCar  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCar $request)
@@ -97,11 +98,11 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCar  $request
+     * @param  \App\Http\Requests\Cars\StoreCar  $request
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCar $request, Car $car)
+    public function update(UpdateCar $request, Car $car)
     {
         $car->fill($request->all());
         $car->type()->associate(CarType::find($request->type_id));

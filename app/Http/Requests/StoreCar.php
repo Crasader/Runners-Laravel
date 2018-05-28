@@ -31,6 +31,7 @@ class StoreCar extends FormRequest
     public function rules()
     {
         return [
+            'name'         => ['required', 'min:2', 'max:40', Rule::unique('users')->ignore(request()->car->id)],
             'plate_number' => ['required', 'min:9', 'max:9'],
             'brand'        => ['required', 'min:2', 'max:20'],
             'model'        => ['required', 'min:2', 'max:10'],

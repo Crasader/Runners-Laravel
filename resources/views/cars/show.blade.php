@@ -22,8 +22,9 @@
                     <table class="table is-fullwidth">
                         <thead>
                             <tr>
-                                <th>model</th>
+                                <th>name</th>
                                 <th>brand</th>
+                                <th>model</th>
                                 <th>plate number</th>
                                 <th>color</th>
                                 <th>status</th>
@@ -32,8 +33,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $car->model }}</td>
+                                <td>{{ $car->name }}</td>
                                 <td>{{ $car->brand }}</td>
+                                <td>{{ $car->model }}</td>
                                 <td>{{ $car->plate_number }}</td>
                                 <td>{{ $car->color }}</td>
                                 <td>

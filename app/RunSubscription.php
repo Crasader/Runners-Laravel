@@ -94,6 +94,15 @@ class RunSubscription extends Model
 
     /**
      * MODEL METHOD
+     * Save subscription parts (car, user)
+     */
+    public function saveDatas($subscriptionDatas)
+    {
+        dd($subscriptionDatas);
+    }
+
+    /**
+     * MODEL METHOD
      * Assign a run to this subscription
      *
      * @param \App\Run $run

@@ -31,6 +31,25 @@
                     {{-- Form create car --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
+                            <label class="label">Nom</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Plate number --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'name',
+                                'placeholder' => 'Nom du véhicule',
+                                'type'        => 'text',
+                                'icon'        => 'fa-id-card',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
                             <label class="label">Numéro de plaque</label>
                         </div>
                         <div class="field-body">
@@ -164,7 +183,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>

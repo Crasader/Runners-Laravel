@@ -9,6 +9,7 @@ use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Kiela;
 
 /**
  * KielaController
@@ -37,6 +38,11 @@ class KielaController extends Controller
         //Get current festival
         $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
         
+        $tutu = Kiela::create([
+            'start_time'    => '2018-05-23 22:00:00', 
+            'end_time'      => '2018-05-23 17:30:00',
+            ]);
+        $tutu->user()->associate(User::find(1))->save();
         //Query to get groups here now
         $present = Schedule::orderBy('group_id', 'asc')->with(['group', 'group.users'])->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
         return view('kielas.index')->with(compact('now', 'cars', 'users', 'festival', 'present'));

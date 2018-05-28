@@ -17,6 +17,9 @@
             <div class="columns">
                 <div class="column is-12">
                     <h1 class="title is-2">Kiéla?</h1>
+                    <div class="column is-4">
+                        <a href="{{ route('cars.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
+                    </div>
                     <h2 class="title is-3">{{$festival->name}}</h2>
                     <b>Il est {{$now->format('H:i')}}</b>
                 </div>
@@ -104,17 +107,6 @@
                     
                 </div>
             </div>
-
-            <div class="field is-narrow">
-                <div class="control">
-                    <div class="select is-fullwidth">
-                        <select name="type_id">
-                            <option value="now">Maintenant</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 

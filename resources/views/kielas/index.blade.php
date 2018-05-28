@@ -33,7 +33,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     @foreach ($present as $schedule)
-                                        <a href="#"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span></a>
+                                        <a href="{{ route('groups.show', ['group' => $schedule->group->id]) }}"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span></a>
                                     @endforeach
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                     @foreach ($present as $schedule)
                                         @foreach ($schedule->group->users as $user)
                                         
-                                                {{$user->firstname}} {{$user->lastname}}
+                                                <a href="{{ route('users.show', ['user' => $user->id]) }}">{{$user->firstname}} {{$user->lastname}}</a>
 
                                                 @component('components/status_tag', ['status' => $user->status])
                                                 @endcomponent
@@ -78,21 +78,21 @@
 
                                         @if ($car->status == 'free')
 
-                                             {{$car->model}} {{$car->plate_number}}
+                                            <a href="{{ route('cars.show', ['car' => $car->id]) }}">{{$car->model}} {{$car->plate_number}}</a>
                                             @component('components/status_tag', ['status' => $car->status])
                                             @endcomponent
                                             <br><hr>
 
                                         @elseif ($car->status == 'taken')
 
-                                            {{$car->model}} {{$car->plate_number}}
+                                            <a href="{{ route('cars.show', ['car' => $car->id]) }}">{{$car->model}} {{$car->plate_number}}</a>
                                             @component('components/status_tag', ['status' => $car->status])
                                             @endcomponent
                                             <br><hr>
 
                                         @else
 
-                                            {{$car->model}} {{$car->plate_number}}
+                                            <a href="{{ route('cars.show', ['car' => $car->id]) }}">{{$car->model}} {{$car->plate_number}}</a>
                                             @component('components/status_tag', ['status' => $car->status])
                                             @endcomponent
                                             <br><hr>

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Kiela;
 
 use App\Car;
 use App\User;
+use App\Kiela;
 use App\Festival;
 use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
-use App\Kiela;
 
 /**
  * KielaController
@@ -28,24 +28,18 @@ class KielaController extends Controller
     {
         //Set now time to show the hour
         $now = new Carbon();
-
         //Select all cars and show by current status
         $cars = Car::orderBy('status', 'asc')->get();
-
         //Select all users and show by current status
         $users = User::orderBy('status', 'asc')->get();
-
         //Get current festival
         $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
-        
-        $tutu = Kiela::create([
-            'start_time'    => '2018-05-23 22:00:00', 
-            'end_time'      => '2018-05-23 17:30:00',
-            ]);
-        $tutu->user()->associate(User::find(1))->save();
+        //Query to get user add on Kiela by button
+        $presentKiela = Kiela::orderBy('user_id', 'asc')->with('user')->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
         //Query to get groups here now
         $present = Schedule::orderBy('group_id', 'asc')->with(['group', 'group.users'])->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
-        return view('kielas.index')->with(compact('now', 'cars', 'users', 'festival', 'present'));
+
+        return view('kielas.index')->with(compact('now', 'cars', 'users', 'festival', 'presentKiela', 'present'));
     }
 
     /**
@@ -55,7 +49,10 @@ class KielaController extends Controller
      */
     public function create()
     {
-        //
+        //Set now time to show the hour
+        $now = new Carbon();
+
+        return view('kielas.create')->with(compact('now'));
     }
 
     /**
@@ -66,7 +63,14 @@ class KielaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Get request
+        $kiela = new Kiela($request->all());
+
+        //Associate user to kiela
+        $kiela->user()->associate(User::find($request->user_id));
+        $kiela->save();
+        
+        return redirect()->route('kiela.index');
     }
 
     /**

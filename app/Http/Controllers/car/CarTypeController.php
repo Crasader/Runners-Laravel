@@ -6,6 +6,7 @@ use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarType;
+use App\Http\Resources\cartypes\CarTypeSearchResource;
 
 /**
  * CarTypeController
@@ -59,6 +60,25 @@ class CarTypeController extends Controller
     public function show(CarType $carType)
     {
         return view('carTypes.show')->with(compact('carType'));
+    }
+
+    /**
+     * Search in the model, return json
+     * This method is designed to be used with the search fields (see the search field component)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if ($request->needle) {
+            // Case insensitive search
+            $results = CarType::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
+            return CarTypeSearchResource::collection($results);
+        } else {
+            return response()->json([], 200);
+        }
+        return response()->json([], 200);
     }
 
     /**

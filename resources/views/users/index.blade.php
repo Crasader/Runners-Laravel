@@ -77,8 +77,8 @@
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
-                                    @component('components/status_tag', ['status' => $user->status])
-                                    @endcomponent
+                                    @statustag(['status' => $user->status])
+                                    @endstatustag
                                 </td>
                                 <td>
                                     {{-- Edition buttons --}}

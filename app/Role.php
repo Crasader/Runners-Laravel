@@ -46,6 +46,18 @@ class Role extends Model
     }
 
     /**
+     * MODEL SCOPE
+     * Limit the request to the usable and assignable roles in the app (not root)
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAssignablesRoles($query)
+    {
+        return $query->whereNotIn('id', [1]);
+    }
+
+    /**
      * MODEL METHOD
      * Return true if the role have access to this specific permission
      *

@@ -7,6 +7,7 @@ use App\Artist;
 use App\Waypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Runs\StoreNewRun;
 
 /**
  * RunController
@@ -52,12 +53,12 @@ class RunController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Runs\StoreNewRun  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNewRun $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -79,7 +80,8 @@ class RunController extends Controller
      */
     public function edit(Run $run)
     {
-        //
+        $this->authorize('update', $run);
+        return view('runs.edit')->with(compact('run'));
     }
 
     /**
@@ -91,7 +93,7 @@ class RunController extends Controller
      */
     public function update(Request $request, Run $run)
     {
-        //
+        dd($request->all());
     }
 
     /**

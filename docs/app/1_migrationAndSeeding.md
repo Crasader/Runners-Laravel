@@ -10,7 +10,7 @@ If you need to make change on the database structure, create a new migration. **
 
 You find all the migration posibilities on the [official doc](https://laravel.com/docs/5.5/migrations).
 
-## Related commands :
+### Related commands :
 ```sh
 # Generate the database from scrach
 php artisan migrate
@@ -26,7 +26,7 @@ php artisan migrate:reset
 
 Laravel provides a seeding system to easily populate the databse. You find all the seeders in the `database/seeds` folder. These scripts populates each tables with fake datas automaticaly. If you want to add new seeders see the [doc](https://laravel.com/docs/5.5/seeding).
 
-## Related commands
+### Related commands
 ```sh
 # Seed the database
 php artisan db:seed

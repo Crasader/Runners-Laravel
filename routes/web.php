@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
     // Import system (csv file)
     Route::get('users/import', 'User\UserController@import')->name('users.import-form');
     Route::post('users/import', 'User\UserController@import')->name('users.import');
+    // Users route for searching in users table (used by search field)
+    Route::post('users/search', 'User\UserController@search')->name('users.search');
     // The user crud
     Route::resource('users', 'User\UserController');
     // User comments crud
@@ -72,16 +74,22 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Cars ressource
      */
+    // Car route for searching in users table (used by search field)
+    Route::post('cars/search', 'car\CarController@search')->name('cars.search');
     Route::resource('cars', 'car\CarController');
 
     /**
      * CarTypes ressource
      */
+    // CarTypes route for searching in users table (used by search field)
+    Route::post('carTypes/search', 'car\CarTypeController@search')->name('carTypes.search');
     Route::resource('carTypes', 'car\CarTypeController');
 
     /**
      * Schedules ressource
      */
+    // This route return all the events in json format for the calendar system
+    Route::post('schedules/events', 'schedule\ScheduleController@events')->name('schedules.events');
     Route::resource('schedules', 'schedule\ScheduleController');
 
     /**
@@ -111,7 +119,7 @@ Route::middleware(['auth'])->group(function () {
     // Specific route for the autocomplete fields
     Route::post('artists/search', 'Artist\ArtistController@search')->name('artists.search');
     Route::resource('artists', 'Artist\ArtistController');
-    
+
     /**
      * Waypoints crud
      */

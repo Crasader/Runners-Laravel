@@ -114,7 +114,7 @@ class Run extends Model
 
     /**
      * MODEL RELATION
-     * Get all of the run comments
+     * Get all of the run subscription (run_driver) table
      */
     public function subscriptions()
     {

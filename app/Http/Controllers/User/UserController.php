@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
+use App\Http\Resources\Users\UserResource;
+use App\Http\Resources\users\UserSearchResource;
+use App\Role;
 
 /**
  * UserController
@@ -47,7 +50,8 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('create', User::class);
-        return view('users.create');
+        $roles = Role::assignablesRoles()->get();
+        return view('users.create')->with(compact('roles'));
     }
 
     /**
@@ -63,6 +67,7 @@ class UserController extends Controller
         $user->generateName();
         $user->save();
         $user->generateDefaultPictures();
+        $user->addRole($request->role);
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
@@ -80,6 +85,25 @@ class UserController extends Controller
     }
 
     /**
+     * Search in the model, return json
+     * This method is designed to be used with the search fields (see the search field component)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if ($request->needle) {
+            // Case insensitive search
+            $results = User::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
+            return UserSearchResource::collection($results);
+        } else {
+            return response()->json([], 200);
+        }
+        return response()->json([], 200);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
@@ -88,7 +112,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        return view('users.edit')->with(compact('user'));
+        $roles = Role::assignablesRoles()->get();
+        return view('users.edit')->with(compact('user', 'roles'));
     }
 
     /**
@@ -104,6 +129,7 @@ class UserController extends Controller
 
         $user->fill($request->all());
         $user->save();
+        $user->addRole($request->role);
 
         return redirect()
             ->route('users.edit', ['user' => $user->id])

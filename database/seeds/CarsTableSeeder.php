@@ -8,7 +8,7 @@ use App\CarType;
 /**
  * CarsTableSeeder
  * Create all the cars
- * 
+ *
  * @author Bastien Nicoud
  */
 class CarsTableSeeder extends Seeder
@@ -34,7 +34,8 @@ class CarsTableSeeder extends Seeder
                 'brand'        => 'Mercedes',
                 'model'        => 'Vito',
                 'color'        => 'noir',
-                'status'       => 'free'
+                'status'       => 'free',
+                'name'         => 'Vito'
             ]);
             // Set the car type to $vito
             $tmpCar->type()->associate($vito);
@@ -49,7 +50,8 @@ class CarsTableSeeder extends Seeder
             'brand'        => 'Mercedes',
             'model'        => 'S500',
             'color'        => 'noir',
-            'status'       => 'free'
+            'status'       => 'free',
+            'name'         => 'Limo'
         ]);
         // Set the car type to $limo
         $tmpLimo->type()->associate($limo);
@@ -60,7 +62,8 @@ class CarsTableSeeder extends Seeder
             'brand'        => 'Mercedes',
             'model'        => 'S350',
             'color'        => 'blue',
-            'status'       => 'free'
+            'status'       => 'free',
+            'name'         => 'Limo'
         ]);
         // Set the car type to $limo
         $tmpLimo->type()->associate($limo);
@@ -74,7 +77,8 @@ class CarsTableSeeder extends Seeder
             'brand'        => 'Peugeot',
             'model'        => 'Boxer',
             'color'        => 'white',
-            'status'       => 'free'
+            'status'       => 'free',
+            'name'         => 'Matos'
         ]);
         // Set the car type to $matos
         $tmpMatos->type()->associate($matos);
@@ -85,7 +89,8 @@ class CarsTableSeeder extends Seeder
             'brand'        => 'Peugeot',
             'model'        => 'Kangoo',
             'color'        => 'white',
-            'status'       => 'free'
+            'status'       => 'free',
+            'name'         => 'Matos'
         ]);
         // Set the car type to $matos
         $tmpMatos->type()->associate($matos);

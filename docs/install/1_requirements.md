@@ -9,10 +9,12 @@
     * Mbstring PHP Extension
     * Tokenizer PHP Extension
     * XML PHP Extension
+    * **composer** ^1.6
 * JS
     * node.js > 8
+    * npm ^3 OR yarn ^1.5
 * Databse
-    * MySQL (or mariaDB)
+    * MySQL (^14.14)
 
 ## Dev env
 

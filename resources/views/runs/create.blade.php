@@ -1,5 +1,5 @@
 {{--
-  -- Users creation
+  -- Runs creation
   --
   -- @author Bastien Nicoud
   --}}
@@ -48,7 +48,7 @@
                         <div class="field-body">
 
                             {{-- RUN NAME --}}
-                            @component('components/horizontal_form_input', [
+                            @horizontalinput([
                                 'name'        => 'name',
                                 'placeholder' => 'Nom du run',
                                 'type'        => 'text',
@@ -58,11 +58,11 @@
                                 <p class="help">
                                     Par défault, le nom de l'artiste sera utilisé.
                                 </p>
-                            @endcomponent
+                            @endhorizontalinput
 
                             {{-- ARTIST --}}
                             {{-- SEARCH FIELD --}}
-                            @component('components/horizontal_search_input', [
+                            @horizontalsearchinput([
                                 'name'        => 'artist',
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
@@ -73,7 +73,7 @@
                                 <p class="help">
                                     Si inéxistant, il sera ajouté a la base de données.
                                 </p>
-                            @endcomponent
+                            @endhorizontalsearchinput
 
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 
                             {{-- WAYPOINT --}}
                             {{-- SEARCH FIELD --}}
-                            @component('components/horizontal_search_input', [
+                            @horizontalsearchinput([
                                 'name'        => 'waypoint[1]',
                                 'placeholder' => 'Lieux de départ',
                                 'type'        => 'text',
@@ -101,7 +101,7 @@
                                         </span>
                                     </button>
                                 @endslot
-                            @endcomponent
+                            @endhorizontalsearchinput
 
                         </div>
                     </div>
@@ -114,7 +114,7 @@
 
                             {{-- WAYPOINT --}}
                             {{-- SEARCH FIELD --}}
-                            @component('components/horizontal_search_input', [
+                            @horizontalsearchinput([
                                 'name'        => 'waypoint[2]',
                                 'placeholder' => "Lieux d'arrivée",
                                 'type'        => 'text',
@@ -122,7 +122,7 @@
                                 'searchUrl'   => route('waypoints.search'),
                                 'errors'      => $errors
                                 ])
-                            @endcomponent
+                            @endhorizontalsearchinput
 
                         </div>
                     </div>
@@ -243,7 +243,7 @@
                                     Il faut qu'ils confirment leur participation pour créer un login.
                                 </p>
                             </div>
-                            
+
                         </div>
                     </div>
 

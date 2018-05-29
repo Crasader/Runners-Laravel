@@ -7,7 +7,6 @@
 | status key name | displayable value               |
 |-----------------|---------------------------------|
 | active          | Actif                           |
-| taken           | En cours de run                 |
 | gone            | Est parti en run                |
 | not_present     | L'utilisateur n'est pas présent |
 | free            | Disponible                      |

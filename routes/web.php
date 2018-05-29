@@ -121,4 +121,13 @@ Route::middleware(['auth'])->group(function () {
     // Specific route for the autocomplete fields
     Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
     Route::resource('waypoints', 'Waypoint\WaypointController');
+
+    /**
+     * Kiela crud
+     */
+    Route::resource(
+        'kiela',
+        'Kiela\KielaController',
+        ['only' => ['index', 'create', 'store' ,'destroy']]
+    );
 });

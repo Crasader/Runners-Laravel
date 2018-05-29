@@ -43,7 +43,7 @@
         @break
 
     @case('finished')
-        <span class="tag is-success">Términé</span>
+        <span class="tag is-success">Terminé</span>
         @break
 
     @case('empty')
@@ -68,6 +68,10 @@
 
     @case('error')
         <span class="tag is-danger">Erreur</span>
+        @break
+
+    @case('hors_service')
+    <span class="tag is-light">Hors service</span>
         @break
 
     @default

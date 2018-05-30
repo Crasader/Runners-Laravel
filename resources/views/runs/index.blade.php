@@ -33,11 +33,18 @@
         </div>
 
         {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
+        @component('components/filters_box', [
+            "filteringBy" => [
+
+            ],
+            "orderingBy" => [
+
+            ],
+            "scopeBetween" => [
+
+            ]
+        ])
+        @endcomponent
 
         {{-- The table --}}
         <div class="columns">

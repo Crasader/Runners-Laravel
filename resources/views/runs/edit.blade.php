@@ -110,7 +110,7 @@
                                 {{-- WAYPOINT --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "waypoint[{$waypoint->pivot->order}]",
+                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
                                     'placeholder' => 'Lieux de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
@@ -187,7 +187,7 @@
                                 {{-- Runner--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][user]",
+                                    'name'        => "subscriptions[{$subscription->id}][user]",
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
@@ -209,7 +209,7 @@
                                 {{-- CATYPE--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][carType]",
+                                    'name'        => "subscriptions[{$subscription->id}][carType]",
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
@@ -222,7 +222,7 @@
                                 {{-- CAR --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][car]",
+                                    'name'        => "subscriptions[{$subscription->id}][car]",
                                     'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',

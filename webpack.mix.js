@@ -26,6 +26,7 @@ mix
   .js('resources/assets/js/pages/schedules/index.js', 'js/pages/schedules')
   // SCSS
   .sass('resources/assets/main.scss', 'css')
+  .sass('resources/assets/scss/pages/big_runs.scss', 'css')
   .copy('node_modules/fullcalendar/dist/fullcalendar.min.css', 'public/css/calendar/fullcalendar.css')
 
 // Create unique hash in production to force browser cache clearing

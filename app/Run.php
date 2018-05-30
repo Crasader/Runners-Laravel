@@ -2,18 +2,18 @@
 
 namespace App;
 
+use App\Car;
+use App\User;
+use App\Artist;
+use App\Comment;
+use App\CarType;
+use App\Waypoint;
+use App\RunDriver;
+use Carbon\Carbon;
+use App\RunSubscription;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-use App\RunDriver;
-use App\Waypoint;
-use App\Car;
-use App\CarType;
-use App\User;
-use App\Comment;
-use App\Artist;
-use App\RunSubscription;
-use Carbon\Carbon;
 
 /**
  * Run
@@ -173,6 +173,126 @@ class Run extends Model
     public function scopeWithoutStatus($query, $status)
     {
         return $query->where('status', '!=', $status);
+    }
+
+    /**
+     * MODEL METHOD
+     * Save run datas
+     *
+     * @param array $runDatas the datas for the run creation
+     * @return void
+     */
+    public function saveDatas($runDatas)
+    {
+        // Fill the run datas (we font use $this->fill because the date format not work)
+        $this->saveArtist($runDatas['artist']);
+        $this->saveName($runDatas['name']);
+        $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
+        $this->saveWaypoints(collect($runDatas['waypoints']));
+        $this->saveSubscriptions(collect($runDatas['subscriptions']));
+        dd($runDatas);
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the subscription to this run
+     * TODO: Implement save datas on the RunSubscription model
+     *
+     * @param \Illuminate\Support\Collection $subscriptions
+     * @return void
+     */
+    public function saveSubscriptions($subscriptions)
+    {
+        $subscriptions->each(function ($subscription, $key) {
+            // Create the subscription if not exist
+            if (!$sub = RunSubscription::find($key)) {
+                $sub = new RunSubscription();
+                $sub->run()->associate($this);
+            }
+            $sub->saveDatas($subscription);
+        });
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the waypoints for this run with the right order
+     *
+     * @param \Illuminate\Support\Collection $waypoints
+     * @return void
+     */
+    public function saveWaypoints($waypoints)
+    {
+        // Initialize an index to save the waypoints order
+        $i = 1;
+        $waypoints->each(function ($waypoint) use ($i) {
+            // Check if the waypoint exists in the database
+            if ($waypointDb = Waypoint::where('name', $waypoint)->first()) {
+                $this->waypoints()->sync([$waypointDb->id => ['order' => $i]]);
+            } else {
+                $newWaypoint = Waypoint::create(['name' => $waypoint]);
+                $this->waypoints()->sync([$newWaypoint->id => ['order' => $i]]);
+            }
+            $i++;
+        });
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the name (get it from the artist if not set)
+     *
+     * @param string $name
+     * @return void
+     */
+    public function saveName($name)
+    {
+        if (empty($name)) {
+            $this->name = $name;
+        } else {
+            $this->name = $this->artists->first()->name;
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the artist if exists
+     * Create new artist if not exists in the db
+     *
+     * @param string|null $artistName
+     * @return void
+     */
+    public function saveArtist($artistName)
+    {
+        if (!empty($artistName)) {
+            // If the artist exists
+            if ($artist = Artist::where('name', $artistName)->first()) {
+                // Attach it
+                $this->artists()->sync([$artist->id]);
+            } else {
+                // If not, create it
+                $newArtist = Artist::create(['name' => $artistName]);
+                $this->artists()->sync([$newArtist->id]);
+            }
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Save the planned dates of a run (if specified)
+     *
+     * @param string|null $planned_at
+     * @param string|null $end_planned_at
+     * @return void
+     */
+    public function savePlannedDates($planned_at, $end_planned_at)
+    {
+        // Parse the dates with carbon pare because the HTML5 datetime-local input is usuported
+        // by the default createFromFormat method user by eloquent to parse the dates
+        if (!empty($planned_at)) {
+            $this->planned_at = Carbon::parse($planned_at);
+        }
+        if (!empty($end_planned_at)) {
+            $this->end_planned_at = Carbon::parse($end_planned_at);
+        }
     }
 
     /**

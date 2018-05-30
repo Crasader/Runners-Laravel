@@ -34,7 +34,6 @@ class RunSubscription extends Model
      */
     protected $fillable = [
         'status',
-
     ];
 
     /**
@@ -95,6 +94,19 @@ class RunSubscription extends Model
 
     /**
      * MODEL METHOD
+     * Save subscription parts (car, user)
+     * Called by the run crud (when we save or update a new run)
+     */
+    public function saveDatas($subscriptionDatas)
+    {
+        $this->user()->associate(User::where('name', $subscriptionDatas['user']));
+        $this->car()->associate(Car::where('name', $subscriptionDatas['car']));
+        $this->carType()->associate(CarType::where('name', $subscriptionDatas['name']));
+        dd($subscriptionDatas);
+    }
+
+    /**
+     * MODEL METHOD
      * Assign a run to this subscription
      *
      * @param \App\Run $run
@@ -128,9 +140,6 @@ class RunSubscription extends Model
     {
         $this->car()->associate($car);
         $this->carType()->associate($car->type);
-        // Temporary sets the status (in the future we use events)
-        $this->run->status = "ready";
-        $this->run->save();
         $this->save();
     }
 }

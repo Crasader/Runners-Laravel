@@ -29,6 +29,7 @@
                         <tr>
                             <th>name</th>
                             <th>brand</th>
+                            <th>model</th>
                             <th>plate number</th>
                             <th>color</th>
                             <th>status</th>
@@ -40,6 +41,7 @@
                         <tr>
                             <th>name</th>
                             <th>brand</th>
+                            <th>model</th>
                             <th>plate number</th>
                             <th>color</th>
                             <th>status</th>
@@ -50,8 +52,9 @@
                     <tbody>
                         @foreach ($cars as $car)
                             <tr>
-                                <th>{{$car->model}}</th>
+                                <td>{{$car->name}}</td>
                                 <td>{{$car->brand}}</td>
+                                <th>{{$car->model}}</th>
                                 <td>{{$car->plate_number}}</td>
                                 <td>{{$car->color}}</td>
                                 <td>{{$car->type->name}}</td>

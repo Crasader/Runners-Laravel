@@ -5,7 +5,7 @@ namespace App\Http\Controllers\car;
 use App\CarType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCarType;
+use App\Http\Requests\CarTypes\StoreCarType;
 use App\Http\Resources\cartypes\CarTypeSearchResource;
 
 /**

@@ -35,7 +35,7 @@
 
             <div class="columns">
                 <div class="column">
-                    <a href="{{-- route('schedule.index') --}}">
+                    <a href="{{ route('schedules.index') }}">
                         <div class="notification is-info">
                             <h2 class="title is-2 has-text-centered">Planning</h2>
                         </div>

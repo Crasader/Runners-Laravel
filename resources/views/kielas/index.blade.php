@@ -28,11 +28,11 @@
             </div>
             <div class="columns">
                 <div class="column is-8  is-offset-4">
-                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=sub" class="button is-warning"><i class="fas fa-arrow-left"></i> 1 jour</a>
-                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=sub" class="button is-warning"><i class="fas fa-arrow-left"></i> 1 heure</a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=sub" class="button is-light"><span class="icon"><i class="fas fa-arrow-left"></i></span> <span>1 jour</span></a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=sub" class="button is-light"><span class="icon"><i class="fas fa-arrow-left"></i></span> <span>1 heure</span></a>
                     <a href="{{ route('kiela.index') }}" class="button is-info">Maintenant</a>
-                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=add" class="button is-success">1 heure <i class="fas fa-arrow-right"></i></a>
-                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=add" class="button is-success">1 jour <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=add" class="button is-light"><span>1 heure</span><span class="icon"><i class="fas fa-arrow-right"></i></span></a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=add" class="button is-light"><span>1 jour</span><span class="icon"><i class="fas fa-arrow-right"></i></span></a>
                 </div>
             </div>
             <div class="columns">

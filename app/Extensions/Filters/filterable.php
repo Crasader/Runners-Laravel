@@ -21,7 +21,7 @@ trait Filterable
      */
     public function scopeFilter($query, $request)
     {
-        dd($request->query());
+        return $query;
     }
 
     /**
@@ -33,6 +33,6 @@ trait Filterable
      */
     public function scopeFilterOrder($query, $request)
     {
-        # Code ...
+        return $query;
     }
 }

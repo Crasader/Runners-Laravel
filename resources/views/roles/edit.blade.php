@@ -94,8 +94,8 @@
                                             <div class="control">
                                                 <div class="select is-fullwidth">
                                                     <select name="permissions[{{ $key }}]">
-                                                        <option value="true" {{ ($value == 'true') ? 'selected' : '' }}>Autorisé à :</option>
-                                                        <option value="false" {{ ($value == 'false') ? 'selected' : '' }}>Non Autorisé à :</option>
+                                                        <option value="true" {{ ($value == true) ? 'selected' : '' }}>Autorisé à :</option>
+                                                        <option value="false" {{ ($value == false) ? 'selected' : '' }}>Non Autorisé à :</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -116,8 +116,8 @@
                                             <div class="control">
                                                 <div class="select is-fullwidth">
                                                     <select name="permissions[{{ $key }}]">
-                                                        <option value="true" {{ ($value == 'true') ? 'selected' : '' }}>Autorisé à :</option>
-                                                        <option value="false" {{ ($value == 'false') ? 'selected' : '' }}>Non Autorisé à :</option>
+                                                        <option value="true" {{ ($value == true) ? 'selected' : '' }}>Autorisé à :</option>
+                                                        <option value="false" {{ ($value == false) ? 'selected' : '' }}>Non Autorisé à :</option>
                                                     </select>
                                                 </div>
                                             </div>

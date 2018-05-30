@@ -24,10 +24,19 @@ class KielaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //Set now time to show the hour
-        $now = new Carbon();
+        if ($request->query('hours')) {
+            $now = Carbon::parse($request->query('date'));
+            if ($request->query('type') == "sub") {
+                $now->subHours($request->query('hours'));
+            } elseif ($request->query('type') == "add"){
+                $now->addHours($request->query('hours'));
+            }
+        } else {
+            $now = new Carbon();
+        }
         //Select all cars and show by current status
         $cars = Car::orderBy('status', 'asc')->get();
         //Select all users and show by current status

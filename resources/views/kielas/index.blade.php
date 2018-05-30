@@ -18,14 +18,23 @@
                 <div class="column is-8">
                     <!-- Show current paleo and hour -->
                     <h1 class="title is-2">{{$festival->name}}</h1>
-                    <b>Il est actuellement : {{$now->format('H:i')}}</b>
+                    <b>Il est actuellement le : {{$now}}</b>
                 </div>
                 <div class="column is-4">
                     <!-- Add new user to kiela -->
                     <a href="{{ route('kiela.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
                 </div>
-            </div>
 
+            </div>
+            <div class="columns">
+                <div class="column is-8  is-offset-4">
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=sub" class="button is-warning"><i class="fas fa-arrow-left"></i> 1 jour</a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=sub" class="button is-warning"><i class="fas fa-arrow-left"></i> 1 heure</a>
+                    <a href="{{ route('kiela.index') }}" class="button is-info">Maintenant</a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=1&type=add" class="button is-success">1 heure <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('kiela.index') }}?date={{$now}}&hours=24&type=add" class="button is-success">1 jour <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
             <div class="columns">
                 <div class="column is-4">
                     <div class="box">

@@ -32,6 +32,26 @@
                     {{-- Form edit car --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
+                            <label class="label">Nom</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Plate number --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'name',
+                                'placeholder' => 'Nom du véhicule',
+                                'value'       => $car->name,
+                                'type'        => 'text',
+                                'icon'        => 'fa-id-card',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
                             <label class="label">Numéro de plaque</label>
                         </div>
                         <div class="field-body">
@@ -133,7 +153,7 @@
                                                 <option value="problem">Problème</option>
                                                 <option value="taken" selected>En run</option>
                                                 @break
-                                        
+
                                             @default
                                                 <option value="free" selected>Libre</option>
                                                 <option value="problem">Problème</option>
@@ -183,7 +203,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>

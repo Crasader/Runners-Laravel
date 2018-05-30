@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\CarTypes;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * StoreCarType
- * Validates a store cartype request
+ * UpdateCarType
+ * Validates a update cartype request
  *
- * @author Nicolas Henry
- * @package App\Http\Requests\
+ * @author Bastien Nicoud
+ * @package App\Http\Requests\CarTypes
  */
-class StoreCarType extends FormRequest
+class UpdateCarType extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +32,8 @@ class StoreCarType extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:30'],
-            'description' => ['required', 'min:5', 'max:255'],
+            'name' => ['required', 'min:2', 'max:30', Rule::unique('car_types')->ignore(request()->carType->id)],
+            'description' => ['required', 'min:2', 'max:255'],
             'nb_place' => ['required', 'numeric', 'min:1', 'max:15']
         ];
     }

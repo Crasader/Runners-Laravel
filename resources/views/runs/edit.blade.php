@@ -110,7 +110,7 @@
                                 {{-- WAYPOINT --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "waypoint[{$waypoint->pivot->order}]",
+                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
                                     'placeholder' => 'Lieux de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
@@ -136,7 +136,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Début</label>
+                            <label class="label">Début prévu à :</label>
                         </div>
                         <div class="field-body">
 
@@ -146,7 +146,8 @@
                                 'placeholder' => "Type de véhicule",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
-                                'errors'      => $errors
+                                'errors'      => $errors,
+                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 
@@ -155,7 +156,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Fin</label>
+                            <label class="label">Fin prévue a :</label>
                         </div>
                         <div class="field-body">
 
@@ -165,7 +166,8 @@
                                 'placeholder' => "Véhicule",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
-                                'errors'      => $errors
+                                'errors'      => $errors,
+                                'value'       => $run->end_planned_at->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 
@@ -185,7 +187,7 @@
                                 {{-- Runner--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][user]",
+                                    'name'        => "subscriptions[{$subscription->id}][user]",
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
@@ -207,7 +209,7 @@
                                 {{-- CATYPE--}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][carType]",
+                                    'name'        => "subscriptions[{$subscription->id}][carType]",
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
@@ -220,7 +222,7 @@
                                 {{-- CAR --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "subscription[{$subscription->id}][car]",
+                                    'name'        => "subscriptions[{$subscription->id}][car]",
                                     'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',

@@ -10,6 +10,7 @@ use App\Run;
 use App\Car;
 use App\Role;
 use App\Group;
+use App\Kiela;
 use App\Comment;
 use App\Festival;
 use App\Schedule;
@@ -180,6 +181,15 @@ class User extends Authenticatable
     }
 
     /**
+     * MODEL RELATION
+     * The kielas that belong to the user.
+     */
+    public function kielas()
+    {
+        return $this->hasMany(Kiela::class);
+    }
+
+    /**
      * MODEL ACCESSOR
      * Get the user's full name.
      *
@@ -258,11 +268,27 @@ class User extends Authenticatable
         }
 
         // Generate a new record with default liscence picture
-        if (!$this->profilePictures()->exists()) {
-            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licence/default.jpg']);
+        if (!$this->licencePictures()->exists()) {
+            $driversLicence = new Attachment(['type' => 'licence', 'path' => 'licences/default.jpg']);
             $driversLicence->owner()->associate(Auth::user());
             $driversLicence->save();
             $this->attachments()->save($driversLicence);
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a fresh api token for the user
+     *
+     * @return string
+     */
+    public function addRole($roleSlug = null)
+    {
+        // If no role slug passed
+        if ($roleSlug === null) {
+            $this->roles()->attach(Role::where('slug', 'runner')->first());
+        } else {
+            $this->roles()->sync([Role::where('slug', $roleSlug)->first()->id]);
         }
     }
 

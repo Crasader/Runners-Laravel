@@ -48,7 +48,9 @@ trait Filterable
      */
     public function scopeFilterValue($query, $request)
     {
-        //
+        foreach ($request->query('filteredfield') as $column) {
+            //
+        }
     }
 
     /**

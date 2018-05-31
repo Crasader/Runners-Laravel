@@ -7,7 +7,11 @@
   -- @author Bastien Nicoud
   --}}
 
-<form action="" method="GET">
+@push('scripts')
+    <script src="{{ mix('js/pages/runs/create.js') }}"></script>
+@endpush
+
+<form id="filtering-form" action="" method="GET">
     <div class="columns is-multiline has-background-light">
         <div class="column is-3">
             <p class="title is-6">

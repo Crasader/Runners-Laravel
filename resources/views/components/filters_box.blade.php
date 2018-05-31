@@ -9,7 +9,7 @@
 
 
 <div class="columns has-background-light">
-    <div class="column is-6">
+    <div class="column is-3">
         <p class="title is-6">
             Filtrer :
         </p>
@@ -28,12 +28,24 @@
     </div>
     <div class="column is-3">
         <p class="title is-6">
+            Rechercher
+        </p>
+        <input class="input" type="text" placeholder="Text input">
+    </div>
+    <div class="column is-3">
+        <p class="title is-6">
             Trier par :
         </p>
         <div class="select">
             <select>
                 <option>Select dropdown</option>
                 <option>With options</option>
+            </select>
+        </div>
+        <div class="select">
+            <select>
+                <option>asc</option>
+                <option>desc</option>
             </select>
         </div>
     </div>

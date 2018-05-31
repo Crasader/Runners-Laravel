@@ -34,14 +34,22 @@
 
         {{-- Filters --}}
         @component('components/filters_box', [
-            "filteringBy" => [
-
+            "filtredColumns" => [
+                "status" => ["started", "ready", "gone", "error"],
             ],
-            "orderingBy" => [
-
+            "search" => [
+                "name",
+                "artist"
             ],
-            "scopeBetween" => [
-
+            "orderBy" => [
+                "name",
+                "passengers",
+                "status",
+                "planned_at",
+                "started_at",
+            ],
+            "between" => [
+                "planned_at" => "datetime"
             ]
         ])
         @endcomponent

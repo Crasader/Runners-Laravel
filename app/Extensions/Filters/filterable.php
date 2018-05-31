@@ -25,16 +25,16 @@ trait Filterable
     {
         // Add's diferents scopes depending the query string (GET request)
         if ($request->query('filter')) {
-            $query = this.filterValue($query, $request);
+            $query->filterValue($request);
         }
         if ($request->query('search')) {
-            $query = this.filterSearch($query, $request);
+            $query->filterSearch($request);
         }
         if ($request->query('order')) {
-            $query = this.filterOrder($query, $request);
+            $query->filterOrder($request);
         }
         if ($request->query('between')) {
-            $query = this.filterBetween($query, $request);
+            $query->filterBetween($request);
         }
         return $query;
     }
@@ -46,7 +46,7 @@ trait Filterable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filterValue($query, $request)
+    public function scopeFilterValue($query, $request)
     {
         //
     }
@@ -58,9 +58,10 @@ trait Filterable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filterSearch($query, $request)
+    public function scopeFilterSearch($query, $request)
     {
-        //
+        $columnName = $request->query('search');
+        return $query->whereRaw("LOWER(`$columnName`) LIKE ? ", [trim(strtolower($request->query('needle'))).'%']);
     }
 
     /**
@@ -70,9 +71,9 @@ trait Filterable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filterOrder($query, $request)
+    public function scopeFilterOrder($query, $request)
     {
-        //
+        $query->orderBy($request->query('order'), $request->query('direction'));
     }
 
     /**
@@ -82,8 +83,8 @@ trait Filterable
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filterBetween($query, $request)
+    public function scopeFilterBetween($query, $request)
     {
-        //
+        $query->whereBetween($request->query('between'), [$request->query('start'), $request->query('end')]);
     }
 }

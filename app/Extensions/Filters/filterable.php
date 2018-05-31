@@ -24,9 +24,9 @@ trait Filterable
         if ($request->query('filter')) {
             $filters = collect($request->query('filters'));
             $filters->each(function ($filter) {
-                //
+                // ...
             });
-            //return $query->where($filter);
+            // return $query->where($filter);
         }
         return $query;
     }

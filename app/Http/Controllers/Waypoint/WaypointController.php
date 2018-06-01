@@ -23,7 +23,7 @@ class WaypointController extends Controller
      */
     public function index()
     {
-        $waypoints = Waypoint::orderBy('name', 'asc')->paginate(20);
+        $waypoints = Waypoint::orderBy('name', 'asc')->paginate(30);
         return view('waypoints.index')->with(compact('waypoints'));
     }
 

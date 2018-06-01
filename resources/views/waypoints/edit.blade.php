@@ -17,15 +17,28 @@
 <div class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Modifier le lieux : {{ $waypoint->name }}</h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', App\Waypoint::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('edit-waypoint-form').submit();"
+                                class="button is-success">
+                                Editer {{ $waypoint->name }}
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('waypoints.update', ['waypoint' => $waypoint->id]) }}" method="POST">
+                <form id="edit-waypoint-form" action="{{ route('waypoints.update', ['waypoint' => $waypoint->id]) }}" method="POST">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -49,23 +62,6 @@
 
                         </div>
                     </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Modifier
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
                 </form>
             </div>
         </div>

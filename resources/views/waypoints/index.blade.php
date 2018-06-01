@@ -26,9 +26,6 @@
                         <p class="control">
                             <a href="{{ route('waypoints.create') }}" class="button is-info">Nouveau lieu</a>
                         </p>
-                        <p class="control">
-                            <a href="{{ route('waypoints.import-form') }}" class="button is-primary">Importer une liste de lieux</a>
-                        </p>
                     </div>
                 @endcan
             </div>
@@ -48,30 +45,20 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th></th>
+                            <th>Utilisation</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th></th>
+                            <th>Utilisation</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($waypoints as $waypoint)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('waypoints.show', ['waypoint' => $waypoint->id]) }}'">
                                 <th>{{ $waypoint->name }}</th>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('waypoints.edit', ['user' => $waypoint->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('waypoints.show', ['user' => $waypoint->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
+                                <td><strong>{{ $waypoint->runs()->count() }}</strong> runs passent par la.</td>
                             </tr>
                         @endforeach
                     </tbody>

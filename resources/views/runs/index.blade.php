@@ -67,7 +67,6 @@
                             <th>Prévu à</th>
                             <th>Démarré à</th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -79,12 +78,11 @@
                             <th>Prévu à</th>
                             <th>Démarré à</th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($runs as $run)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->artists->first()->name }}</td>
                                 <td>{{ $run->passengers }}</td>
@@ -103,17 +101,6 @@
                                         </a>
                                         <a href="{{-- route('runs.stop', ['user' => $run->id]) --}}" class="button is-small is-link is-danger">
                                             Arréter
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('runs.show', ['user' => $run->id]) }}" class="button is-small is-link">
-                                            Show
                                         </a>
                                     </div>
                                 </td>

@@ -26,7 +26,7 @@ mix
   .js('resources/assets/js/pages/schedules/index.js', 'js/pages/schedules')
   .js('resources/assets/js/pages/runs/big.js', 'js/pages/runs')
   // FUNCTIONALITIES
-  .js('resources/assets/js/features/filters.js')
+  .js('resources/assets/js/features/filters.js', 'js/features/filters.js')
   // SCSS
   .sass('resources/assets/main.scss', 'css')
   .sass('resources/assets/scss/pages/big_runs.scss', 'css')

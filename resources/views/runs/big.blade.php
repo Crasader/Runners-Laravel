@@ -37,6 +37,27 @@
             </div>
         </div>
 
+        {{-- Iterates all the runs --}}
+        <div class="columns is-multiline">
+            @foreach ($runs as $run)
+                <div class="column is-12">
+                    <div class="box">
+                        <div class="columns">
+                            <div class="column is-4">
+                                tutu
+                            </div>
+                            <div class="column is-4">
+                                tutu
+                            </div>
+                            <div class="column is-4">
+                                tutu
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">

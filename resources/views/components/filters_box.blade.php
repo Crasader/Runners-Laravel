@@ -40,10 +40,20 @@
                     {{-- SEARCH FILTER --}}
                     <div class="column is-4">
                         <p class="title is-6">
-                            Rechercher
+                            Rechercher :
                         </p>
-                        <input class="input" name="needle" type="text" placeholder="Rechercher dans {{ $filters["search"] }}">
-                        <input class="input" type="hidden" name="search" value="{{ $filters["search"] }}" type="text">
+                        <input
+                            class="input"
+                            name="needle"
+                            type="text"
+                            placeholder="Rechercher dans {{ $filters["search"] }}"
+                            value="{{ old("needle") }}">
+                        <input
+                            class="input"
+                            type="hidden"
+                            name="search"
+                            value="{{ $filters["search"] }}"
+                            type="text">
                     </div>
 
                     {{-- SORT FILTER --}}

@@ -6,8 +6,8 @@
  */
 
 document.getElementById('filtering-form').addEventListener('keypress', (e) => {
-  e.preventDefault()
   if (e.keycode === 13) {
+    e.preventDefault()
     document.getElementById('filtering-form').submit()
   }
 })

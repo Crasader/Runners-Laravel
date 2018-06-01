@@ -27,50 +27,26 @@
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
-                            <th>name</th>
-                            <th>brand</th>
-                            <th>model</th>
-                            <th>plate number</th>
-                            <th>color</th>
-                            <th>status</th>
-                            <th>Type</th>
-                            <th></th>
+                            <th>Nom</th>
+                            <th>Numéro de plaque</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>name</th>
-                            <th>brand</th>
-                            <th>model</th>
-                            <th>plate number</th>
-                            <th>color</th>
-                            <th>status</th>
-                            <th>Type</th>
-                            <th></th>
+                            <th>Nom</th>
+                            <th>Numéro de plaque</th>
+                            <th>Status</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($cars as $car)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('cars.show', ['car' => $car->id]) }}'">
                                 <td>{{$car->name}}</td>
-                                <td>{{$car->brand}}</td>
-                                <th>{{$car->model}}</th>
                                 <td>{{$car->plate_number}}</td>
-                                <td>{{$car->color}}</td>
-                                <td>{{$car->type->name}}</td>
                                 <td>
                                     @component('components/status_tag', ['status' => $car->status])
                                     @endcomponent
-                                </td>
-                                <td>
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('cars.edit', ['car' => $car->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('cars.show', ['car' => $car->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
                                 </td>
                             </tr>
                         @endforeach

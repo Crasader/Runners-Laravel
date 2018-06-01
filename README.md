@@ -6,7 +6,7 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## Version changelog **v2.0.0-alpha.8**
+## Version changelog **v2.0.0-beta.1**
 
 Break changes :
 * x
@@ -15,12 +15,12 @@ Changes :
 * x
 
 Improuvments :
-* Add Kielas page
 * Add big display for runs
+* Add filters box (not fully functionnal)
 
 Bux fixes :
-* Broken link on home page
-* Incorrect select on roles edition
+* Kielas bugs
+* Runs ordering
 
 In progress :
 * x

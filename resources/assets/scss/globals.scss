@@ -11,3 +11,8 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+// For borders in the big screen page
+.has-border-right {
+    border-right: 1px solid $grey-darker;
+}

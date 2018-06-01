@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Run;
 use App\Run;
 use App\Artist;
 use App\Waypoint;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Runs\StoreNewRun;
@@ -20,12 +21,13 @@ class RunController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Run::class);
-        $runs = Run::orderBy('planned_at', 'desc')->paginate(20);
+        $runs = Run::filter($request)->paginate(20);
         return view('runs.index')->with(compact('runs'));
     }
 
@@ -37,7 +39,10 @@ class RunController extends Controller
     public function big()
     {
         $this->authorize('view', Run::class);
-        $runs = Run::orderBy('planned_at', 'desc')->limit(50)->get();
+        $runs = Run::whereDate('planned_at', '>', Carbon::now()->toDateString())
+            ->orderBy('planned_at', 'asc')
+            ->limit(30)
+            ->get();
         return view('runs.big')->with(compact('runs'));
     }
 

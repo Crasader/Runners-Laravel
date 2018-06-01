@@ -70,6 +70,10 @@
         <span class="tag {{ $slot }} is-danger">Erreur</span>
         @break
 
+    @case('hors_service')
+    <span class="tag is-light">Hors service</span>
+        @break
+
     @default
         <span class="tag {{ $slot }} is-light">Aucun status</span>
 @endswitch

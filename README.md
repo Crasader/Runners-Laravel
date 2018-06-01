@@ -4,9 +4,9 @@
 
 # Runners
 
-Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival of Nyon.
+Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## Version changelog **v2.0.0-alpha.7**
+## Version changelog **v2.0.0-beta.1**
 
 Break changes :
 * x
@@ -15,14 +15,15 @@ Changes :
 * x
 
 Improuvments :
-* x
+* Add big display for runs
+* Add filters box (not fully functionnal)
 
 Bux fixes :
-* Missing commands in the docs
+* Kielas bugs
+* Runs ordering
 
 In progress :
-* Edit and create page for the run crud
-* Schedule system
+* x
 
 ## Start developping
 

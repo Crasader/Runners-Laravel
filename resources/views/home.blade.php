@@ -15,7 +15,7 @@
 
             <div class="columns">
                 <div class="column is-12">
-                    <a href="{{-- route('kiela') --}}">
+                    <a href="{{ route('kiela.index') }}">
                         <div class="notification is-primary">
                             <h2 class="title is-2 has-text-centered">Kiéla?</h2>
                         </div>
@@ -35,7 +35,7 @@
 
             <div class="columns">
                 <div class="column">
-                    <a href="{{-- route('schedule.index') --}}">
+                    <a href="{{ route('schedules.index') }}">
                         <div class="notification is-info">
                             <h2 class="title is-2 has-text-centered">Planning</h2>
                         </div>

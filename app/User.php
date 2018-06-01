@@ -10,6 +10,7 @@ use App\Run;
 use App\Car;
 use App\Role;
 use App\Group;
+use App\Kiela;
 use App\Comment;
 use App\Festival;
 use App\Schedule;
@@ -177,6 +178,15 @@ class User extends Authenticatable
     public function qrCodes()
     {
         return $this->morphMany(Attachment::class, 'attachable')->where('type', 'qrcode');
+    }
+
+    /**
+     * MODEL RELATION
+     * The kielas that belong to the user.
+     */
+    public function kielas()
+    {
+        return $this->hasMany(Kiela::class);
     }
 
     /**

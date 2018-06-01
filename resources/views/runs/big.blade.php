@@ -16,6 +16,7 @@
 @endpush
 
 @push('scripts')
+    <script src="{{ mix('js/pages/runs/big.js') }}"></script>
 @endpush
 
 @section('content')
@@ -37,49 +38,49 @@
             </div>
         </div>
 
-        {{-- The table --}}
-        <div class="columns">
-            <div class="column is-12">
-                <table class="table is-striped is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Artiste</th>
-                            <th>Passagers</th>
-                            <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Artiste</th>
-                            <th>Passagers</th>
-                            <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($runs as $run)
-                            <tr>
-                                <th>{{ $run->name }}</th>
-                                <td>{{ $run->artists->first()->name }}</td>
-                                <td>{{ $run->passengers }}</td>
-                                <td>
-                                    {{-- Status tag (see related component) --}}
-                                    @component('components/status_tag', ['status' => $run->status])
-                                        is-large
-                                    @endcomponent
-                                </td>
-                                <td>{{ $run->planned_at->toDateString() }} <strong>{{ $run->planned_at->toTimeString() }}</strong></td>
-                                <td>{{ $run->started_at ?? '' }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        {{-- Iterates all the runs --}}
+        <div class="columns is-multiline">
+            @foreach ($runs as $run)
+                <div class="column is-12">
+                    <div class="box">
+                        <div class="columns">
+                            <div class="column is-3 has-background-light has-border-right">
+                                <h2 class="title is-5">
+                                    {{ $run->name }}
+                                </h2>
+                                @component('components/status_tag', ['status' => $run->status])
+                                @endcomponent
+                            </div>
+                            <div class="column is-6 has-border-right">
+                                <div class="columns">
+                                    <div class="column is-6">
+                                        <h3 class="title is-5">{{ $run->waypoints->first()->name }}</h3>
+                                        <h4 class="title is-5">{{ $run->planned_at->format('\L\e d \à H \h i') }}</h4>
+                                    </div>
+                                    <div class="column is-6">
+                                        <h3 class="title is-5">{{ $run->waypoints->last()->name }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                @foreach ($run->subscriptions as $sub)
+                                    <div class="columns">
+                                        <div class="column is-1">
+                                            <h4 class="subtitle is-5">{{ $loop->index + 1 }}</h4>
+                                        </div>
+                                        <div class="column is-5">
+                                            <h4 class="subtitle is-5">{{ $sub->car->name }}</h4>
+                                        </div>
+                                        <div class="column is-6">
+                                            <h4 class="subtitle is-5">{{ $sub->user->firstname }}</h4>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
     </div>

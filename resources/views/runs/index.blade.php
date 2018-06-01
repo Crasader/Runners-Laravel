@@ -33,11 +33,26 @@
         </div>
 
         {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
+        @component('components/filters_box', [
+            "filtredColumns" => [
+                "status" => ["started", "ready", "gone", "error"],
+            ],
+            "search" => [
+                "name",
+                "artist"
+            ],
+            "orderBy" => [
+                "name",
+                "passengers",
+                "status",
+                "planned_at",
+                "started_at",
+            ],
+            "between" => [
+                "planned_at" => "datetime"
+            ]
+        ])
+        @endcomponent
 
         {{-- The table --}}
         <div class="columns">

@@ -16,6 +16,7 @@
 @endpush
 
 @push('scripts')
+    <script src="{{ mix('js/pages/runs/big.js') }}"></script>
 @endpush
 
 @section('content')

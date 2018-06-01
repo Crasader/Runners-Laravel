@@ -21,12 +21,13 @@ class RunController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Run::class);
-        $runs = Run::orderBy('planned_at', 'desc')->paginate(20);
+        $runs = Run::filter($request)->paginate(20);
         return view('runs.index')->with(compact('runs'));
     }
 

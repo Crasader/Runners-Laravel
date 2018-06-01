@@ -33,9 +33,6 @@ trait Filterable
         if ($request->query('order')) {
             $query->filterOrder($request);
         }
-        if ($request->query('between')) {
-            $query->filterBetween($request);
-        }
         return $query;
     }
 
@@ -76,17 +73,5 @@ trait Filterable
     public function scopeFilterOrder($query, $request)
     {
         $query->orderBy($request->query('order'), $request->query('direction'));
-    }
-
-    /**
-     * filterBetween
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilterBetween($query, $request)
-    {
-        $query->whereBetween($request->query('between'), [$request->query('start'), $request->query('end')]);
     }
 }

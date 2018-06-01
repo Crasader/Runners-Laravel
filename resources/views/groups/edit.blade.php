@@ -17,15 +17,28 @@
 <div class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Modifier le groupe <span class="tag is-large" style="background-color: #{{ $group->color }};">{{ $group->name }}</span></h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', App\Artist::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('edit-group-form').submit();"
+                                class="button is-success">
+                                Editer le groupe {{ $group->name }}
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('groups.update', ['group' => $group->id]) }}" method="POST">
+                <form id="edit-group-form" action="{{ route('groups.update', ['group' => $group->id]) }}" method="POST">
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -61,22 +74,6 @@
                                 </p>
                             @endcomponent
 
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer le groupe
-                                    </button>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
 

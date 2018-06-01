@@ -5,9 +5,9 @@
  * @author Bastien Nicoud
  */
 
-document.onkeypress((e) => {
-  e.preventDefault()
+document.getElementById('filtering-form').addEventListener('keypress', (e) => {
   if (e.keycode === 13) {
+    e.preventDefault()
     document.getElementById('filtering-form').submit()
   }
 })

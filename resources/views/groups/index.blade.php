@@ -31,13 +31,6 @@
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
-
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
@@ -46,32 +39,23 @@
                         <tr>
                             <th>Nom</th>
                             <th>Couleur</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
                             <th>Couleur</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($groups as $group)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('groups.show', ['group' => $group->id]) }}'">
                                 <th>{{ $group->name }}</th>
                                 {{-- Display a tag with the group background color --}}
-                                <td><span class="tag" style="background-color: #{{ $group->color }};">{{ $group->color }}</span></td>
                                 <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('groups.show', ['group' => $group->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
+                                    <span class="tag" style="background-color: #{{ $group->color }};">
+                                        {{ $group->color }}
+                                    </span>
                                 </td>
                             </tr>
                         @endforeach

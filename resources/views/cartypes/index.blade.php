@@ -30,7 +30,6 @@
                             <th>Nom</th>
                             <th>Description</th>
                             <th>Nombre de place</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -38,25 +37,14 @@
                             <th>Nom</th>
                             <th>Description</th>
                             <th>Nombre de place</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($carTypes as $carType)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('carTypes.show', ['carType' => $carType->id]) }}'">
                                 <th>{{$carType->name}}</th>
                                 <td>{{$carType->description}}</td>
                                 <td>{{$carType->nb_place}}</td>
-                                <td>
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('carTypes.edit', ['carType' => $carType->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('carTypes.show', ['carType' => $carType->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

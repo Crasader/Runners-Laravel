@@ -56,13 +56,6 @@
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
-
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
@@ -71,33 +64,20 @@
                         <tr>
                             <th>Nom</th>
                             <th>Email</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
                             <th>Email</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($group->users as $user)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
                                 <th>{{ $user->fullname }}</th>
                                 {{-- Display a tag with the group background color --}}
                                 <td>{{ $user->email }}</td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -26,18 +26,8 @@
                         <p class="control">
                             <a href="{{ route('artists.create') }}" class="button is-info">Nouvel artiste</a>
                         </p>
-                        <p class="control">
-                            <a href="{{ route('artists.import-form') }}" class="button is-primary">Importer une liste d'artistes</a>
-                        </p>
                     </div>
                 @endcan
-            </div>
-        </div>
-
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
             </div>
         </div>
 
@@ -48,30 +38,20 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th></th>
+                            <th>Utilisation</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th></th>
+                            <th>Utilisation</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($artists as $artist)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('artists.show', ['user' => $artist->id]) }}'">
                                 <th>{{ $artist->name }}</th>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('artists.edit', ['user' => $artist->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('artists.show', ['user' => $artist->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
+                                <td><strong>{{ $artist->runs()->count() }}</strong> runs transportent cet artiste.</td>
                             </tr>
                         @endforeach
                     </tbody>

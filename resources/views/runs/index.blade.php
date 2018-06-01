@@ -33,25 +33,19 @@
         </div>
 
         {{-- Filters --}}
-        @component('components/filters_box', [
+        @component('components/filters_box', ['filters' => [
             "filtredColumns" => [
                 "status" => ["started", "ready", "gone", "error"],
             ],
-            "search" => [
-                "name",
-                "artist"
-            ],
+            "search" => "name",
             "orderBy" => [
-                "name",
-                "passengers",
-                "status",
-                "planned_at",
-                "started_at",
-            ],
-            "between" => [
-                "planned_at" => "datetime"
+                "name" => "Nom",
+                "passengers" => "Nb passagers",
+                "status" => "Status",
+                "planned_at" => "Prévu à",
+                "started_at" => "Démarré à",
             ]
-        ])
+        ]])
         @endcomponent
 
         {{-- The table --}}
@@ -61,32 +55,27 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Artiste</th>
                             <th>Passagers</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th>Artiste</th>
                             <th>Passagers</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($runs as $run)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
-                                <td>{{ $run->artists->first()->name }}</td>
                                 <td>{{ $run->passengers }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
@@ -103,17 +92,6 @@
                                         </a>
                                         <a href="{{-- route('runs.stop', ['user' => $run->id]) --}}" class="button is-small is-link is-danger">
                                             Arréter
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('runs.show', ['user' => $run->id]) }}" class="button is-small is-link">
-                                            Show
                                         </a>
                                     </div>
                                 </td>

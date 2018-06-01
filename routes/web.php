@@ -104,6 +104,8 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
     Route::resource('runs', 'Run\RunController');
+    // Run comments crud
+    Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);
 
     /**
      * Stats crud

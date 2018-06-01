@@ -30,6 +30,12 @@
         </div>
 
         <div class="columns">
+
+            {{-- Logs --}}
+            <div class="column is-4">
+                LOGS
+            </div>
+
             @can('view', App\Comment::class)
                 <div class="column is-8">
 
@@ -39,8 +45,8 @@
                     {{-- --------------------- --}}
                     <div class="columns">
                         <div class="column is-12">
-                            @if ($user->comments()->exists())
-                                @foreach ($user->comments as $comment)
+                            @if ($run->comments()->exists())
+                                @foreach ($run->comments as $comment)
                                     <article class="media">
                                         <figure class="media-left">
                                             <p class="image is-64x64">
@@ -62,7 +68,7 @@
                                                     document.getElementById('delete-comment-form').submit();"
                                                     class="delete"></button>
                                                 <form id="delete-comment-form"
-                                                    action="{{ route('users.comments.destroy', ['user' => $user->id, 'comment' => $comment->id]) }}"
+                                                    action="{{ route('users.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
                                                         method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
@@ -84,7 +90,7 @@
                     @can('create', App\Comment::class)
                         <div class="columns">
                             <div class="column is-12">
-                                <form action="{{ route('users.comments.store', ['user' => $user->id]) }}" method="POST">
+                                <form action="{{ route('runs.comments.store', ['run' => $run->id]) }}" method="POST">
                                     {{ csrf_field() }}
                                     <article class="media">
                                         <figure class="media-left">

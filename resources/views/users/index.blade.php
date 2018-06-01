@@ -49,47 +49,31 @@
                         <tr>
                             <th>Prénom</th>
                             <th>Nom</th>
-                            <th>Nom d'utilisateur</th>
                             <th>E-mail</th>
                             <th>Tel</th>
                             <th>Status</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Prénom</th>
                             <th>Nom</th>
-                            <th>Nom d'utilisateur</th>
                             <th>E-mail</th>
                             <th>Tel</th>
                             <th>Status</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
                                 <th>{{ $user->firstname }}</th>
                                 <td>{{ $user->lastname }}</td>
-                                <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @statustag(['status' => $user->status])
                                     @endstatustag
-                                </td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('users.show', ['user' => $user->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -33,25 +33,19 @@
         </div>
 
         {{-- Filters --}}
-        @component('components/filters_box', [
+        @component('components/filters_box', ['filters' => [
             "filtredColumns" => [
                 "status" => ["started", "ready", "gone", "error"],
             ],
-            "search" => [
-                "name",
-                "artist"
-            ],
+            "search" => "name",
             "orderBy" => [
-                "name",
-                "passengers",
-                "status",
-                "planned_at",
-                "started_at",
-            ],
-            "between" => [
-                "planned_at" => "datetime"
+                "name" => "Nom",
+                "passengers" => "Nb passagers",
+                "status" => "Status",
+                "planned_at" => "Prévu à",
+                "started_at" => "Démarré à",
             ]
-        ])
+        ]])
         @endcomponent
 
         {{-- The table --}}
@@ -61,7 +55,6 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Artiste</th>
                             <th>Passagers</th>
                             <th>Status</th>
                             <th>Prévu à</th>
@@ -72,7 +65,6 @@
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th>Artiste</th>
                             <th>Passagers</th>
                             <th>Status</th>
                             <th>Prévu à</th>
@@ -84,7 +76,6 @@
                         @foreach ($runs as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
-                                <td>{{ $run->artists->first()->name }}</td>
                                 <td>{{ $run->passengers }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}

@@ -8,61 +8,71 @@
   --}}
 
 @push('scripts')
-    <script src="{{ mix('js/pages/runs/create.js') }}"></script>
+    <script src="{{ mix('js/features/filters.js') }}"></script>
 @endpush
 
+
 <form id="filtering-form" action="" method="GET">
-    <div class="columns is-multiline has-background-light">
-        <div class="column is-3">
-            <p class="title is-6">
-                Filtrer :
-            </p>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Rechercher
-            </p>
-            <input class="input" type="hidden" name="search" value="name" type="text">
-            <input class="input" name="needle" type="text" placeholder="Text input" value="{{ old("needle") }}">
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Trier par :
-            </p>
-            <div class="select">
-                <select name="order">
-                    <option value="planned_at">Prévu A</option>
-                    <option value="started_at">Démarré à</option>
-                </select>
-            </div>
-            <div class="select">
-                <select name="direction">
-                    <option value="asc">Croissant</option>
-                    <option value="desc">Décroissant</option>
-                </select>
-            </div>
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Entre :
-            </p>
-            <input class="input" type="text" placeholder="Text input">
-            <input class="input" type="text" placeholder="Text input">
-        </div>
+    <div class="columns">
         <div class="column is-12">
-            <button type="submit" class="button is-danger is-centered">Filtrer</button>
+            <div class="box has-background-light">
+                <div class="columns is-multiline">
+
+                    {{-- CHECKBOX FILTERS --}}
+                    <div class="column is-4">
+                        <p class="title is-6">
+                            Filtrer :
+                        </p>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Remember me
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Remember me
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Remember me
+                        </label>
+                    </div>
+
+                    {{-- SEARCH FILTER --}}
+                    <div class="column is-4">
+                        <p class="title is-6">
+                            Rechercher
+                        </p>
+                        <input class="input" name="needle" type="text" placeholder="Rechercher dans {{ $filters["search"] }}">
+                        <input class="input" type="hidden" name="search" value="{{ $filters["search"] }}" type="text">
+                    </div>
+
+                    {{-- SORT FILTER --}}
+                    <div class="column is-4">
+                        <p class="title is-6">
+                            Trier par :
+                        </p>
+                        <div class="select">
+                            <select name="order">
+                                @foreach($filters["orderBy"] as $key => $val)
+                                    <option value="{{ $key }}">{{ $val }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="select">
+                            <select name="direction">
+                                <option value="asc">Croissant</option>
+                                <option value="desc">Décroissant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="column is-12">
+                        <div class="buttons has-addons is-centered">
+                            <button type="submit" class="button">Filtrer les résultats</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

@@ -16,15 +16,28 @@
 <div class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Nouvel utilisateur</h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('create', App\User::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('create-user-form').submit();"
+                                class="button is-success">
+                                Créer l'utilisateur
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('users.store') }}" method="POST">
+                <form id="create-user-form" action="{{ route('users.store') }}" method="POST">
 
                     {{ csrf_field() }}
 
@@ -48,23 +61,6 @@
                             @component('components/horizontal_form_input', [
                                 'name'        => 'firstname',
                                 'placeholder' => 'Prénom',
-                                'type'        => 'text',
-                                'icon'        => 'fa-user',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- USERNAME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'name',
-                                'placeholder' => "Nom d'utilisateur",
                                 'type'        => 'text',
                                 'icon'        => 'fa-user',
                                 'errors'      => $errors
@@ -140,22 +136,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer l'utilisateur
-                                    </button>
                                 </div>
                                 <p class="help">
                                     Par défault les nouveaux utilisateurs sont crées sans mot de passes.

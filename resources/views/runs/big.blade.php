@@ -24,50 +24,37 @@
 <div class="section">
     <div class="container is-fluid">
 
-        {{-- Title and controls --}}
-        <div class="columns">
-            <div class="column is-narrow">
-                <h1 class="title is-2">Prochains runs</h1>
-            </div>
-            <div class="column">
-                <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="{{ route('runs.index') }}" class="button is-info">Retour</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-
         {{-- Iterates all the runs --}}
         <div class="columns is-multiline">
             @foreach ($runs as $run)
                 <div class="column is-12">
-                    <div class="box">
+                    <div class="box box-big">
                         <div class="columns">
                             <div class="column is-3 has-background-light has-border-right">
-                                <h2 class="title is-5">
+                                <h2 class="title is-5 title-run">
                                     {{ $run->name }}
                                 </h2>
-                                @component('components/status_tag', ['status' => $run->status])
-                                @endcomponent
+                                @statustag(['status' => $run->status])
+                                @endstatustag
+                                <p>
+                                    {{ $run->passengers }} personnes
+                                </p>
                             </div>
                             <div class="column is-6 has-border-right">
-                                <div class="columns">
+                                <div class="columns is-multiline">
                                     <div class="column is-6">
-                                        <h3 class="title is-5">{{ $run->waypoints->first()->name }}</h3>
-                                        <h4 class="title is-5">{{ $run->planned_at->format('\L\e d \à H \h i') }}</h4>
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
+                                        <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
                                     </div>
                                     <div class="column is-6">
-                                        <h3 class="title is-5">{{ $run->waypoints->last()->name }}</h3>
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>
+                                        <p>{{ str_limit($run->infos, 200, ' ...') }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="column is-3">
                                 @foreach ($run->subscriptions as $sub)
                                     <div class="columns">
-                                        <div class="column is-1">
-                                            <h4 class="subtitle is-5">{{ $loop->index + 1 }}</h4>
-                                        </div>
                                         <div class="column is-5">
                                             <h4 class="subtitle is-5">{{ $sub->car->name }}</h4>
                                         </div>

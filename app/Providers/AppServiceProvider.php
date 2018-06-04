@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Blade;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,12 @@ class AppServiceProvider extends ServiceProvider
          * Disable the api ressources wrapping to a 'data' key
          */
         Resource::withoutWrapping();
+
+        /**
+         * Sets the locale for carbon dates
+         */
+        setlocale(LC_TIME, 'fr');
+        Carbon::setLocale(LC_TIME, 'fr');
 
         /**
          * Declare global components alias (used to simply import components)

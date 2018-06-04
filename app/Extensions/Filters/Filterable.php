@@ -6,6 +6,7 @@ namespace App\Extensions\Filters;
  * Filterable
  *
  * Provides additional methods to the model to filter requests
+ * Intended to be use with the filterable component
  *
  * @author Bastien Nicoud
  * @package App\Extensions\Filters

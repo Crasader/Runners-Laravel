@@ -28,23 +28,26 @@
         <div class="columns is-multiline">
             @foreach ($runs as $run)
                 <div class="column is-12">
-                    <div class="box">
+                    <div class="box box-big">
                         <div class="columns">
                             <div class="column is-3 has-background-light has-border-right">
-                                <h2 class="title is-5">
+                                <h2 class="title is-5 title-run">
                                     {{ $run->name }}
                                 </h2>
-                                @component('components/status_tag', ['status' => $run->status])
-                                @endcomponent
+                                @statustag(['status' => $run->status])
+                                @endstatustag
+                                <p>
+                                    {{ $run->passengers }} personnes
+                                </p>
                             </div>
                             <div class="column is-6 has-border-right">
                                 <div class="columns">
                                     <div class="column is-6">
-                                        <h3 class="title is-5">{{ $run->waypoints->first()->name }}</h3>
-                                        <h4 class="title is-5">{{ $run->planned_at->format('l \à H \h i') }}</h4>
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
+                                        <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
                                     </div>
                                     <div class="column is-6">
-                                        <h3 class="title is-5">{{ $run->waypoints->last()->name }}</h3>
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>
                                     </div>
                                 </div>
                             </div>

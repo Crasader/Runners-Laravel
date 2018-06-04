@@ -19,23 +19,20 @@
                 <div class="columns is-multiline">
 
                     {{-- CHECKBOX FILTERS --}}
-                    <div class="column is-4">
-                        <p class="title is-6">
-                            Filtrer :
-                        </p>
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Remember me
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Remember me
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Remember me
-                        </label>
-                    </div>
+                        @foreach($filters['filtredColumns'] as $columns => $fields)
+
+                        <div class="column">
+                            <p class="title is-6">
+                                Filtrer {{ $columns }} :
+                            </p>
+                            @foreach($fields as $key => $val)
+                                <label class="checkbox">
+                                    <input name="filter[]" value="{{ $key }}" type="checkbox">
+                                    {{ $val }}
+                                </label>
+                            @endforeach
+                        </div>
+                        @endforeach
 
                     {{-- SEARCH FILTER --}}
                     <div class="column is-4">

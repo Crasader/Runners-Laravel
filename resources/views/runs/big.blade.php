@@ -41,13 +41,14 @@
                                 </p>
                             </div>
                             <div class="column is-6 has-border-right">
-                                <div class="columns">
+                                <div class="columns is-multiline">
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
                                         <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
                                     </div>
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>
+                                        <p>{{ str_limit($run->infos, 200, ' ...') }}</p>
                                     </div>
                                 </div>
                             </div>

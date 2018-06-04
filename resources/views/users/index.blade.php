@@ -35,11 +35,26 @@
         </div>
 
         {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
+        @component('components/filters_box', ['filters' => [
+            "filtredColumns" => [
+                "status" => [
+                    "not-present" => "Pas présent",
+                    "not-requested" => "Non demandé",
+                    "free" => "Libre",
+                    "requested" => "Demandé",
+                    "gone" => "En run"
+                ],
+            ],
+            "search" => "firstname",
+            "orderBy" => [
+                "firstname" => "Prénom",
+                "lastname" => "Nom de famille",
+                "email" => "E-mail",
+                "phone_number" => "Tel",
+                "status" => "Status",
+            ]
+        ]])
+        @endcomponent
 
         {{-- The table --}}
         <div class="columns">

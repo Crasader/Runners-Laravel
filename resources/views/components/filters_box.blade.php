@@ -19,13 +19,13 @@
 
                     {{-- CHECKBOX FILTERS --}}
                     @foreach($filters['filtredColumns'] as $columns => $fields)
-                        <input
-                        class="input"
-                        type="hidden"
-                        name="filter-column"
-                        value="{{ $columns }}"
-                        type="text">
                         <div class="column">
+                            <input
+                                class="input"
+                                type="hidden"
+                                name="filter-column"
+                                value="{{ $columns }}"
+                                type="text">
                             <p class="title is-6">
                                 Filtrer {{ $columns }} :
                             </p>
@@ -39,7 +39,7 @@
                     @endforeach
 
                     {{-- SEARCH FILTER --}}
-                    <div class="column is-4">
+                    <div class="column">
                         <p class="title is-6">
                             Rechercher :
                         </p>
@@ -58,7 +58,7 @@
                     </div>
 
                     {{-- SORT FILTER --}}
-                    <div class="column is-4">
+                    <div class="column">
                         <p class="title is-6">
                             Trier par :
                         </p>
@@ -77,6 +77,7 @@
                         </div>
                     </div>
 
+                    {{-- SUBMIT BUTTON --}}
                     <div class="column is-12">
                         <div class="buttons has-addons is-centered">
                             <button type="submit" class="button">Filtrer les résultats</button>

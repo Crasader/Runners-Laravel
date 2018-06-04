@@ -19,6 +19,7 @@ use App\Attachment;
 use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Auth;
 use \BaconQrCode\Renderer\Image\Png;
+use App\Extensions\Filters\Filterable;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -30,7 +31,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, Filterable;
 
     /**
      * MODEL PROPERTY

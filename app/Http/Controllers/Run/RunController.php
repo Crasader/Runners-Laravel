@@ -28,7 +28,7 @@ class RunController extends Controller
     {
         $this->authorize('view', Run::class);
         $runs = Run::filter($request)->paginate(20);
-        return view('runs.index')->with(compact('runs'));
+        return view('runs.index')->with(compact('runs', 'request'));
     }
 
     /**

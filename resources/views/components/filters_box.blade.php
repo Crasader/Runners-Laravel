@@ -11,7 +11,6 @@
     <script src="{{ mix('js/features/filters.js') }}"></script>
 @endpush
 
-
 <form id="filtering-form" action="" method="GET">
     <div class="columns">
         <div class="column is-12">
@@ -19,8 +18,13 @@
                 <div class="columns is-multiline">
 
                     {{-- CHECKBOX FILTERS --}}
-                        @foreach($filters['filtredColumns'] as $columns => $fields)
-
+                    @foreach($filters['filtredColumns'] as $columns => $fields)
+                        <input
+                        class="input"
+                        type="hidden"
+                        name="filter-column"
+                        value="{{ $columns }}"
+                        type="text">
                         <div class="column">
                             <p class="title is-6">
                                 Filtrer {{ $columns }} :
@@ -32,7 +36,7 @@
                                 </label>
                             @endforeach
                         </div>
-                        @endforeach
+                    @endforeach
 
                     {{-- SEARCH FILTER --}}
                     <div class="column is-4">
@@ -44,7 +48,7 @@
                             name="needle"
                             type="text"
                             placeholder="Rechercher dans {{ $filters["search"] }}"
-                            value="{{ old("needle") }}">
+                            value="{{ request()->needle }}">
                         <input
                             class="input"
                             type="hidden"

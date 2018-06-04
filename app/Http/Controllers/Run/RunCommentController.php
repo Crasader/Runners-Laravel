@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Run;
 
 use App\Run;
-use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Comments\StoreComment;
 
 /**
  * RunCommentController

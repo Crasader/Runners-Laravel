@@ -20,9 +20,11 @@ trait Filterable
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param  \Illuminate\Http\Request  $request
+     * @param string $defaultFieldOrdering Name of the field for default ordering
+     * @param string $defultOrderingDirection Direction for default ordering
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request, $defaultFieldOrdering, $defultOrderingDirection)
     {
         // Add's diferents scopes depending the query string (GET request)
         if ($request->query('filter')) {
@@ -33,9 +35,8 @@ trait Filterable
         }
         if ($request->query('order')) {
             $query->filterOrder($request);
-        }
-        if ($request->query('between')) {
-            $query->filterBetween($request);
+        } else {
+            $query->orderBy($defaultFieldOrdering, $defultOrderingDirection);
         }
         return $query;
     }
@@ -49,9 +50,7 @@ trait Filterable
      */
     public function scopeFilterValue($query, $request)
     {
-        foreach ($request->query('filter') as $column) {
-            //
-        }
+        $query->whereIn($request->query('filter-column'), $request->query('filter'));
     }
 
     /**
@@ -77,17 +76,5 @@ trait Filterable
     public function scopeFilterOrder($query, $request)
     {
         $query->orderBy($request->query('order'), $request->query('direction'));
-    }
-
-    /**
-     * filterBetween
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilterBetween($query, $request)
-    {
-        $query->whereBetween($request->query('between'), [$request->query('start'), $request->query('end')]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,6 @@ use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
-use App\Role;
 
 /**
  * UserController
@@ -23,11 +23,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('firstname', 'asc')->paginate(20);
+        $users = User::filter($request, 'lastname', 'asc')->paginate(20);
         return view('users/index')->with(compact('users'));
     }
 

@@ -8,61 +8,94 @@
   --}}
 
 @push('scripts')
-    <script src="{{ mix('js/pages/runs/create.js') }}"></script>
+    <script src="{{ mix('js/features/filters.js') }}"></script>
 @endpush
 
 <form id="filtering-form" action="" method="GET">
-    <div class="columns is-multiline has-background-light">
-        <div class="column is-3">
-            <p class="title is-6">
-                Filtrer :
-            </p>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-            </label>
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Rechercher
-            </p>
-            <input class="input" type="hidden" name="search" value="name" type="text">
-            <input class="input" name="needle" type="text" placeholder="Text input" value="{{ old("needle") }}">
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Trier par :
-            </p>
-            <div class="select">
-                <select name="order">
-                    <option value="planned_at">Prévu A</option>
-                    <option value="started_at">Démarré à</option>
-                </select>
-            </div>
-            <div class="select">
-                <select name="direction">
-                    <option value="asc">Croissant</option>
-                    <option value="desc">Décroissant</option>
-                </select>
-            </div>
-        </div>
-        <div class="column is-3">
-            <p class="title is-6">
-                Entre :
-            </p>
-            <input class="input" type="text" placeholder="Text input">
-            <input class="input" type="text" placeholder="Text input">
-        </div>
+    <div class="columns">
         <div class="column is-12">
-            <button type="submit" class="button is-danger is-centered">Filtrer</button>
+            <div class="box has-background-light">
+                <div class="columns is-multiline">
+
+                    {{-- CHECKBOX FILTERS --}}
+                    {{-- MAX 3 fields (you can add more put layout can be ridiculous) --}}
+                    @foreach($filters['filtredColumns'] as $columns => $fields)
+                        <div class="column">
+                            <input
+                                class="input"
+                                type="hidden"
+                                name="filter-column"
+                                value="{{ $columns }}"
+                                type="text">
+                            <p class="title is-6">
+                                Filtrer {{ $columns }} :
+                            </p>
+                            @foreach($fields as $key => $val)
+                                <div class="control">
+                                    <label class="checkbox">
+                                        <input
+                                            name="filter[]"
+                                            value="{{ $key }}"
+                                            type="checkbox"
+                                            {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
+                                        {{ $val }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
+
+                    {{-- SEARCH FILTER --}}
+                    @if ($filters["search"])
+                        <div class="column">
+                            <p class="title is-6">
+                                Rechercher :
+                            </p>
+                            <input
+                                class="input"
+                                name="needle"
+                                type="text"
+                                placeholder="Rechercher dans {{ $filters["search"] }}"
+                                value="{{ request()->needle }}">
+                            <input
+                                class="input"
+                                type="hidden"
+                                name="search"
+                                value="{{ $filters["search"] }}"
+                                type="text">
+                        </div>
+                    @endif
+
+                    {{-- SORT FILTER --}}
+                    @if ($filters["orderBy"])
+                        <div class="column">
+                            <p class="title is-6">
+                                Trier par :
+                            </p>
+                            <div class="select">
+                                <select name="order">
+                                    @foreach($filters["orderBy"] as $key => $val)
+                                        <option value="{{ $key }}">{{ $val }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="select">
+                                <select name="direction">
+                                    <option value="asc">Croissant</option>
+                                    <option value="desc">Décroissant</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- SUBMIT BUTTON --}}
+                    <div class="column is-12">
+                        <div class="buttons has-addons is-centered">
+                            <button type="submit" class="button">Filtrer les résultats</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

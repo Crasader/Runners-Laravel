@@ -15,16 +15,35 @@
 
 <div class="section">
     <div class="container">
+        {{-- --------------------- --}}
+        {{-- HEADER                --}}
+        {{-- --------------------- --}}
         <div class="columns">
-            <div class="column is-12">
-                <h1 class="title is-2">Créer un type véhicule</h1>
+            <div class="column is-narrow">
+                <h1 class="title is-2">
+                    Créer un type véhicule
+                </h1>
+            </div>
+            {{-- Controls buttons on the top --}}
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('create', App\CarType::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('create-cartype-form').submit();"
+                                class="button is-success">
+                                Créer le véhicule
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('carTypes.store') }}" method="POST">
+                <form id="create-cartype-form" action="{{ route('carTypes.store') }}" method="POST">
 
                     {{ csrf_field() }}
 
@@ -83,24 +102,6 @@
                                 ])
                             @endcomponent
 
-                        </div>
-                    </div>
-
-                    {{-- end form --}}
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- Submit button --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer le type de véhicule
-                                    </button>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </form>

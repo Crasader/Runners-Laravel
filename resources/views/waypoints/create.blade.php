@@ -16,15 +16,29 @@
 <div class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-12">
+            <div class="column is-narrow">
                 <h1 class="title is-2">Nouveau lieu</h1>
+            </div>
+
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('create', App\Waypoint::class)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('create-waypoint-form').submit();"
+                                class="button is-success">
+                                Créer le lieux
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('waypoints.store') }}" method="POST">
+                <form id="create-waypoint-form" action="{{ route('waypoints.store') }}" method="POST">
 
                     {{ csrf_field() }}
 
@@ -44,22 +58,6 @@
                                 ])
                             @endcomponent
 
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Créer le lieux
-                                    </button>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
 

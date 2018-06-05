@@ -53,13 +53,6 @@
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
-
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
@@ -71,7 +64,6 @@
                             <th>Départ prévu à</th>
                             <th>A démarré</th>
                             <th>A terminé</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -81,12 +73,11 @@
                             <th>Départ prévu à</th>
                             <th>A démarré</th>
                             <th>A terminé</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($waypoint->runs as $run)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 {{-- Display a tag with the group background color --}}
                                 <th>
@@ -97,17 +88,6 @@
                                 <td>{{ $run->planned_at ? $run->planned_at->format(' j F Y H:i:s') : '' }}</td>
                                 <td>{{ $run->started_at ? $run->started_at->format(' j F Y H:i:s') : '' }}</td>
                                 <td>{{ $run->ended_at ? $run->ended_at->format(' j F Y H:i:s') : '' }}</td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('runs.show', ['run' => $run->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -1,10 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\Comments;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserComment extends FormRequest
+/**
+ * StoreComment
+ * Validates a comment
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Requests\Comments
+ */
+class StoreComment extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

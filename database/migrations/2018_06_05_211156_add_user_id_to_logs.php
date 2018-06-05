@@ -19,7 +19,7 @@ class AddUserIdToLogs extends Migration
     public function up()
     {
         Schema::table('logs', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->after('action');
+            $table->integer('user_id')->unsigned()->nullable()->after('action');
 
             // Foreing keys
             $table->foreign('user_id')->references('id')->on('users');

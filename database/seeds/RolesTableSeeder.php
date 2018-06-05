@@ -8,7 +8,7 @@ use App\Role;
  * RolesTableSeeder
  * Create all the roles used in the application
  * Note: the admin role can only be added trough the database
- * 
+ *
  * @author Bastien Nicoud
  */
 class RolesTableSeeder extends Seeder
@@ -45,7 +45,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => true,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -73,7 +74,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => true,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -101,7 +103,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => false,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -129,7 +132,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => false,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => false,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => false
             ]
         ]);
     }

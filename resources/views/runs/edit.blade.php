@@ -257,22 +257,6 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-success">
-                                        Modifier le run
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
                 </form>
             </div>
         </div>

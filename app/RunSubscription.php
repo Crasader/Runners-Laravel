@@ -99,9 +99,8 @@ class RunSubscription extends Model
      */
     public function saveDatas($subscriptionDatas)
     {
-        $this->user()->associate(User::where('name', $subscriptionDatas['user']));
-        $this->car()->associate(Car::where('name', $subscriptionDatas['car']));
-        $this->carType()->associate(CarType::where('name', $subscriptionDatas['name']));
+        $this->assignUser(User::where('name', $subscriptionDatas['user']));
+        $this->assignCar(Car::where('name', $subscriptionDatas['car']));
         dd($subscriptionDatas);
     }
 

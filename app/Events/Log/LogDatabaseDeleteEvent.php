@@ -6,12 +6,12 @@ use App\Order;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * LogDatabaseCreateEvent
+ * LogDatabaseDeleteEvent
  *
  * @author Bastien Nicoud
  * @package App\Events\Log
  */
-class LogDatabaseCreateEvent
+class LogDatabaseDeleteEvent
 {
     use SerializesModels;
 

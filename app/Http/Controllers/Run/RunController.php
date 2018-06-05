@@ -101,6 +101,7 @@ class RunController extends Controller
      */
     public function update(UpdateRun $request, Run $run)
     {
+        // Check usage of add runner and add waypoint buttons
 
         dd($request->all());
         //$run->saveDatas($request->all());

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Kiela;
 
-use App\Car;
 use App\User;
 use App\Kiela;
 use App\Festival;
@@ -37,8 +36,6 @@ class KielaController extends Controller
         } else {
             $now = new Carbon();
         }
-        //Select all cars and show by current status
-        $cars = Car::orderBy('status', 'asc')->get();
         //Select all users and show by current status
         $users = User::orderBy('status', 'asc')->get();
         //Get current festival
@@ -48,7 +45,7 @@ class KielaController extends Controller
         //Query to get groups here now
         $present = Schedule::orderBy('group_id', 'asc')->with(['group', 'group.users'])->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
 
-        return view('kielas.index')->with(compact('now', 'cars', 'users', 'festival', 'presentKiela', 'present'));
+        return view('kielas.index')->with(compact('now', 'users', 'festival', 'presentKiela', 'present'));
     }
 
     /**

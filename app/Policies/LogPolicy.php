@@ -36,7 +36,7 @@ class LogPolicy
      * @param  \App\Log  $log
      * @return mixed
      */
-    public function view(User $user, Log $log)
+    public function view(User $user)
     {
         return $user->may('manage_logs');
     }

@@ -7,10 +7,60 @@ all actions performed in the model will be saved in the logs table, and can be a
 
 ## How to attach it to a model
 
+For a Model to be logged, you need to perform little changes on the model :
+
 ### Model relation
+
+Add a polymorphic relation to the log model.
+
+```php
+/**
+ * MODEL RELATION
+ * Gets the logs corresponding to this model
+ */
+public function logs()
+{
+    return $this->morphMany(Log::class, 'loggable');
+}
+```
 
 ### Attaching events
 
+Next you need to register the events you want to log for the model.
+In runners you can log 4 events :
+* `created`
+* `updated`
+* `deleted`
+* `restored`
+The restored event can only be addet to medels that uses soft deletes.
+
+Here the code to add in the model to fire events :
+
+```php
+/**
+ * MODEL EVENTS
+ * The event map for the model.
+ *
+ * @var array
+ */
+protected $dispatchesEvents = [
+    'created'  => LogDatabaseCreateEvent::class,
+    'updated'  => LogDatabaseUpdateEvent::class,
+    'deleted'  => LogDatabaseDeleteEvent::class,
+    'restored' => LogDatabaseRestoreEvent::class
+];
+```
+
+# Retriving logs
+
+After this manipulations, all the events will be logged in the logs table.
+You can retrieve logs for a specific model by accesing the polymorphic relation you added below.
+Example to retrive runs logs.
+
+```php
+$run = Run::first();
+$run->logs();
+```
 
 <br>
 <br>

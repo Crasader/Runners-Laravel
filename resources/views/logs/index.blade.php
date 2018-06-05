@@ -49,7 +49,11 @@
                             <tr>
                                 <td>{{ $log->created_at->toDateString() }}</td>
                                 <th>{{ $log->created_at->format('H:i:s') }}</th>
-                                <td>{{ $log->action }}</td>
+                                <td>
+                                    {{-- Status tag (see related component) --}}
+                                    @logaction(['action' => $log->action])
+                                    @endlogaction
+                                </td>
                                 <td>{{ $log->loggable->getTable() }}</td>
                                 <td>{{ $log->user()->count() ? $log->user->name : 'Migrations' }}</td>
                             </tr>

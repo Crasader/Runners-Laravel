@@ -295,7 +295,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user->myLogs as $log)
+                            @foreach ($user->myLogs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
                                     <td>
@@ -324,7 +324,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user->logs as $log)
+                            @foreach ($user->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
                                     <td>

@@ -7,19 +7,19 @@
 
 @switch($action)
     @case('created')
-        <span class="tag {{ $slot }} is-success">Crée</span>
+        <span class="tag {{ $slot }} is-success">Création</span>
         @break
 
     @case('updated')
-        <span class="tag {{ $slot }} is-info">Mis a jour</span>
+        <span class="tag {{ $slot }} is-info">Mise a jour</span>
         @break
 
     @case('deleted')
-        <span class="tag {{ $slot }} is-danger">Supprimé</span>
+        <span class="tag {{ $slot }} is-danger">Suppression</span>
         @break
 
     @case('restored')
-        <span class="tag {{ $slot }} is-dark">Réstoré</span>
+        <span class="tag {{ $slot }} is-dark">Réstoration</span>
         @break
 
     @default

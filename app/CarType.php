@@ -9,6 +9,9 @@ use App\RunDriver;
 use App\Run;
 use App\Comment;
 use App\Events\Log\LogDatabaseCreateEvent;
+use App\Events\Log\LogDatabaseUpdateEvent;
+use App\Events\Log\LogDatabaseDeleteEvent;
+use App\Events\Log\LogDatabaseRestoreEvent;
 
 /**
  * CarType
@@ -36,7 +39,10 @@ class CarType extends Model
      * @var array
      */
     protected $dispatchesEvents = [
-        'created'  => LogDatabaseCreateEvent::class
+        'created'  => LogDatabaseCreateEvent::class,
+        'updated'  => LogDatabaseUpdateEvent::class,
+        'deleted'  => LogDatabaseDeleteEvent::class,
+        'restored' => LogDatabaseRestoreEvent::class
     ];
 
     /**

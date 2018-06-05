@@ -47,8 +47,8 @@
             ],
             "search" => "firstname",
             "orderBy" => [
-                "firstname" => "Prénom",
                 "lastname" => "Nom de famille",
+                "firstname" => "Prénom",
                 "email" => "E-mail",
                 "phone_number" => "Tel",
                 "status" => "Status",
@@ -81,8 +81,8 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
-                                <th>{{ $user->firstname }}</th>
-                                <td>{{ $user->lastname }}</td>
+                                <td>{{ $user->firstname }}</td>
+                                <th>{{ $user->lastname }}</th>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>

@@ -20,9 +20,11 @@ trait Filterable
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param  \Illuminate\Http\Request  $request
+     * @param string $defaultFieldOrdering Name of the field for default ordering
+     * @param string $defultOrderingDirection Direction for default ordering
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request, $defaultFieldOrdering, $defultOrderingDirection)
     {
         // Add's diferents scopes depending the query string (GET request)
         if ($request->query('filter')) {
@@ -33,6 +35,8 @@ trait Filterable
         }
         if ($request->query('order')) {
             $query->filterOrder($request);
+        } else {
+            $query->orderBy($defaultFieldOrdering, $defultOrderingDirection);
         }
         return $query;
     }

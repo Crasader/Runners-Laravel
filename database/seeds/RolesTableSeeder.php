@@ -8,7 +8,7 @@ use App\Role;
  * RolesTableSeeder
  * Create all the roles used in the application
  * Note: the admin role can only be added trough the database
- * 
+ *
  * @author Bastien Nicoud
  */
 class RolesTableSeeder extends Seeder
@@ -45,7 +45,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => true,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -73,7 +74,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => true,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -93,7 +95,7 @@ class RolesTableSeeder extends Seeder
                 'manage_artists'             => true,
                 'manage_waypoints'           => true,
                 'manage_groups'              => true,
-                'manage_roles'               => true,
+                'manage_roles'               => false,
                 'manage_cars'                => true,
                 'manage_car_types'           => true,
                 'create_users'               => true,
@@ -101,7 +103,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => true,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => false,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => true
             ]
         ]);
 
@@ -121,7 +124,7 @@ class RolesTableSeeder extends Seeder
                 'manage_artists'             => false,
                 'manage_waypoints'           => false,
                 'manage_groups'              => false,
-                'manage_roles'               => true,
+                'manage_roles'               => false,
                 'manage_cars'                => false,
                 'manage_car_types'           => false,
                 'create_users'               => false,
@@ -129,7 +132,8 @@ class RolesTableSeeder extends Seeder
                 'manage_other_users'         => false,
                 'manage_my_comments'         => true,
                 'manage_other_user_comments' => false,
-                'view_comments'              => true
+                'view_comments'              => true,
+                'manage_logs'                => false
             ]
         ]);
     }

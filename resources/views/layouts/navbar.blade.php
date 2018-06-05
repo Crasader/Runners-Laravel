@@ -117,6 +117,13 @@
                 <a class="navbar-item" href="{{ route('kiela.index') }}">
                     Kiéla?
                 </a>
+
+                {{-- Logs page --}}
+                @can('view', App\Log::class)
+                    <a class="navbar-item" href="{{ route('logs.index') }}">
+                        Logs
+                    </a>
+                @endcan
             </div>
 
             <div class="navbar-end">

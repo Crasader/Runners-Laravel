@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * AddAttachmentsTable
- * 
+ *
  * @author Bastien Nicoud
  */
 class AddAttachmentsTable extends Migration

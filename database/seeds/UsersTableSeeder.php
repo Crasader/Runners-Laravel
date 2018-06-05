@@ -10,7 +10,7 @@ use App\Festival;
 /**
  * UsersTableSeeder
  * Create all the users in the database.
- * 
+ *
  * @author Bastien Nicoud
  */
 class UsersTableSeeder extends Seeder
@@ -115,8 +115,7 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Toor',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'free',
-            'api_token'    => str_random(60)
+            'status'       => 'free'
         ]);
         // Asociate the admin role
         $root->roles()->save(Role::where('slug', 'root')->first());
@@ -133,8 +132,7 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Runner',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'free',
-            'api_token'    => str_random(60)
+            'status'       => 'free'
         ]);
         // Asociate the runner role
         $runner->roles()->save(Role::where('slug', 'runner')->first());
@@ -155,7 +153,6 @@ class UsersTableSeeder extends Seeder
                 'firstname'    => $user[1],
                 'phone_number' => $user[2],
                 'sex'          => $user[3],
-                'api_token'    => str_random(60),
                 'status'       => $status->random()
             ]);
             // Attach the right role and group for this user

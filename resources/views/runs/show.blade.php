@@ -27,6 +27,15 @@
                     @endcomponent
                 </h1>
             </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $run)
+                        <p class="control">
+                            <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
+                        </p>
+                    @endcan
+                </div>
+            </div>
         </div>
 
         <div class="columns">

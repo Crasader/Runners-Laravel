@@ -9,7 +9,7 @@ use App\Attachment;
  * AttachmentsTableSeeder
  * Create some attachments (driver licence and profile picture)
  * And link it to user
- * 
+ *
  * @author Bastien Nicoud
  */
 class AttachmentsTableSeeder extends Seeder

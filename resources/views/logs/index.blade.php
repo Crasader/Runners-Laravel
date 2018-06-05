@@ -54,8 +54,19 @@
                                     @logaction(['action' => $log->action])
                                     @endlogaction
                                 </td>
-                                <td>{{ $log->loggable->getTable() }}</td>
-                                <td>{{ $log->user()->count() ? $log->user->name : 'Migrations' }}</td>
+                                <td>
+                                    {{ $log->loggable->getTable() }}
+                                    <span class="tag is-light">{{ $log->loggable->id }}</span>
+                                </td>
+                                @if($log->user()->count())
+                                    <td>
+                                        <a href="{{ route('users.show', ['user' => $log->user->id]) }}">
+                                            {{ $log->user->fullname }}
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>Migrations</td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

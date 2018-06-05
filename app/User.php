@@ -93,10 +93,20 @@ class User extends Authenticatable
     /**
      * MODEL RELATION
      * Gets the logs corresponding to this model
+     * (the logs fiered for this user)
      */
     public function logs()
     {
         return $this->morphMany(Log::class, 'loggable');
+    }
+
+    /**
+     * MODEL RELATION
+     * Retrive the logs fired by this user (the actions the user makes)
+     */
+    public function myLogs()
+    {
+        return $this->hasMany(Log::class);
     }
 
     /**

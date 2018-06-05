@@ -12,6 +12,7 @@ use App\RunDriver;
 use Carbon\Carbon;
 use App\RunSubscription;
 use Illuminate\Support\Collection;
+use App\Extensions\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Run extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Filterable;
 
     /**
      * MODEL PROPERTY

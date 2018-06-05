@@ -14,7 +14,7 @@
 @push('scripts')
     <script src="{{ mix('js/pages/groups/manager.js') }}"></script>
 @endpush
-  
+
 @section('content')
 
 <div class="section">
@@ -26,6 +26,11 @@
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
+                    @can('create', App\Group::class)
+                        <p class="control">
+                            <a href="{{ route('groups.create') }}" class="button is-info">Nouveau groupe</a>
+                        </p>
+                    @endcan
                     @can('update', App\Group::class)
                         <p class="control">
                             <button onclick="event.preventDefault();
@@ -36,13 +41,6 @@
                         </p>
                     @endcan
                 </div>
-            </div>
-        </div>
-
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
             </div>
         </div>
 
@@ -80,11 +78,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <button class="button is-success" type="submit">Valider les modifications</button>
-                </div>
             </div>
         </form>
 

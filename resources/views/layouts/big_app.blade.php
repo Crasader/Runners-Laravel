@@ -29,8 +29,6 @@
 
       @yield('content')
 
-      @include('layouts.footer')
-
       {{-- Scripts --}}
       <script src="{{ mix('js/main.js') }}"></script>
       @stack('scripts')

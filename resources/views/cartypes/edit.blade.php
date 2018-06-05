@@ -8,7 +8,7 @@
 
 @section('breadcrum')
 <li><a href="{{ route('carTypes.index') }}">Types de véhicules</a></li>
-<li class="is-active"><a href="#" aria-current="page">Modifier le type de véhicule</a></li>
+<li class="is-active"><a href="#" aria-current="page">Modifier {{ $carType->name }}</a></li>
 @endsection
 
 @section('content')
@@ -16,16 +16,50 @@
 
 <div class="section">
     <div class="container">
+        {{-- --------------------- --}}
+        {{-- HEADER                --}}
+        {{-- --------------------- --}}
         <div class="columns">
-            <div class="column is-12">
-                <h1 class="title is-2">Modifier un type de véhicule</h1>
+            <div class="column is-narrow">
+                <h1 class="title is-2">
+                    Modifier {{ $carType->name }}
+                </h1>
+            </div>
+            {{-- Controls buttons on the top --}}
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $carType)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('update-cartype-form').submit();"
+                                class="button is-success">
+                                Valider les modifications
+                            </button>
+                        </p>
+                    @endcan
+                    @can('delete', $carType)
+                        <p class="control">
+                            <form id="delete-cartype-form"
+                                action="{{ route('carTypes.destroy', ['carType' => $carType->id]) }}"
+                                method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
+                            <button onclick="event.preventDefault();
+                                document.getElementById('delete-cartype-form').submit();"
+                                class="button is-danger">
+                                Supprimer {{ $carType->name }}
+                            </button>
+                        </p>
+                    @endcan
+                </div>
             </div>
         </div>
 
         <div class="columns">
             <div class="column">
 
-                <form action="{{ route('carTypes.update', ['carType' => $carType->id]) }}" method="POST">
+                <form id="update-cartype-form" action="{{ route('carTypes.update', ['carType' => $carType->id]) }}" method="POST">
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
 
@@ -89,26 +123,7 @@
 
                         </div>
                     </div>
-
-                    {{-- end form --}}
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- Submit button --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Modifier le type véhicule
-                                    </button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
                 </form>
-
             </div>
         </div>
     </div>

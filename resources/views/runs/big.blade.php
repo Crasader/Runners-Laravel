@@ -16,6 +16,7 @@
 @endpush
 
 @push('scripts')
+    <script src="{{ mix('js/pages/runs/big.js') }}"></script>
 @endpush
 
 @section('content')
@@ -23,63 +24,50 @@
 <div class="section">
     <div class="container is-fluid">
 
-        {{-- Title and controls --}}
-        <div class="columns">
-            <div class="column is-narrow">
-                <h1 class="title is-2">Prochains runs</h1>
-            </div>
-            <div class="column">
-                <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="{{ route('runs.index') }}" class="button is-info">Retour</a>
-                    </p>
+        {{-- Iterates all the runs --}}
+        <div class="columns is-multiline">
+            @foreach ($runs as $run)
+                <div class="column is-12">
+                    <div class="box box-big">
+                        <div class="columns">
+                            <div class="column is-3 has-background-light has-border-right">
+                                <h2 class="title is-5 title-run">
+                                    {{ $run->name }}
+                                </h2>
+                                @statustag(['status' => $run->status])
+                                @endstatustag
+                                <p>
+                                    {{ $run->passengers }} personnes
+                                </p>
+                            </div>
+                            <div class="column is-6 has-border-right">
+                                <div class="columns is-multiline">
+                                    <div class="column is-6">
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
+                                        <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
+                                    </div>
+                                    <div class="column is-6">
+                                        <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>
+                                        <p>{{ str_limit($run->infos, 200, ' ...') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                @foreach ($run->subscriptions as $sub)
+                                    <div class="columns">
+                                        <div class="column is-5">
+                                            <h4 class="subtitle is-5">{{ $sub->car->name }}</h4>
+                                        </div>
+                                        <div class="column is-6">
+                                            <h4 class="subtitle is-5">{{ $sub->user->firstname }}</h4>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        {{-- The table --}}
-        <div class="columns">
-            <div class="column is-12">
-                <table class="table is-striped is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Artiste</th>
-                            <th>Passagers</th>
-                            <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Artiste</th>
-                            <th>Passagers</th>
-                            <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach ($runs as $run)
-                            <tr>
-                                <th>{{ $run->name }}</th>
-                                <td>{{ $run->artists->first()->name }}</td>
-                                <td>{{ $run->passengers }}</td>
-                                <td>
-                                    {{-- Status tag (see related component) --}}
-                                    @component('components/status_tag', ['status' => $run->status])
-                                        is-large
-                                    @endcomponent
-                                </td>
-                                <td>{{ $run->planned_at->toDateString() }} <strong>{{ $run->planned_at->toTimeString() }}</strong></td>
-                                <td>{{ $run->started_at ?? '' }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            @endforeach
         </div>
 
     </div>

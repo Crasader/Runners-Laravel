@@ -21,6 +21,7 @@ class KielaController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -30,7 +31,7 @@ class KielaController extends Controller
             $now = Carbon::parse($request->query('date'));
             if ($request->query('type') == "sub") {
                 $now->subHours($request->query('hours'));
-            } elseif ($request->query('type') == "add"){
+            } elseif ($request->query('type') == 'add') {
                 $now->addHours($request->query('hours'));
             }
         } else {
@@ -75,7 +76,7 @@ class KielaController extends Controller
         //Associate user to kiela
         $kiela->user()->associate(User::find($request->user_id));
         $kiela->save();
-        
+
         return redirect()->route('kiela.index');
     }
 

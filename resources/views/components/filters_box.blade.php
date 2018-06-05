@@ -92,6 +92,9 @@
                     <div class="column is-12">
                         <div class="buttons has-addons is-centered">
                             <button type="submit" class="button">Filtrer les résultats</button>
+                            @if (request()->query())
+                                <a class="button" href="{{ route(request()->route()->getName()) }}">Enlever les filtres</a>
+                            @endif
                         </div>
                     </div>
                 </div>

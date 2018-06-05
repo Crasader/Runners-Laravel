@@ -35,7 +35,14 @@
         {{-- Filters --}}
         @component('components/filters_box', ['filters' => [
             "filtredColumns" => [
-                "status" => ["started", "ready", "gone", "error"],
+                "status" => [
+                    "ready" => "Pret",
+                    "gone" => "Démarré",
+                    "error" => "Erreur",
+                    "drafting" => "En préparation",
+                    "finished" => "Terminé",
+                    "needs_filling" => "Manque infos"
+                ],
             ],
             "search" => "name",
             "orderBy" => [
@@ -103,7 +110,7 @@
         </div>
 
         {{-- Pagination links --}}
-        {{ $runs->links() }}
+        {{ $runs->appends(request()->except('page'))->links() }}
 
     </div>
 </div>

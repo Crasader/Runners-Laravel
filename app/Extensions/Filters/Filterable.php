@@ -6,6 +6,7 @@ namespace App\Extensions\Filters;
  * Filterable
  *
  * Provides additional methods to the model to filter requests
+ * Intended to be use with the filterable component
  *
  * @author Bastien Nicoud
  * @package App\Extensions\Filters
@@ -19,9 +20,11 @@ trait Filterable
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param  \Illuminate\Http\Request  $request
+     * @param string $defaultFieldOrdering Name of the field for default ordering
+     * @param string $defultOrderingDirection Direction for default ordering
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request, $defaultFieldOrdering, $defultOrderingDirection)
     {
         // Add's diferents scopes depending the query string (GET request)
         if ($request->query('filter')) {
@@ -32,6 +35,8 @@ trait Filterable
         }
         if ($request->query('order')) {
             $query->filterOrder($request);
+        } else {
+            $query->orderBy($defaultFieldOrdering, $defultOrderingDirection);
         }
         return $query;
     }
@@ -45,9 +50,7 @@ trait Filterable
      */
     public function scopeFilterValue($query, $request)
     {
-        foreach ($request->query('filter') as $column) {
-            //
-        }
+        $query->whereIn($request->query('filter-column'), $request->query('filter'));
     }
 
     /**

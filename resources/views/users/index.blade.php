@@ -35,11 +35,26 @@
         </div>
 
         {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
+        @component('components/filters_box', ['filters' => [
+            "filtredColumns" => [
+                "status" => [
+                    "not-present" => "Pas présent",
+                    "not-requested" => "Non demandé",
+                    "free" => "Libre",
+                    "requested" => "Demandé",
+                    "gone" => "En run"
+                ],
+            ],
+            "search" => "firstname",
+            "orderBy" => [
+                "lastname" => "Nom de famille",
+                "firstname" => "Prénom",
+                "email" => "E-mail",
+                "phone_number" => "Tel",
+                "status" => "Status",
+            ]
+        ]])
+        @endcomponent
 
         {{-- The table --}}
         <div class="columns">
@@ -66,8 +81,8 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
-                                <th>{{ $user->firstname }}</th>
-                                <td>{{ $user->lastname }}</td>
+                                <td>{{ $user->firstname }}</td>
+                                <th>{{ $user->lastname }}</th>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
@@ -83,7 +98,7 @@
         </div>
 
         {{-- Pagination links --}}
-        {{ $users->links() }}
+        {{ $users->appends(request()->except('page'))->links() }}
 
     </div>
 </div>

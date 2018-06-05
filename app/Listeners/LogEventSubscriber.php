@@ -2,14 +2,21 @@
 
 namespace App\Listeners;
 
+use App\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Events\Log\LogDatabaseCreateEvent;
+
 class LogEventSubscriber
 {
     /**
-     * Handle eloquent saves
+     * Handle eloquent creations
      */
-    public function onModelSave($event)
+    public function onDatabaseCreate($event)
     {
-        dd('tutu');
+        $log = new Log(['action' => "Création"]);
+        $log->user()->associate(Auth::user());
+        $log->loggable()->associate($event->model);
+        $log->save();
     }
 
     /**
@@ -19,9 +26,6 @@ class LogEventSubscriber
      */
     public function subscribe($events)
     {
-        $events->listen(
-            'eloquent.saved',
-            [$this, 'onModelSave']
-        );
+        $events->listen(LogDatabaseCreateEvent::class, [$this, 'onDatabaseCreate']);
     }
 }

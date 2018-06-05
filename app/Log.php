@@ -30,4 +30,13 @@ class Log extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * MODEL RELATION
+     * The user wo triggs this event
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

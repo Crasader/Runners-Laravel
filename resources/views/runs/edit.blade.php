@@ -30,12 +30,30 @@
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="#" class="button is-success">Valider les modifications</a>
-                    </p>
-                    <p class="control">
-                        <a href="#" class="button is-danger">Supprimer ce run</a>
-                    </p>
+                    @can('update', $run)
+                        <p class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('update-run-form').submit();"
+                                class="button is-success">
+                                Valider les modifications
+                            </button>
+                        </p>
+                    @endcan
+                    @can('delete', $run)
+                        <p class="control">
+                            <form id="delete-run-form"
+                                action="{{ route('runs.destroy', ['run' => $run->id]) }}"
+                                method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
+                            <button onclick="event.preventDefault();
+                                document.getElementById('delete-run-form').submit();"
+                                class="button is-danger">
+                                Supprimer {{ $run->name }}
+                            </button>
+                        </p>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -245,7 +263,7 @@
                             {{-- SEX --}}
                             <div class="field is-pulled-right">
                                 <p class="control">
-                                    <button type="submit" value="addRunner" class="button is-info">
+                                    <button type="submit" name="add-runner" value="true" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>

@@ -101,7 +101,6 @@ class RunSubscription extends Model
     {
         $this->assignUser(User::where('name', $subscriptionDatas['user']));
         $this->assignCar(Car::where('name', $subscriptionDatas['car']));
-        dd($subscriptionDatas);
     }
 
     /**

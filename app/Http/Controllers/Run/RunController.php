@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Runs\StoreNewRun;
+use App\Http\Requests\Runs\UpdateRun;
 
 /**
  * RunController
@@ -94,13 +95,15 @@ class RunController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Runs\StoreNewRun  $request
+     * @param  \App\Http\Requests\Runs\UpdateRun  $request
      * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewRun $request, Run $run)
+    public function update(UpdateRun $request, Run $run)
     {
-        $run->saveDatas($request->all());
+
+        dd($request->all());
+        //$run->saveDatas($request->all());
         // Save the run datas
         // Save the artist and waypoints linked to the run
         // Save the run drivers

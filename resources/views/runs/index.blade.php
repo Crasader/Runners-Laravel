@@ -110,7 +110,7 @@
         </div>
 
         {{-- Pagination links --}}
-        {{ $runs->links() }}
+        {{ $runs->appends(request()->except('page'))->links() }}
 
     </div>
 </div>

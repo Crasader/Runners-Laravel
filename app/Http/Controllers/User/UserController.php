@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::filter($request, 'lastname', asc)->paginate(20);
+        $users = User::filter($request, 'lastname', 'asc')->paginate(20);
         return view('users/index')->with(compact('users'));
     }
 

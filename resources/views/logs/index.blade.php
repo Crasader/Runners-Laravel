@@ -32,7 +32,7 @@
                             <th>Heure</th>
                             <th>Action</th>
                             <th>Resource</th>
-                            <th>Utilisateur</th>
+                            <th>Effectué par</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -41,7 +41,7 @@
                             <th>Heure</th>
                             <th>Action</th>
                             <th>Resource</th>
-                            <th>Utilisateur</th>
+                            <th>Effectué par</th>
                         </tr>
                     </tfoot>
                     <tbody>

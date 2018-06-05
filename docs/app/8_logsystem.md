@@ -51,7 +51,7 @@ protected $dispatchesEvents = [
 ];
 ```
 
-# Retriving logs
+## Retriving logs
 
 After this manipulations, all the events will be logged in the logs table.
 You can retrieve logs for a specific model by accesing the polymorphic relation you added below.
@@ -61,6 +61,14 @@ Example to retrive runs logs.
 $run = Run::first();
 $run->logs();
 ```
+
+## Custom logs
+
+You can crete our own custom events for log actions in logs table.
+
+1. Create a custom [event](https://laravel.com/docs/5.6/events#defining-events)
+2. Add a method to the LogEventSubscriber to handle this even an log it in the database (or create our own event listener for mor control)
+3. Fire your event, and watch the logs
 
 <br>
 <br>

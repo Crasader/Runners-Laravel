@@ -72,7 +72,7 @@
                     </p>
 
                     <p>
-                        Démarré
+                        Démarré le
                         <span class="tag">
                             <strong>
                                 {{ $run->started_at->format('l d') }}
@@ -87,7 +87,7 @@
                     </p>
 
                     <p>
-                        Terminé à
+                        Terminé le
                         <span class="tag">
                             <strong>
                                 {{ $run->ended_at->format('l d') }}
@@ -105,6 +105,11 @@
 
             <div class="column is-3">
                 @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
+                @endcomponent
+            </div>
+
+            <div class="column is-6">
+                @component('components/runs/run_runners_box', ['subscriptions' => $run->subscriptions])
                 @endcomponent
             </div>
         </div>

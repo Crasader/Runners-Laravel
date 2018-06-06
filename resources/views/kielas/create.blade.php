@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-    <li><a href="{{ route('kiela.index') }}">Kiela</a></li>
+    <li><a href="{{ route('kiela.index') }}">Kiéla?</a></li>
     <li class="is-active"><a href="#" aria-current="page">Ajouter un chauffeur</a></li>
 @endsection
   
@@ -31,7 +31,7 @@
                     {{-- Form add user --}}
                     <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Type</label>
+                        <label class="label">Chauffeur</label>
                     </div>
                     <div class="field-body">
 

@@ -38,6 +38,15 @@ php artisan storage:link
 
 Now you can access to you freshly installed Runners app.
 
+## IDE helper
+
+To provide best completion on laravel Facade we use the [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) package, it allows you to generate file thats help your ide to discover methods and attributes generated on the fly.
+
+```sh
+# Generate helper file for laravel facades
+php artisan ide-helper:generate
+```
+
 ## !!! Code quality and Linting !!!
 
 To maintain a good code quality and beauty on the project we use **coding standards** :

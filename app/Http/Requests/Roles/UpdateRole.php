@@ -2,18 +2,16 @@
 
 namespace App\Http\Requests\Roles;
 
-use App\Role;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * StoreRole
+ * UpdateRole
  *
  * @author Bastien Nicoud
  * @package App\Http\Requests\Roles
  */
-class StoreRole extends FormRequest
+class UpdateRole extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +20,7 @@ class StoreRole extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('create', Role::class);
+        return true;
     }
 
     /**
@@ -39,7 +37,7 @@ class StoreRole extends FormRequest
                 'max:50',
                 // The regex is used to validate the slug format
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                Rule::unique('roles')
+                Rule::unique('roles')->ignore(request()->role->id)
             ],
             'name' => ['required', 'string', 'max:50'],
             'permissions.*' => [Rule::in(['true', 'false'])]

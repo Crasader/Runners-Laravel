@@ -140,4 +140,13 @@ Route::middleware(['auth'])->group(function () {
         'Kiela\KielaController',
         ['only' => ['index', 'create', 'store' ,'destroy']]
     );
+
+    /**
+     * Logs crud
+     */
+    Route::resource(
+        'logs',
+        'Log\LogController',
+        ['only' => ['index']]
+    );
 });

@@ -6,6 +6,7 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreRole;
+use App\Http\Requests\Roles\UpdateRole;
 
 /**
  * RoleController
@@ -80,11 +81,11 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Roles\StoreRole  $request
+     * @param  \App\Http\Requests\Roles\UpdateRole  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRole $request, Role $role)
+    public function update(UpdateRole $request, Role $role)
     {
         $this->authorize('update', Role::class);
         $role->fill($request->all());

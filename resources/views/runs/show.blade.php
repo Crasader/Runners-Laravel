@@ -27,17 +27,56 @@
                     @endcomponent
                 </h1>
             </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    @can('update', $run)
+                        <p class="control">
+                            <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
+                        </p>
+                    @endcan
+                </div>
+            </div>
         </div>
 
         <div class="columns">
 
             {{-- Logs --}}
-            <div class="column is-4">
-                LOGS
+            <div class="column is-5">
+                <h2 class="title is-5">Dernières actions effectuées sur ce run</h2>
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Action</th>
+                            <th>Effectué par</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($run->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
+                            <tr>
+                                <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                <td>
+                                    {{-- Status tag (see related component) --}}
+                                    @logaction(['action' => $log->action])
+                                    @endlogaction
+                                </td>
+                                @if($log->user()->count())
+                                    <td>
+                                        <a href="{{ route('users.show', ['user' => $log->user->id]) }}">
+                                            {{ $log->user->fullname }}
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>Migrations</td>
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
 
             @can('view', App\Comment::class)
-                <div class="column is-8">
+                <div class="column is-7">
 
 
                     {{-- --------------------- --}}

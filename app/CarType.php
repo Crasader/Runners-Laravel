@@ -8,6 +8,10 @@ use App\Car;
 use App\RunDriver;
 use App\Run;
 use App\Comment;
+use App\Events\Log\LogDatabaseCreateEvent;
+use App\Events\Log\LogDatabaseUpdateEvent;
+use App\Events\Log\LogDatabaseDeleteEvent;
+use App\Events\Log\LogDatabaseRestoreEvent;
 
 /**
  * CarType
@@ -27,6 +31,28 @@ class CarType extends Model
     protected $fillable = [
         'name', 'description', 'nb_place'
     ];
+
+    /**
+     * MODEL EVENTS
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created'  => LogDatabaseCreateEvent::class,
+        'updated'  => LogDatabaseUpdateEvent::class,
+        'deleted'  => LogDatabaseDeleteEvent::class,
+        'restored' => LogDatabaseRestoreEvent::class
+    ];
+
+    /**
+     * MODEL RELATION
+     * Gets the logs corresponding to this model
+     */
+    public function logs()
+    {
+        return $this->morphMany(Log::class, 'loggable');
+    }
 
     /**
      * MODEL RELATION

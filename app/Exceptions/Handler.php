@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Noodlehaus\ErrorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,6 +58,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //dd($exception);
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof ModelNotFoundException) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof NotFoundHttpException) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof Exception) {
+            return redirect()
+                ->back()
+                ->with('error', 'Une erreur non controlée est survenue. L\'administrateur a été informé');
+        }
         return parent::render($request, $exception);
     }
 }

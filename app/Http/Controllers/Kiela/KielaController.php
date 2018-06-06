@@ -77,7 +77,9 @@ class KielaController extends Controller
         $kiela->user()->associate(User::find($request->user_id));
         $kiela->save();
 
-        return redirect()->route('kiela.index');
+        return redirect()
+            ->route('kiela.index')
+            ->with('success', "L'utilisateur a bien été ajouté aux chauffeurs présents.");
     }
 
     /**
@@ -120,8 +122,11 @@ class KielaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kiela $kiela)
     {
-        //
+        $kiela->delete();
+        return redirect()
+            ->back()
+            ->with('success', "L'utilisateur a bien été retiré des chauffeurs présents.");
     }
 }

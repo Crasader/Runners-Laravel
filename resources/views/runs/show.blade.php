@@ -77,7 +77,7 @@
 
             @can('view', App\Comment::class)
                 <div class="column is-7">
-
+                    <h2 class="title is-5">Commentaires</h2>
 
                     {{-- --------------------- --}}
                     {{-- COMMENTS LISTING      --}}

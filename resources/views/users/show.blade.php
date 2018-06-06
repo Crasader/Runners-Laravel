@@ -304,8 +304,8 @@
                                         @endlogaction
                                     </td>
                                     <td>
-                                        {{ $log->loggable->getTable() }}
-                                        <span class="tag is-light">{{ $log->loggable->id }}</span>
+                                        {{ $log->loggable_type }}
+                                        <span class="tag is-light">{{ $log->loggable_id }}</span>
                                     </td>
                                 </tr>
                             @endforeach

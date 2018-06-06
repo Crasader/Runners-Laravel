@@ -11,7 +11,7 @@
         @break
 
     @case('updated')
-        <span class="tag {{ $slot }} is-info">Mise a jour</span>
+        <span class="tag {{ $slot }} is-primary">Mise a jour</span>
         @break
 
     @case('deleted')
@@ -20,6 +20,14 @@
 
     @case('restored')
         <span class="tag {{ $slot }} is-dark">Réstoration</span>
+
+    @break
+    @case('login')
+        <span class="tag {{ $slot }} is-info">Connexion a l'administration</span>
+        @break
+
+    @case('logout')
+        <span class="tag {{ $slot }} is-info">Déconnexion de l'administration</span>
         @break
 
     @default

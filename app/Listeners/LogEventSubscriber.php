@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Log;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Auth;
 use App\Events\Log\LogDatabaseCreateEvent;
 use App\Events\Log\LogDatabaseUpdateEvent;
@@ -18,6 +20,13 @@ use App\Events\Log\LogDatabaseRestoreEvent;
  */
 class LogEventSubscriber
 {
+    /**
+     * Create a log record on the database
+     *
+     * @param Event $event
+     * @param string $action
+     * @return void
+     */
     public function log($event, $action)
     {
         $log = new Log(['action' => $action]);
@@ -58,15 +67,51 @@ class LogEventSubscriber
     }
 
     /**
+     * Create an authentication log in the database
+     *
+     * @param [type] $user
+     * @param [type] $action
+     * @return void
+     */
+    public function logUserAuthentication($user, $action)
+    {
+        $log = new Log(['action' => $action]);
+        $log->user()->associate($user);
+        $log->loggable()->associate($user);
+        $log->save();
+    }
+
+    /**
+     * Handle user log-in
+     */
+    public function onUserLogIn($event)
+    {
+        $this->logUserAuthentication($event->user, "login");
+    }
+
+    /**
+     * Handle user log-out
+     */
+    public function onUserLogOut($event)
+    {
+        $this->logUserAuthentication($event->user, "logout");
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param  \Illuminate\Events\Dispatcher  $events
      */
     public function subscribe($events)
     {
+        // Database events
         $events->listen(LogDatabaseCreateEvent::class, [$this, 'onDatabaseCreate']);
         $events->listen(LogDatabaseUpdateEvent::class, [$this, 'onDatabaseUpdate']);
         $events->listen(LogDatabaseDeleteEvent::class, [$this, 'onDatabaseDelete']);
         $events->listen(LogDatabaseRestoreEvent::class, [$this, 'onDatabaseRestore']);
+
+        // Authentication events
+        $events->listen(Login::class, [$this, 'onUserLogIn']);
+        $events->listen(Logout::class, [$this, 'onUserLogOut']);
     }
 }

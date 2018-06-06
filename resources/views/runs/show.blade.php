@@ -24,7 +24,7 @@
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
-                    Edition du run {{ $run->name }}
+                    Run {{ $run->name }}
                     @component('components/status_tag', ['status' => $run->status])
                     @endcomponent
                 </h1>
@@ -42,19 +42,19 @@
 
         {{-- RUN INFOS --}}
         <div class="columns">
-            <div class="column is-3">
+            <div class="column">
                 <h2 class="title is-4">Horaires</h2>
             </div>
-            <div class="column is-3">
-                <h2 class="title is-4">Depart -> arrivée</h2>
+            <div class="column">
+                <h2 class="title is-4">Départ -> arrivée</h2>
             </div>
-            <div class="column is-6">
-                <h2 class="title is-4">Runners</h2>
+            <div class="column is-5">
+                <h2 class="title is-4">Infos</h2>
             </div>
         </div>
 
         <div class="columns">
-            <div class="column is-3">
+            <div class="column">
                 <div class="content box">
                     @datetag(['date' => $run->planned_at])
                         Prévu le
@@ -68,13 +68,26 @@
                 </div>
             </div>
 
-            <div class="column is-3">
+            <div class="column">
                 @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
                 @endcomponent
             </div>
 
-            <div class="column is-6">
-                Informations
+            <div class="column is-5">
+                <div class="content box">
+                    <p>
+                        <strong>
+                            {{ $run->passengers }}
+                        </strong>
+                        passagers
+                    </p>
+                    <p>
+                        <strong>
+                            Informations :
+                        </strong>
+                        {{ $run->infos }}
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -117,7 +130,8 @@
                     <tbody>
                         @foreach ($run->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                             <tr>
-                                <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                <th>
+                                    {{ $log->created_at->format('d-m-Y H:i:s') }}</th>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @logaction(['action' => $log->action])

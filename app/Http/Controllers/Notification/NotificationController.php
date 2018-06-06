@@ -4,7 +4,14 @@ namespace App\Http\Controllers\Notification;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ * NotificationController
+ *
+ * @author Bastien Nicoud
+ * @package App\Http\Controllers\Log
+ */
 class NotificationController extends Controller
 {
     /**
@@ -14,7 +21,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Auth::user()->notifications()->paginate();
+        return view('notifications.index')->with(compact('notifications'));
     }
 
     /**

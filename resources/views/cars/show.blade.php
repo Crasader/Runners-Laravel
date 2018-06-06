@@ -64,6 +64,58 @@
                 </table>
             </div>
         </div>
+
+
+        <div class="columns">
+                <div class="column">
+                    <h2 class="title is-3">Runs utilisant ce véhicule</h2>
+                </div>
+            </div>
+
+        {{-- The table --}}
+        <div class="columns">
+            <div class="column is-12">
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Passagers</th>
+                            <th>Status</th>
+                            <th>Prévu à</th>
+                            <th>Démarré à</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Passagers</th>
+                            <th>Status</th>
+                            <th>Prévu à</th>
+                            <th>Démarré à</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach ($car->runs()->orderBy('planned_at', 'asc')->where('planned_at', '>=', Carbon\Carbon::now())->get() as $run)
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
+                                <th>{{ $run->name }}</th>
+                                <td>{{ $run->passengers }}</td>
+                                <td>
+                                    {{-- Status tag (see related component) --}}
+                                    @component('components/status_tag', ['status' => $run->status])
+                                    @endcomponent
+                                </td>
+                                <td>
+                                    {{ $run->planned_at }}
+                                </td>
+                                <td>
+                                    {{ $run->started_at }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

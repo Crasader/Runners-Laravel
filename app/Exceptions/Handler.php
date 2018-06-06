@@ -2,12 +2,19 @@
 
 namespace App\Exceptions;
 
+use App\User;
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Noodlehaus\ErrorException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use App\Notifications\UnHandledExceptionNotification;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -40,12 +47,18 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        // Log the exeption in laravel.log
         Log::error(
             "RUNNERS LOG : " . get_class($exception) .
             " CODE : " . $exception->getCode() .
             " MESSAGE : " . $exception->getMessage(),
             ['REQUEST' => request()]
         );
+
+        // Notify the app administrator (root)
+        Notification::send([User::first()], new UnHandledExceptionNotification($exception));
+
+        // Call default exeption reporter (displays mor detailed infos in the log)
         parent::report($exception);
     }
 
@@ -58,21 +71,38 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //dd($exception);
+        // In debug mode, call the default handler
         if (config('app.debug')) {
             return parent::render($request, $exception);
         }
+
+        // Catch Http exeptions
         if ($exception instanceof ModelNotFoundException) {
             return parent::render($request, $exception);
         }
         if ($exception instanceof NotFoundHttpException) {
             return parent::render($request, $exception);
         }
+        if ($exception instanceof HttpException) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof AuthenticationException) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof AuthorizationException) {
+            return parent::render($request, $exception);
+        }
+        if ($exception instanceof ValidationException) {
+            return parent::render($request, $exception);
+        }
+
+        // Return flash message for generic exeptions
         if ($exception instanceof Exception) {
             return redirect()
                 ->back()
                 ->with('error', 'Une erreur non controlée est survenue. L\'administrateur a été informé');
         }
+
         return parent::render($request, $exception);
     }
 }

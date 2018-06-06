@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li class="is-active"><a href="#" aria-current="page">Gestion des roles</a></li>
+<li class="is-active"><a href="#" aria-current="page">Gestion des rôles</a></li>
 @endsection
 
 @section('content')
@@ -18,13 +18,13 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Liste des roles</h1>
+                <h1 class="title is-2">Liste des rôles</h1>
             </div>
             <div class="column">
                 @can('create', App\Role::class)
                     <div class="field is-grouped is-pulled-right">
                         <p class="control">
-                            <a href="{{ route('roles.create') }}" class="button is-info">Nouveau role</a>
+                            <a href="{{ route('roles.create') }}" class="button is-info">Nouveau rôle</a>
                         </p>
                     </div>
                 @endcan

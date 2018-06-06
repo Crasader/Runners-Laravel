@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('roles.index') }}">Roles</a></li>
+<li><a href="{{ route('roles.index') }}">Rôles</a></li>
 <li><a href="{{ route('roles.show', ['role' => $role->id]) }}">{{ $role->slug }}</a></li>
 <li class="is-active"><a href="#" aria-current="page">Edition</a></li>
 @endsection
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Edition du role {{ $role->name }}</h1>
+                <h1 class="title is-2">Edition du rôle {{ $role->name }}</h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
@@ -26,7 +26,7 @@
                         <button onclick="event.preventDefault();
                             document.getElementById('update-role-form').submit();"
                             class="button is-success">
-                            Modifier le role
+                            Modifier le rôle
                         </button>
                     </p>
                 </div>
@@ -43,7 +43,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Nom du role :</label>
+                            <label class="label">Nom du rôle :</label>
                         </div>
                         <div class="field-body">
 
@@ -64,14 +64,14 @@
                             {{-- FIRSTNAME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'name',
-                                'placeholder' => 'Nom du role',
+                                'placeholder' => 'Nom du rôle',
                                 'type'        => 'text',
                                 'icon'        => 'fa-i-cursor',
                                 'errors'      => $errors,
                                 'value'       => $role->slug
                                 ])
                                 <p class="help">
-                                    Décris intuitivement le role.
+                                    Décris intuitivement le rôle.
                                 </p>
                             @endcomponent
 
@@ -81,7 +81,7 @@
                     {{-- Display all the permissions with a little select to athorize or not the permission for this role --}}
                     <div class="columns">
                         <dim class="column">
-                            <h2 class="title is-4">Choissisez les permissions autorisées pour ce role :</h2>
+                            <h2 class="title is-4">Choisissez les permissions autorisées pour ce rôle :</h2>
                         </dim>
                     </div>
                     <div class="columns">
@@ -135,7 +135,7 @@
                     <div class="field is-grouped is-grouped-centered">
                         <div class="control">
                             <button type="submit" class="button is-success">
-                                Modifier le role
+                                Modifier le rôle
                             </button>
                         </div>
                     </div>

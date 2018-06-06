@@ -1,6 +1,6 @@
 {{--
-  -- Status tag
-  -- Display the right tag from the status value
+  -- Run actions button
+  -- Display the right button from the status value
   --
   -- @author Bastien Nicoud
   --}}

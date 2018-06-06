@@ -19,6 +19,8 @@
 
 <div class="section">
     <div class="container">
+
+        {{-- TITLE AND ACTIONS --}}
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
@@ -38,11 +40,89 @@
             </div>
         </div>
 
+        {{-- RUN INFOS --}}
+        <div class="columns">
+            <div class="column is-3">
+                <h2 class="title is-4">Horaires</h2>
+            </div>
+            <div class="column is-3">
+                <h2 class="title is-4">Depart -> arrivée</h2>
+            </div>
+            <div class="column is-6">
+                <h2 class="title is-4">Runners</h2>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column is-3">
+                <div class="content">
+                    <p>
+                        Prévu le
+                        <span class="tag">
+                            <strong>
+                                {{ $run->planned_at->format('l d') }}
+                            </strong>
+                        </span>
+                        à
+                        <span class="tag">
+                            <strong>
+                                {{ $run->planned_at->format('H \h m') }}
+                            </strong>
+                        </span>
+                    </p>
+
+                    <p>
+                        Démarré
+                        <span class="tag">
+                            <strong>
+                                {{ $run->started_at->format('l d') }}
+                            </strong>
+                        </span>
+                        à
+                        <span class="tag">
+                            <strong>
+                                {{ $run->started_at->format('H \h m') }}
+                            </strong>
+                        </span>
+                    </p>
+
+                    <p>
+                        Terminé à
+                        <span class="tag">
+                            <strong>
+                                {{ $run->ended_at->format('l d') }}
+                            </strong>
+                        </span>
+                        à
+                        <span class="tag">
+                            <strong>
+                                {{ $run->ended_at->format('H \h m') }}
+                            </strong>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="column is-3">
+                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
+                @endcomponent
+            </div>
+        </div>
+
+        {{-- LOGS AND COMMENTS --}}
+        <div class="columns">
+            <div class="column is-5">
+                <h2 class="title is-4">Dernières actions effectuées sur ce run</h2>
+            </div>
+            <div class="column is-7">
+                <h2 class="title is-4">Commentaires</h2>
+            </div>
+        </div>
+
         <div class="columns">
 
             {{-- Logs --}}
             <div class="column is-5">
-                <h2 class="title is-5">Dernières actions effectuées sur ce run</h2>
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -77,7 +157,6 @@
 
             @can('view', App\Comment::class)
                 <div class="column is-7">
-                    <h2 class="title is-5">Commentaires</h2>
 
                     {{-- --------------------- --}}
                     {{-- COMMENTS LISTING      --}}

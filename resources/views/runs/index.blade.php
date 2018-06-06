@@ -89,8 +89,12 @@
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
-                                <td>{{ $run->planned_at }}</td>
-                                <td>{{ $run->started_at }}</td>
+                                <td>
+                                    {{ $run->planned_at }}
+                                </td>
+                                <td>
+                                    {{ $run->started_at }}
+                                </td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">

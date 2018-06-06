@@ -31,7 +31,7 @@
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Action</th>
-                            <th>Resource</th>
+                            <th>Ressource</th>
                             <th>Effectué par</th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Action</th>
-                            <th>Resource</th>
+                            <th>Ressource</th>
                             <th>Effectué par</th>
                         </tr>
                     </tfoot>

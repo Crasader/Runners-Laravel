@@ -264,6 +264,91 @@
             @endcan
 
         </div>
+
+        {{-- LOGS --}}
+        @can('view', App\Log::class)
+            <div class="columns">
+                <div class="column">
+                    <h2 class="title is-3">Logs</h2>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column is-6">
+                    <h2 class="title is-5">Dernières actions effectuées par cet utlisateur</h2>
+                </div>
+
+                <div class="column is-6">
+                    <h2 class="title is-5">Dérniéres actions effectuées sur cet utilisateur</h2>
+                </div>
+            </div>
+
+            {{-- Logs fired by this user --}}
+            <div class="columns">
+                <div class="column is-6">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Action</th>
+                                <th>Resource</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($user->myLogs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
+                                <tr>
+                                    <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    <td>
+                                        {{-- Status tag (see related component) --}}
+                                        @logaction(['action' => $log->action])
+                                        @endlogaction
+                                    </td>
+                                    <td>
+                                        {{ $log->loggable->getTable() }}
+                                        <span class="tag is-light">{{ $log->loggable->id }}</span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- Logs fired on this user --}}
+                <div class="column is-6">
+                    <table class="table is-striped is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Action</th>
+                                <th>Effectué par</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($user->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
+                                <tr>
+                                    <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    <td>
+                                        {{-- Status tag (see related component) --}}
+                                        @logaction(['action' => $log->action])
+                                        @endlogaction
+                                    </td>
+                                    @if($log->user()->count())
+                                        <td>
+                                            <a href="{{ route('users.show', ['user' => $log->user->id]) }}">
+                                                {{ $log->user->fullname }}
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td>Migrations</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endcan
+
     </div>
 </div>
 

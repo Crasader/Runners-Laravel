@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Run;
+use App\Log;
 use App\Car;
 use App\User;
 use App\Role;
@@ -13,6 +14,7 @@ use App\CarType;
 use App\Schedule;
 use App\Waypoint;
 use App\Policies\RunPolicy;
+use App\Policies\LogPolicy;
 use App\Policies\CarPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -42,7 +44,8 @@ class AuthServiceProvider extends ServiceProvider
         Role::class     => RolePolicy::class,
         Comment::class  => CommentPolicy::class,
         Artist::class   => ArtistPolicy::class,
-        Waypoint::class => WaypointPolicy::class
+        Waypoint::class => WaypointPolicy::class,
+        Log::class      => LogPolicy::class
     ];
 
     /**

@@ -39,7 +39,7 @@
                             <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
                         </p>
                         <p class="control">
-                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer Identifiants</a>
+                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer identifiants</a>
                         </p>
                     @endcan
                 </div>
@@ -87,7 +87,7 @@
                     <article class="message is-warning">
                         <div class="message-body">
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
-                            la connexion a l'app mobile n'est donc pas possible.
+                            la connexion à l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
                                 <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
                             @endcan
@@ -135,8 +135,8 @@
                     <div class="column is-3 has-text-right">
                         <strong>
                             Groupes :<br>
-                            Role :<br>
-                            Status actuel :<br>
+                            Rôle :<br>
+                            Statut actuel :<br>
                         </strong>
                     </div>
                     <div class="column is-5">
@@ -275,11 +275,11 @@
 
             <div class="columns">
                 <div class="column is-6">
-                    <h2 class="title is-5">Dernières actions effectuées par cet utlisateur</h2>
+                    <h2 class="title is-5">Dernières actions effectuées par cet utilisateur</h2>
                 </div>
 
                 <div class="column is-6">
-                    <h2 class="title is-5">Dérniéres actions effectuées sur cet utilisateur</h2>
+                    <h2 class="title is-5">Dernières actions effectuées sur cet utilisateur</h2>
                 </div>
             </div>
 
@@ -291,7 +291,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Action</th>
-                                <th>Resource</th>
+                                <th>Ressource</th>
                             </tr>
                         </thead>
                         <tbody>

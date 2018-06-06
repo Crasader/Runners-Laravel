@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +38,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        Log::error(
+            "RUNNERS LOG : " . get_class($exception) .
+            " CODE : " . $exception->getCode() .
+            " MESSAGE : " . $exception->getMessage(),
+            ['REQUEST' => request()]
+        );
         parent::report($exception);
     }
 

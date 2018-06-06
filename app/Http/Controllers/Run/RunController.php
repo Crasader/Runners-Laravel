@@ -101,7 +101,16 @@ class RunController extends Controller
      */
     public function update(UpdateRun $request, Run $run)
     {
+        $this->authorize('update', $run);
         // Check usage of add runner and add waypoint buttons
+        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
+            $run->newSubscription();
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+        }
+        if ($request->has('add-waypoint')) {
+            $run->newWaypoint($request->input('add-waypoint'));
+            dd($run->waypoints);
+        }
 
         dd($request->all());
         //$run->saveDatas($request->all());

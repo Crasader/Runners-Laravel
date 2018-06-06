@@ -324,6 +324,18 @@ class Run extends Model
 
     /**
      * MODEL METHOD
+     * Add new empty subscription to a run
+     *
+     * @return bool
+     */
+    public function newSubscription()
+    {
+        $sub = new RunSubscription();
+        $this->subscriptions()->save($sub);
+    }
+
+    /**
+     * MODEL METHOD
      * Determine if the run is ready to go
      *
      * @return bool

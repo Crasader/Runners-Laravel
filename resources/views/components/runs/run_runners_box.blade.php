@@ -18,19 +18,31 @@
         @foreach($subscriptions as $subscription)
             <tr>
                 <th>
-                    <a href="{{ route('users.show', ['user' => $subscription->user->id]) }}">
-                        {{ $subscription->user->fullname }}
-                    </a>
+                    @if($subscription->user()->exists())
+                        <a href="{{ route('users.show', ['user' => $subscription->user->id]) }}">
+                            {{ $subscription->user->fullname }}
+                        </a>
+                    @else
+                        Pas de chauffeur selectionné
+                    @endif
                 </th>
                 <td>
-                    <a href="{{ route('carTypes.show', ['carType' => $subscription->carType->id]) }}">
-                        {{ $subscription->carType->name }}
-                    </a>
+                    @if($subscription->user()->exists())
+                        <a href="{{ route('carTypes.show', ['carType' => $subscription->carType->id]) }}">
+                            {{ $subscription->carType->name }}
+                        </a>
+                    @else
+                        Pas de type de véhicule spécifié
+                    @endif
                 </td>
                 <td>
-                    <a href="{{ route('cars.show', ['car' => $subscription->car->id]) }}">
-                        {{ $subscription->car->name }}
-                    </a>
+                    @if($subscription->user()->exists())
+                        <a href="{{ route('cars.show', ['car' => $subscription->car->id]) }}">
+                            {{ $subscription->car->name }}
+                        </a>
+                    @else
+                        Pas de véhicule specifié
+                    @endif
                 </td>
                 <td>
                     {{-- Status tag (see related component) --}}

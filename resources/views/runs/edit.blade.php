@@ -50,7 +50,7 @@
                             <button onclick="event.preventDefault();
                                 document.getElementById('delete-run-form').submit();"
                                 class="button is-danger">
-                                Supprimer {{ $run->name }}
+                                Supprimer le run
                             </button>
                         </p>
                     @endcan
@@ -60,6 +60,8 @@
 
         <div class="columns">
             <div class="column">
+
+                {{ $errors }}
 
                 <form id="update-run-form" action="{{ route('runs.update', ['run' => $run->id]) }}" method="POST">
 
@@ -73,20 +75,6 @@
                             <label class="label">Nom / Artiste</label>
                         </div>
                         <div class="field-body">
-
-                            {{-- RUN NAME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'name',
-                                'placeholder' => 'Nom du run',
-                                'type'        => 'text',
-                                'icon'        => 'fa-bookmark',
-                                'value'       => $run->name,
-                                'errors'      => $errors
-                                ])
-                                <p class="help">
-                                    Par défault, le nom de l'artiste sera utilisé.
-                                </p>
-                            @endcomponent
 
                             {{-- ARTIST --}}
                             {{-- SEARCH FIELD --}}
@@ -137,7 +125,7 @@
                                     'errors'      => $errors
                                     ])
                                     @slot('button')
-                                        <button type="submit" name="addWaypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
+                                        <button type="submit" name="add-waypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
                                             <span class="icon">
                                                 <i class="fas fa-plus"></i>
                                             </span>
@@ -209,7 +197,7 @@
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
-                                    'value'       => $subscription->user->name,
+                                    'value'       => $subscription->user()->exists() ? $subscription->user->name : '',
                                     'searchUrl'   => route('users.search'),
                                     'errors'      => $errors
                                     ])
@@ -231,7 +219,7 @@
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
-                                    'value'       => $subscription->carType->name,
+                                    'value'       => $subscription->carType()->exists() ? $subscription->carType->name : '',
                                     'searchUrl'   => route('carTypes.search'),
                                     'errors'      => $errors
                                     ])
@@ -244,7 +232,7 @@
                                     'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',
-                                    'value'       => $subscription->car->name,
+                                    'value'       => $subscription->car()->exists() ? $subscription->car->name : '',
                                     'searchUrl'   => route('cars.search'),
                                     'errors'      => $errors
                                     ])

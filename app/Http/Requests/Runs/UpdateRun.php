@@ -36,9 +36,9 @@ class UpdateRun extends FormRequest
             'planned_at'              => ['nullable', 'date'],
             'end_planned_at'          => ['nullable', 'date'],
             'waypoints.*'             => ['sometimes', 'string'],
-            'subscriptions.*.user'    => ['sometimes', 'string', 'exists:users,name'],
-            'subscriptions.*.carType' => ['sometimes', 'string', 'exists:car_types,name'],
-            'subscriptions.*.car'     => ['sometimes', 'string', 'exists:cars,name'],
+            'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
+            'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],
+            'subscriptions.*.car'     => ['nullable', 'string', 'exists:cars,name'],
             'add-runner'              => ['sometimes', 'in:true']
         ];
     }

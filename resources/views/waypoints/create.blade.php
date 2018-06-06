@@ -27,7 +27,7 @@
                             <button onclick="event.preventDefault();
                                 document.getElementById('create-waypoint-form').submit();"
                                 class="button is-success">
-                                Créer le lieux
+                                Créer le lieu
                             </button>
                         </p>
                     @endcan
@@ -51,7 +51,7 @@
                             {{-- GROUP NAME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'name',
-                                'placeholder' => "Nom du lieux",
+                                'placeholder' => "Nom du lieu",
                                 'type'        => 'text',
                                 'icon'        => 'fa-tag',
                                 'errors'      => $errors

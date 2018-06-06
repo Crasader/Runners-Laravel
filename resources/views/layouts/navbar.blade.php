@@ -24,10 +24,10 @@
                             Grand affichage
                         </a>
                         <a class="navbar-item" href="{{ route('runs.index') }}">
-                            Afficher runs
+                            Afficher les runs
                         </a>
                         <a class="navbar-item" href="{{ route('runs.create') }}">
-                            Créer run
+                            Créer un run
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('waypoints.index') }}">
@@ -57,17 +57,17 @@
                     </a>
                     <div class="navbar-dropdown is-boxed">
                         <a class="navbar-item" href="{{ route('cars.index') }}">
-                            Afficher véhicules
+                            Afficher les véhicules
                         </a>
                         <a class="navbar-item" href="{{ route('cars.create') }}">
-                            Créer véhicule
+                            Créer un véhicule
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('carTypes.index') }}">
-                            Afficher type de véhicule
+                            Afficher les types de véhicules
                         </a>
                         <a class="navbar-item" href="{{ route('carTypes.create') }}">
-                            Créer type de véhicule
+                            Créer un type de véhicule
                         </a>
                     </div>
                 </div>
@@ -79,13 +79,13 @@
                     </a>
                     <div class="navbar-dropdown is-boxed">
                         <a class="navbar-item" href="{{ route('users.index') }}">
-                            Afficher chauffeurs
+                            Afficher les chauffeurs
                         </a>
                         <a class="navbar-item" href="{{ route('users.create') }}">
-                            Créer chauffeurs
+                            Créer un chauffeur
                         </a>
                         <a class="navbar-item" href="{{ route('users.import-form') }}">
-                            Importer chauffeurs
+                            Importer des chauffeurs
                         </a>
                     </div>
                 </div>

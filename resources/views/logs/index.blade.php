@@ -55,13 +55,13 @@
                                     @endlogaction
                                 </td>
                                 <td>
-                                    {{ $log->loggable->getTable() }}
-                                    <span class="tag is-light">{{ $log->loggable->id }}</span>
+                                    {{ $log->loggable_type }}
+                                    <span class="tag is-light">{{ $log->loggable_id }}</span>
                                 </td>
                                 @if($log->user()->count())
                                     <td>
                                         <a href="{{ route('users.show', ['user' => $log->user->id]) }}">
-                                            {{ $log->user->fullname }}
+                                            {{ $log->user()->withTrashed()->first()->fullname }}
                                         </a>
                                     </td>
                                 @else

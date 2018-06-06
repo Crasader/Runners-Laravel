@@ -51,6 +51,47 @@
                 </table>
             </div>
         </div>
+
+
+        <div class="columns">
+            <div class="column">
+                <h2 class="title is-3">Véhicules de ce type</h2>
+            </div>
+        </div>
+
+        {{-- The table --}}
+        <div class="columns">
+            <div class="column is-12">
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Numéro de plaque</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Numéro de plaque</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach ($carType->cars as $car)
+                            <tr onclick="window.location.href = '{{ route('cars.show', ['car' => $car->id]) }}'">
+                                <td>{{$car->name}}</td>
+                                <td>{{$car->plate_number}}</td>
+                                <td>
+                                    @component('components/status_tag', ['status' => $car->status])
+                                    @endcomponent
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

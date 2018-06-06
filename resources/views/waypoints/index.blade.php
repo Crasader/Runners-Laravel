@@ -31,13 +31,6 @@
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
-
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">

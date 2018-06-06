@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components/horizontal_form_input', 'horizontalinput');
         Blade::component('components/horizontal_search_input', 'horizontalsearchinput');
         Blade::component('components/log_action', 'logaction');
+        Blade::component('components/date_tag', 'datetag');
 
         /**
          * Log all the sql queries in a log file

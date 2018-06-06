@@ -89,17 +89,18 @@
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
-                                <td>{{ $run->planned_at }}</td>
-                                <td>{{ $run->started_at }}</td>
+                                <td>
+                                    {{ $run->planned_at }}
+                                </td>
+                                <td>
+                                    {{ $run->started_at }}
+                                </td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
-                                        <a href="{{-- route('runs.start', ['run' => $run->id]) --}}" class="button is-small is-link is-success">
-                                            Démarrer
-                                        </a>
-                                        <a href="{{-- route('runs.stop', ['user' => $run->id]) --}}" class="button is-small is-link is-danger">
-                                            Arréter
-                                        </a>
+                                        @component('components/run_action_buttons', ['status' => $run->status])
+                                            {{-- route('runs.stop', ['user' => $run->id]) --}}
+                                        @endcomponent
                                     </div>
                                 </td>
                             </tr>

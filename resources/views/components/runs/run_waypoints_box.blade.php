@@ -4,7 +4,7 @@
   -- @author Bastien Nicoud
   --}}
 
-<div class="content">
+<div class="content box">
     @foreach($waypoints as $waypoint)
         <p>
             {{ $waypoint->positionToString() }}

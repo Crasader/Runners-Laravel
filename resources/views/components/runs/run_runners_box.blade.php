@@ -13,6 +13,9 @@
                     <strong>Runner</strong>
                 </p>
                 <p>
+                    <figure class="image is-32x32">
+                        <img src="{{ asset(Storage::url($subscription->user->profilePictures->first()->path)) }}">
+                    </figure>
                     <a href="{{ route('users.show', ['user' => $subscription->user->id]) }}">
                         {{ $subscription->user->fullname }}
                     </a>

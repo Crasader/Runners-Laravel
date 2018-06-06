@@ -55,51 +55,16 @@
 
         <div class="columns">
             <div class="column is-3">
-                <div class="content">
-                    <p>
+                <div class="content box">
+                    @datetag(['date' => $run->planned_at])
                         Prévu le
-                        <span class="tag">
-                            <strong>
-                                {{ $run->planned_at->format('l d') }}
-                            </strong>
-                        </span>
-                        à
-                        <span class="tag">
-                            <strong>
-                                {{ $run->planned_at->format('H \h m') }}
-                            </strong>
-                        </span>
-                    </p>
-
-                    <p>
+                    @enddatetag
+                    @datetag(['date' => $run->started_at])
                         Démarré le
-                        <span class="tag">
-                            <strong>
-                                {{ $run->started_at->format('l d') }}
-                            </strong>
-                        </span>
-                        à
-                        <span class="tag">
-                            <strong>
-                                {{ $run->started_at->format('H \h m') }}
-                            </strong>
-                        </span>
-                    </p>
-
-                    <p>
-                        Terminé le
-                        <span class="tag">
-                            <strong>
-                                {{ $run->ended_at->format('l d') }}
-                            </strong>
-                        </span>
-                        à
-                        <span class="tag">
-                            <strong>
-                                {{ $run->ended_at->format('H \h m') }}
-                            </strong>
-                        </span>
-                    </p>
+                    @enddatetag
+                    @datetag(['date' => $run->ended_at])
+                        Terminé
+                    @enddatetag
                 </div>
             </div>
 
@@ -109,6 +74,19 @@
             </div>
 
             <div class="column is-6">
+                Informations
+            </div>
+        </div>
+
+        {{-- RUN INFOS --}}
+        <div class="columns">
+            <div class="column">
+                <h2 class="title is-4">Runners</h2>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
                 @component('components/runs/run_runners_box', ['subscriptions' => $run->subscriptions])
                 @endcomponent
             </div>

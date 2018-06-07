@@ -20,7 +20,16 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Notifications</h1>
+                <h1 class="title is-2">Mes notifications</h1>
+            </div>
+            <div class="column">
+                <div class="field is-grouped is-pulled-right">
+                    <p class="control">
+                        <a href="{{ route('notifications.read') }}" class="button is-info">
+                            Tout marquer comme lu
+                        </a>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -44,14 +53,20 @@
                     </tfoot>
                     <tbody>
                         @foreach ($notifications as $notification)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('notifications.show', ['notification' => $notification->id]) }}'">
                                 <td>
                                     @datetag(['date' => $notification->created_at])
                                         Le
                                     @enddatetag
                                 </td>
-                                <th>{{ $notification->type }}</th>
-                                <td>{{ $notification->read_at }}</td>
+                                <th>
+                                    @component('components/notifications/notification_types', ['type' => $notification->type])
+                                    @endcomponent
+                                </th>
+                                <td>
+                                    @datetag(['date' => $notification->read_at])
+                                    @enddatetag
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

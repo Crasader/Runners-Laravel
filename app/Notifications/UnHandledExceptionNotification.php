@@ -63,7 +63,7 @@ class UnHandledExceptionNotification extends Notification
             'current_page' => url()->current(),
             'previous_page' => url()->previous(),
             'route' => request()->route(),
-            'session' => request()->session()->all()
+            //'session' => request()->session()->all()
         ];
     }
 

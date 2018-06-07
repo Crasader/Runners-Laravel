@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notification;
 
 /**
  * NotificationController
@@ -54,7 +55,8 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
+        $notification = Auth::user()->notifications()->find($id);
+        return view('notifications.show')->with(compact('notification'));
     }
 
     /**
@@ -81,6 +83,29 @@ class NotificationController extends Controller
     }
 
     /**
+     * Mark notifications as read
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function read(Request $request, $id = null)
+    {
+        if ($id === null) {
+            Auth::user()->unreadNotifications->markAsRead();
+            return redirect()
+                ->route('notifications.index')
+                ->with('info', 'Toutes les notifications on été notées comme lues !');
+        } else {
+            Auth::user()->notifications()->find($id)->markAsRead();
+            return redirect()
+                ->route('notifications.show', ['id' => $id])
+                ->with('info', 'La notification à été notée comme lue !');
+        }
+        return back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -88,6 +113,9 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->notifications()->find($id)->delete();
+        return redirect()
+            ->route('notifications.index')
+            ->with('success', 'La notification a bien été suprimée');
     }
 }

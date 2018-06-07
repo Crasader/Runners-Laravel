@@ -107,6 +107,7 @@
                                             'status' => $run->status,
                                             'id' => $run->id
                                             ])
+                                            is-small
                                         @endcomponent
                                     </div>
                                 </td>

@@ -149,4 +149,14 @@ Route::middleware(['auth'])->group(function () {
         'Log\LogController',
         ['only' => ['index']]
     );
+
+    /**
+     * Notifications crud
+     */
+    Route::get('notifications/read/{id?}', 'Notification\NotificationController@read')->name('notifications.read');
+    Route::resource(
+        'notifications',
+        'Notification\NotificationController',
+        ['only' => ['index', 'show', 'destroy']]
+    );
 });

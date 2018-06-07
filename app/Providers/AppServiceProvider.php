@@ -39,9 +39,11 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Log all the sql queries in a log file
          */
-        \DB::listen(function ($query) {
-            \Log::info($query->sql, $query->bindings);
-        });
+        if (config('app.debug') == true) {
+            \DB::listen(function ($query) {
+                \Log::info("DATABASE QUERY : " . $query->sql, $query->bindings);
+            });
+        }
     }
 
     /**

@@ -16,7 +16,7 @@
         à
         <span class="tag">
             <strong>
-                {{ $date->format('H \h m') }}
+                {{ $date->format('H \h i') }}
             </strong>
         </span>
     </p>

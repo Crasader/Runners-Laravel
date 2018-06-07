@@ -50,6 +50,7 @@
             </div>
             <div class="column is-5">
                 <h2 class="title is-4">Infos</h2>
+                {{$run->ended_at->format('H')}}
             </div>
         </div>
 

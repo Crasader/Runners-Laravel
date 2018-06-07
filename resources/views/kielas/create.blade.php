@@ -41,7 +41,7 @@
                                 <div class="select is-fullwidth">
                                     <select name="user_id">
                                         @foreach (App\User::all() as $user)
-                                            <option value="{{$user->id}}" >{{$user->name}}</option>
+                                            <option value="{{$user->id}}" >{{$user->firstname}} {{$user->lastname}}</option>
                                         @endforeach
 
                                     </select>

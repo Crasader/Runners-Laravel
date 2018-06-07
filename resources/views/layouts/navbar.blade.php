@@ -144,6 +144,10 @@
                             <span>
                                 {{ Auth::user()->name }}
                             </span>
+                            @if (Auth::user()->unreadNotifications()->count())
+                                &nbsp;
+                                <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                            @endif
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
                             <a class="navbar-item" href="{{ route('home') }}">
@@ -151,6 +155,9 @@
                             </a>
                             <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
+                            </a>
+                            <a class="navbar-item" href="{{ route('notifications.index') }}">
+                                <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>&nbsp;Notifications
                             </a>
                             @can('view', App\Role::class)
                                 <a class="navbar-item" href="{{ route('roles.index') }}">

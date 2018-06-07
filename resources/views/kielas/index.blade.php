@@ -17,7 +17,10 @@
             <div class="columns">
                 <div class="column is-8">
                     <!-- Show current paleo and hour -->
-                    <h1 class="title is-2">{{$now->format('l jS F Y H:i')}}</h1>
+                    <h1 class="title is-2">
+                        @datetext(['date' => $now])
+                        @enddatetext
+                    </h1>
                     <b><u>{{$festival->name}}</u></b>
                 </div>
                 <div class="column is-4">
@@ -50,7 +53,7 @@
                             </div>
                         </article>
                     </div>
-                </div>                
+                </div>
             </div>
 
             <div class="columns">
@@ -85,9 +88,7 @@
                                                         @endif
                                                     </p>
                                                 </div>
-                                                <hr>
                                             </div>
-                                            <hr>
                                         </article>
                                     </div>
                                 @endforeach
@@ -124,14 +125,12 @@
                                                     @endif
                                                 </p>
                                             </div>
-                                            <hr>
                                         </div>
-                                        <hr>
                                         <div class="media-right">
                                             <button onclick="event.preventDefault();
-                                                document.getElementById('delete-kiela-user').submit();"
+                                                document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
                                                 class="delete"></button>
-                                            <form id="delete-kiela-user"
+                                            <form id="delete-kiela-user-{{ $schedule->id }}"
                                                 action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
                                                     method="POST" style="display: none;">
                                                 {{ csrf_field() }}

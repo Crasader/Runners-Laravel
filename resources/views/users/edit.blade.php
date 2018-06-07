@@ -446,9 +446,9 @@
                                         @can('delete', $comment)
                                             <div class="media-right">
                                                 <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-comment-form').submit();"
+                                                    document.getElementById('delete-comment-form-{{ $comment->id }}').submit();"
                                                     class="delete"></button>
-                                                <form id="delete-comment-form"
+                                                <form id="delete-comment-form-{{ $comment->id }}"
                                                     action="{{ route('users.comments.destroy', ['user' => $user->id, 'comment' => $comment->id]) }}"
                                                         method="POST" style="display: none;">
                                                     {{ csrf_field() }}

@@ -49,9 +49,9 @@ class UserCommentController extends Controller
         // Create the comment
         $comment = new Comment($request->all());
         $comment->author()->associate(Auth::user());
-        $comment->save();
         // Associate the comment to the commented user
-        $user->comments()->save($comment);
+        $comment->commentable()->associate($user);
+        $comment->save();
         // Redirect to the consulted user page
         return redirect()->route('users.show', ['user' => $user->id]);
     }

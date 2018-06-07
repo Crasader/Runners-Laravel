@@ -51,10 +51,10 @@
         {{-- TITLES                --}}
         {{-- --------------------- --}}
         <div class="columns">
-            <div class="column is-4">
+            <div class="column is-5">
                 <h2 class="title is-3">QR code</h2>
             </div>
-            <div class="column is-8">
+            <div class="column is-7">
                 <h2 class="title is-3">Informations</h2>
             </div>
         </div>
@@ -63,7 +63,7 @@
         {{-- QR code infos         --}}
         {{-- --------------------- --}}
         <div class="columns">
-            <div class="column is-4">
+            <div class="column is-5">
                 @if ($user->qrCodes()->exists())
                     <figure class="image box">
                         <img src="{{ asset(Storage::url($user->qrCodes->first()->path)) }}">
@@ -99,30 +99,62 @@
             {{-- --------------------- --}}
             {{-- USER INFOS            --}}
             {{-- --------------------- --}}
-            <div class="column is-8">
+            <div class="column is-7">
                 <div class="columns">
                     <div class="column is-4">
                         <figure class="image box">
                             <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                         </figure>
                     </div>
-                    <div class="column is-3 has-text-right">
-                        <strong>
-                            Nom complet :<br>
-                            Nom d'utilisateur :<br>
-                            Adresse email :<br>
-                            Téléphone :<br>
-                            Sexe :<br>
-                        </strong>
-                    </div>
-                    <div class="column is-5">
-                        <p>
-                            {{ $user->fullname }}<br>
-                            {{ $user->name }}<br>
-                            {{ $user->email }}<br>
-                            {{ $user->phone_number }}<br>
-                            {{ $user->sex }}<br>
-                        </p>
+                    <div class="column is-8">
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Nom complet : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->fullname }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Adresse email :</strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->email }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Téléphone : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->phone_number }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Sexe : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->sex }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -132,47 +164,111 @@
                             <img src="{{ asset(Storage::url($user->licencePictures->first()->path)) }}">
                         </figure>
                     </div>
-                    <div class="column is-3 has-text-right">
-                        <strong>
-                            Groupes :<br>
-                            Role :<br>
-                            Status actuel :<br>
-                        </strong>
-                    </div>
-                    <div class="column is-5">
-                        <p>
-                            @foreach ($user->groups as $group)
-                                <span class="tag is-light">
-                                    {{ $group->name }}
-                                </span>
-                            @endforeach
-                            <br>
-                            {{ $user->roles->first()->name }}<br>
-                            {{ $user->status }}<br>
-                        </p>
+                    <div class="column is-8">
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Groupe : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    @foreach ($user->groups as $group)
+                                        <span class="tag" style="background-color: #{{ $group->color }};">
+                                            {{ $group->name }}
+                                        </span>
+                                    @endforeach
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Role : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->roles->first()->name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
+                                    <strong>Status actuel : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    @statustag(['status' => $user->status])
+                                    @endstatustag
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="columns">
-            <div class="column is-4">
-                <h2 class="title is-3">Derniers runs</h2>
+            <div class="column is-6">
+                <h2 class="title is-3">Runs</h2>
             </div>
 
-            <div class="column is-8">
+            <div class="column is-6">
                 <h2 class="title is-3">Commentaires</h2>
             </div>
         </div>
 
         <div class="columns">
-            <div class="column is-4">
-                Pas encore implémenté.
+            <div class="column is-6">
+                <table class="table is-striped is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Status</th>
+                            <th>Départ prévu le</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Status</th>
+                            <th>Départ prévu le</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @forelse ($user->runs()->orderBy('planned_at')->get() as $run)
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">
+                                <th>{{ $run->name }}</th>
+                                {{-- Display a tag with the group background color --}}
+                                <th>
+                                    {{-- Status tag (see related component) --}}
+                                    @component('components/status_tag', ['status' => $run->status])
+                                    @endcomponent
+                                </th>
+                                <td>
+                                    @datetag(['date' => $run->planned_at])
+                                    @enddatetag
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td>
+                                    <span class="tag is-warning is-medium">
+                                        <strong>Ce chauffeur n'effectue aucun run<strong>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
 
 
             @can('view', App\Comment::class)
-                <div class="column is-8">
+                <div class="column is-6">
 
 
                     {{-- --------------------- --}}
@@ -200,9 +296,9 @@
                                         @can('delete', $comment)
                                             <div class="media-right">
                                                 <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-comment-form').submit();"
+                                                    document.getElementById('delete-comment-form-{{ $comment->id }}').submit();"
                                                     class="delete"></button>
-                                                <form id="delete-comment-form"
+                                                <form id="delete-comment-form-{{ $comment->id }}"
                                                     action="{{ route('users.comments.destroy', ['user' => $user->id, 'comment' => $comment->id]) }}"
                                                         method="POST" style="display: none;">
                                                     {{ csrf_field() }}
@@ -297,7 +393,10 @@
                         <tbody>
                             @foreach ($user->myLogs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
-                                    <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    <td>
+                                        @date(['date' => $log->created_at])
+                                        @enddate
+                                    </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}
                                         @logaction(['action' => $log->action])
@@ -326,7 +425,10 @@
                         <tbody>
                             @foreach ($user->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
-                                    <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    <td>
+                                        @date(['date' => $log->created_at])
+                                        @enddate
+                                    </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}
                                         @logaction(['action' => $log->action])

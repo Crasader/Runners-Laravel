@@ -8,7 +8,7 @@
 
 @switch($notification->type)
     @case('App\Notifications\UnHandledExceptionNotification')
-        <p><span class="tag {{ $slot }} is-danger">Erreur d'application non capturée</span></p>
+        @include('notifications.layouts.UnHandledExceptionNotification', ['notification' => $notification])
         @break
 
     @default

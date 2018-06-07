@@ -12,9 +12,6 @@
     @datetag(['date' => $notification->created_at])
         Le
     @enddatetag
-    &nbsp;
-    @component('components/notifications/notification_types', ['type' => $notification->type])
-    @endcomponent
 </a></li>
 @endsection
 
@@ -27,7 +24,9 @@
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
-                    Notification
+                    @component('components/notifications/notification_types', ['type' => $notification->type])
+                        is-large
+                    @endcomponent
                 </h1>
             </div>
             <div class="column">

@@ -127,7 +127,7 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
-        //
+        dd('DESTROY run');
     }
 
     /**
@@ -138,7 +138,7 @@ class RunController extends Controller
      */
     public function publish(Run $run)
     {
-        //
+        dd('Publish run');
     }
 
     /**
@@ -149,7 +149,7 @@ class RunController extends Controller
      */
     public function start(Run $run)
     {
-        //
+        dd('Start run');
     }
 
     /**
@@ -160,6 +160,28 @@ class RunController extends Controller
      */
     public function stop(Run $run)
     {
-        //
+        dd('Stop run');
+    }
+
+    /**
+     * Force the start of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStart(Run $run)
+    {
+        dd('Force start run');
+    }
+
+    /**
+     * Force the end of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStop(Run $run)
+    {
+        dd('Force stop run');
     }
 }

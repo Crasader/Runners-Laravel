@@ -25,6 +25,7 @@
                 <h1 class="title is-2">
                     Edition du run {{ $run->name }}
                     @component('components/status_tag', ['status' => $run->status])
+                        is-medium
                     @endcomponent
                 </h1>
             </div>

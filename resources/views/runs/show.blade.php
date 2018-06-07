@@ -33,13 +33,10 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $run)
-                        <p class="control">
-                            @component('components/run_action_buttons', [
-                                'status' => $run->status,
-                                'id' => $run->id
-                                ])
+                        <div class="control">
+                            @component('components/runs/run_action_buttons', ['status' => $run->status, 'id' => $run->id])
                             @endcomponent
-                        </p>
+                        </div>
                         <p class="control">
                             <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
                         </p>

@@ -63,6 +63,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -73,6 +74,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -84,22 +86,28 @@
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->passengers }}</td>
+                                <td>{{ $run->subscriptions()->count() }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
                                 <td>
-                                    {{ $run->planned_at }}
+                                    @datetext(['date' => $run->planned_at])
+                                    @enddatetext
                                 </td>
                                 <td>
-                                    {{ $run->started_at }}
+                                    @datetext(['date' => $run->started_at])
+                                    @enddatetext
                                 </td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
-                                        @component('components/run_action_buttons', ['status' => $run->status])
-                                            {{-- route('runs.stop', ['user' => $run->id]) --}}
+                                        @component('components/run_action_buttons', [
+                                            'status' => $run->status,
+                                            'id' => $run->id
+                                            ])
+                                            is-small
                                         @endcomponent
                                     </div>
                                 </td>

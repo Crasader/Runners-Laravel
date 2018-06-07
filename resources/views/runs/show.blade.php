@@ -26,12 +26,20 @@
                 <h1 class="title is-2">
                     Run {{ $run->name }}
                     @component('components/status_tag', ['status' => $run->status])
+                        is-medium
                     @endcomponent
                 </h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $run)
+                        <p class="control">
+                            @component('components/run_action_buttons', [
+                                'status' => $run->status,
+                                'id' => $run->id
+                                ])
+                            @endcomponent
+                        </p>
                         <p class="control">
                             <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
                         </p>
@@ -180,10 +188,10 @@
                                         @can('delete', $comment)
                                             <div class="media-right">
                                                 <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-comment-form').submit();"
+                                                    document.getElementById('delete-comment-form-{{ $comment->id }}').submit();"
                                                     class="delete"></button>
-                                                <form id="delete-comment-form"
-                                                    action="{{ route('users.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
+                                                <form id="delete-comment-form-{{ $comment->id }}"
+                                                    action="{{ route('runs.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
                                                         method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}

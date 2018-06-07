@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Sets the locale for carbon dates
          */
-        setlocale(LC_TIME, 'fr');
-        Carbon::setLocale(LC_TIME, 'fr');
+        setlocale(LC_TIME, config('app.locale'));
+        Carbon::setLocale(config('app.locale'));
 
         /**
          * Declare global components alias (used to simply import components)
@@ -35,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components/horizontal_search_input', 'horizontalsearchinput');
         Blade::component('components/log_action', 'logaction');
         Blade::component('components/date_tag', 'datetag');
+        Blade::component('components/date_text', 'datetext');
+        Blade::component('components/date', 'date');
 
         /**
          * Log all the sql queries in a log file

@@ -84,6 +84,6 @@ Filter nedds 3 parameters :
 <hr>
 <div align="center">
 
-**[<- Prev](6_status.md) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](6_status.md) // [Summary](../README.md) // [Next ->](8_logsystem.md)**
 
 </div>

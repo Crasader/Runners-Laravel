@@ -129,4 +129,37 @@ class RunController extends Controller
     {
         //
     }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Run $run)
+    {
+        //
+    }
+
+    /**
+     * Start the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function start(Run $run)
+    {
+        //
+    }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function stop(Run $run)
+    {
+        //
+    }
 }

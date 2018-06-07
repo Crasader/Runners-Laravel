@@ -103,6 +103,9 @@ Route::middleware(['auth'])->group(function () {
      * Runs ressource
      */
     Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
+    Route::patch('runs/start/{run}', 'Run\RunController@start')->name('runs.start');
+    Route::patch('runs/stop/{run}', 'Run\RunController@stop')->name('runs.stop');
+    Route::patch('runs/publish/{run}', 'Run\RunController@publish')->name('runs.publish');
     Route::resource('runs', 'Run\RunController');
     // Run comments crud
     Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);

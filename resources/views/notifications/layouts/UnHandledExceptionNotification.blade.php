@@ -40,6 +40,27 @@
                 <strong>Previous page :</strong>
                 <span class="tag is-light">{{ $notification->data['previous_page'] }}</span>
             </p>
+            <p>
+                <strong>Utilisateur :</strong>
+                @if ($notification->data['user_id'])
+                    <ul>
+                        <li>
+                            <strong>
+                                Id :
+                            </strong>
+                            {{ App\User::find($notification->data['user_id'])->id }}
+                        </li>
+                        <li>
+                            <strong>
+                                Name :
+                            </strong>
+                            {{ App\User::find($notification->data['user_id'])->fullname }}
+                        </li>
+                    </ul>
+                @else
+                    <p>Utilisateur non connecté lors de l'erreur.</p>
+                @endif
+            </p>
         </div>
     </div>
     <div class="column is-7">
@@ -60,7 +81,7 @@
                 <strong>Route :</strong>
                 <ul>
                     @foreach($notification->data['route'] as $key => $value)
-                        <li><strong>{{ $key }}</strong> {{ var_dump($value) }}</li>
+                        <li><strong>{{ $key }} : </strong><pre>{{ var_dump($value) }}</pre></li>
                     @endforeach
                 </ul>
             </p>

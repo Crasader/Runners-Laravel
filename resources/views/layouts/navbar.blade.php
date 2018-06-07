@@ -153,6 +153,7 @@
                             <a class="navbar-item" href="{{ route('home') }}">
                                 Home
                             </a>
+                            <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>
@@ -160,6 +161,7 @@
                                 <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>&nbsp;Notifications
                             </a>
                             @can('view', App\Role::class)
+                                <hr class="navbar-divider">
                                 <a class="navbar-item" href="{{ route('roles.index') }}">
                                     Gèrer les roles
                                 </a>

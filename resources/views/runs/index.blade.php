@@ -63,6 +63,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -73,6 +74,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -84,6 +86,7 @@
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->passengers }}</td>
+                                <th>{{ $run->subscriptions()->count() }}</th>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $run->status])

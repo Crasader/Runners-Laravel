@@ -11,7 +11,7 @@ use App\RunDriver;
 /**
  * AssociateRunnersAndCarsToRunSeeder
  * This seeder will associate Runners and car to a Run according to the availability of each parts
- * 
+ *
  * @author Bastien Nicoud
  */
 class AssociateRunnersAndCarsToRunSeeder extends Seeder
@@ -41,7 +41,7 @@ class AssociateRunnersAndCarsToRunSeeder extends Seeder
             $subscription->carType()->associate($carType);
 
             // Associate a car with the same type
-            $subscription->car()->associate(Car::where('type_id', $carType->id)->first());
+            $subscription->car()->associate(Car::where('type_id', $carType->id)->get()->random());
 
             // Associate the current run to this subscription
             $subscription->run()->associate($run);

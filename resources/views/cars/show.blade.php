@@ -79,39 +79,53 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Passagers</th>
                             <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
+                            <th>Départ prévu le</th>
+                            <th>A démarré le</th>
+                            <th>A terminé le</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
-                            <th>Passagers</th>
                             <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
+                            <th>Départ prévu le</th>
+                            <th>A démarré le</th>
+                            <th>A terminé le</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($car->runs()->orderBy('planned_at', 'asc')->where('planned_at', '>=', Carbon\Carbon::now())->get() as $run)
-                            <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
+                        @forelse ($car->runs()->orderBy('planned_at')->get() as $run)
+                            <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
-                                <td>{{ $run->passengers }}</td>
-                                <td>
+                                {{-- Display a tag with the group background color --}}
+                                <th>
                                     {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
+                                </th>
+                                <td>
+                                    @datetag(['date' => $run->planned_at])
+                                    @enddatetag
                                 </td>
                                 <td>
-                                    {{ $run->planned_at }}
+                                    @datetag(['date' => $run->started_at])
+                                    @enddatetag
                                 </td>
                                 <td>
-                                    {{ $run->started_at }}
+                                    @datetag(['date' => $run->ended_at])
+                                    @enddatetag
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td>
+                                    <span class="tag is-warning is-medium">
+                                        <strong>Aucun run n'utilise ce véhicule<strong>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

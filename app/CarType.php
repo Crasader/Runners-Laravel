@@ -78,7 +78,7 @@ class CarType extends Model
      */
     public function runs()
     {
-        return $this->belongsToMany(Run::class)->using(RunDriver::class);
+        return $this->belongsToMany(Run::class, 'run_drivers')->using(RunDriver::class);
     }
 
     /**

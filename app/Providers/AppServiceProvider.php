@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Sets the locale for carbon dates
          */
-        setlocale(LC_TIME, 'fr');
-        Carbon::setLocale(LC_TIME, 'fr');
+        setlocale(LC_TIME, config('app.locale'));
+        Carbon::setLocale(config('app.locale'));
 
         /**
          * Declare global components alias (used to simply import components)

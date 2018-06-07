@@ -10,7 +10,7 @@
         {{ $slot }}
         <span class="tag">
             <strong>
-                {{ $date->format('l d') }}
+                {{ $date->formatLocalized('%A %d %B') }}
             </strong>
         </span>
         à

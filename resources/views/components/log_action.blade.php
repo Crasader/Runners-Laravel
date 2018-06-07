@@ -20,10 +20,14 @@
 
     @case('restored')
         <span class="tag {{ $slot }} is-dark">Réstoration</span>
+        @break
 
-    @break
     @case('login')
         <span class="tag {{ $slot }} is-info">Connexion a l'administration</span>
+        @break
+
+    @case('commented')
+        <span class="tag {{ $slot }} is-info">Commenté</span>
         @break
 
     @case('logout')

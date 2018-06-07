@@ -40,6 +40,12 @@
                 <strong>Previous page :</strong>
                 <span class="tag is-light">{{ $notification->data['previous_page'] }}</span>
             </p>
+            <p>
+                <strong>Utilisateur :</strong>
+                <ul>
+                    <li>{{ App\User::find($notification->data['user_id'])->fullname }}</li>
+                </ul>
+            </p>
         </div>
     </div>
     <div class="column is-7">
@@ -60,7 +66,7 @@
                 <strong>Route :</strong>
                 <ul>
                     @foreach($notification->data['route'] as $key => $value)
-                        <li><strong>{{ $key }} : </strong> {{ print_r($value) }}</li>
+                        <li><strong>{{ $key }} : </strong><pre>{{ var_dump($value) }}</pre></li>
                     @endforeach
                 </ul>
             </p>

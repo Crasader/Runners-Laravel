@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * UnHandledExceptionNotification
@@ -63,6 +64,7 @@ class UnHandledExceptionNotification extends Notification
             'current_page' => url()->current(),
             'previous_page' => url()->previous(),
             'route' => request()->route(),
+            'user_id' => Auth::user() ? Auth::user()->id : null
             //'session' => request()->session()->all()
         ];
     }

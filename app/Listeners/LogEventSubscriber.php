@@ -10,6 +10,7 @@ use App\Events\Log\LogDatabaseCreateEvent;
 use App\Events\Log\LogDatabaseUpdateEvent;
 use App\Events\Log\LogDatabaseDeleteEvent;
 use App\Events\Log\LogDatabaseRestoreEvent;
+use App\Comment;
 
 /**
  * LogEventSubscriber
@@ -27,11 +28,11 @@ class LogEventSubscriber
      * @param string $action
      * @return void
      */
-    public function log($event, $action)
+    public function log($model, $action)
     {
         $log = new Log(['action' => $action]);
         $log->user()->associate(Auth::user());
-        $log->loggable()->associate($event->model);
+        $log->loggable()->associate($model);
         $log->save();
     }
     /**
@@ -39,7 +40,10 @@ class LogEventSubscriber
      */
     public function onDatabaseCreate($event)
     {
-        $this->log($event, "created");
+        $this->log($event->model, "created");
+        if ($event->model instanceof Comment) {
+            $this->log($event->model->commentable, "commented");
+        }
     }
 
     /**
@@ -47,7 +51,8 @@ class LogEventSubscriber
      */
     public function onDatabaseUpdate($event)
     {
-        $this->log($event, "updated");
+        $this->log($event->model, "updated");
+        // Create special log for comments
     }
 
     /**
@@ -55,7 +60,7 @@ class LogEventSubscriber
      */
     public function onDatabaseDelete($event)
     {
-        $this->log($event, "deleted");
+        $this->log($event->model, "deleted");
     }
 
     /**
@@ -63,7 +68,7 @@ class LogEventSubscriber
      */
     public function onDatabaseRestore($event)
     {
-        $this->log($event, "restored");
+        $this->log($event->model, "restored");
     }
 
     /**

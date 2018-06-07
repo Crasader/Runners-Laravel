@@ -1,6 +1,6 @@
 {{--
   -- Date tag
-  -- Display dates with a tag
+  -- Display dates with a tag layout
   --
   -- @author Bastien Nicoud
   --}}
@@ -10,7 +10,7 @@
         {{ $slot }}
         <span class="tag">
             <strong>
-                {{ $date->formatLocalized('%A %d %B') }}
+                {{ $date->formatLocalized('%A') }}
             </strong>
         </span>
         à

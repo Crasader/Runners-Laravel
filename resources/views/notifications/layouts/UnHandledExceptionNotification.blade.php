@@ -42,9 +42,24 @@
             </p>
             <p>
                 <strong>Utilisateur :</strong>
-                <ul>
-                    <li>{{ App\User::find($notification->data['user_id'])->fullname }}</li>
-                </ul>
+                @if ($notification->data['user_id'])
+                    <ul>
+                        <li>
+                            <strong>
+                                Id :
+                            </strong>
+                            {{ App\User::find($notification->data['user_id'])->id }}
+                        </li>
+                        <li>
+                            <strong>
+                                Name :
+                            </strong>
+                            {{ App\User::find($notification->data['user_id'])->fullname }}
+                        </li>
+                    </ul>
+                @else
+                    <p>Utilisateur non connecté lors de l'erreur.</p>
+                @endif
             </p>
         </div>
     </div>

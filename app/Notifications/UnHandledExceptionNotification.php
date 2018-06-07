@@ -65,7 +65,6 @@ class UnHandledExceptionNotification extends Notification
             'previous_page' => url()->previous(),
             'route' => request()->route(),
             'user_id' => Auth::user() ? Auth::user()->id : null
-            //'session' => request()->session()->all()
         ];
     }
 

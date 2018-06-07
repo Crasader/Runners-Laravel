@@ -32,11 +32,6 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     <p class="control">
-                        <a href="{{ route('notifications.read', ['id' => $notification->id]) }}" class="button is-info">
-                            Marquer comme lue
-                        </a>
-                    </p>
-                    <p class="control">
                         <form id="delete-notification-form"
                             action="{{ route('notifications.destroy', ['id' => $notification->id]) }}"
                             method="POST" style="display: none;">

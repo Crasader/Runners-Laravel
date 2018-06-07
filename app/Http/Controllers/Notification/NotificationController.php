@@ -56,6 +56,7 @@ class NotificationController extends Controller
     public function show($id)
     {
         $notification = Auth::user()->notifications()->find($id);
+        $notification->markAsRead();
         return view('notifications.show')->with(compact('notification'));
     }
 
@@ -89,20 +90,12 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function read(Request $request, $id = null)
+    public function read(Request $request)
     {
-        if ($id === null) {
-            Auth::user()->unreadNotifications->markAsRead();
-            return redirect()
-                ->route('notifications.index')
-                ->with('info', 'Toutes les notifications on été notées comme lues !');
-        } else {
-            Auth::user()->notifications()->find($id)->markAsRead();
-            return redirect()
-                ->route('notifications.show', ['id' => $id])
-                ->with('info', 'La notification à été notée comme lue !');
-        }
-        return back();
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()
+            ->route('notifications.index')
+            ->with('info', 'Toutes les notifications on été notées comme lues !');
     }
 
     /**

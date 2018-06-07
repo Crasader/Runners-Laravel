@@ -65,6 +65,7 @@
                                 </th>
                                 <td>
                                     @datetag(['date' => $notification->read_at])
+                                        Le
                                     @enddatetag
                                 </td>
                             </tr>

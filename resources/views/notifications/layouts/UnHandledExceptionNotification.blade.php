@@ -60,7 +60,7 @@
                 <strong>Route :</strong>
                 <ul>
                     @foreach($notification->data['route'] as $key => $value)
-                        <li><strong>{{ $key }}</strong> {{ var_dump($value) }}</li>
+                        <li><strong>{{ $key }} : </strong> {{ print_r($value) }}</li>
                     @endforeach
                 </ul>
             </p>

@@ -93,16 +93,20 @@
                                     @endcomponent
                                 </td>
                                 <td>
-                                    {{ $run->planned_at }}
+                                    @datetext(['date' => $run->planned_at])
+                                    @enddatetext
                                 </td>
                                 <td>
-                                    {{ $run->started_at }}
+                                    @datetext(['date' => $run->started_at])
+                                    @enddatetext
                                 </td>
                                 <td>
                                     {{-- Edition buttons --}}
                                     <div class="buttons has-addons is-right">
-                                        @component('components/run_action_buttons', ['status' => $run->status])
-                                            {{-- route('runs.stop', ['user' => $run->id]) --}}
+                                        @component('components/run_action_buttons', [
+                                            'status' => $run->status,
+                                            'id' => $run->id
+                                            ])
                                         @endcomponent
                                     </div>
                                 </td>

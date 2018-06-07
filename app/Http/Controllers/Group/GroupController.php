@@ -140,6 +140,11 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         $this->authorize('delete', $group);
+        if ($group->users()->count() > 0) {
+            return redirect()
+                ->back()
+                ->with('error', "Le groupe {$group->name} n'est pas vide !");
+        }
         $group->delete();
         return redirect()
             ->route('groups.index')

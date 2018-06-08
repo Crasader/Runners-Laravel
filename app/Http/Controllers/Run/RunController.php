@@ -159,7 +159,15 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
-        dd('DESTROY run');
+        $run->subscriptions->each(function ($sub) {
+            $sub->delete();
+        });
+        $run->waypoints()->detach();
+        $run->artists()->detach();
+        $run->delete();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été supprimé.");
     }
 
     /**

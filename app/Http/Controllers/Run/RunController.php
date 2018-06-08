@@ -55,7 +55,11 @@ class RunController extends Controller
     public function create()
     {
         $this->authorize('create', Run::class);
-        return view('runs.create'); //->with(compact('waypoints', 'artists'));
+        $run = Run::create(['status' => 'drafting']);
+        $run->waypoints()->attach(1, ['order' => 1]);
+        return redirect()
+            ->route('runs.edit', ['run' => $run->id])
+            ->with('success', "Le run à correctement été crée");
     }
 
     /**
@@ -66,7 +70,7 @@ class RunController extends Controller
      */
     public function store(StoreNewRun $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
@@ -102,21 +106,49 @@ class RunController extends Controller
     public function update(UpdateRun $request, Run $run)
     {
         $this->authorize('update', $run);
-        // Check usage of add runner and add waypoint buttons
-        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
-            $run->newSubscription();
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
-        }
-        if ($request->has('add-waypoint')) {
-            $run->newWaypoint($request->input('add-waypoint'));
-            dd($run->waypoints);
+
+        // Check usage of action buttons on the form
+        if ($this->checkFormActions($request, $run)) {
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id])->withInput();
         }
 
-        dd($request->all());
-        //$run->saveDatas($request->all());
-        // Save the run datas
-        // Save the artist and waypoints linked to the run
-        // Save the run drivers
+        // Save alle the run datas and related datas
+        $run->saveDatas($request->all());
+
+        return redirect()
+            ->route('runs.show', ['run' => $run->id])
+            ->with('success', "Le run à correctement été mis a jour.");
+    }
+
+    /**
+     * Check if actions buttons are used in the view (add waypoint, add run)
+     *
+     * @param  \App\Http\Requests\Runs\UpdateRun  $request
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function checkFormActions($request, $run)
+    {
+        // Check runners addition
+        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
+            $run->newSubscription();
+            return true;
+        }
+        // Check runners deletion
+        if ($request->has('remove-runner')) {
+            $run->removeSubscription($request->input('remove-runner'));
+            return true;
+        }
+        // Check waypoints additions
+        if ($request->has('add-waypoint')) {
+            $run->newWaypoint($request->input('add-waypoint'));
+            return true;
+        }
+        // Check waypoints removes
+        if ($request->has('remove-waypoint')) {
+            $run->removeWaypoint($request->input('remove-waypoint'));
+            return true;
+        }
     }
 
     /**

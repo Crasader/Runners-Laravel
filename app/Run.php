@@ -213,17 +213,17 @@ class Run extends Model
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
-        $this->saveName($runDatas['name']);
-        $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
+        $this->infos = $runDatas['infos'];
+        $this->passengers = $runDatas['passengers'];
+        $this->savePlannedDates($runDatas['planned_at']);
+        $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
         $this->saveSubscriptions(collect($runDatas['subscriptions']));
-        dd($runDatas);
     }
 
     /**
      * MODEL METHOD
      * Save the subscription to this run
-     * TODO: Implement save datas on the RunSubscription model
      *
      * @param \Illuminate\Support\Collection $subscriptions
      * @return void
@@ -232,10 +232,7 @@ class Run extends Model
     {
         $subscriptions->each(function ($subscription, $key) {
             // Create the subscription if not exist
-            if (!$sub = RunSubscription::find($key)) {
-                $sub = new RunSubscription();
-                $sub->run()->associate($this);
-            }
+            $sub = RunSubscription::find($key);
             $sub->saveDatas($subscription);
         });
     }
@@ -250,16 +247,20 @@ class Run extends Model
     public function saveWaypoints($waypoints)
     {
         // Initialize an index to save the waypoints order
-        $i = 1;
-        $waypoints->each(function ($waypoint) use ($i) {
-            // Check if the waypoint exists in the database
-            if ($waypointDb = Waypoint::where('name', $waypoint)->first()) {
-                $this->waypoints()->sync([$waypointDb->id => ['order' => $i]]);
-            } else {
-                $newWaypoint = Waypoint::create(['name' => $waypoint]);
-                $this->waypoints()->sync([$newWaypoint->id => ['order' => $i]]);
+        $waypoints->each(function ($name, $order) {
+            // If the waypoint form contains data
+            if (!empty($name)) {
+                // Detach the waypoint of the run
+                $this->waypoints()->wherePivot('order', $order)->detach();
+                // If a waypoint with this name exists
+                if ($way = Waypoint::where('name', $name)->first()) {
+                    $this->waypoints()->attach($way->id, ['order' => $order]);
+                } else {
+                    // If no waypoint with this name, create a new one
+                    $newWay = Waypoint::create(['name' => $name]);
+                    $this->waypoints()->attach($newWay->id, ['order' => $order]);
+                }
             }
-            $i++;
         });
     }
 
@@ -270,13 +271,10 @@ class Run extends Model
      * @param string $name
      * @return void
      */
-    public function saveName($name)
+    public function saveName()
     {
-        if (empty($name)) {
-            $this->name = $name;
-        } else {
-            $this->name = $this->artists->first()->name;
-        }
+        $this->name = $this->artists->first()->name;
+        $this->save();
     }
 
     /**
@@ -294,10 +292,13 @@ class Run extends Model
             if ($artist = Artist::where('name', $artistName)->first()) {
                 // Attach it
                 $this->artists()->sync([$artist->id]);
+                $this->name = $artist->name;
+                $this->save();
             } else {
                 // If not, create it
                 $newArtist = Artist::create(['name' => $artistName]);
                 $this->artists()->sync([$newArtist->id]);
+                $this->save();
             }
         }
     }
@@ -310,15 +311,12 @@ class Run extends Model
      * @param string|null $end_planned_at
      * @return void
      */
-    public function savePlannedDates($planned_at, $end_planned_at)
+    public function savePlannedDates($planned_at)
     {
         // Parse the dates with carbon pare because the HTML5 datetime-local input is usuported
         // by the default createFromFormat method user by eloquent to parse the dates
         if (!empty($planned_at)) {
             $this->planned_at = Carbon::parse($planned_at);
-        }
-        if (!empty($end_planned_at)) {
-            $this->end_planned_at = Carbon::parse($end_planned_at);
         }
     }
 
@@ -336,17 +334,69 @@ class Run extends Model
 
     /**
      * MODEL METHOD
+     * Remove subscription for this run
+     *
+     * @return bool
+     */
+    public function removeSubscription($id)
+    {
+        $sub = RunSubscription::findOrFail($id)->delete();
+    }
+
+    /**
+     * MODEL METHOD
      * Add new empty waypoint for the run
-     * TODO: implement waypoint addition
      *
      * @return bool
      */
     public function newWaypoint($order)
     {
-        $waypoints = $this->waypoints;
-        dd($waypoints);
-        $way = new Waypoint(['name' => 'tmp']);
-        $this->subscriptions()->save($sub);
+        // Create an empty waypoint
+        $this->waypoints()->save(Waypoint::find(1), ['order' => 0]);
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order == 0) {
+                return [$waypoint->id => ['order' => ($order + 1)]];
+            } elseif ($waypoint->pivot->order > intval($order)) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order + 1)]];
+            } elseif ($waypoint->pivot->order <= intval($order)) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            }
+        });
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
+    }
+
+    /**
+     * MODEL METHOD
+     * Remove a waypoint for the run
+     *
+     * @return bool
+     */
+    public function removeWaypoint($order)
+    {
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order < $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            } elseif ($waypoint->pivot->order > $order) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order - 1)]];
+            }
+        });
+        // Filter to remove unused waypoints
+        $ids = $ids->filter(function ($el) {
+            return $el != null;
+        });
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
     }
 
     /**

@@ -46,10 +46,10 @@
             ],
             "search" => "name",
             "orderBy" => [
+                "planned_at" => "Prévu à",
                 "name" => "Nom",
                 "passengers" => "Nb passagers",
                 "status" => "Status",
-                "planned_at" => "Prévu à",
                 "started_at" => "Démarré à",
             ]
         ]])
@@ -93,12 +93,12 @@
                                     @endcomponent
                                 </td>
                                 <td>
-                                    @datetext(['date' => $run->planned_at])
-                                    @enddatetext
+                                    @datetag(['date' => $run->planned_at])
+                                    @enddatetag
                                 </td>
                                 <td>
-                                    @datetext(['date' => $run->started_at])
-                                    @enddatetext
+                                    @datetag(['date' => $run->started_at])
+                                    @enddatetag
                                 </td>
                                 <td>
                                     {{-- Edition buttons --}}

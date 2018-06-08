@@ -96,6 +96,46 @@
                         </div>
                     </div>
 
+                    {{-- PLANNED AT --}}
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Début prévu à :</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- START TIME --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'planned_at',
+                                'placeholder' => "Type de véhicule",
+                                'type'        => 'datetime-local',
+                                'icon'        => 'fa-clock',
+                                'errors'      => $errors,
+                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
+                                ])
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Informations</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- RUN INFOS --}}
+                            <div class="field">
+                                <p class="control">
+                                    <textarea class="textarea {{ $errors->has('infos') ? ' is-danger' : '' }}" name="infos" placeholder="Informations liées au run, choses a prendre..."></textarea>
+                                </p>
+                                @if ($errors->has('infos'))
+                                    <p class="help is-danger">{{ $errors->first('infos') }}</p>
+                                @endif
+                            </div>
+
+                        </div>
+                    </div>
+
                     <h2 class="title is-4">Lieux de passage</h3>
 
                     {{-- WAYPOINTS --}}
@@ -117,7 +157,7 @@
                                 {{-- WAYPOINT --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "waypoints[{$waypoint->id}]",
+                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
                                     'placeholder' => 'Lieu de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
@@ -155,28 +195,6 @@
                         </div>
 
                     @endforeach
-
-                    <h2 class="title is-4">Horaires</h3>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Début prévu à :</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- START TIME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'planned_at',
-                                'placeholder' => "Type de véhicule",
-                                'type'        => 'datetime-local',
-                                'icon'        => 'fa-clock',
-                                'errors'      => $errors,
-                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
 
                     <h2 class="title is-4">Runners</h3>
 

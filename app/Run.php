@@ -245,8 +245,20 @@ class Run extends Model
     public function saveWaypoints($waypoints)
     {
         // Initialize an index to save the waypoints order
-        $waypoints->each(function ($name, $key) {
-            $this->waypoints()->find($key)->fill(['name' => $name])->save();
+        $waypoints->each(function ($name, $order) {
+            // If the waypoint form contains data
+            if (!empty($name)) {
+                // Detach the waypoint of the run
+                $this->waypoints()->wherePivot('order', $order)->detach();
+                // If a waypoint with this name exists
+                if ($way = Waypoint::where('name', $name)->first()) {
+                    $this->waypoints()->attach($way->id, ['order' => $order]);
+                } else {
+                    // If no waypoint with this name, create a new one
+                    $newWay = Waypoint::create(['name' => $name]);
+                    $this->waypoints()->attach($newWay->id, ['order' => $order]);
+                }
+            }
         });
     }
 
@@ -294,7 +306,7 @@ class Run extends Model
      * @param string|null $end_planned_at
      * @return void
      */
-    public function savePlannedDates($planned_at, $end_planned_at)
+    public function savePlannedDates($planned_at)
     {
         // Parse the dates with carbon pare because the HTML5 datetime-local input is usuported
         // by the default createFromFormat method user by eloquent to parse the dates

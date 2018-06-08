@@ -6,6 +6,12 @@ use App\User;
 use App\Run;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * RunPolicy
+ *
+ * @author Bastien Nicoud
+ * @package App\Policies
+ */
 class RunPolicy
 {
     use HandlesAuthorization;

@@ -14,7 +14,7 @@ use App\Waypoint;
  * RunsTableSeeder
  * Create runs in the db
  * This seeder wil generates customs run with randomly generated course and dates
- * 
+ *
  * @author Bastien Nicoud
  */
 class RunsTableSeeder extends Seeder
@@ -48,6 +48,10 @@ class RunsTableSeeder extends Seeder
         $status = collect([
             'drafting',
             'drafting',
+            'drafting',
+            'drafting',
+            'ready',
+            'ready',
             'ready',
             'ready',
             'needs_filling',
@@ -55,16 +59,10 @@ class RunsTableSeeder extends Seeder
             'gone',
             'gone',
             'gone',
-            'gone',
-            'gone',
             'finished',
             'finished',
             'finished',
-            'finished',
-            'finished',
-            'finished',
-            'error',
-            'empty'
+            'error'
         ]);
 
         /**

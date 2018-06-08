@@ -31,7 +31,8 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/home', 'HomeController@home')->name('home');
 
-    /**
+
+    /** *****************************
      * Users ressource
      */
     // Qr codes management
@@ -66,78 +67,112 @@ Route::middleware(['auth'])->group(function () {
     // the curently authenticated user
     Route::get('/me', 'User\UserController@me')->name('me');
 
-    /**
+
+    /** *****************************
      * Role crud
      */
     Route::resource('roles', 'Role\RoleController');
 
-    /**
+
+    /** *****************************
      * Cars ressource
      */
     // Car route for searching in users table (used by search field)
     Route::post('cars/search', 'car\CarController@search')->name('cars.search');
     Route::resource('cars', 'car\CarController');
 
-    /**
+
+    /** *****************************
      * CarTypes ressource
      */
     // CarTypes route for searching in users table (used by search field)
     Route::post('carTypes/search', 'car\CarTypeController@search')->name('carTypes.search');
     Route::resource('carTypes', 'car\CarTypeController');
 
-    /**
+
+    /** *****************************
      * Schedules ressource
      */
     // This route return all the events in json format for the calendar system
     Route::post('schedules/events', 'schedule\ScheduleController@events')->name('schedules.events');
     Route::resource('schedules', 'schedule\ScheduleController');
 
-    /**
+
+    /** *****************************
      * Groups ressource
      */
     Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');
     Route::put('groups/manager', 'Group\GroupController@managerUpdate')->name('groups.manager.update');
     Route::resource('groups', 'Group\GroupController');
 
-    /**
+
+    /** *****************************
      * Runs ressource
      */
+    // Display runs for TV screen
     Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
+    // Publish a run (visible in the mobile app)
+    Route::patch('runs/publish/{run}', 'Run\RunController@publish')->name('runs.publish');
+    // Start/stop a run
+    Route::patch('runs/start/{run}', 'Run\RunController@start')->name('runs.start');
+    Route::patch('runs/stop/{run}', 'Run\RunController@stop')->name('runs.stop');
+    // Force start/stop of a run (for needs_filling runs)
+    Route::patch('runs/force-start/{run}', 'Run\RunController@forceStart')->name('runs.force-start');
+    Route::patch('runs/force-stop/{run}', 'Run\RunController@forceStop')->name('runs.force-stop');
     Route::resource('runs', 'Run\RunController');
     // Run comments crud
     Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);
 
-    /**
+
+    /** *****************************
      * Stats crud
      */
-    Route::get('stats', 'Stats\StatsController@index')->name('stats.index');
+    Route::resource('statistics', 'Statistic\StatisticController');
 
-    /**
+
+    /** *****************************
      * Artists crud
      */
-    // Import system (csv file)
-    Route::get('artists/import', 'Artist\ArtistController@import')->name('artists.import-form');
-    Route::post('artists/import', 'Artist\ArtistController@import')->name('artists.import');
     // Specific route for the autocomplete fields
     Route::post('artists/search', 'Artist\ArtistController@search')->name('artists.search');
     Route::resource('artists', 'Artist\ArtistController');
 
-    /**
+
+    /** *****************************
      * Waypoints crud
      */
-    // Import system (csv file)
-    Route::get('waypoints/import', 'Waypoint\WaypointController@import')->name('waypoints.import-form');
-    Route::post('waypoints/import', 'Waypoint\WaypointController@import')->name('waypoints.import');
     // Specific route for the autocomplete fields
     Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
     Route::resource('waypoints', 'Waypoint\WaypointController');
 
-    /**
+
+    /** *****************************
      * Kiela crud
      */
     Route::resource(
         'kiela',
         'Kiela\KielaController',
         ['only' => ['index', 'create', 'store' ,'destroy']]
+    );
+
+
+    /** *****************************
+     * Logs crud
+     */
+    Route::resource(
+        'logs',
+        'Log\LogController',
+        ['only' => ['index']]
+    );
+
+
+    /** *****************************
+     * Notifications crud
+     */
+    Route::get('notifications/read', 'Notification\NotificationController@read')->name('notifications.read');
+    Route::resource(
+        'notifications',
+        'Notification\NotificationController',
+        ['only' => ['index', 'show', 'destroy']]
     );
 });

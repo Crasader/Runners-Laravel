@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\Log\LogDatabaseCreateEvent;
+use App\Events\Log\LogDatabaseUpdateEvent;
+use App\Events\Log\LogDatabaseDeleteEvent;
+use App\Events\Log\LogDatabaseRestoreEvent;
 
 use App\Run;
 use App\Comment;
@@ -25,6 +29,28 @@ class Waypoint extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * MODEL EVENTS
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created'  => LogDatabaseCreateEvent::class,
+        'updated'  => LogDatabaseUpdateEvent::class,
+        'deleted'  => LogDatabaseDeleteEvent::class,
+        'restored' => LogDatabaseRestoreEvent::class
+    ];
+
+    /**
+     * MODEL RELATION
+     * Gets the logs corresponding to this model
+     */
+    public function logs()
+    {
+        return $this->morphMany(Log::class, 'loggable');
+    }
 
     /**
      * MODEL RELATION
@@ -65,11 +91,11 @@ class Waypoint extends Model
     public function positionToString()
     {
         if ($this->position() === 1) {
-            return "Lieux de départ";
+            return "Lieu de départ";
         } elseif ($this->position() === Run::find($this->pivot->run_id)->waypoints->count()) {
-            return "Lieux d'arrivée";
+            return "Lieu d'arrivée";
         } else {
-            return "Lieux n° {$this->position()}";
+            return "Lieu n° {$this->position()}";
         }
     }
 }

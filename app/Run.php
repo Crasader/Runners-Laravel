@@ -14,7 +14,12 @@ use App\RunSubscription;
 use Illuminate\Support\Collection;
 use App\Extensions\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\Log\LogDatabaseCreateEvent;
+use App\Events\Log\LogDatabaseUpdateEvent;
+use App\Events\Log\LogDatabaseDeleteEvent;
+use App\Events\Log\LogDatabaseRestoreEvent;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Run
@@ -58,6 +63,28 @@ class Run extends Model
         'started_at',
         'ended_at'
     ];
+
+    /**
+     * MODEL EVENTS
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created'  => LogDatabaseCreateEvent::class,
+        'updated'  => LogDatabaseUpdateEvent::class,
+        'deleted'  => LogDatabaseDeleteEvent::class,
+        'restored' => LogDatabaseRestoreEvent::class
+    ];
+
+    /**
+     * MODEL RELATION
+     * Gets the logs corresponding to this model
+     */
+    public function logs()
+    {
+        return $this->morphMany(Log::class, 'loggable');
+    }
 
     /**
      * MODEL RELATION
@@ -187,17 +214,17 @@ class Run extends Model
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
-        $this->saveName($runDatas['name']);
-        $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
+        $this->infos = $runDatas['infos'];
+        $this->passengers = $runDatas['passengers'];
+        $this->savePlannedDates($runDatas['planned_at']);
+        $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
         $this->saveSubscriptions(collect($runDatas['subscriptions']));
-        dd($runDatas);
     }
 
     /**
      * MODEL METHOD
      * Save the subscription to this run
-     * TODO: Implement save datas on the RunSubscription model
      *
      * @param \Illuminate\Support\Collection $subscriptions
      * @return void
@@ -206,10 +233,7 @@ class Run extends Model
     {
         $subscriptions->each(function ($subscription, $key) {
             // Create the subscription if not exist
-            if (!$sub = RunSubscription::find($key)) {
-                $sub = new RunSubscription();
-                $sub->run()->associate($this);
-            }
+            $sub = RunSubscription::find($key);
             $sub->saveDatas($subscription);
         });
     }
@@ -224,16 +248,20 @@ class Run extends Model
     public function saveWaypoints($waypoints)
     {
         // Initialize an index to save the waypoints order
-        $i = 1;
-        $waypoints->each(function ($waypoint) use ($i) {
-            // Check if the waypoint exists in the database
-            if ($waypointDb = Waypoint::where('name', $waypoint)->first()) {
-                $this->waypoints()->sync([$waypointDb->id => ['order' => $i]]);
-            } else {
-                $newWaypoint = Waypoint::create(['name' => $waypoint]);
-                $this->waypoints()->sync([$newWaypoint->id => ['order' => $i]]);
+        $waypoints->each(function ($name, $order) {
+            // If the waypoint form contains data
+            if (!empty($name)) {
+                // Detach the waypoint of the run
+                $this->waypoints()->wherePivot('order', $order)->detach();
+                // If a waypoint with this name exists
+                if ($way = Waypoint::where('name', $name)->first()) {
+                    $this->waypoints()->attach($way->id, ['order' => $order]);
+                } else {
+                    // If no waypoint with this name, create a new one
+                    $newWay = Waypoint::create(['name' => $name]);
+                    $this->waypoints()->attach($newWay->id, ['order' => $order]);
+                }
             }
-            $i++;
         });
     }
 
@@ -244,13 +272,10 @@ class Run extends Model
      * @param string $name
      * @return void
      */
-    public function saveName($name)
+    public function saveName()
     {
-        if (empty($name)) {
-            $this->name = $name;
-        } else {
-            $this->name = $this->artists->first()->name;
-        }
+        $this->name = $this->artists->first()->name;
+        $this->save();
     }
 
     /**
@@ -268,10 +293,13 @@ class Run extends Model
             if ($artist = Artist::where('name', $artistName)->first()) {
                 // Attach it
                 $this->artists()->sync([$artist->id]);
+                $this->name = $artist->name;
+                $this->save();
             } else {
                 // If not, create it
                 $newArtist = Artist::create(['name' => $artistName]);
                 $this->artists()->sync([$newArtist->id]);
+                $this->save();
             }
         }
     }
@@ -284,16 +312,92 @@ class Run extends Model
      * @param string|null $end_planned_at
      * @return void
      */
-    public function savePlannedDates($planned_at, $end_planned_at)
+    public function savePlannedDates($planned_at)
     {
         // Parse the dates with carbon pare because the HTML5 datetime-local input is usuported
         // by the default createFromFormat method user by eloquent to parse the dates
         if (!empty($planned_at)) {
             $this->planned_at = Carbon::parse($planned_at);
         }
-        if (!empty($end_planned_at)) {
-            $this->end_planned_at = Carbon::parse($end_planned_at);
-        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Add new empty subscription to a run
+     *
+     * @return bool
+     */
+    public function newSubscription()
+    {
+        $sub = new RunSubscription();
+        $this->subscriptions()->save($sub);
+    }
+
+    /**
+     * MODEL METHOD
+     * Remove subscription for this run
+     *
+     * @return bool
+     */
+    public function removeSubscription($id)
+    {
+        $sub = RunSubscription::findOrFail($id)->delete();
+    }
+
+    /**
+     * MODEL METHOD
+     * Add new empty waypoint for the run
+     *
+     * @return bool
+     */
+    public function newWaypoint($order)
+    {
+        // Create an empty waypoint
+        $this->waypoints()->save(Waypoint::find(1), ['order' => 0]);
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order == 0) {
+                return [$waypoint->id => ['order' => ($order + 1)]];
+            } elseif ($waypoint->pivot->order > intval($order)) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order + 1)]];
+            } elseif ($waypoint->pivot->order <= intval($order)) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            }
+        });
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
+    }
+
+    /**
+     * MODEL METHOD
+     * Remove a waypoint for the run
+     *
+     * @return bool
+     */
+    public function removeWaypoint($order)
+    {
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order < $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            } elseif ($waypoint->pivot->order > $order) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order - 1)]];
+            }
+        });
+        // Filter to remove unused waypoints
+        $ids = $ids->filter(function ($el) {
+            return $el != null;
+        });
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
     }
 
     /**
@@ -326,15 +430,51 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Starts a run
+     * Publish the run
      *
      * @return bool
+     */
+    public function publish()
+    {
+        // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
+        if ($this->needsFilling()) {
+            $this->status = 'needs_filling';
+        } else {
+            $this->status = 'ready';
+        }
+        $this->published_at = now();
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Check if the run needs filling
+     *
+     * @return bool
+     */
+    public function needsFilling()
+    {
+        $needsFilling = false;
+        $needsFilling |= $this->artists()->first() ? false : true;
+        $needsFilling |= $this->passengers > 1 ? false : true;
+        $needsFilling |= $this->planned_at ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+        $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
+        return $needsFilling;
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
      */
     public function start()
     {
         // Set the run start time and status
-        $this->status = 'started';
-        $this->started_at = Carbon::now();
+        $this->status = 'gone';
+        $this->started_at = now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
             $item->status = "taken";
@@ -351,9 +491,54 @@ class Run extends Model
      * MODEL METHOD
      * Ends a run
      *
-     * @return bool
+     * @return void
      */
     public function stop()
+    {
+        $this->status = 'finished';
+        $this->ended_at = Carbon::now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
+     */
+    public function forceSart()
+    {
+        // Set the run start time and status
+        $this->status = 'gone';
+        $this->started_at = now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Ends a run
+     *
+     * @return void
+     */
+    public function forceStop()
     {
         $this->status = 'finished';
         $this->ended_at = Carbon::now();

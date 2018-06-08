@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Runs\StoreNewRun;
+use App\Http\Requests\Runs\UpdateRun;
 
 /**
  * RunController
@@ -27,7 +28,7 @@ class RunController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Run::class);
-        $runs = Run::filter($request, 'name', 'asc')->paginate(20);
+        $runs = Run::filter($request, 'planned_at', 'asc')->paginate(20);
         return view('runs.index')->with(compact('runs', 'request'));
     }
 
@@ -54,7 +55,11 @@ class RunController extends Controller
     public function create()
     {
         $this->authorize('create', Run::class);
-        return view('runs.create'); //->with(compact('waypoints', 'artists'));
+        $run = Run::create(['status' => 'drafting']);
+        $run->waypoints()->attach(1, ['order' => 1]);
+        return redirect()
+            ->route('runs.edit', ['run' => $run->id])
+            ->with('success', "Le run à correctement été crée");
     }
 
     /**
@@ -65,7 +70,7 @@ class RunController extends Controller
      */
     public function store(StoreNewRun $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
@@ -94,16 +99,56 @@ class RunController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Runs\StoreNewRun  $request
+     * @param  \App\Http\Requests\Runs\UpdateRun  $request
      * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewRun $request, Run $run)
+    public function update(UpdateRun $request, Run $run)
     {
+        $this->authorize('update', $run);
+
+        // Check usage of action buttons on the form
+        if ($this->checkFormActions($request, $run)) {
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id])->withInput();
+        }
+
+        // Save alle the run datas and related datas
         $run->saveDatas($request->all());
-        // Save the run datas
-        // Save the artist and waypoints linked to the run
-        // Save the run drivers
+
+        return redirect()
+            ->route('runs.show', ['run' => $run->id])
+            ->with('success', "Le run à correctement été mis a jour.");
+    }
+
+    /**
+     * Check if actions buttons are used in the view (add waypoint, add run)
+     *
+     * @param  \App\Http\Requests\Runs\UpdateRun  $request
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function checkFormActions($request, $run)
+    {
+        // Check runners addition
+        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
+            $run->newSubscription();
+            return true;
+        }
+        // Check runners deletion
+        if ($request->has('remove-runner')) {
+            $run->removeSubscription($request->input('remove-runner'));
+            return true;
+        }
+        // Check waypoints additions
+        if ($request->has('add-waypoint')) {
+            $run->newWaypoint($request->input('add-waypoint'));
+            return true;
+        }
+        // Check waypoints removes
+        if ($request->has('remove-waypoint')) {
+            $run->removeWaypoint($request->input('remove-waypoint'));
+            return true;
+        }
     }
 
     /**
@@ -114,6 +159,89 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
-        //
+        $run->subscriptions->each(function ($sub) {
+            $sub->delete();
+        });
+        $run->waypoints()->detach();
+        $run->artists()->detach();
+        $run->delete();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été supprimé.");
+    }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Run $run)
+    {
+        $this->authorize('update', $run);
+        $run->publish();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été publié, il est maintenant visible depuis l'app mobile");
+    }
+
+    /**
+     * Start the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function start(Run $run)
+    {
+        $this->authorize('start', $run);
+        $run->start();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été démarré !");
+    }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function stop(Run $run)
+    {
+        $this->authorize('stop', $run);
+        $run->stop();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été démarré !");
+    }
+
+    /**
+     * Force the start of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStart(Run $run)
+    {
+        $this->authorize('forceStart', $run);
+        $run->forceSart();
+        return redirect()
+            ->back()
+            ->with('warning', "Vous avez forcé le run $run->name à démarrer, malgré des informations manquantes !");
+    }
+
+    /**
+     * Force the end of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStop(Run $run)
+    {
+        $this->authorize('forceStop', $run);
+        $run->forceStop();
+        return redirect()
+            ->back()
+            ->with('warning', "Vous avez forcé le run à s'arreter !");
     }
 }

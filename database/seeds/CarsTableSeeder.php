@@ -28,14 +28,14 @@ class CarsTableSeeder extends Seeder
         /**
          * 12 Vito bus
          */
-        for ($i = 0; $i < 12; $i++) {
+        for ($i = 1; $i < 13; $i++) {
             $tmpCar = Car::create([
                 'plate_number' => 'AI ' . rand(1000000, 200000),
                 'brand'        => 'Mercedes',
                 'model'        => 'Vito',
                 'color'        => 'noir',
                 'status'       => 'free',
-                'name'         => 'Vito'
+                'name'         => "Vito $i"
             ]);
             // Set the car type to $vito
             $tmpCar->type()->associate($vito);
@@ -51,7 +51,7 @@ class CarsTableSeeder extends Seeder
             'model'        => 'S500',
             'color'        => 'noir',
             'status'       => 'free',
-            'name'         => 'Limo'
+            'name'         => 'Limo 1'
         ]);
         // Set the car type to $limo
         $tmpLimo->type()->associate($limo);
@@ -63,7 +63,7 @@ class CarsTableSeeder extends Seeder
             'model'        => 'S350',
             'color'        => 'blue',
             'status'       => 'free',
-            'name'         => 'Limo'
+            'name'         => 'Limo 2'
         ]);
         // Set the car type to $limo
         $tmpLimo->type()->associate($limo);
@@ -78,7 +78,7 @@ class CarsTableSeeder extends Seeder
             'model'        => 'Boxer',
             'color'        => 'white',
             'status'       => 'free',
-            'name'         => 'Matos'
+            'name'         => 'Matos 1'
         ]);
         // Set the car type to $matos
         $tmpMatos->type()->associate($matos);
@@ -90,7 +90,7 @@ class CarsTableSeeder extends Seeder
             'model'        => 'Kangoo',
             'color'        => 'white',
             'status'       => 'free',
-            'name'         => 'Matos'
+            'name'         => 'Matos 2'
         ]);
         // Set the car type to $matos
         $tmpMatos->type()->associate($matos);

@@ -39,7 +39,7 @@ class StoreRole extends FormRequest
                 'max:50',
                 // The regex is used to validate the slug format
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                Rule::unique('roles')->ignore(request()->role->id)
+                Rule::unique('roles')
             ],
             'name' => ['required', 'string', 'max:50'],
             'permissions.*' => [Rule::in(['true', 'false'])]

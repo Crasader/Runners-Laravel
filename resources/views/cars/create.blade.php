@@ -28,13 +28,13 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('create', App\Car::class)
-                        <p class="control">
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('create-car-form').submit();"
                                 class="button is-success">
                                 Créer le véhicule
                             </button>
-                        </p>
+                        </div>
                     @endcan
                 </div>
             </div>
@@ -156,7 +156,6 @@
                                         <select name="status">
                                             <option value="free">Libre</option>
                                             <option value="problem">Problème</option>
-                                            <option value="taken">En run</option>
                                         </select>
                                     </div>
                                 </div>

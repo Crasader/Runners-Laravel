@@ -6,6 +6,7 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\StoreRole;
+use App\Http\Requests\Roles\UpdateRole;
 
 /**
  * RoleController
@@ -50,7 +51,7 @@ class RoleController extends Controller
     {
         $this->authorize('create', Role::class);
         Role::create($request->all());
-        return redirect()->route('roles.index')->with('success', 'Le role à bien été crée');
+        return redirect()->route('roles.index')->with('success', 'Le rôle à bien été crée');
     }
 
     /**
@@ -80,16 +81,16 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Roles\StoreRole  $request
+     * @param  \App\Http\Requests\Roles\UpdateRole  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreRole $request, Role $role)
+    public function update(UpdateRole $request, Role $role)
     {
         $this->authorize('update', Role::class);
         $role->fill($request->all());
         $role->save();
-        return redirect()->route('roles.show', ['role' => $role->id])->with('success', 'Le role à bien été modifié !');
+        return redirect()->route('roles.show', ['role' => $role->id])->with('success', 'Le rôle à bien été modifié !');
     }
 
     /**
@@ -107,6 +108,6 @@ class RoleController extends Controller
                 ->route('roles.index')
                 ->with('success', "{$role->name} a bien été supprimé !");
         }
-        return redirect()->back()->with('danger', 'Ce role est utilisé, vous ne pouvez pas le supprimer.');
+        return redirect()->back()->with('danger', 'Ce rôle est utilisé, vous ne pouvez pas le supprimer.');
     }
 }

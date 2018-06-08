@@ -70,7 +70,7 @@ class UserProfilePictureController extends Controller
         if ($user->profilePictures()->exists()) {
             Storage::delete($user->profilePictures->first()->path);
             $user->profilePictures()->delete();
-            
+
             // Success message
             return redirect()
                 ->back()

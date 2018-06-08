@@ -51,7 +51,12 @@
                         @foreach ($artists as $artist)
                             <tr onclick="window.location.href = '{{ route('artists.show', ['user' => $artist->id]) }}'">
                                 <th>{{ $artist->name }}</th>
-                                <td><strong>{{ $artist->runs()->count() }}</strong> runs transportent cet artiste.</td>
+                                <td>
+                                    <span class="tag is-light">
+                                        <strong>{{ $artist->runs()->count() }}</strong>
+                                    </span>
+                                    run transportent cet artiste.
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

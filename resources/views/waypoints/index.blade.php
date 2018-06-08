@@ -31,13 +31,6 @@
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="columns">
-            <div class="column is-12">
-                filters
-            </div>
-        </div>
-
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
@@ -58,7 +51,12 @@
                         @foreach ($waypoints as $waypoint)
                             <tr onclick="window.location.href = '{{ route('waypoints.show', ['waypoint' => $waypoint->id]) }}'">
                                 <th>{{ $waypoint->name }}</th>
-                                <td><strong>{{ $waypoint->runs()->count() }}</strong> runs passent par la.</td>
+                                <td>
+                                    <span class="tag is-light">
+                                        <strong>{{ $waypoint->runs()->count() }}</strong>
+                                    </span>
+                                    run passent par ce lieu.
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

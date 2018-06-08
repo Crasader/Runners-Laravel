@@ -23,7 +23,8 @@ class WaypointController extends Controller
      */
     public function index()
     {
-        $waypoints = Waypoint::orderBy('name', 'asc')->paginate(30);
+        // Where to ignore temporary waypoints used in the run creation
+        $waypoints = Waypoint::orderBy('name', 'asc')->whereNotIn('name', ['tmp'])->paginate(30);
         return view('waypoints.index')->with(compact('waypoints'));
     }
 
@@ -48,7 +49,7 @@ class WaypointController extends Controller
     {
         $this->authorize('create', Waypoint::class);
         Waypoint::create($request->all());
-        return redirect()->route('waypoints.index')->with('success', "Le lieux a bien été ajouté.");
+        return redirect()->route('waypoints.index')->with('success', "Le lieu a bien été ajouté.");
     }
 
     /**
@@ -106,7 +107,7 @@ class WaypointController extends Controller
         $waypoint->save();
         return redirect()
             ->route('waypoints.show', ['waypoint' => $waypoint->id])
-            ->with('success', "Le lieux a bien été modifié !");
+            ->with('success', "Le lieu a bien été modifié !");
     }
 
     /**

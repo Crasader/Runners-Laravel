@@ -30,16 +30,16 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $car)
-                        <p class="control">
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('update-car-form').submit();"
                                 class="button is-success">
                                 Valider les modifications
                             </button>
-                        </p>
+                        </div>
                     @endcan
                     @can('delete', $car)
-                        <p class="control">
+                        <div class="control">
                             <form id="delete-car-form"
                                 action="{{ route('cars.destroy', ['car' => $car->id]) }}"
                                 method="POST" style="display: none;">
@@ -51,7 +51,7 @@
                                 class="button is-danger">
                                 Supprimer {{ $car->name }}
                             </button>
-                        </p>
+                        </div>
                     @endcan
                 </div>
             </div>

@@ -25,17 +25,36 @@
                 <h1 class="title is-2">
                     Edition du run {{ $run->name }}
                     @component('components/status_tag', ['status' => $run->status])
+                        is-medium
                     @endcomponent
                 </h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="#" class="button is-success">Valider les modifications</a>
-                    </p>
-                    <p class="control">
-                        <a href="#" class="button is-danger">Supprimer ce run</a>
-                    </p>
+                    @can('update', $run)
+                        <div class="control">
+                            <button onclick="event.preventDefault();
+                                document.getElementById('update-run-form').submit();"
+                                class="button is-success">
+                                Valider les modifications
+                            </button>
+                        </div>
+                    @endcan
+                    @can('delete', $run)
+                        <div class="control">
+                            <form id="delete-run-form"
+                                action="{{ route('runs.destroy', ['run' => $run->id]) }}"
+                                method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
+                            <button onclick="event.preventDefault();
+                                document.getElementById('delete-run-form').submit();"
+                                class="button is-danger">
+                                Supprimer le run
+                            </button>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -52,23 +71,9 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Nom / Artiste</label>
+                            <label class="label">Artiste : </label>
                         </div>
                         <div class="field-body">
-
-                            {{-- RUN NAME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'name',
-                                'placeholder' => 'Nom du run',
-                                'type'        => 'text',
-                                'icon'        => 'fa-bookmark',
-                                'value'       => $run->name,
-                                'errors'      => $errors
-                                ])
-                                <p class="help">
-                                    Par défault, le nom de l'artiste sera utilisé.
-                                </p>
-                            @endcomponent
 
                             {{-- ARTIST --}}
                             {{-- SEARCH FIELD --}}
@@ -77,7 +82,7 @@
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
-                                'value'       => $run->artists->first()->name,
+                                'value'       => $run->artists()->exists() ? $run->artists->first()->name : '',
                                 'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])
@@ -89,51 +94,27 @@
                         </div>
                     </div>
 
-                    <h2 class="title is-4">Lieux de passage</h3>
-
-                    {{-- WAYPOINTS --}}
-
-                    @foreach($run->waypoints as $waypoint)
-
-                        <div class="field is-horizontal">
-                            <div class="field-label is-normal">
-                                @if($loop->first)
-                                    <label class="label">Départ</label>
-                                @elseif($loop->last)
-                                    <label class="label">Arrivée</label>
-                                @else
-                                    <label class="label">Lieux {{ $waypoint->pivot->order }}</label>
-                                @endif
-                            </div>
-                            <div class="field-body">
-
-                                {{-- WAYPOINT --}}
-                                {{-- SEARCH FIELD --}}
-                                @component('components/horizontal_search_input', [
-                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
-                                    'placeholder' => 'Lieux de départ',
-                                    'type'        => 'text',
-                                    'icon'        => 'fa-map-signs',
-                                    'value'       => $waypoint->name,
-                                    'searchUrl'   => route('waypoints.search'),
-                                    'errors'      => $errors
-                                    ])
-                                    @slot('button')
-                                        <button type="submit" name="addWaypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
-                                            <span class="icon">
-                                                <i class="fas fa-plus"></i>
-                                            </span>
-                                        </button>
-                                    @endslot
-                                @endcomponent
-
-                            </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Passagers :</label>
                         </div>
+                        <div class="field-body">
 
-                    @endforeach
+                            {{-- Nombre de passagers --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'passengers',
+                                'placeholder' => "Nombre de passagers",
+                                'type'        => 'text',
+                                'icon'        => 'fa-users',
+                                'errors'      => $errors,
+                                'value'       => $run->passengers
+                                ])
+                            @endcomponent
 
-                    <h2 class="title is-4">Horaires</h3>
+                        </div>
+                    </div>
 
+                    {{-- PLANNED AT --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
                             <label class="label">Début prévu à :</label>
@@ -147,7 +128,7 @@
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
                                 'errors'      => $errors,
-                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
+                                'value'       => $run->planned_at ? $run->planned_at->format('Y-m-d\\TH:i:s') : now()->startOfHour()->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 
@@ -156,31 +137,94 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Fin prévue a :</label>
+                            <label class="label">Informations</label>
                         </div>
                         <div class="field-body">
 
-                            {{-- END TIME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'end_planned_at',
-                                'placeholder' => "Véhicule",
-                                'type'        => 'datetime-local',
-                                'icon'        => 'fa-clock',
-                                'errors'      => $errors,
-                                'value'       => $run->end_planned_at->format('Y-m-d\\TH:i:s')
-                                ])
-                            @endcomponent
+                            {{-- RUN INFOS --}}
+                            <div class="field">
+                                <p class="control">
+                                    <textarea
+                                        class="textarea {{ $errors->has('infos') ? ' is-danger' : '' }}"
+                                        name="infos"
+                                        placeholder="Informations liées au run, choses a prendre..."
+                                        >{{ old('infos') ? old('infos') : $run->infos }}</textarea>
+                                </p>
+                                @if ($errors->has('infos'))
+                                    <p class="help is-danger">{{ $errors->first('infos') }}</p>
+                                @endif
+                            </div>
 
                         </div>
                     </div>
 
-                    @foreach($run->subscriptions as $subscription)
+                    <h2 class="title is-4">Lieux de passage</h3>
 
-                        <h2 class="title is-4">Runner {{ $loop->index + 1 }}</h3>
+                    {{-- WAYPOINTS --}}
+
+                    @foreach($run->waypoints()->orderBy('pivot_order')->get() as $waypoint)
 
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
-                                <label class="label">Runner</label>
+                                @if($loop->first)
+                                    <label class="label">Départ</label>
+                                @elseif($loop->last)
+                                    <label class="label">Arrivée</label>
+                                @else
+                                    <label class="label">Lieu {{ $waypoint->pivot->order }}</label>
+                                @endif
+                            </div>
+                            <div class="field-body">
+
+                                {{-- WAYPOINT --}}
+                                {{-- SEARCH FIELD --}}
+                                @component('components/horizontal_search_input', [
+                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
+                                    'placeholder' => 'Lieu de départ',
+                                    'type'        => 'text',
+                                    'icon'        => 'fa-map-signs',
+                                    'value'       => $waypoint->name,
+                                    'searchUrl'   => route('waypoints.search'),
+                                    'errors'      => $errors
+                                    ])
+                                    @slot('button')
+                                        {{-- Button to remove waypoints --}}
+                                        @unless ($loop->first)
+                                            <button
+                                                type="submit"
+                                                name="remove-waypoint"
+                                                value="{{ $waypoint->pivot->order }}"
+                                                class="button is-danger">
+                                                <span class="icon">
+                                                    <i class="fas fa-minus"></i>
+                                                </span>
+                                            </button>
+                                        @endunless
+                                        {{-- Button to add waypoint after current waypoint --}}
+                                        <button
+                                            type="submit"
+                                            name="add-waypoint"
+                                            value="{{ $waypoint->pivot->order }}"
+                                            class="button is-info">
+                                            <span class="icon">
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </button>
+                                    @endslot
+                                @endcomponent
+
+                            </div>
+                        </div>
+
+                    @endforeach
+
+                    <h2 class="title is-4">Runners</h3>
+
+                    @foreach($run->subscriptions as $subscription)
+
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Runner {{ $loop->index + 1 }}</label>
                             </div>
                             <div class="field-body">
 
@@ -191,10 +235,21 @@
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
-                                    'value'       => $subscription->user->name,
+                                    'value'       => $subscription->user()->exists() ? $subscription->user->name : '',
                                     'searchUrl'   => route('users.search'),
                                     'errors'      => $errors
                                     ])
+                                    @slot('button')
+                                        <button
+                                            type="submit"
+                                            name="remove-runner"
+                                            value="{{ $subscription->id }}"
+                                            class="button is-danger">
+                                            <span class="icon">
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    @endslot
                                 @endcomponent
 
                             </div>
@@ -213,7 +268,7 @@
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
-                                    'value'       => $subscription->carType->name,
+                                    'value'       => $subscription->carType()->exists() ? $subscription->carType->name : '',
                                     'searchUrl'   => route('carTypes.search'),
                                     'errors'      => $errors
                                     ])
@@ -226,7 +281,7 @@
                                     'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',
-                                    'value'       => $subscription->car->name,
+                                    'value'       => $subscription->car()->exists() ? $subscription->car->name : '',
                                     'searchUrl'   => route('cars.search'),
                                     'errors'      => $errors
                                     ])
@@ -245,29 +300,13 @@
                             {{-- SEX --}}
                             <div class="field is-pulled-right">
                                 <p class="control">
-                                    <button type="submit" value="addRunner" class="button is-info">
+                                    <button type="submit" name="add-runner" value="true" class="button is-info">
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
                                         </span>
                                         <span>Ajouter un runner</span>
                                     </a>
                                 </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- SUBMIT BUTTONS --}}
-                            <div class="field">
-                                <div class="control">
-                                    <button type="submit" class="button is-success">
-                                        Modifier le run
-                                    </button>
-                                </div>
                             </div>
 
                         </div>

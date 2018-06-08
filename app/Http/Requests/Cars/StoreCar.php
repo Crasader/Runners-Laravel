@@ -36,7 +36,8 @@ class StoreCar extends FormRequest
             'brand'        => ['required', 'min:2', 'max:20'],
             'model'        => ['required', 'min:2', 'max:10'],
             'color'        => ['required', 'min:2', 'max:10'],
-            'status'       => ['required']
+            'status'       => ['required'],
+            'type_id'      => ['required', 'exists:car_types,id']
         ];
     }
 }

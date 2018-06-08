@@ -23,47 +23,29 @@ The permissions name follow a simple pattern :
 
 ## Permissions list
 
-For the **superuser** :  
+For the **superuser** :
 The superuser have acces to all the roles, and it's not possible to remouve permissions for this role.
 
-For the **admin** role :
-* 'start_run'            => true
-* 'end_run'              => true
-* 'force_start_run'      => true
-* 'force_end_run'        => true
-* 'create_runners'       => true
-* 'create_coordinators'  => true
-* 'create_admin'         => false
-* 'destroy_runners'      => true
-* 'destroy_coordinators' => true
-* 'destroy_admin'        => false
-* 'manage_schedules'     => true
-
-For the **coordinator** role :
-* 'start_run'            => true
-* 'end_run'              => true
-* 'force_start_run'      => true
-* 'force_end_run'        => true
-* 'create_runners'       => true
-* 'create_coordinators'  => false
-* 'create_admin'         => false
-* 'destroy_runners'      => true
-* 'destroy_coordinators' => false
-* 'destroy_admin'        => false
-* 'manage_schedules'     => true
-
-For the **runner** role :
-* 'start_run'            => true
-* 'end_run'              => true
-* 'force_start_run'      => false
-* 'force_end_run'        => false
-* 'create_runners'       => false
-* 'create_coordinators'  => false
-* 'create_admin'         => false
-* 'destroy_runners'      => false
-* 'destroy_coordinators' => false
-* 'destroy_admin'        => false
-* 'manage_schedules'     => false
+Permissions assignables for **all other users** :
+* 'start_run'                  => true or flase
+* 'end_run'                    => true or flase
+* 'force_start_run'            => true or flase
+* 'force_end_run'              => true or flase
+* 'manage_runs'                => true or flase
+* 'create_users'               => true or flase
+* 'delete_users'               => true or flase
+* 'manage_schedules'           => true or flase
+* 'manage_artists'             => true or flase
+* 'manage_waypoints'           => true or flase
+* 'manage_groups'              => true or flase
+* 'manage_roles'               => true or flase
+* 'manage_cars'                => true or flase
+* 'manage_car_types'           => true or flase
+* 'manage_other_users'         => true or flase
+* 'manage_my_comments'         => true or flase
+* 'manage_other_user_comments' => true or flase
+* 'view_comments'              => true or flase
+* 'manage_logs'                => true or flase
 
 <br>
 <br>
@@ -71,6 +53,7 @@ For the **runner** role :
 <hr>
 
 **Helpful links :**
+* [Laravel authorization system](https://laravel.com/docs/5.6/authorization)
 
 <hr>
 <div align="center">

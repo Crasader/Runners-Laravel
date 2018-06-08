@@ -99,10 +99,15 @@ class RunSubscription extends Model
      */
     public function saveDatas($subscriptionDatas)
     {
-        $this->user()->associate(User::where('name', $subscriptionDatas['user']));
-        $this->car()->associate(Car::where('name', $subscriptionDatas['car']));
-        $this->carType()->associate(CarType::where('name', $subscriptionDatas['name']));
-        dd($subscriptionDatas);
+        if ($user = User::where('name', $subscriptionDatas['user'])->first()) {
+            $this->assignUser($user);
+        }
+        if ($carType = CarType::where('name', $subscriptionDatas['carType'])->first()) {
+            $this->assignCarType($carType);
+        }
+        if ($car = Car::where('name', $subscriptionDatas['car'])->first()) {
+            $this->assignCar($car);
+        }
     }
 
     /**
@@ -113,7 +118,7 @@ class RunSubscription extends Model
      */
     public function assignRun($run)
     {
-        $this->run()->associate($run);
+        $this->run()->associate($run->id);
         $this->save();
     }
 
@@ -125,7 +130,7 @@ class RunSubscription extends Model
      */
     public function assignUser($user)
     {
-        $this->user()->associate($user);
+        $this->user()->associate($user->id);
         $this->save();
     }
 
@@ -138,8 +143,21 @@ class RunSubscription extends Model
      */
     public function assignCar($car)
     {
-        $this->car()->associate($car);
-        $this->carType()->associate($car->type);
+        $this->car()->associate($car->id);
+        $this->carType()->associate($car->type->id);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign a car to this subscription
+     * (It assign the cartype automaticaly)
+     *
+     * @param \App\Car $car
+     */
+    public function assignCarType($carType)
+    {
+        $this->carType()->associate($carType->id);
         $this->save();
     }
 }

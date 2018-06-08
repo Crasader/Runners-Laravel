@@ -442,6 +442,7 @@ class Run extends Model
         } else {
             $this->status = 'ready';
         }
+        $this->published_at = now();
         $this->save();
     }
 
@@ -472,8 +473,8 @@ class Run extends Model
     public function start()
     {
         // Set the run start time and status
-        $this->status = 'started';
-        $this->started_at = Carbon::now();
+        $this->status = 'gone';
+        $this->started_at = now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
             $item->status = "taken";
@@ -493,6 +494,51 @@ class Run extends Model
      * @return void
      */
     public function stop()
+    {
+        $this->status = 'finished';
+        $this->ended_at = Carbon::now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
+     */
+    public function forceSart()
+    {
+        // Set the run start time and status
+        $this->status = 'gone';
+        $this->started_at = now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Ends a run
+     *
+     * @return void
+     */
+    public function forceStop()
     {
         $this->status = 'finished';
         $this->ended_at = Carbon::now();

@@ -93,12 +93,12 @@
                                     @endcomponent
                                 </td>
                                 <td>
-                                    @datetext(['date' => $run->planned_at])
-                                    @enddatetext
+                                    @datetag(['date' => $run->planned_at])
+                                    @enddatetag
                                 </td>
                                 <td>
-                                    @datetext(['date' => $run->started_at])
-                                    @enddatetext
+                                    @datetag(['date' => $run->started_at])
+                                    @enddatetag
                                 </td>
                                 <td>
                                     {{-- Edition buttons --}}

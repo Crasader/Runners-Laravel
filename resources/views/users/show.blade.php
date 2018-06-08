@@ -394,8 +394,8 @@
                             @foreach ($user->myLogs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <td>
-                                        @date(['date' => $log->created_at])
-                                        @enddate
+                                        @datetext(['date' => $log->created_at])
+                                        @enddatetext
                                     </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}
@@ -426,8 +426,8 @@
                             @foreach ($user->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <td>
-                                        @date(['date' => $log->created_at])
-                                        @enddate
+                                        @datetext(['date' => $log->created_at])
+                                        @enddatetext
                                     </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}

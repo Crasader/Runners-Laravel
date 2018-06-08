@@ -104,7 +104,9 @@ class RunController extends Controller
         $this->authorize('update', $run);
 
         // Check usage of action buttons on the form
-        $this->checkFormActions($request);
+        if ($this->checkFormActions($request, $run)) {
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+        }
 
         // Save alle the run datas and related datas
         $run->saveDatas($request->all());
@@ -118,29 +120,30 @@ class RunController extends Controller
      * Check if actions buttons are used in the view (add waypoint, add run)
      *
      * @param  \App\Http\Requests\Runs\UpdateRun  $request
+     * @param  \App\Run  $run
      * @return \Illuminate\Http\Response
      */
-    public function checkFormActions($request)
+    public function checkFormActions($request, $run)
     {
         // Check runners addition
         if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
             $run->newSubscription();
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+            return true;
         }
         // Check runners deletion
         if ($request->has('remove-runner')) {
             $run->removeSubscription($request->input('remove-runner'));
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+            return true;
         }
         // Check waypoints additions
         if ($request->has('add-waypoint')) {
             $run->newWaypoint($request->input('add-waypoint'));
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+            return true;
         }
         // Check waypoints removes
         if ($request->has('remove-waypoint')) {
             $run->removeWaypoint($request->input('remove-waypoint'));
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+            return true;
         }
     }
 

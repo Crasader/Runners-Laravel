@@ -136,7 +136,9 @@
                         @foreach ($run->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                             <tr>
                                 <th>
-                                    {{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    @datetext(['date' => $log->created_at])
+                                    @enddatetext
+                                </th>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @logaction(['action' => $log->action])

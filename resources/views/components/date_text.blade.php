@@ -9,7 +9,7 @@
     <p>
         {{ $slot }}
         <strong>
-            {{ $date->formatLocalized('%A') }}
+            {{ $date->formatLocalized('%A %d') }}
         </strong>
         à
         <strong>

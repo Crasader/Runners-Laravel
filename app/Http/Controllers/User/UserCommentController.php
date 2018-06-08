@@ -53,7 +53,7 @@ class UserCommentController extends Controller
         $comment->commentable()->associate($user);
         $comment->save();
         // Redirect to the consulted user page
-        return redirect()->route('users.show', ['user' => $user->id]);
+        return back();
     }
 
     /**

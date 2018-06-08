@@ -138,7 +138,7 @@
                                     </div>
                                 </div>
                                 <p class="help">
-                                    Par défault les nouveaux utilisateurs sont crées sans mot de passes.
+                                    Par défaut les nouveaux utilisateurs sont créés sans mot de passe.
                                     Il faut qu'ils confirment leur participation pour créer un login.
                                 </p>
                             </div>

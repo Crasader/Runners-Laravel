@@ -24,10 +24,10 @@
                             Grand affichage
                         </a>
                         <a class="navbar-item" href="{{ route('runs.index') }}">
-                            Afficher runs
+                            Afficher les runs
                         </a>
                         <a class="navbar-item" href="{{ route('runs.create') }}">
-                            Créer run
+                            Créer un run
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('waypoints.index') }}">
@@ -57,17 +57,17 @@
                     </a>
                     <div class="navbar-dropdown is-boxed">
                         <a class="navbar-item" href="{{ route('cars.index') }}">
-                            Afficher véhicules
+                            Afficher les véhicules
                         </a>
                         <a class="navbar-item" href="{{ route('cars.create') }}">
-                            Créer véhicule
+                            Créer un véhicule
                         </a>
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('carTypes.index') }}">
-                            Afficher type de véhicule
+                            Afficher les types de véhicules
                         </a>
                         <a class="navbar-item" href="{{ route('carTypes.create') }}">
-                            Créer type de véhicule
+                            Créer un type de véhicule
                         </a>
                     </div>
                 </div>
@@ -79,13 +79,13 @@
                     </a>
                     <div class="navbar-dropdown is-boxed">
                         <a class="navbar-item" href="{{ route('users.index') }}">
-                            Afficher chauffeurs
+                            Afficher les chauffeurs
                         </a>
                         <a class="navbar-item" href="{{ route('users.create') }}">
-                            Créer chauffeurs
+                            Créer un chauffeur
                         </a>
                         <a class="navbar-item" href="{{ route('users.import-form') }}">
-                            Importer chauffeurs
+                            Importer des chauffeurs
                         </a>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
 
                 {{-- Authentication Links --}}
                 @guest
-                    <a class="navbar-item" href="{{ route('login') }}">Login</a>
+                    <a class="navbar-item" href="{{ route('login') }}">Connexion</a>
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="{{ route('me') }}">
@@ -144,15 +144,24 @@
                             <span>
                                 {{ Auth::user()->name }}
                             </span>
+                            @if (Auth::user()->unreadNotifications()->count())
+                                &nbsp;
+                                <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                            @endif
                         </a>
                         <div class="navbar-dropdown is-right is-boxed">
                             <a class="navbar-item" href="{{ route('home') }}">
                                 Home
                             </a>
+                            <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('me') }}">
                                 Mon compte
                             </a>
+                            <a class="navbar-item" href="{{ route('notifications.index') }}">
+                                <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>&nbsp;Notifications
+                            </a>
                             @can('view', App\Role::class)
+                                <hr class="navbar-divider">
                                 <a class="navbar-item" href="{{ route('roles.index') }}">
                                     Gèrer les roles
                                 </a>
@@ -160,7 +169,7 @@
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                Logout
+                                Déconnexion
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}

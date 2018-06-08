@@ -49,9 +49,9 @@ class RunCommentController extends Controller
         // Create the comment
         $comment = new Comment($request->all());
         $comment->author()->associate(Auth::user());
-        $comment->save();
         // Associate the comment to the commented user
-        $run->comments()->save($comment);
+        $comment->commentable()->associate($run);
+        $comment->save();
         // Redirect to the consulted user page
         return redirect()->route('runs.show', ['run' => $run->id]);
     }

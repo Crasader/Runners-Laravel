@@ -1,74 +1,59 @@
-# Log System
+# Notifications
 
-You can easyly add loging for our diferents models, thats allow you to conserve a stack of all the actions performed in the app.
-For loging actions we use the eloquent events and laravel subscriber system.
-Thats allo you to easyly add logging on any model as you want, after attaching these events,
-all actions performed in the model will be saved in the logs table, and can be acceced by the log page.
+To provide an easy way to sent notifications to users we use the laravel [built-in notifications system](https://laravel.com/docs/5.6/notifications).
+It allows you to easyly create ne notifications in the app. The database notifications are preconfigured, and a dedicated page for consulting notifications is available.
 
-## How to attach it to a model
+## Add new notification
 
-For a Model to be logged, you need to perform little changes on the model :
-
-### Model relation
-
-Add a polymorphic relation to the log model.
-
+1. You need to create a new [Notification class](https://laravel.com/docs/5.6/notifications#creating-notifications) and specify notification contents and channels.
+2. You need to [send the notification](https://laravel.com/docs/5.6/notifications#sending-notifications) via the `Notification` facade.
 ```php
-/**
- * MODEL RELATION
- * Gets the logs corresponding to this model
- */
-public function logs()
+// Send the InvoicePaid notification to an array of users
+Notification::send($users, new InvoicePaid($invoice));
+```
+
+## Display database notifications
+1. In our notification class you need to add database in our via channels
+```php
+// App\Notifications\MyNewAwesomeNotification
+
+public function via($notifiable)
 {
-    return $this->morphMany(Log::class, 'loggable');
+    return ['database'];
 }
 ```
-
-### Attaching events
-
-Next you need to register the events you want to log for the model.
-In runners you can log 4 events :
-* `created`
-* `updated`
-* `deleted`
-* `restored`
-The restored event can only be addet to medels that uses soft deletes.
-
-Here the code to add in the model to fire events :
-
+2. You need to define a to array method thats converts notification datas into associative array to store it in the database. Thats allow you to retrive this data in the notification layout.
 ```php
-/**
- * MODEL EVENTS
- * The event map for the model.
- *
- * @var array
- */
-protected $dispatchesEvents = [
-    'created'  => LogDatabaseCreateEvent::class,
-    'updated'  => LogDatabaseUpdateEvent::class,
-    'deleted'  => LogDatabaseDeleteEvent::class,
-    'restored' => LogDatabaseRestoreEvent::class
-];
+// App\Notifications\MyNewAwesomeNotification
+
+public function toArray($notifiable)
+{
+    return [
+        'notification_data' => $this->datas->notificationData,
+        'anorther_notification_data' => $this->datas->anotherNotificationData,
+    ];
+}
+```
+3. Create a new notification type view in the `views/notifications/layouts/YourNotificationName` to provide a confinient layout for displaying the notification (in the show route of the notifications crud). See the [UnHandledExceptionNotification](../../resources/views/notifications/layouts/UnHandledExceptionNotification.blade.php) for example.
+4. Register our notification type the the 2 notification types componenets, thats allow you to convert the complete notification type namespace to an user friendly name, and to load the desired notification layort.
+```html
+<!-- In resources/views/components/notifications/notification_types.blade.php -->
+<!-- Add a case that retrun a tag with the notification name -->
+@case('App\Notifications\MyNewAwesomeNotification')
+    <span class="tag {{ $slot }} is-white">Ma nouvelle notification</span>
+    @break
+
+<!-- In resources/views/components/notifications/nrender_notification.blade.php -->
+<!-- Add a case with and include statment that point to our new notification layout -->
+@case('App\Notifications\MyNewAwesomeNotification')
+    @include('notifications.layouts.MyNewAwesomeNotification', ['notification' => $notification])
+    @break
 ```
 
-## Retriving logs
+## Other notifications channels
 
-After this manipulations, all the events will be logged in the logs table.
-You can retrieve logs for a specific model by accesing the polymorphic relation you added below.
-Example to retrive runs logs.
+You can easily add other channels to our notification, like mail..
 
-```php
-$run = Run::first();
-$run->logs();
-```
-
-## Custom logs
-
-You can crete our own custom events for log actions in logs table.
-
-1. Create a custom [event](https://laravel.com/docs/5.6/events#defining-events)
-2. Add a method to the LogEventSubscriber to handle this even an log it in the database (or create our own event listener for mor control)
-3. Fire your event, and watch the logs
 
 <br>
 <br>
@@ -77,12 +62,11 @@ You can crete our own custom events for log actions in logs table.
 
 **Helpful links :**
 
-* [Eloquent events](https://laravel.com/docs/5.6/eloquent#events)
-* [Laravel events](https://laravel.com/docs/5.6/events#event-subscribers)
+* [Laravel notifications](https://laravel.com/docs/5.6/notifications)
 
 <hr>
 <div align="center">
 
-**[<- Prev](7_filterSystem.md) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](7_filterSystem.md) // [Summary](../README.md) // [Next ->](9_notifications.md)**
 
 </div>

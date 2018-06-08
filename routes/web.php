@@ -102,7 +102,16 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Runs ressource
      */
+    // Display runs for TV screen
     Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
+    // Publish a run (visible in the mobile app)
+    Route::patch('runs/publish/{run}', 'Run\RunController@publish')->name('runs.publish');
+    // Start/stop a run
+    Route::patch('runs/start/{run}', 'Run\RunController@start')->name('runs.start');
+    Route::patch('runs/stop/{run}', 'Run\RunController@stop')->name('runs.stop');
+    // Force start/stop of a run (for needs_filling runs)
+    Route::patch('runs/force-start/{run}', 'Run\RunController@forceStart')->name('runs.force-start');
+    Route::patch('runs/force-stop/{run}', 'Run\RunController@forceStop')->name('runs.force-stop');
     Route::resource('runs', 'Run\RunController');
     // Run comments crud
     Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);
@@ -148,5 +157,15 @@ Route::middleware(['auth'])->group(function () {
         'logs',
         'Log\LogController',
         ['only' => ['index']]
+    );
+
+    /**
+     * Notifications crud
+     */
+    Route::get('notifications/read', 'Notification\NotificationController@read')->name('notifications.read');
+    Route::resource(
+        'notifications',
+        'Notification\NotificationController',
+        ['only' => ['index', 'show', 'destroy']]
     );
 });

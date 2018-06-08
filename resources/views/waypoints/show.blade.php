@@ -25,7 +25,7 @@
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $waypoint)
                         <p class="control">
-                            <a href="{{ route('waypoints.edit', ['waypoint' => $waypoint->id]) }}" class="button is-info">Modifier le lieux</a>
+                            <a href="{{ route('waypoints.edit', ['waypoint' => $waypoint->id]) }}" class="button is-info">Modifier le lieu</a>
                         </p>
                     @endcan
                     @can('delete', $waypoint)
@@ -49,7 +49,7 @@
 
         <div class="columns">
             <div class="column">
-                <h2 class="title is-3">Runs passant par ce lieux</h2>
+                <h2 class="title is-3">Runs passant par ce lieu</h2>
             </div>
         </div>
 
@@ -61,22 +61,22 @@
                         <tr>
                             <th>Nom</th>
                             <th>Status</th>
-                            <th>Départ prévu à</th>
-                            <th>A démarré</th>
-                            <th>A terminé</th>
+                            <th>Départ prévu le</th>
+                            <th>A démarré le</th>
+                            <th>A terminé le</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Nom</th>
                             <th>Status</th>
-                            <th>Départ prévu à</th>
-                            <th>A démarré</th>
-                            <th>A terminé</th>
+                            <th>Départ prévu le</th>
+                            <th>A démarré le</th>
+                            <th>A terminé le</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($waypoint->runs as $run)
+                        @forelse ($waypoint->runs()->orderBy('planned_at')->get() as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 {{-- Display a tag with the group background color --}}
@@ -85,11 +85,28 @@
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </th>
-                                <td>{{ $run->planned_at ? $run->planned_at->format(' j F Y H:i:s') : '' }}</td>
-                                <td>{{ $run->started_at ? $run->started_at->format(' j F Y H:i:s') : '' }}</td>
-                                <td>{{ $run->ended_at ? $run->ended_at->format(' j F Y H:i:s') : '' }}</td>
+                                <td>
+                                    @datetag(['date' => $run->planned_at])
+                                    @enddatetag
+                                </td>
+                                <td>
+                                    @datetag(['date' => $run->started_at])
+                                    @enddatetag
+                                </td>
+                                <td>
+                                    @datetag(['date' => $run->ended_at])
+                                    @enddatetag
+                                </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td>
+                                    <span class="tag is-warning is-medium">
+                                        <strong>Aucun run passe par ce lieu.<strong>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * CreateWaypointsTable
- * 
+ *
  * @author Bastien Nicoud
  */
 class CreateWaypointsTable extends Migration

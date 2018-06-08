@@ -19,7 +19,7 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Liste des runns</h1>
+                <h1 class="title is-2">Liste des runs</h1>
             </div>
             <div class="column">
                 @can('create', App\Run::class)
@@ -36,7 +36,7 @@
         @component('components/filters_box', ['filters' => [
             "filtredColumns" => [
                 "status" => [
-                    "ready" => "Pret",
+                    "ready" => "Prêt",
                     "gone" => "Démarré",
                     "error" => "Erreur",
                     "drafting" => "En préparation",
@@ -63,6 +63,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -73,6 +74,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -84,22 +86,29 @@
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->passengers }}</td>
+                                <td>{{ $run->subscriptions()->count() }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
-                                <td>{{ $run->planned_at }}</td>
-                                <td>{{ $run->started_at }}</td>
+                                <td>
+                                    @datetext(['date' => $run->planned_at])
+                                    @enddatetext
+                                </td>
+                                <td>
+                                    @datetext(['date' => $run->started_at])
+                                    @enddatetext
+                                </td>
                                 <td>
                                     {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{-- route('runs.start', ['run' => $run->id]) --}}" class="button is-small is-link is-success">
-                                            Démarrer
-                                        </a>
-                                        <a href="{{-- route('runs.stop', ['user' => $run->id]) --}}" class="button is-small is-link is-danger">
-                                            Arréter
-                                        </a>
+                                    <div class="buttons is-right">
+                                        @component('components/runs/run_action_buttons', [
+                                            'status' => $run->status,
+                                            'id' => $run->id
+                                            ])
+                                            is-small
+                                        @endcomponent
                                     </div>
                                 </td>
                             </tr>

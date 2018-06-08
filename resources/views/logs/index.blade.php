@@ -31,7 +31,7 @@
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Action</th>
-                            <th>Resource</th>
+                            <th>Ressource</th>
                             <th>Effectué par</th>
                         </tr>
                     </thead>
@@ -40,7 +40,7 @@
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Action</th>
-                            <th>Resource</th>
+                            <th>Ressource</th>
                             <th>Effectué par</th>
                         </tr>
                     </tfoot>
@@ -55,13 +55,13 @@
                                     @endlogaction
                                 </td>
                                 <td>
-                                    {{ $log->loggable->getTable() }}
-                                    <span class="tag is-light">{{ $log->loggable->id }}</span>
+                                    {{ $log->loggable_type }}
+                                    <span class="tag is-light">{{ $log->loggable_id }}</span>
                                 </td>
                                 @if($log->user()->count())
                                     <td>
                                         <a href="{{ route('users.show', ['user' => $log->user->id]) }}">
-                                            {{ $log->user->fullname }}
+                                            {{ $log->user()->withTrashed()->first()->fullname }}
                                         </a>
                                     </td>
                                 @else

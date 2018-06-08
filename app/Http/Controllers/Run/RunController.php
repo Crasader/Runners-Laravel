@@ -28,7 +28,7 @@ class RunController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Run::class);
-        $runs = Run::filter($request, 'name', 'asc')->paginate(20);
+        $runs = Run::filter($request, 'planned_at', 'asc')->paginate(20);
         return view('runs.index')->with(compact('runs', 'request'));
     }
 
@@ -101,7 +101,16 @@ class RunController extends Controller
      */
     public function update(UpdateRun $request, Run $run)
     {
+        $this->authorize('update', $run);
         // Check usage of add runner and add waypoint buttons
+        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
+            $run->newSubscription();
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+        }
+        if ($request->has('add-waypoint')) {
+            $run->newWaypoint($request->input('add-waypoint'));
+            dd($run->waypoints);
+        }
 
         dd($request->all());
         //$run->saveDatas($request->all());
@@ -118,6 +127,61 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
-        //
+        dd('DESTROY run');
+    }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(Run $run)
+    {
+        dd('Publish run');
+    }
+
+    /**
+     * Start the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function start(Run $run)
+    {
+        dd('Start run');
+    }
+
+    /**
+     * Ends the run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function stop(Run $run)
+    {
+        dd('Stop run');
+    }
+
+    /**
+     * Force the start of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStart(Run $run)
+    {
+        dd('Force start run');
+    }
+
+    /**
+     * Force the end of a run
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function forceStop(Run $run)
+    {
+        dd('Force stop run');
     }
 }

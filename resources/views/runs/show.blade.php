@@ -19,17 +19,24 @@
 
 <div class="section">
     <div class="container">
+
+        {{-- TITLE AND ACTIONS --}}
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
-                    Edition du run {{ $run->name }}
+                    Run {{ $run->name }}
                     @component('components/status_tag', ['status' => $run->status])
+                        is-medium
                     @endcomponent
                 </h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $run)
+                        <div class="control">
+                            @component('components/runs/run_action_buttons', ['status' => $run->status, 'id' => $run->id])
+                            @endcomponent
+                        </div>
                         <p class="control">
                             <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
                         </p>
@@ -38,11 +45,85 @@
             </div>
         </div>
 
+        {{-- RUN INFOS --}}
+        <div class="columns">
+            <div class="column">
+                <h2 class="title is-4">Horaires</h2>
+            </div>
+            <div class="column">
+                <h2 class="title is-4">Départ -> arrivée</h2>
+            </div>
+            <div class="column is-5">
+                <h2 class="title is-4">Infos</h2>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                <div class="content box">
+                    @datetag(['date' => $run->planned_at])
+                        Prévu le
+                    @enddatetag
+                    @datetag(['date' => $run->started_at])
+                        Démarré le
+                    @enddatetag
+                    @datetag(['date' => $run->ended_at])
+                        Terminé
+                    @enddatetag
+                </div>
+            </div>
+
+            <div class="column">
+                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
+                @endcomponent
+            </div>
+
+            <div class="column is-5">
+                <div class="content box">
+                    <p>
+                        <strong>
+                            {{ $run->passengers }}
+                        </strong>
+                        passagers
+                    </p>
+                    <p>
+                        <strong>
+                            Informations :
+                        </strong>
+                        {{ $run->infos }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {{-- RUN INFOS --}}
+        <div class="columns">
+            <div class="column">
+                <h2 class="title is-4">Runners</h2>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                @component('components/runs/run_runners_box', ['subscriptions' => $run->subscriptions])
+                @endcomponent
+            </div>
+        </div>
+
+        {{-- LOGS AND COMMENTS --}}
+        <div class="columns">
+            <div class="column is-5">
+                <h2 class="title is-4">Dernières actions effectuées sur ce run</h2>
+            </div>
+            <div class="column is-7">
+                <h2 class="title is-4">Commentaires</h2>
+            </div>
+        </div>
+
         <div class="columns">
 
             {{-- Logs --}}
             <div class="column is-5">
-                <h2 class="title is-5">Dernières actions effectuées sur ce run</h2>
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -54,7 +135,8 @@
                     <tbody>
                         @foreach ($run->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                             <tr>
-                                <th>{{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                <th>
+                                    {{ $log->created_at->format('d-m-Y H:i:s') }}</th>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @logaction(['action' => $log->action])
@@ -77,7 +159,6 @@
 
             @can('view', App\Comment::class)
                 <div class="column is-7">
-
 
                     {{-- --------------------- --}}
                     {{-- COMMENTS LISTING      --}}
@@ -104,10 +185,10 @@
                                         @can('delete', $comment)
                                             <div class="media-right">
                                                 <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-comment-form').submit();"
+                                                    document.getElementById('delete-comment-form-{{ $comment->id }}').submit();"
                                                     class="delete"></button>
-                                                <form id="delete-comment-form"
-                                                    action="{{ route('users.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
+                                                <form id="delete-comment-form-{{ $comment->id }}"
+                                                    action="{{ route('runs.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
                                                         method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}

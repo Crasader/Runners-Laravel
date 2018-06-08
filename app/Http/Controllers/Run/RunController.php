@@ -55,7 +55,11 @@ class RunController extends Controller
     public function create()
     {
         $this->authorize('create', Run::class);
-        return view('runs.create'); //->with(compact('waypoints', 'artists'));
+        $run = Run::create(['status' => 'drafting']);
+        $run->waypoints()->attach(1, ['order' => 1]);
+        return redirect()
+            ->route('runs.edit', ['run' => $run->id])
+            ->with('success', "Le run à correctement été crée");
     }
 
     /**
@@ -66,7 +70,7 @@ class RunController extends Controller
      */
     public function store(StoreNewRun $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
@@ -105,7 +109,7 @@ class RunController extends Controller
 
         // Check usage of action buttons on the form
         if ($this->checkFormActions($request, $run)) {
-            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id])->withInput();
         }
 
         // Save alle the run datas and related datas

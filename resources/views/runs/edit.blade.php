@@ -62,8 +62,6 @@
         <div class="columns">
             <div class="column">
 
-                {{ $errors }}
-
                 <form id="update-run-form" action="{{ route('runs.update', ['run' => $run->id]) }}" method="POST">
 
                     {{ csrf_field() }}
@@ -73,7 +71,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Nom / Artiste</label>
+                            <label class="label">Artiste : </label>
                         </div>
                         <div class="field-body">
 
@@ -84,13 +82,33 @@
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
-                                'value'       => $run->artists->first()->name,
+                                'value'       => $run->artists()->exists() ? $run->artists->first()->name : '',
                                 'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
                                     Si inéxistant, il sera ajouté a la base de données.
                                 </p>
+                            @endcomponent
+
+                        </div>
+                    </div>
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Passagers :</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- Nombre de passagers --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'passengers',
+                                'placeholder' => "Nombre de passagers",
+                                'type'        => 'text',
+                                'icon'        => 'fa-users',
+                                'errors'      => $errors,
+                                'value'       => $run->passengers
+                                ])
                             @endcomponent
 
                         </div>
@@ -110,7 +128,7 @@
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-clock',
                                 'errors'      => $errors,
-                                'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
+                                'value'       => $run->planned_at ? $run->planned_at->format('Y-m-d\\TH:i:s') : now()->startOfHour()->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 
@@ -126,7 +144,11 @@
                             {{-- RUN INFOS --}}
                             <div class="field">
                                 <p class="control">
-                                    <textarea class="textarea {{ $errors->has('infos') ? ' is-danger' : '' }}" name="infos" placeholder="Informations liées au run, choses a prendre..."></textarea>
+                                    <textarea
+                                        class="textarea {{ $errors->has('infos') ? ' is-danger' : '' }}"
+                                        name="infos"
+                                        placeholder="Informations liées au run, choses a prendre..."
+                                        >{{ old('infos') ? old('infos') : $run->infos }}</textarea>
                                 </p>
                                 @if ($errors->has('infos'))
                                     <p class="help is-danger">{{ $errors->first('infos') }}</p>

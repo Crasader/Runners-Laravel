@@ -214,6 +214,7 @@ class Run extends Model
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
         $this->infos = $runDatas['infos'];
+        $this->passengers = $runDatas['passengers'];
         $this->savePlannedDates($runDatas['planned_at']);
         $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
@@ -223,7 +224,6 @@ class Run extends Model
     /**
      * MODEL METHOD
      * Save the subscription to this run
-     * TODO: Implement save datas on the RunSubscription model
      *
      * @param \Illuminate\Support\Collection $subscriptions
      * @return void
@@ -292,10 +292,13 @@ class Run extends Model
             if ($artist = Artist::where('name', $artistName)->first()) {
                 // Attach it
                 $this->artists()->sync([$artist->id]);
+                $this->name = $artist->name;
+                $this->save();
             } else {
                 // If not, create it
                 $newArtist = Artist::create(['name' => $artistName]);
                 $this->artists()->sync([$newArtist->id]);
+                $this->save();
             }
         }
     }

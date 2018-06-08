@@ -15,7 +15,7 @@
                             <label class="label"></label>
                         </div>
                         <div class="field-body">
-                            <h1 class="title is-2">Login</h1>
+                            <h1 class="title is-2">Connexion</h1>
                         </div>
                     </div>
 
@@ -40,13 +40,13 @@
                     {{-- PASSWORD --}}
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Email</label>
+                            <label class="label">Mot de passe</label>
                         </div>
                         <div class="field-body">
                             {{-- LASTNAME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'password',
-                                'placeholder' => "Votre mot-de-passe",
+                                'placeholder' => "Votre mot de passe",
                                 'type'        => 'password',
                                 'icon'        => 'fa-lock',
                                 'errors'      => $errors
@@ -64,7 +64,7 @@
                             <div class="field is-narrow">
                                 <div class="control">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
                                     </label>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <div class="field is-narrow">
                                 <div class="control">
                                     <button type="submit" class="btn btn-primary button is-info">
-                                        Login
+                                        Connexion
                                     </button>
                                 </div>
                             </div>

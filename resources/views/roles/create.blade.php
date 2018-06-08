@@ -7,8 +7,8 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('roles.index') }}">Gestion des roles</a></li>
-<li class="is-active"><a href="#" aria-current="page">Nouveau role</a></li>
+<li><a href="{{ route('roles.index') }}">Gestion des rôles</a></li>
+<li class="is-active"><a href="#" aria-current="page">Nouveau rôle</a></li>
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-12">
-                <h1 class="title is-2">Création d'un role</h1>
+                <h1 class="title is-2">Création d'un rôle</h1>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Nom du role :</label>
+                            <label class="label">Nom du rôle :</label>
                         </div>
                         <div class="field-body">
 
@@ -50,13 +50,13 @@
                             {{-- FIRSTNAME --}}
                             @component('components/horizontal_form_input', [
                                 'name'        => 'name',
-                                'placeholder' => 'Nom du role',
+                                'placeholder' => 'Nom du rôle',
                                 'type'        => 'text',
                                 'icon'        => 'fa-i-cursor',
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
-                                    Décris intuitivement le role.
+                                    Décris intuitivement le rôle.
                                 </p>
                             @endcomponent
 
@@ -66,7 +66,7 @@
                     {{-- Display all the permissions with a little select to athorize or not the permission for this role --}}
                     <div class="columns">
                         <dim class="column">
-                            <h2 class="title is-4">Choissisez les permissions autorisées pour ce role :</h2>
+                            <h2 class="title is-4">Choisissez les permissions autorisées pour ce rôle :</h2>
                         </dim>
                     </div>
                     <div class="columns">
@@ -119,7 +119,7 @@
                     <div class="field is-grouped is-grouped-centered">
                         <div class="control">
                             <button type="submit" class="button is-primary">
-                                Créer le nouveau role
+                                Créer le nouveau rôle
                             </button>
                         </div>
                     </div>

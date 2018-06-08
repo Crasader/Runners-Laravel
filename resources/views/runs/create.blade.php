@@ -75,7 +75,7 @@
                             {{-- SEARCH FIELD --}}
                             @horizontalsearchinput([
                                 'name'        => 'waypoint[1]',
-                                'placeholder' => 'Lieux de départ',
+                                'placeholder' => 'Lieu de départ',
                                 'type'        => 'text',
                                 'icon'        => 'fa-map-signs',
                                 'searchUrl'   => route('waypoints.search'),
@@ -103,7 +103,7 @@
                             {{-- SEARCH FIELD --}}
                             @horizontalsearchinput([
                                 'name'        => 'waypoint[2]',
-                                'placeholder' => "Lieux d'arrivée",
+                                'placeholder' => "Lieu d'arrivée",
                                 'type'        => 'text',
                                 'icon'        => 'fa-map-marker-alt',
                                 'searchUrl'   => route('waypoints.search'),
@@ -226,7 +226,7 @@
                                     </button>
                                 </div>
                                 <p class="help">
-                                    Par défault les nouveaux utilisateurs sont crées sans mot de passes.
+                                    Par défaut les nouveaux utilisateurs sont créés sans mot de passes.
                                     Il faut qu'ils confirment leur participation pour créer un login.
                                 </p>
                             </div>

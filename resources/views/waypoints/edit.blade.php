@@ -18,7 +18,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Modifier le lieux : {{ $waypoint->name }}</h1>
+                <h1 class="title is-2">Modifier le lieu : {{ $waypoint->name }}</h1>
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">

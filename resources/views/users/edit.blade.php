@@ -185,7 +185,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Role</label>
+                            <label class="label">Rôle</label>
                         </div>
                         <div class="field-body">
 
@@ -220,7 +220,7 @@
                 <h2 class="title is-3">QR code</h2>
             </div>
             <div class="column is-4">
-                <h2 class="title is-3">Photo de profile</h2>
+                <h2 class="title is-3">Photo de profil</h2>
             </div>
             <div class="column is-4">
                 <h2 class="title is-3">Permis</h2>
@@ -240,7 +240,7 @@
                     </figure>
                     <article class="message is-info">
                         <div class="message-body">
-                            Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
+                            Vous pouvez utiliser ce QR code pour vous connecter à l'app mobile.
                         </div>
                     </article>
                     @can('update', $user)
@@ -281,7 +281,7 @@
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
-                            L'utilisateur le possède pas de photo de profile. Ajoutez en une.
+                            L'utilisateur le possède pas de photo de profil. Ajoutez en une.
                         </div>
                     </article>
                 @endif

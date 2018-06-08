@@ -19,7 +19,7 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Liste des runns</h1>
+                <h1 class="title is-2">Liste des runs</h1>
             </div>
             <div class="column">
                 @can('create', App\Run::class)
@@ -36,7 +36,7 @@
         @component('components/filters_box', ['filters' => [
             "filtredColumns" => [
                 "status" => [
-                    "ready" => "Pret",
+                    "ready" => "Prêt",
                     "gone" => "Démarré",
                     "error" => "Erreur",
                     "drafting" => "En préparation",

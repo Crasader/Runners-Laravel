@@ -25,7 +25,7 @@
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $waypoint)
                         <p class="control">
-                            <a href="{{ route('waypoints.edit', ['waypoint' => $waypoint->id]) }}" class="button is-info">Modifier le lieux</a>
+                            <a href="{{ route('waypoints.edit', ['waypoint' => $waypoint->id]) }}" class="button is-info">Modifier le lieu</a>
                         </p>
                     @endcan
                     @can('delete', $waypoint)
@@ -49,7 +49,7 @@
 
         <div class="columns">
             <div class="column">
-                <h2 class="title is-3">Runs passant par ce lieux</h2>
+                <h2 class="title is-3">Runs passant par ce lieu</h2>
             </div>
         </div>
 
@@ -102,7 +102,7 @@
                             <tr>
                                 <td>
                                     <span class="tag is-warning is-medium">
-                                        <strong>Aucun runs passent par ce lieu.<strong>
+                                        <strong>Aucun run passe par ce lieu.<strong>
                                     </span>
                                 </td>
                             </tr>

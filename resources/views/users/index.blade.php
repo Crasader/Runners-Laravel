@@ -66,7 +66,7 @@
                             <th>Nom</th>
                             <th>E-mail</th>
                             <th>Tel</th>
-                            <th>Status</th>
+                            <th>Statut</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -75,7 +75,7 @@
                             <th>Nom</th>
                             <th>E-mail</th>
                             <th>Tel</th>
-                            <th>Status</th>
+                            <th>Statut</th>
                         </tr>
                     </tfoot>
                     <tbody>

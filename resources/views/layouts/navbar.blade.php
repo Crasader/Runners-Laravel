@@ -134,7 +134,7 @@
 
                 {{-- Authentication Links --}}
                 @guest
-                    <a class="navbar-item" href="{{ route('login') }}">Login</a>
+                    <a class="navbar-item" href="{{ route('login') }}">Connexion</a>
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link" href="{{ route('me') }}">
@@ -169,7 +169,7 @@
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                Logout
+                                Déconnexion
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}

@@ -343,9 +343,16 @@ class Run extends Model
      */
     public function newWaypoint($order)
     {
-        $waypoints = $this->waypoints;
-        dd($waypoints);
-        $way = new Waypoint(['name' => 'tmp']);
+        $this->waypoints()->create(['name' => 'tmp'], ['order' => 0]);
+        $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order == 0) {
+                return $waypoint->pivot->order = $order;
+            } elseif ($waypoint->pivot->order >= $order) {
+                return $waypoint->pivot->order++;
+            }
+        });
+        $this->save();
+        dd($this->waypoints);
         $this->subscriptions()->save($sub);
     }
 

@@ -109,7 +109,7 @@
                                 @elseif($loop->last)
                                     <label class="label">Arrivée</label>
                                 @else
-                                    <label class="label">Lieux {{ $waypoint->pivot->order }}</label>
+                                    <label class="label">Lieu {{ $waypoint->pivot->order }}</label>
                                 @endif
                             </div>
                             <div class="field-body">
@@ -117,8 +117,8 @@
                                 {{-- WAYPOINT --}}
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
-                                    'name'        => "waypoints[{$waypoint->pivot->order}]",
-                                    'placeholder' => 'Lieux de départ',
+                                    'name'        => "waypoints[{$waypoint->id}]",
+                                    'placeholder' => 'Lieu de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
                                     'value'       => $waypoint->name,
@@ -178,13 +178,13 @@
                         </div>
                     </div>
 
-                    @foreach($run->subscriptions as $subscription)
+                    <h2 class="title is-4">Runners</h3>
 
-                        <h2 class="title is-4">Runner {{ $loop->index + 1 }}</h3>
+                    @foreach($run->subscriptions as $subscription)
 
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
-                                <label class="label">Runner</label>
+                                <label class="label">Runner {{ $loop->index + 1 }}</label>
                             </div>
                             <div class="field-body">
 
@@ -199,6 +199,17 @@
                                     'searchUrl'   => route('users.search'),
                                     'errors'      => $errors
                                     ])
+                                    @slot('button')
+                                        <button
+                                            type="submit"
+                                            name="remove-runner"
+                                            value="{{ $subscription->id }}"
+                                            class="button is-danger">
+                                            <span class="icon">
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                        </button>
+                                    @endslot
                                 @endcomponent
 
                             </div>

@@ -46,10 +46,10 @@
             ],
             "search" => "name",
             "orderBy" => [
+                "planned_at" => "Prévu à",
                 "name" => "Nom",
                 "passengers" => "Nb passagers",
                 "status" => "Status",
-                "planned_at" => "Prévu à",
                 "started_at" => "Démarré à",
             ]
         ]])

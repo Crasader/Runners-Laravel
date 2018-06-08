@@ -2,26 +2,37 @@
   <img src ="public/img/logo.svg" width="40%"/><br><br>
 </div>
 
-# Runners
-
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## Version changelog **v2.0.0-beta.2**
+## **v2.0.0-beta.3**
+
+This version includes dependencies changes, dont forget to :
+* Run `composer install`
+* Migrate the new database `php artisan migrate:fresh --seed`
+* Generates new assets `npm run dev`
 
 Break changes :
 * x
 
 Changes :
-* Now you click on a row to shor the resource
+* Home page links reorganization
+* Cars and CarTypes show pages now display related runs
 
 Improuvments :
-* Add filters to run and users crud
+* Complete log system, that mark all database actions in a special crud. It allows you to track changes on a resource.
+* Notification system, it allows you to send notification to users via the database driver.
+* Unhandled exceptions notification, the superuser now receive notification when the app throws an uncatched exceptions.
+* Add create and edition in runs crud.
+* Add runs actions (start, stop, publish)
 
 Bux fixes :
-* x
+* Carbon dates formating
+* Locales mismatch
+* Spelling
 
 In progress :
-* x
+* Notifications linked to runs actions
+* Schedules crud
 
 ## Start developping
 

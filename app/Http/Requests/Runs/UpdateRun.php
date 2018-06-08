@@ -35,10 +35,10 @@ class UpdateRun extends FormRequest
             'artist'                  => ['required_if:name,', 'string', 'min:1', 'max:200'],
             'planned_at'              => ['nullable', 'date'],
             'end_planned_at'          => ['nullable', 'date'],
-            'waypoints.*'             => ['sometimes', 'string'],
-            'subscriptions.*.user'    => ['sometimes', 'string', 'exists:users,name'],
-            'subscriptions.*.carType' => ['sometimes', 'string', 'exists:car_types,name'],
-            'subscriptions.*.car'     => ['sometimes', 'string', 'exists:cars,name'],
+            'waypoints.*'             => ['nullable', 'string'],
+            'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
+            'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],
+            'subscriptions.*.car'     => ['nullable', 'string', 'exists:cars,name'],
             'add-runner'              => ['sometimes', 'in:true']
         ];
     }

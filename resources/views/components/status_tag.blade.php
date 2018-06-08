@@ -63,7 +63,7 @@
         @break
 
     @case('drafting')
-        <span class="tag {{ $slot }} is-dark">En préparation</span>
+        <span class="tag {{ $slot }} is-dark">Non publié</span>
         @break
 
     @case('error')

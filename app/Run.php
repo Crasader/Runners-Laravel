@@ -324,6 +324,33 @@ class Run extends Model
 
     /**
      * MODEL METHOD
+     * Add new empty subscription to a run
+     *
+     * @return bool
+     */
+    public function newSubscription()
+    {
+        $sub = new RunSubscription();
+        $this->subscriptions()->save($sub);
+    }
+
+    /**
+     * MODEL METHOD
+     * Add new empty waypoint for the run
+     * TODO: implement waypoint addition
+     *
+     * @return bool
+     */
+    public function newWaypoint($order)
+    {
+        $waypoints = $this->waypoints;
+        dd($waypoints);
+        $way = new Waypoint(['name' => 'tmp']);
+        $this->subscriptions()->save($sub);
+    }
+
+    /**
+     * MODEL METHOD
      * Determine if the run is ready to go
      *
      * @return bool

@@ -91,11 +91,11 @@ class Waypoint extends Model
     public function positionToString()
     {
         if ($this->position() === 1) {
-            return "Lieux de départ";
+            return "Lieu de départ";
         } elseif ($this->position() === Run::find($this->pivot->run_id)->waypoints->count()) {
-            return "Lieux d'arrivée";
+            return "Lieu d'arrivée";
         } else {
-            return "Lieux n° {$this->position()}";
+            return "Lieu n° {$this->position()}";
         }
     }
 }

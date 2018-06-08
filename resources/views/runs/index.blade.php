@@ -63,6 +63,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -73,6 +74,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Passagers</th>
+                            <th>Runners</th>
                             <th>Status</th>
                             <th>Prévu à</th>
                             <th>Démarré à</th>
@@ -84,22 +86,29 @@
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->passengers }}</td>
+                                <td>{{ $run->subscriptions()->count() }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
-                                <td>{{ $run->planned_at }}</td>
-                                <td>{{ $run->started_at }}</td>
+                                <td>
+                                    @datetext(['date' => $run->planned_at])
+                                    @enddatetext
+                                </td>
+                                <td>
+                                    @datetext(['date' => $run->started_at])
+                                    @enddatetext
+                                </td>
                                 <td>
                                     {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{-- route('runs.start', ['run' => $run->id]) --}}" class="button is-small is-link is-success">
-                                            Démarrer
-                                        </a>
-                                        <a href="{{-- route('runs.stop', ['user' => $run->id]) --}}" class="button is-small is-link is-danger">
-                                            Arréter
-                                        </a>
+                                    <div class="buttons is-right">
+                                        @component('components/runs/run_action_buttons', [
+                                            'status' => $run->status,
+                                            'id' => $run->id
+                                            ])
+                                            is-small
+                                        @endcomponent
                                     </div>
                                 </td>
                             </tr>

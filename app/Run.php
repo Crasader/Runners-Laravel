@@ -19,6 +19,7 @@ use App\Events\Log\LogDatabaseUpdateEvent;
 use App\Events\Log\LogDatabaseDeleteEvent;
 use App\Events\Log\LogDatabaseRestoreEvent;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Run
@@ -429,15 +430,51 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Starts a run
+     * Publish the run
      *
      * @return bool
+     */
+    public function publish()
+    {
+        // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
+        if ($this->needsFilling()) {
+            $this->status = 'needs_filling';
+        } else {
+            $this->status = 'ready';
+        }
+        $this->published_at = now();
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Check if the run needs filling
+     *
+     * @return bool
+     */
+    public function needsFilling()
+    {
+        $needsFilling = false;
+        $needsFilling |= $this->artists()->first() ? false : true;
+        $needsFilling |= $this->passengers > 1 ? false : true;
+        $needsFilling |= $this->planned_at ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+        $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
+        return $needsFilling;
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
      */
     public function start()
     {
         // Set the run start time and status
-        $this->status = 'started';
-        $this->started_at = Carbon::now();
+        $this->status = 'gone';
+        $this->started_at = now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
             $item->status = "taken";
@@ -454,9 +491,54 @@ class Run extends Model
      * MODEL METHOD
      * Ends a run
      *
-     * @return bool
+     * @return void
      */
     public function stop()
+    {
+        $this->status = 'finished';
+        $this->ended_at = Carbon::now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "free";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
+     */
+    public function forceSart()
+    {
+        // Set the run start time and status
+        $this->status = 'gone';
+        $this->started_at = now();
+        // Temporary sets the status
+        $this->cars->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->runners->each(function ($item, $key) {
+            $item->status = "taken";
+            $item->save();
+        });
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Ends a run
+     *
+     * @return void
+     */
+    public function forceStop()
     {
         $this->status = 'finished';
         $this->ended_at = Carbon::now();

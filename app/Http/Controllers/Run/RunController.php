@@ -159,7 +159,15 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
-        dd('DESTROY run');
+        $run->subscriptions->each(function ($sub) {
+            $sub->delete();
+        });
+        $run->waypoints()->detach();
+        $run->artists()->detach();
+        $run->delete();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été supprimé.");
     }
 
     /**
@@ -170,7 +178,11 @@ class RunController extends Controller
      */
     public function publish(Run $run)
     {
-        dd('Publish run');
+        $this->authorize('update', $run);
+        $run->publish();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été publié, il est maintenant visible depuis l'app mobile");
     }
 
     /**
@@ -181,7 +193,11 @@ class RunController extends Controller
      */
     public function start(Run $run)
     {
-        dd('Start run');
+        $this->authorize('start', $run);
+        $run->start();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été démarré !");
     }
 
     /**
@@ -192,7 +208,11 @@ class RunController extends Controller
      */
     public function stop(Run $run)
     {
-        dd('Stop run');
+        $this->authorize('stop', $run);
+        $run->stop();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été démarré !");
     }
 
     /**
@@ -203,7 +223,11 @@ class RunController extends Controller
      */
     public function forceStart(Run $run)
     {
-        dd('Force start run');
+        $this->authorize('forceStart', $run);
+        $run->forceSart();
+        return redirect()
+            ->back()
+            ->with('warning', "Vous avez forcé le run $run->name à démarrer, malgré des informations manquantes !");
     }
 
     /**
@@ -214,6 +238,10 @@ class RunController extends Controller
      */
     public function forceStop(Run $run)
     {
-        dd('Force stop run');
+        $this->authorize('forceStop', $run);
+        $run->forceStop();
+        return redirect()
+            ->back()
+            ->with('warning', "Vous avez forcé le run à s'arreter !");
     }
 }

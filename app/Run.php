@@ -213,7 +213,9 @@ class Run extends Model
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
+        $this->infos = $runDatas['infos'];
         $this->savePlannedDates($runDatas['planned_at']);
+        $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
         $this->saveSubscriptions(collect($runDatas['subscriptions']));
     }

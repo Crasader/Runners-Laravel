@@ -102,6 +102,26 @@ class RunController extends Controller
     public function update(UpdateRun $request, Run $run)
     {
         $this->authorize('update', $run);
+
+        // Check usage of action buttons on the form
+        $this->checkFormActions($request);
+
+        // Save alle the run datas and related datas
+        $run->saveDatas($request->all());
+
+        return redirect()
+            ->route('runs.show', ['run' => $run->id])
+            ->with('success', "Le run à correctement été mis a jour.");
+    }
+
+    /**
+     * Check if actions buttons are used in the view (add waypoint, add run)
+     *
+     * @param  \App\Http\Requests\Runs\UpdateRun  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkFormActions($request)
+    {
         // Check runners addition
         if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
             $run->newSubscription();
@@ -122,13 +142,6 @@ class RunController extends Controller
             $run->removeWaypoint($request->input('remove-waypoint'));
             return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
         }
-
-        // Save alle the run datas and related datas
-        $run->saveDatas($request->all());
-
-        return redirect()
-            ->route('runs.show', ['run' => $run->id])
-            ->with('success', "Le run à correctement été mis a jour.");
     }
 
     /**

@@ -337,23 +337,49 @@ class Run extends Model
     /**
      * MODEL METHOD
      * Add new empty waypoint for the run
-     * TODO: implement waypoint addition
      *
      * @return bool
      */
     public function newWaypoint($order)
     {
-        $this->waypoints()->create(['name' => 'tmp'], ['order' => 0]);
-        $this->waypoints->map(function ($waypoint) use ($order) {
+        // Create an empty waypoint
+        $this->waypoints()->create(['name' => ''], ['order' => 0]);
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->mapWithKeys(function ($waypoint) use ($order) {
             if ($waypoint->pivot->order == 0) {
-                return $waypoint->pivot->order = $order;
-            } elseif ($waypoint->pivot->order >= $order) {
-                return $waypoint->pivot->order++;
+                return [$waypoint->id => ['order' => $order + 1]];
+            } elseif ($waypoint->pivot->order > $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order + 1]];
+            } elseif ($waypoint->pivot->order <= $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
             }
         });
-        $this->save();
-        dd($this->waypoints);
-        $this->subscriptions()->save($sub);
+        // Sysnc the association with order datas
+        $this->waypoints()->sync($ids->all());
+    }
+
+    /**
+     * MODEL METHOD
+     * Remove a waypoint for the run
+     *
+     * @return bool
+     */
+    public function removeWaypoint($order)
+    {
+        // Create an empty waypoint
+        $this->waypoints()->create(['name' => ''], ['order' => 0]);
+        // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
+        $ids = $this->waypoints->mapWithKeys(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order == 0) {
+                return [$waypoint->id => ['order' => $order + 1]];
+            } elseif ($waypoint->pivot->order > $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order + 1]];
+            } elseif ($waypoint->pivot->order <= $order) {
+                return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            }
+        });
+        // Sysnc the association with order datas
+        $this->waypoints()->sync($ids->all());
     }
 
     /**

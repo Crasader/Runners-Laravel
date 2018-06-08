@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/home', 'HomeController@home')->name('home');
 
+
     /** *****************************
      * Users ressource
      */
@@ -66,10 +67,12 @@ Route::middleware(['auth'])->group(function () {
     // the curently authenticated user
     Route::get('/me', 'User\UserController@me')->name('me');
 
+
     /** *****************************
      * Role crud
      */
     Route::resource('roles', 'Role\RoleController');
+
 
     /** *****************************
      * Cars ressource
@@ -78,12 +81,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cars/search', 'car\CarController@search')->name('cars.search');
     Route::resource('cars', 'car\CarController');
 
+
     /** *****************************
      * CarTypes ressource
      */
     // CarTypes route for searching in users table (used by search field)
     Route::post('carTypes/search', 'car\CarTypeController@search')->name('carTypes.search');
     Route::resource('carTypes', 'car\CarTypeController');
+
 
     /** *****************************
      * Schedules ressource
@@ -92,12 +97,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('schedules/events', 'schedule\ScheduleController@events')->name('schedules.events');
     Route::resource('schedules', 'schedule\ScheduleController');
 
+
     /** *****************************
      * Groups ressource
      */
     Route::get('groups/manager', 'Group\GroupController@manager')->name('groups.manager');
     Route::put('groups/manager', 'Group\GroupController@managerUpdate')->name('groups.manager.update');
     Route::resource('groups', 'Group\GroupController');
+
 
     /** *****************************
      * Runs ressource
@@ -116,10 +123,12 @@ Route::middleware(['auth'])->group(function () {
     // Run comments crud
     Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);
 
+
     /** *****************************
      * Stats crud
      */
     Route::resource('statistics', 'Statistic\StatisticController');
+
 
     /** *****************************
      * Artists crud
@@ -128,12 +137,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('artists/search', 'Artist\ArtistController@search')->name('artists.search');
     Route::resource('artists', 'Artist\ArtistController');
 
+
     /** *****************************
      * Waypoints crud
      */
     // Specific route for the autocomplete fields
     Route::post('waypoints/search', 'Waypoint\WaypointController@search')->name('waypoints.search');
     Route::resource('waypoints', 'Waypoint\WaypointController');
+
 
     /** *****************************
      * Kiela crud
@@ -144,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
         ['only' => ['index', 'create', 'store' ,'destroy']]
     );
 
+
     /** *****************************
      * Logs crud
      */
@@ -152,6 +164,7 @@ Route::middleware(['auth'])->group(function () {
         'Log\LogController',
         ['only' => ['index']]
     );
+
 
     /** *****************************
      * Notifications crud

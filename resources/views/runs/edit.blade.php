@@ -32,16 +32,16 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $run)
-                        <p class="control">
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('update-run-form').submit();"
                                 class="button is-success">
                                 Valider les modifications
                             </button>
-                        </p>
+                        </div>
                     @endcan
                     @can('delete', $run)
-                        <p class="control">
+                        <div class="control">
                             <form id="delete-run-form"
                                 action="{{ route('runs.destroy', ['run' => $run->id]) }}"
                                 method="POST" style="display: none;">
@@ -53,7 +53,7 @@
                                 class="button is-danger">
                                 Supprimer le run
                             </button>
-                        </p>
+                        </div>
                     @endcan
                 </div>
             </div>
@@ -100,7 +100,7 @@
 
                     {{-- WAYPOINTS --}}
 
-                    @foreach($run->waypoints as $waypoint)
+                    @foreach($run->waypoints()->orderBy('pivot_order')->get() as $waypoint)
 
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
@@ -126,7 +126,24 @@
                                     'errors'      => $errors
                                     ])
                                     @slot('button')
-                                        <button type="submit" name="add-waypoint" value="{{ $waypoint->pivot->order }}" class="button is-info">
+                                        {{-- Button to remove waypoints --}}
+                                        @unless ($loop->first)
+                                            <button
+                                                type="submit"
+                                                name="remove-waypoint"
+                                                value="{{ $waypoint->pivot->order }}"
+                                                class="button is-danger">
+                                                <span class="icon">
+                                                    <i class="fas fa-minus"></i>
+                                                </span>
+                                            </button>
+                                        @endunless
+                                        {{-- Button to add waypoint after current waypoint --}}
+                                        <button
+                                            type="submit"
+                                            name="add-waypoint"
+                                            value="{{ $waypoint->pivot->order }}"
+                                            class="button is-info">
                                             <span class="icon">
                                                 <i class="fas fa-plus"></i>
                                             </span>
@@ -155,26 +172,6 @@
                                 'icon'        => 'fa-clock',
                                 'errors'      => $errors,
                                 'value'       => $run->planned_at->format('Y-m-d\\TH:i:s')
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Fin prévue a :</label>
-                        </div>
-                        <div class="field-body">
-
-                            {{-- END TIME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'end_planned_at',
-                                'placeholder' => "Véhicule",
-                                'type'        => 'datetime-local',
-                                'icon'        => 'fa-clock',
-                                'errors'      => $errors,
-                                'value'       => $run->end_planned_at->format('Y-m-d\\TH:i:s')
                                 ])
                             @endcomponent
 

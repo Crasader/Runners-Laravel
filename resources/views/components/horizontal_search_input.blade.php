@@ -15,7 +15,7 @@
     <p id="search-field-{{ $name }}" class="autocomplete control is-expanded has-icons-left">
         {{-- The input, with specific ID and data-atribute to be detected by javascript --}}
         <input
-            id="search-input-{{ $name }}" 
+            id="search-input-{{ $name }}"
             data-search-api-url="{{ $searchUrl }}"
             class="input {{ $errors->has($name) ? ' is-danger' : '' }}"
             type="{{ $type }}"

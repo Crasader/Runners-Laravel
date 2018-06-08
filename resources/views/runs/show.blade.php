@@ -74,7 +74,7 @@
             </div>
 
             <div class="column">
-                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
+                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints()->orderBy('pivot_order')->get()])
                 @endcomponent
             </div>
 

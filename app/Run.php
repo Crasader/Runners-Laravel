@@ -19,6 +19,7 @@ use App\Events\Log\LogDatabaseUpdateEvent;
 use App\Events\Log\LogDatabaseDeleteEvent;
 use App\Events\Log\LogDatabaseRestoreEvent;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Run
@@ -429,9 +430,44 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Starts a run
+     * Publish the run
      *
      * @return bool
+     */
+    public function publish()
+    {
+        // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
+        if ($this->needsFilling()) {
+            $this->status = 'needs_filling';
+        } else {
+            $this->status = 'ready';
+        }
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Check if the run needs filling
+     *
+     * @return bool
+     */
+    public function needsFilling()
+    {
+        $needsFilling = false;
+        $needsFilling |= $this->artists()->first() ? false : true;
+        $needsFilling |= $this->passengers > 1 ? false : true;
+        $needsFilling |= $this->planned_at ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
+        $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+        $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
+        return $needsFilling;
+    }
+
+    /**
+     * MODEL METHOD
+     * Starts a run
+     *
+     * @return void
      */
     public function start()
     {
@@ -454,7 +490,7 @@ class Run extends Model
      * MODEL METHOD
      * Ends a run
      *
-     * @return bool
+     * @return void
      */
     public function stop()
     {

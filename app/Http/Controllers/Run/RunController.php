@@ -170,7 +170,11 @@ class RunController extends Controller
      */
     public function publish(Run $run)
     {
-        dd('Publish run');
+        $this->authorize('update', $run);
+        $run->publish();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été publié, il est maintenant visible depuis l'app mobile");
     }
 
     /**
@@ -181,7 +185,11 @@ class RunController extends Controller
      */
     public function start(Run $run)
     {
-        dd('Start run');
+        $this->authorize('start', $run);
+        $run->start();
+        return redirect()
+            ->back()
+            ->with('success', "Le run $run->name à bien été démarré !");
     }
 
     /**
@@ -192,7 +200,8 @@ class RunController extends Controller
      */
     public function stop(Run $run)
     {
-        dd('Stop run');
+        $this->authorize('stop', $run);
+        $run->stop();
     }
 
     /**
@@ -203,6 +212,7 @@ class RunController extends Controller
      */
     public function forceStart(Run $run)
     {
+        $this->authorize('forceStart', $run);
         dd('Force start run');
     }
 
@@ -214,6 +224,7 @@ class RunController extends Controller
      */
     public function forceStop(Run $run)
     {
+        $this->authorize('forceStop', $run);
         dd('Force stop run');
     }
 }

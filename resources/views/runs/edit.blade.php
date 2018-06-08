@@ -163,7 +163,7 @@
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
-                            <label class="label">Fin prévue a :</label>
+                            <label class="label">Fin prévue à :</label>
                         </div>
                         <div class="field-body">
 

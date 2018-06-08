@@ -102,7 +102,7 @@
                             <tr>
                                 <td>
                                     <span class="tag is-warning is-medium">
-                                        <strong>Aucun runs passent par ce lieu.<strong>
+                                        <strong>Aucun run passe par ce lieu.<strong>
                                     </span>
                                 </td>
                             </tr>

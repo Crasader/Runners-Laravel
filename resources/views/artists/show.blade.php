@@ -102,7 +102,7 @@
                             <tr>
                                 <td>
                                     <span class="tag is-warning is-medium">
-                                        <strong>Aucun runs pour cet artiste<strong>
+                                        <strong>Aucun run pour cet artiste<strong>
                                     </span>
                                 </td>
                             </tr>

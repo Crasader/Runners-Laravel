@@ -39,7 +39,10 @@ class UpdateRun extends FormRequest
             'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
             'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],
             'subscriptions.*.car'     => ['nullable', 'string', 'exists:cars,name'],
-            'add-runner'              => ['sometimes', 'in:true']
+            'add-runner'              => ['sometimes', 'in:true'],
+            'remove-runner'           => ['sometimes', 'integer'],
+            'add-waypoint'            => ['sometimes', 'integer'],
+            'remove-runner'           => ['sometimes', 'integer']
         ];
     }
 }

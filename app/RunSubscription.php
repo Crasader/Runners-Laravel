@@ -100,6 +100,7 @@ class RunSubscription extends Model
     public function saveDatas($subscriptionDatas)
     {
         $this->assignUser(User::where('name', $subscriptionDatas['user']));
+        $this->assignCarType(CarType::where('name', $subscriptionDatas['carType']));
         $this->assignCar(Car::where('name', $subscriptionDatas['car']));
     }
 
@@ -138,6 +139,19 @@ class RunSubscription extends Model
     {
         $this->car()->associate($car);
         $this->carType()->associate($car->type);
+        $this->save();
+    }
+
+    /**
+     * MODEL METHOD
+     * Assign a car to this subscription
+     * (It assign the cartype automaticaly)
+     *
+     * @param \App\Car $car
+     */
+    public function assignCarType($carType)
+    {
+        $this->carType()->associate($carType);
         $this->save();
     }
 }

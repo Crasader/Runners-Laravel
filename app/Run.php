@@ -213,11 +213,9 @@ class Run extends Model
     {
         // Fill the run datas (we font use $this->fill because the date format not work)
         $this->saveArtist($runDatas['artist']);
-        $this->saveName($runDatas['name']);
-        $this->savePlannedDates($runDatas['planned_at'], $runDatas['end_planned_at']);
+        $this->savePlannedDates($runDatas['planned_at']);
         $this->saveWaypoints(collect($runDatas['waypoints']));
         $this->saveSubscriptions(collect($runDatas['subscriptions']));
-        dd($runDatas);
     }
 
     /**
@@ -232,10 +230,7 @@ class Run extends Model
     {
         $subscriptions->each(function ($subscription, $key) {
             // Create the subscription if not exist
-            if (!$sub = RunSubscription::find($key)) {
-                $sub = new RunSubscription();
-                $sub->run()->associate($this);
-            }
+            $sub = RunSubscription::find($key);
             $sub->saveDatas($subscription);
         });
     }
@@ -250,16 +245,8 @@ class Run extends Model
     public function saveWaypoints($waypoints)
     {
         // Initialize an index to save the waypoints order
-        $i = 1;
-        $waypoints->each(function ($waypoint) use ($i) {
-            // Check if the waypoint exists in the database
-            if ($waypointDb = Waypoint::where('name', $waypoint)->first()) {
-                $this->waypoints()->sync([$waypointDb->id => ['order' => $i]]);
-            } else {
-                $newWaypoint = Waypoint::create(['name' => $waypoint]);
-                $this->waypoints()->sync([$newWaypoint->id => ['order' => $i]]);
-            }
-            $i++;
+        $waypoints->each(function ($name, $key) {
+            $this->waypoints()->find($key)->fill(['name' => $name])->save();
         });
     }
 
@@ -270,13 +257,10 @@ class Run extends Model
      * @param string $name
      * @return void
      */
-    public function saveName($name)
+    public function saveName()
     {
-        if (empty($name)) {
-            $this->name = $name;
-        } else {
-            $this->name = $this->artists->first()->name;
-        }
+        $this->name = $this->artists->first()->name;
+        $this->save();
     }
 
     /**
@@ -317,9 +301,6 @@ class Run extends Model
         if (!empty($planned_at)) {
             $this->planned_at = Carbon::parse($planned_at);
         }
-        if (!empty($end_planned_at)) {
-            $this->end_planned_at = Carbon::parse($end_planned_at);
-        }
     }
 
     /**
@@ -336,6 +317,17 @@ class Run extends Model
 
     /**
      * MODEL METHOD
+     * Remove subscription for this run
+     *
+     * @return bool
+     */
+    public function removeSubscription($id)
+    {
+        $sub = RunSubscription::findOrFail($id)->delete();
+    }
+
+    /**
+     * MODEL METHOD
      * Add new empty waypoint for the run
      *
      * @return bool
@@ -343,19 +335,23 @@ class Run extends Model
     public function newWaypoint($order)
     {
         // Create an empty waypoint
-        $this->waypoints()->create(['name' => ''], ['order' => 0]);
+        $this->waypoints()->save(Waypoint::find(1), ['order' => 0]);
         // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
-        $ids = $this->waypoints->mapWithKeys(function ($waypoint) use ($order) {
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
             if ($waypoint->pivot->order == 0) {
-                return [$waypoint->id => ['order' => $order + 1]];
-            } elseif ($waypoint->pivot->order > $order) {
-                return [$waypoint->id => ['order' => $waypoint->pivot->order + 1]];
-            } elseif ($waypoint->pivot->order <= $order) {
+                return [$waypoint->id => ['order' => ($order + 1)]];
+            } elseif ($waypoint->pivot->order > intval($order)) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order + 1)]];
+            } elseif ($waypoint->pivot->order <= intval($order)) {
                 return [$waypoint->id => ['order' => $waypoint->pivot->order]];
             }
         });
-        // Sysnc the association with order datas
-        $this->waypoints()->sync($ids->all());
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
     }
 
     /**
@@ -366,20 +362,24 @@ class Run extends Model
      */
     public function removeWaypoint($order)
     {
-        // Create an empty waypoint
-        $this->waypoints()->create(['name' => ''], ['order' => 0]);
         // Map the waypoints and order it (adding the new waypoint after the clicked field (see edition page))
-        $ids = $this->waypoints->mapWithKeys(function ($waypoint) use ($order) {
-            if ($waypoint->pivot->order == 0) {
-                return [$waypoint->id => ['order' => $order + 1]];
-            } elseif ($waypoint->pivot->order > $order) {
-                return [$waypoint->id => ['order' => $waypoint->pivot->order + 1]];
-            } elseif ($waypoint->pivot->order <= $order) {
+        $ids = $this->waypoints->map(function ($waypoint) use ($order) {
+            if ($waypoint->pivot->order < $order) {
                 return [$waypoint->id => ['order' => $waypoint->pivot->order]];
+            } elseif ($waypoint->pivot->order > $order) {
+                return [$waypoint->id => ['order' => ($waypoint->pivot->order - 1)]];
             }
         });
-        // Sysnc the association with order datas
-        $this->waypoints()->sync($ids->all());
+        // Filter to remove unused waypoints
+        $ids = $ids->filter(function ($el) {
+            return $el != null;
+        });
+        // Detatch all waypoints
+        $this->waypoints()->detach();
+        // Reatach the waypoints in correct order
+        $ids->each(function ($id) {
+            $this->waypoints()->attach($id);
+        });
     }
 
     /**

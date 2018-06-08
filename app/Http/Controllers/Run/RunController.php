@@ -102,9 +102,14 @@ class RunController extends Controller
     public function update(UpdateRun $request, Run $run)
     {
         $this->authorize('update', $run);
-        // Check usage of add runner
+        // Check runners addition
         if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
             $run->newSubscription();
+            return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
+        }
+        // Check runners deletion
+        if ($request->has('remove-runner')) {
+            $run->removeSubscription($request->input('remove-runner'));
             return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
         }
         // Check waypoints additions
@@ -115,15 +120,15 @@ class RunController extends Controller
         // Check waypoints removes
         if ($request->has('remove-waypoint')) {
             $run->removeWaypoint($request->input('remove-waypoint'));
-            dd($run);
             return redirect()->action('Run\RunController@edit', ['run' => $run->id]);
         }
 
-        dd($request->all());
-        //$run->saveDatas($request->all());
-        // Save the run datas
-        // Save the artist and waypoints linked to the run
-        // Save the run drivers
+        // Save alle the run datas and related datas
+        $run->saveDatas($request->all());
+
+        return redirect()
+            ->route('runs.show', ['run' => $run->id])
+            ->with('success', "Le run à correctement été mis a jour.");
     }
 
     /**

@@ -180,6 +180,7 @@
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
                                     'name'        => "waypoints[{$waypoint->pivot->order}]",
+                                    'errorName'   => "waypoints.{$waypoint->pivot->order}",
                                     'placeholder' => 'Lieu de départ',
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
@@ -232,6 +233,7 @@
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
                                     'name'        => "subscriptions[{$subscription->id}][user]",
+                                    'errorName'   => "subscriptions.{$subscription->id}.user",
                                     'placeholder' => 'Conducteur',
                                     'type'        => 'text',
                                     'icon'        => 'fa-user',
@@ -265,6 +267,7 @@
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
                                     'name'        => "subscriptions[{$subscription->id}][carType]",
+                                    'errorName'   => "subscriptions.{$subscription->id}.carType",
                                     'placeholder' => 'Type de véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-truck',
@@ -278,6 +281,7 @@
                                 {{-- SEARCH FIELD --}}
                                 @component('components/horizontal_search_input', [
                                     'name'        => "subscriptions[{$subscription->id}][car]",
+                                    'errorName'   => "subscriptions.{$subscription->id}.car",
                                     'placeholder' => 'Véhicule',
                                     'type'        => 'text',
                                     'icon'        => 'fa-car',

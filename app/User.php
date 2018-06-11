@@ -284,7 +284,7 @@ class User extends Authenticatable
     public function generateName()
     {
         if (empty($this->name)) {
-            $this->name = str_replace(' ', '', strtolower("{$this->firstname} {$this->lastname}"));
+            $this->name = "{$this->firstname} {$this->lastname}";
         }
     }
 

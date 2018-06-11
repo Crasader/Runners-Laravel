@@ -231,13 +231,6 @@
                             <th>Départ prévu le</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Status</th>
-                            <th>Départ prévu le</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($user->runs()->orderBy('planned_at')->get() as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">
@@ -257,7 +250,7 @@
                             <tr>
                                 <td>
                                     <span class="tag is-warning is-medium">
-                                        <strong>Ce chauffeur n'effectue aucun run<strong>
+                                        Aucun runs
                                     </span>
                                 </td>
                             </tr>
@@ -394,8 +387,8 @@
                             @foreach ($user->myLogs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <td>
-                                        @date(['date' => $log->created_at])
-                                        @enddate
+                                        @datetext(['date' => $log->created_at])
+                                        @enddatetext
                                     </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}
@@ -426,8 +419,8 @@
                             @foreach ($user->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                                 <tr>
                                     <td>
-                                        @date(['date' => $log->created_at])
-                                        @enddate
+                                        @datetext(['date' => $log->created_at])
+                                        @enddatetext
                                     </td>
                                     <td>
                                         {{-- Status tag (see related component) --}}

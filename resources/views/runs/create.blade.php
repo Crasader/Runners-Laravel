@@ -47,19 +47,6 @@
                         </div>
                         <div class="field-body">
 
-                            {{-- RUN NAME --}}
-                            @horizontalinput([
-                                'name'        => 'name',
-                                'placeholder' => 'Nom du run',
-                                'type'        => 'text',
-                                'icon'        => 'fa-bookmark',
-                                'errors'      => $errors
-                                ])
-                                <p class="help">
-                                    Par défault, le nom de l'artiste sera utilisé.
-                                </p>
-                            @endhorizontalinput
-
                             {{-- ARTIST --}}
                             {{-- SEARCH FIELD --}}
                             @horizontalsearchinput([

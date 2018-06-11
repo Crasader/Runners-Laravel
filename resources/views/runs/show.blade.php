@@ -74,7 +74,7 @@
             </div>
 
             <div class="column">
-                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints])
+                @component('components/runs/run_waypoints_box', ['waypoints' => $run->waypoints()->orderBy('pivot_order')->get()])
                 @endcomponent
             </div>
 
@@ -136,7 +136,9 @@
                         @foreach ($run->logs()->orderBy('created_at', 'desc')->limit(10)->get() as $log)
                             <tr>
                                 <th>
-                                    {{ $log->created_at->format('d-m-Y H:i:s') }}</th>
+                                    @datetext(['date' => $log->created_at])
+                                    @enddatetext
+                                </th>
                                 <td>
                                     {{-- Status tag (see related component) --}}
                                     @logaction(['action' => $log->action])

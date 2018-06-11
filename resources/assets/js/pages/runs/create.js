@@ -12,6 +12,6 @@ let fields = document.querySelectorAll('[id^="search-input-"]')
 
 // Initialize all the search fields
 for (let el of fields) {
-  let field = new SearchField()
-  field.observe(el)
+  let field = new SearchField(el)
+  field.observe()
 }

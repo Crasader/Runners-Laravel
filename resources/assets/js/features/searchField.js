@@ -12,13 +12,32 @@
 */
 export class SearchField {
   /**
-   * Observe
+   * Class constructor
+   * @param {*} field
+   */
+  constructor (field) {
+    console.log('SEARCH FIELD INSERTED')
+    /**
+     * The field who want autocomplete
+     */
+    this.field = field
+    /**
+     * Get the url to search autocomplete (stored in a data property)
+     */
+    this.searchApiUrl = field.getAttribute('data-search-api-url')
+    /**
+     * The box where the results could apear
+     */
+    this.resultsBox = document.getElementById(`search-field-${field.name}`)
+  }
+  /**
+   * Launch the triggers for the search actions
    *
    * @param {Element} searchField The fiels on wich to graft the search
    */
-  observe (searchField) {
+  observe () {
     // Hook events on each search fields
-    searchField.addEventListener('input', (e) => {
+    this.field.addEventListener('input', (e) => {
       let el = e.target
       let resultEl = document.getElementById(`search-field-${el.name}`)
       let apiUrl = el.getAttribute('data-search-api-url')
@@ -60,6 +79,41 @@ export class SearchField {
           document.getElementById(`search-results-${el.name}`).remove()
         }
       }
+
+      this.field.addEventListener('keyup', e => {
+        console.log('KEYPRESS', e.keyCode)
+        e.preventDefault()
+        e.stopPropagation()
+
+        // ESCAPE to exit the field
+        if (e.keyCode === 27) {
+          console.log('ESCAPE PRESSED')
+          this.field.value = ''
+          if (document.getElementById(`search-results-${el.name}`)) {
+            document.getElementById(`search-results-${el.name}`).remove()
+          }
+        }
+        // TAB to insert the value and go to the next field
+        if (e.keyCode === 9) {
+          console.log('TAB PRESSED')
+          //
+        }
+        // ARROW DOWN
+        if (e.keyCode === 40) {
+          console.log('ARROW DOWN PRESSED')
+          //
+        }
+        // ARROW UP
+        if (e.keyCode === 38) {
+          console.log('ARROW UP PRESSED')
+          //
+        }
+        // Enter add the curent selected to the field
+        if (e.keyCode === 13) {
+          console.log('ENTER PRESSED')
+          //
+        }
+      })
     })
   }
 

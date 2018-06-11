@@ -27,7 +27,7 @@
                     @endif
                 </th>
                 <td>
-                    @if($subscription->user()->exists())
+                    @if($subscription->carType()->exists())
                         <a href="{{ route('carTypes.show', ['carType' => $subscription->carType->id]) }}">
                             {{ $subscription->carType->name }}
                         </a>
@@ -36,7 +36,7 @@
                     @endif
                 </td>
                 <td>
-                    @if($subscription->user()->exists())
+                    @if($subscription->car()->exists())
                         <a href="{{ route('cars.show', ['car' => $subscription->car->id]) }}">
                             {{ $subscription->car->name }}
                         </a>

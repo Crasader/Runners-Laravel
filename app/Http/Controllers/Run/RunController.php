@@ -182,7 +182,7 @@ class RunController extends Controller
         $run->publish();
         return redirect()
             ->back()
-            ->with('success', "Le run $run->name à bien été publié, il est maintenant visible depuis l'app mobile");
+            ->with('success', "Le run $run->name à bien été publié, il est maintenant visible depuis l'app mobile.");
     }
 
     /**
@@ -212,7 +212,7 @@ class RunController extends Controller
         $run->stop();
         return redirect()
             ->back()
-            ->with('success', "Le run $run->name à bien été démarré !");
+            ->with('success', "Le run $run->name à bien été arrété !");
     }
 
     /**

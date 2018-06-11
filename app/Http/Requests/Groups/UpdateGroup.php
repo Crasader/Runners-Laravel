@@ -32,7 +32,7 @@ class UpdateGroup extends FormRequest
     {
         return [
             'name'  => ['required', 'string', 'min:1', 'max:50', Rule::unique('groups')->ignore(request()->group->id)],
-            'color' => ['required', 'string', 'min:3', 'max:12']
+            'color' => ['required', 'string', 'min:6', 'max:6', 'regex:/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
         ];
     }
 }

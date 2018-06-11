@@ -5,13 +5,21 @@
   -- @author Bastien Nicoud
   --}}
 
+{{-- Set the $errorName if not provided by the user --}}
+{{-- We use specific error name for arrays, but laravel not use the same syntax as html for array forms --}}
+@php
+if (!isset($errorName)) {
+    $errorName = $name;
+}
+@endphp
+
 <div class="field">
     <p class="control is-expanded has-icons-left">
-        <input class="input {{ $errors->has($name) ? ' is-danger' : '' }}"
+        <input class="input {{ $errors->has($errorName) ? ' is-danger' : '' }}"
             type="{{ $type }}"
             name="{{ $name }}"
-            @if(old($name))
-                value="{{ old($name) }}"
+            @if(old($errorName))
+                value="{{ old($errorName) }}"
             @elseif(isset($value))
                 value="{{ $value }}"
             @endif
@@ -20,8 +28,8 @@
             <i class="fas {{ $icon }}"></i>
         </span>
     </p>
-    @if ($errors->has($name))
-        <p class="help is-danger">{{ $errors->first($name) }}</p>
+    @if ($errors->has($errorName))
+        <p class="help is-danger">{{ $errors->first($errorName) }}</p>
     @endif
     {{ $slot }}
 </div>

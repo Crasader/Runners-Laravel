@@ -12,6 +12,7 @@
   --}}
 
 {{-- Set the $errorName if not provided by the user --}}
+{{-- We use specific error name for arrays, but laravel not use the same syntax as html for array forms --}}
 @php
 if (!isset($errorName)) {
     $errorName = $name;

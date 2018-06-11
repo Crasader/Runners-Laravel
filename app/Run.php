@@ -219,7 +219,9 @@ class Run extends Model
         $this->savePlannedDates($runDatas['planned_at']);
         $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
-        $this->saveSubscriptions(collect($runDatas['subscriptions']));
+        if (isset($runDatas['subscriptions'])) {
+            $this->saveSubscriptions(collect($runDatas['subscriptions']));
+        }
     }
 
     /**

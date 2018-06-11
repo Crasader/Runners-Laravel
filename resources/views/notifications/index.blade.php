@@ -73,7 +73,7 @@
                             <tr>
                                 <td>
                                     <span class="tag is-warning is-medium">
-                                        <strong>Aucunnes notifications<strong>
+                                        <strong>Aucune notification<strong>
                                     </span>
                                 </td>
                             </tr>

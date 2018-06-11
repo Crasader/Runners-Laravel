@@ -34,7 +34,7 @@ class UpdateGroupUserAssociations extends FormRequest
     {
         return [
             'unused.*' => [Rule::in(['not-changed'])],
-            'user.*' => ['integer', 'exists:groups,id']
+            //'user.*' => ['integer', 'exists:groups,id']
         ];
     }
 }

@@ -4,7 +4,7 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## **v2.0.0-beta.3**
+## **v2.0.0-beta.3.1**
 
 This version includes dependencies changes, dont forget to :
 * Run `composer install`
@@ -15,20 +15,16 @@ Break changes :
 * x
 
 Changes :
-* Home page links reorganization
-* Cars and CarTypes show pages now display related runs
+* Search field now use user full name
 
 Improuvments :
-* Complete log system, that mark all database actions in a special crud. It allows you to track changes on a resource.
-* Notification system, it allows you to send notification to users via the database driver.
-* Unhandled exceptions notification, the superuser now receive notification when the app throws an uncatched exceptions.
-* Add create and edition in runs crud.
-* Add runs actions (start, stop, publish)
+* Add box that display users without group in the groups manager
+* Update of the search field with autocomplete to support key modifiers
 
 Bux fixes :
-* Carbon dates formating
-* Locales mismatch
-* Spelling
+* Runs creation without subscription
+* Request validation fails on run creation
+* Data loss on new run when you add subscription or waypoint
 
 In progress :
 * Notifications linked to runs actions

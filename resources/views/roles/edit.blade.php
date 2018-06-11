@@ -84,10 +84,9 @@
                             <h2 class="title is-4">Choisissez les permissions autorisées pour ce rôle :</h2>
                         </dim>
                     </div>
-                    <div class="columns">
-                        <div class="column is-half">
-                            @foreach ($role->permissions as $key => $value)
-                                @break($loop->index == 9)
+                    <div class="columns is-multiline">
+                        @foreach ($role->permissions as $key => $value)
+                            <div class="column is-6">
                                 <div class="field is-horizontal">
                                     <div class="field-body">
                                         <div class="field is-narrow">
@@ -105,31 +104,8 @@
                                         <label class="label">{{ $key }}</label>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                        <div class="column is-half">
-                            @foreach ($role->permissions as $key => $value)
-                                @continue($loop->index <= 8)
-                                <div class="field is-horizontal">
-                                    <div class="field-body">
-                                        <div class="field is-narrow">
-                                            <div class="control">
-                                                <div class="select is-fullwidth">
-                                                    <select name="permissions[{{ $key }}]">
-                                                        <option value="true" {{ ($value == true) ? 'selected' : '' }}>Autorisé à :</option>
-                                                        <option value="false" {{ ($value == false) ? 'selected' : '' }}>Non Autorisé à :</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="field-label is-normal">
-                                        <label class="label">{{ $key }}</label>
-                                    </div>
-                                </div>
-                                @break($loop->index == 8)
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="field is-grouped is-grouped-centered">

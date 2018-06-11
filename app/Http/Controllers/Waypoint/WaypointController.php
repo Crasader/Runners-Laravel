@@ -24,7 +24,7 @@ class WaypointController extends Controller
     public function index()
     {
         // Where to ignore temporary waypoints used in the run creation
-        $waypoints = Waypoint::orderBy('name', 'asc')->whereNotIn('name', ['tmp'])->paginate(30);
+        $waypoints = Waypoint::orderBy('name', 'asc')->whereNotIn('name', [''])->paginate(30);
         return view('waypoints.index')->with(compact('waypoints'));
     }
 

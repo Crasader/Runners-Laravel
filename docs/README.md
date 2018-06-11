@@ -13,27 +13,24 @@ Here we found the summary of all the documentation for the Runners project.
 
 1. [Migrations and Seeding](app/1_migrationAndSeeding.md)
 2. [Assets](app/2_assets.md)
-3. [App lifecycle](app/3_lifecycle.md)
-4. [App architecture](app/4_architecture.md)
-5. [Permissions system](app/5_permissions.md)
-6. [Status system](app/6_status.md)
+3. [App lifecycle](app/3_architecture.md)
+4. [App architecture](app/4_permissions.md)
+5. [Permissions system](app/5_status.md)
+6. [Status system](app/6_searchInput.md)
+7. [Status system](app/6_filterSystem.md)
+8. [Status system](app/6_logsystem.md)
+9. [Status system](app/6_notifications.md)
 
 ### Api
 
 1. [Architecture](api/1_arch.md)
 2. [Api routes](api/2_routes.md)
 3. [Error handling](api/3_errors.md)
-
-### Tests
-
-1. [Tests workflow](tests/1_tests.md)
-1. [Testing api](tests/2_api.md)
+3. [Authentication](api/4_authentication.md)
 
 ### Diagrams
 
-1. [Database MLD](diagrams/databaseMLD.png)
-2. [Application architecture](diagrams/arch.png)
-3. [Modules interactions](diagrams/modules.png)
+1. [Database MLD](diagrams/databaseMLD.pdf)
 
 *All the diagrams are created with [draw.io](draw.io), you can easyly edit them.*
 

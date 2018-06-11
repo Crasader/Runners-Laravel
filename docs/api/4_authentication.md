@@ -23,6 +23,6 @@ Authorization: Bearer Ah1mPoahgeKDGdyneM5m60jCbFWj8hDQo0dGqxAE7mC8uojlzHT7dFsEe1
 <hr>
 <div align="center">
 
-**[<- Prev](../README.md) // [Summary](../README.md) // [Next ->](2_routes.md)**
+**[<- Prev](../3_errors.md) // [Summary](../README.md) // [Next ->](../README.md)**
 
 </div>

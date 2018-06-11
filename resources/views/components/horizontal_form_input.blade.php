@@ -13,7 +13,7 @@ if (!isset($errorName)) {
 }
 @endphp
 
-<div class="field">
+<div class="field {{ isset($button) ? 'is-grouped' : '' }}">
     <p class="control is-expanded has-icons-left">
         <input class="input {{ $errors->has($errorName) ? ' is-danger' : '' }}"
             type="{{ $type }}"
@@ -27,9 +27,14 @@ if (!isset($errorName)) {
         <span class="icon is-small is-left">
             <i class="fas {{ $icon }}"></i>
         </span>
+        @if ($errors->has($errorName))
+            <p class="help is-danger">{{ $errors->first($errorName) }}</p>
+        @endif
     </p>
-    @if ($errors->has($errorName))
-        <p class="help is-danger">{{ $errors->first($errorName) }}</p>
+    @if(isset($button))
+        <p class="control">
+            {{ $button }}
+        </p>
     @endif
     {{ $slot }}
 </div>

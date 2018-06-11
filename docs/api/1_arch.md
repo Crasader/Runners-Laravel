@@ -1,5 +1,14 @@
 # Api architecture
 
+## Files
+
+* Routes are in `routes/api.php``
+* Controllers are groupped in `Http/Controllers/api/``
+* All json response are generated with laravel resources, located in `Http/Controllers/Resources/`
+
+## Note for search field
+
+In the back-office we use search fields, with autocomplete, this fields use an ajax call to sugest the user. !!! We don't use api routes for this ajax call's !!! this routes are registred in the `routes/app.php` because they need to use the same authentication system as the back office. See [search fields doc](../app/6_searchInput.md) for details
 
 
 <br>
@@ -8,7 +17,7 @@
 <hr>
 
 **Helpful links :**
-* [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Laravel routing](https://laravel.com/docs/5.6/routing#basic-routing)
 
 <hr>
 <div align="center">

@@ -32,6 +32,6 @@ npm run watch # yarn watch
 <hr>
 <div align="center">
 
-**[<- Prev](migrationAndSeeding.md) // [Summary](../README.md) // [Next ->](lifecycle.md)**
+**[<- Prev](./1_migrationAndSeeding.md) // [Summary](../README.md) // [Next ->](./3_architecture.md)**
 
 </div>

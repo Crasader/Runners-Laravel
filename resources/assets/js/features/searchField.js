@@ -29,6 +29,7 @@ export class SearchField {
      * The box where the results could apear
      */
     this.resultsBox = document.getElementById(`search-field-${field.name}`)
+    this.currentSelected = 'none'
   }
   /**
    * Launch the triggers for the search actions
@@ -63,10 +64,8 @@ export class SearchField {
    * Attach events to keys
    */
   registerListeners () {
-    this.field.addEventListener('keyup', e => {
+    this.field.addEventListener('keydown', e => {
       console.log('KEYPRESS', e.keyCode)
-      e.preventDefault()
-      e.stopPropagation()
 
       // ESCAPE to exit the field
       if (e.keyCode === 27) {
@@ -79,7 +78,13 @@ export class SearchField {
       // TAB to insert the value and go to the next field
       if (e.keyCode === 9) {
         console.log('TAB PRESSED')
-        //
+        if (this.currentSelected !== 'none') {
+          console.log('Selected field')
+          this.field.value = this.searchResults[this.currentSelected].name
+        }
+        if (document.getElementById(`search-results-${this.field.name}`)) {
+          document.getElementById(`search-results-${this.field.name}`).remove()
+        }
       }
       // ARROW DOWN
       if (e.keyCode === 40) {
@@ -114,7 +119,15 @@ export class SearchField {
       // Enter add the curent selected to the field
       if (e.keyCode === 13) {
         console.log('ENTER PRESSED')
-        //
+        if (this.currentSelected !== 'none') {
+          console.log('Selected field')
+          this.field.value = this.searchResults[this.currentSelected].name
+        }
+        if (document.getElementById(`search-results-${this.field.name}`)) {
+          document.getElementById(`search-results-${this.field.name}`).remove()
+        }
+        e.preventDefault()
+        e.stopPropagation()
       }
     })
   }

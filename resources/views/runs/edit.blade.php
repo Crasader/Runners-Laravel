@@ -147,7 +147,7 @@
                                     <textarea
                                         class="textarea {{ $errors->has('infos') ? ' is-danger' : '' }}"
                                         name="infos"
-                                        placeholder="Informations liées au run, choses a prendre..."
+                                        placeholder="Informations liées au run, choses à prendre..."
                                         >{{ old('infos') ? old('infos') : $run->infos }}</textarea>
                                 </p>
                                 @if ($errors->has('infos'))

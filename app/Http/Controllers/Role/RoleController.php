@@ -74,7 +74,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $this->authorize('update', Role::class);
+        $this->authorize('update', $role);
         return view('roles.edit')->with(compact('role'));
     }
 

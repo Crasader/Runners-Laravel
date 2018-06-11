@@ -39,7 +39,8 @@ class GroupController extends Controller
     {
         $this->authorize('view', Group::class);
         $groups = Group::with('users')->get();
-        return view('groups.manager')->with(compact('groups'));
+        $usersWithoutGroup = User::doesntHave('groups')->get();
+        return view('groups.manager')->with(compact('groups', 'usersWithoutGroup'));
     }
 
     /**
@@ -123,8 +124,12 @@ class GroupController extends Controller
         $users = User::find($userGroupChanges->keys());
         // Iteraites each users
         $users->each(function ($user) use ($userGroupChanges) {
-            // Sync the association
-            $user->groups()->sync([$userGroupChanges->get($user->id)]);
+            if ($userGroupChanges->get($user->id) === 'no-group') {
+                $user->groups()->sync([]);
+            } else {
+                // Sync the association
+                $user->groups()->sync([$userGroupChanges->get($user->id)]);
+            }
         });
         return redirect()
             ->back()

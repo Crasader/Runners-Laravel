@@ -54,30 +54,53 @@
             {{ csrf_field() }}
             {{ method_field('PUT') }}
 
-            <div class="columns is-multiline">
-                @foreach($groups as $group)
-                    <div class="column is-4">
-                        <div class="box" style="background-color: #{{ $group->color }};">
-                            <div class="content">
-                                <h2>{{ $group->name }}</h2>
+            <div class="columns">
+                <div class="column is-9">
+                    <div class="columns is-multiline">
+                        @foreach($groups as $group)
+                            <div class="column is-4">
+                                <div class="box" style="background-color: #{{ $group->color }};">
+                                    <div class="content">
+                                        <h2>{{ $group->name }}</h2>
 
-                                {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
-                                <ul id="group[{{ $group->id }}]" data-group-id="{{ $group->id }}">
-                                    @foreach($group->users as $user)
-                                        <li class="cursor-pointer">
-                                            {{--<span class="icon">
-                                                <i class="fas fa-arrows-alt"></i>
-                                            </span>--}}
-                                            <input type="text" data-user-id="{{ $user->id }}" name="unused[{{ $user->id }}]" value="not-changed" style="display: none;">
-                                            {{ $user->fullname }}
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                        {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
+                                        <ul id="group[{{ $group->id }}]" data-group-id="{{ $group->id }}" style="min-height: 60px;">
+                                            @foreach($group->users as $user)
+                                                <li class="cursor-pointer">
+                                                    {{--<span class="icon">
+                                                        <i class="fas fa-arrows-alt"></i>
+                                                    </span>--}}
+                                                    <input type="text" data-user-id="{{ $user->id }}" name="unused[{{ $user->id }}]" value="not-changed" style="display: none;">
+                                                    {{ $user->fullname }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
 
+                                    </div>
+                                </div>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="column is-3">
+                    <div class="box has-background-light">
+                        <div class="content">
+                            <h2>Sans groupe</h2>
+                                {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
+                                <ul id="group[no-group]" data-group-id="no-group" style="min-height: 60px;">
+                                @foreach($usersWithoutGroup as $user)
+                                    <li class="cursor-pointer">
+                                        {{--<span class="icon">
+                                            <i class="fas fa-arrows-alt"></i>
+                                        </span>--}}
+                                        <input type="text" data-user-id="{{ $user->id }}" name="unused[{{ $user->id }}]" value="not-changed" style="display: none;">
+                                        {{ $user->fullname }}
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </form>
 

@@ -108,7 +108,7 @@ class UsersTableSeeder extends Seeder
          * Create the superuser
          */
         $root = User::create([
-            'name'         => 'root',
+            'name'         => 'Root Toor',
             'email'        => 'root.toor@paleo.ch',
             'password'     => bcrypt('secret'),
             'firstname'    => 'Root',
@@ -125,7 +125,7 @@ class UsersTableSeeder extends Seeder
          * Create a generic user (for tests)
          */
         $runner = User::create([
-            'name'         => 'runner',
+            'name'         => 'Runner Runner',
             'email'        => 'runner@paleo.ch',
             'password'     => bcrypt('runner'),
             'firstname'    => 'Runner',
@@ -145,7 +145,7 @@ class UsersTableSeeder extends Seeder
             // Create a new user record
             $tmpUser = User::create([
                 // The name is generated with fistname and last name (no space, and lowercase)
-                'name'         => str_replace(' ', '', strtolower("{$user[0]}{$user[1]}")),
+                'name'         => "$user[1] $user[0]",
                 // The email is also generated with firstname and lastname and with the @test.local prefix
                 'email'        => str_replace(' ', '', strtolower("{$user[0]}.{$user[1]}@test.local")),
                 'password'     => bcrypt($user[4]),

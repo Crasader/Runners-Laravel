@@ -28,6 +28,7 @@ if (!isset($errorName)) {
             class="input {{ $errors->has($errorName) ? ' is-danger' : '' }}"
             type="{{ $type }}"
             name="{{ $name }}"
+            autocomplete="off"
             @if(old($errorName))
                 value="{{ old($errorName) }}"
             @elseif(isset($value))

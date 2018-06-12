@@ -3,16 +3,16 @@
 namespace App\Policies;
 
 use App\User;
-use App\CarType;
+use App\Kiela;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
- * CarTypePolicy
+ * KielaPolicy
  *
  * @author Bastien Nicoud
  * @package App\Policies
  */
-class CarTypePolicy
+class KielaPolicy
 {
     use HandlesAuthorization;
 
@@ -30,49 +30,49 @@ class CarTypePolicy
     }
 
     /**
-     * Determine whether the user can view the carType.
+     * Determine whether the user can view the kiela.
      *
      * @param  \App\User  $user
-     * @param  \App\CarType  $carType
+     * @param  \App\Kiela  $kiela
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, Kiela $kiela)
     {
         return true;
     }
 
     /**
-     * Determine whether the user can create carTypes.
+     * Determine whether the user can create kielas.
      *
      * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        return $user->may('manage_car_types');
+        return $user->may('manage_kielas');
     }
 
     /**
-     * Determine whether the user can update the carType.
+     * Determine whether the user can update the kiela.
      *
      * @param  \App\User  $user
-     * @param  \App\CarType  $carType
+     * @param  \App\Kiela  $kiela
      * @return mixed
      */
-    public function update(User $user, CarType $carType)
+    public function update(User $user, Kiela $kiela)
     {
-        return $user->may('manage_car_types');
+        return $user->may('manage_kielas');
     }
 
     /**
-     * Determine whether the user can delete the carType.
+     * Determine whether the user can delete the kiela.
      *
      * @param  \App\User  $user
-     * @param  \App\CarType  $carType
+     * @param  \App\Kiela  $kiela
      * @return mixed
      */
-    public function delete(User $user, CarType $carType)
+    public function delete(User $user, Kiela $kiela)
     {
-        return $user->may('manage_car_types');
+        return $user->may('manage_kielas');
     }
 }

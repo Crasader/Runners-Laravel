@@ -31,7 +31,7 @@ class UpdateRun extends FormRequest
     public function rules()
     {
         return [
-            'artist'                  => ['nullable', 'string', 'min:1', 'max:200'],
+            'artist'                  => ['required', 'string', 'min:1', 'max:200', 'exists:artists,name'],
             'infos'                   => ['nullable', 'max:1000'],
             'planned_at'              => ['nullable', 'date'],
             'end_planned_at'          => ['nullable', 'date'],

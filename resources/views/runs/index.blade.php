@@ -105,7 +105,8 @@
                                     <div class="buttons is-right">
                                         @component('components/runs/run_action_buttons', [
                                             'status' => $run->status,
-                                            'id' => $run->id
+                                            'id' => $run->id,
+                                            'run' => $run
                                             ])
                                             is-small
                                         @endcomponent

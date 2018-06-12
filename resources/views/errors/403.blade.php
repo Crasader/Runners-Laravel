@@ -5,7 +5,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li class="is-active"><a href="#" aria-current="page">Erreur 404</a></li>
+<li class="is-active"><a href="#" aria-current="page">Erreur 403</a></li>
 @endsection
 
 @section('content')

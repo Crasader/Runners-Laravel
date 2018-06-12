@@ -35,6 +35,7 @@ class CarTypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', CarType::class);
         return view('carTypes.create');
     }
 
@@ -46,6 +47,7 @@ class CarTypeController extends Controller
      */
     public function store(StoreCarType $request)
     {
+        $this->authorize('create', CarType::class);
         $cartypes = new CarType($request->all());
         $cartypes->save();
         return redirect()->route('carTypes.index');
@@ -59,6 +61,7 @@ class CarTypeController extends Controller
      */
     public function show(CarType $carType)
     {
+        $this->authorize('view', CarType::class);
         return view('carTypes.show')->with(compact('carType'));
     }
 
@@ -89,6 +92,7 @@ class CarTypeController extends Controller
      */
     public function edit(CarType $carType)
     {
+        $this->authorize('update', CarType::class);
         return view('carTypes.edit')->with(compact('carType'));
     }
 
@@ -101,6 +105,7 @@ class CarTypeController extends Controller
      */
     public function update(StoreCarType $request, CarType $carType)
     {
+        $this->authorize('update', CarType::class);
         $carType->fill($request->all());
         $carType->save();
         return redirect()->route('carTypes.index');
@@ -114,6 +119,7 @@ class CarTypeController extends Controller
      */
     public function destroy(CarType $carType)
     {
+        $this->authorize('delete', CarType::class);
         $carType->delete();
         return redirect()->route('carTypes.index');
     }

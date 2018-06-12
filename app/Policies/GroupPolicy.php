@@ -59,7 +59,7 @@ class GroupPolicy
      * @param  \App\Group  $group
      * @return mixed
      */
-    public function update(User $user, Group $group)
+    public function update(User $user)
     {
         return $user->may('manage_groups');
     }

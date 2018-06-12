@@ -70,6 +70,13 @@ class UserProfilePictureController extends Controller
         if ($user->profilePictures()->exists()) {
             Storage::delete($user->profilePictures->first()->path);
             $user->profilePictures()->delete();
+            $default = new Attachment(['type' => 'profile', 'path' => 'profiles/default.jpg']);
+            // Set the owner of this attachments
+            $default->owner()->associate($user);
+            $default->save();
+
+            // add the attachment of this user
+            $user->attachments()->save($default);
 
             // Success message
             return redirect()

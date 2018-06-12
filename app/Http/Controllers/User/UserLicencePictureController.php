@@ -70,7 +70,14 @@ class UserLicencePictureController extends Controller
         if ($user->licencePictures()->exists()) {
             Storage::delete($user->licencePictures->first()->path);
             $user->licencePictures()->delete();
-            
+            $default = new Attachment(['type' => 'licence', 'licence' => 'licences/default.jpg']);
+            // Set the owner of this attachments
+            $default->owner()->associate($user);
+            $default->save();
+
+            // add the attachment of this user
+            $user->attachments()->save($default);
+
             // Success message
             return redirect()
                 ->back()

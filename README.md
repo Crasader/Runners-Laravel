@@ -4,7 +4,7 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## **v2.0.0-beta.3.1**
+## **v2.0.0-beta.3.2**
 
 This version includes dependencies changes, dont forget to :
 * Run `composer install`
@@ -15,20 +15,19 @@ Break changes :
 * x
 
 Changes :
-* Search field now use user full name
+* x
 
 Improuvments :
-* Add box that display users without group in the groups manager
-* Update of the search field with autocomplete to support key modifiers
+* x
 
 Bux fixes :
-* Runs creation without subscription
-* Request validation fails on run creation
-* Data loss on new run when you add subscription or waypoint
+* Policies errors with roles runners and coordinator
+* Pictures errors on update and delete
+* Add permisions in the kielas crud
+* Fix manager edition for runners crud
 
 In progress :
-* Notifications linked to runs actions
-* Schedules crud
+* x
 
 ## Start developping
 

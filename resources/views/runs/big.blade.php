@@ -44,7 +44,10 @@
                                 <div class="columns is-multiline">
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
-                                        <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
+                                        <h4 class="title is-5 title-run">
+                                            @datetext(['date' => $run->planned_at])
+                                            @enddatetext
+                                        </h4>
                                     </div>
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>

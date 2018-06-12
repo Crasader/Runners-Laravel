@@ -4,7 +4,7 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-beta.3.2](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.3)
+## [v2.0.0-beta.3.3](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.3)
 
 This version includes dependencies changes, dont forget to :
 * Migrate the new database `php artisan migrate:fresh --seed`

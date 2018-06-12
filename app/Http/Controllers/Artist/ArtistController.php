@@ -89,7 +89,7 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        $this->authorize('update', Artist::class);
+        $this->authorize('update', $artist);
         return view('artists.edit')->with(compact('artist'));
     }
 
@@ -102,7 +102,7 @@ class ArtistController extends Controller
      */
     public function update(StoreArtist $request, Artist $artist)
     {
-        $this->authorize('update', Artist::class);
+        $this->authorize('update', $artist);
         $artist->fill($request->all());
         $artist->save();
         return redirect()
@@ -118,10 +118,16 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        $this->authorize('delete', Artist::class);
-        $artist->delete();
-        return redirect()
-            ->route('artists.index')
-            ->with('success', "L'artiste : {$artist->name} a bien été supprimé !");
+        $this->authorize('delete', $artist);
+        if ($artist->runs()->exists()) {
+            return redirect()
+                ->back()
+                ->with('warning', "L'artiste {$artist->name} est utilisé dans un ou plusieurs runs, il ne peut pas être supprimé.");
+        } else {
+            $artist->delete();
+            return redirect()
+                ->route('artists.index')
+                ->with('success', "L'artiste : {$artist->name} a bien été supprimé !");
+        }
     }
 }

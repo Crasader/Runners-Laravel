@@ -129,17 +129,19 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="media-right">
-                                                <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
-                                                    class="delete"></button>
-                                                <form id="delete-kiela-user-{{ $schedule->id }}"
-                                                    action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
-                                                        method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-                                                </form>
-                                            </div>
+                                            @can('delete', $schedule)
+                                                <div class="media-right">
+                                                    <button onclick="event.preventDefault();
+                                                        document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
+                                                        class="delete"></button>
+                                                    <form id="delete-kiela-user-{{ $schedule->id }}"
+                                                        action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                </div>
+                                            @endcan
                                         </article>
                                     </div>
                                 @endforeach

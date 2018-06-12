@@ -57,7 +57,7 @@
                             <div class="column is-4">
                                 <div class="box" style="background-color: #{{ $group->color }};">
                                     <div class="content">
-                                        <h2>{{ $group->name }}</h2>
+                                        <h2><a class="has-text-black" href="{{ route('groups.show', ['group' => $group->id]) }}">{{ $group->name }}</a></h2>
 
                                         {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
                                         <ul id="group[{{ $group->id }}]" data-group-id="{{ $group->id }}" style="min-height: 60px;">

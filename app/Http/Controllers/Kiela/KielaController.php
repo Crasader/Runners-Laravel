@@ -127,7 +127,7 @@ class KielaController extends Controller
      */
     public function destroy(Kiela $kiela)
     {
-        $this->authorize('delete', Kiela::class);
+        $this->authorize('delete', $kiela);
         $kiela->delete();
         return redirect()
             ->back()

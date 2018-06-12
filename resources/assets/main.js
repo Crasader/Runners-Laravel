@@ -1,8 +1,17 @@
 /**
  * Main js file for all pages
  */
+import { FoldedBox } from './js/features/foldedBox'
 
 console.log('TUTU')
 
-// Change the filename on file uploads
-// User profile picture form
+// Register folded box component
+
+// Scan the page and get all the serch fields
+let foldedBoxes = document.querySelectorAll('[id^="unfolded-box-"]')
+
+// Initialize all the search fields
+for (let foldedBox of foldedBoxes) {
+  let box = new FoldedBox(foldedBox)
+  box.observe()
+}

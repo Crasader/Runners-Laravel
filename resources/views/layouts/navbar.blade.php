@@ -26,9 +26,11 @@
                         <a class="navbar-item" href="{{ route('runs.index') }}">
                             Afficher les runs
                         </a>
-                        <a class="navbar-item" href="{{ route('runs.create') }}">
-                            Créer un run
-                        </a>
+                        @can('create', App\Run::class)
+                            <a class="navbar-item" href="{{ route('runs.create') }}">
+                                Créer un run
+                            </a>
+                        @endcan
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('waypoints.index') }}">
                             Afficher les waypoints
@@ -59,16 +61,20 @@
                         <a class="navbar-item" href="{{ route('cars.index') }}">
                             Afficher les véhicules
                         </a>
-                        <a class="navbar-item" href="{{ route('cars.create') }}">
-                            Créer un véhicule
-                        </a>
+                        @can('create', App\Car::class)
+                            <a class="navbar-item" href="{{ route('cars.create') }}">
+                                Créer un véhicule
+                            </a>
+                        @endcan
                         <hr class="navbar-divider">
                         <a class="navbar-item" href="{{ route('carTypes.index') }}">
                             Afficher les types de véhicules
                         </a>
-                        <a class="navbar-item" href="{{ route('carTypes.create') }}">
-                            Créer un type de véhicule
-                        </a>
+                        @can('create', App\CarType::class)
+                            <a class="navbar-item" href="{{ route('carTypes.create') }}">
+                                Créer un type de véhicule
+                            </a>
+                        @endcan
                     </div>
                 </div>
 
@@ -81,9 +87,11 @@
                         <a class="navbar-item" href="{{ route('users.index') }}">
                             Afficher les chauffeurs
                         </a>
-                        <a class="navbar-item" href="{{ route('users.create') }}">
-                            Créer un chauffeur
-                        </a>
+                        @can('create', App\User::class)
+                            <a class="navbar-item" href="{{ route('users.create') }}">
+                                Créer un chauffeur
+                            </a>
+                        @endcan
                         <a class="navbar-item" href="{{ route('users.import-form') }}">
                             Importer des chauffeurs
                         </a>
@@ -102,9 +110,11 @@
                         <a class="navbar-item" href="{{ route('groups.index') }}">
                             Liste des groupes
                         </a>
-                        <a class="navbar-item" href="{{ route('groups.create') }}">
-                            Créer un groupe
-                        </a>
+                        @can('create', App\Group::class)
+                            <a class="navbar-item" href="{{ route('groups.create') }}">
+                                Créer un groupe
+                            </a>
+                        @endcan
                     </div>
                 </div>
 
@@ -117,13 +127,6 @@
                 <a class="navbar-item" href="{{ route('kiela.index') }}">
                     Kiéla?
                 </a>
-
-                {{-- Logs page --}}
-                @can('view', App\Log::class)
-                    <a class="navbar-item" href="{{ route('logs.index') }}">
-                        Logs
-                    </a>
-                @endcan
             </div>
 
             <div class="navbar-end">
@@ -160,6 +163,13 @@
                             <a class="navbar-item" href="{{ route('notifications.index') }}">
                                 <span class="tag is-rounded is-dark">{{ Auth::user()->unreadNotifications()->count() }}</span>&nbsp;Notifications
                             </a>
+                            {{-- Logs page --}}
+                            @can('view', App\Log::class)
+                                <hr class="navbar-divider">
+                                <a class="navbar-item" href="{{ route('logs.index') }}">
+                                    Logs
+                                </a>
+                            @endcan
                             @can('view', App\Role::class)
                                 <hr class="navbar-divider">
                                 <a class="navbar-item" href="{{ route('roles.index') }}">

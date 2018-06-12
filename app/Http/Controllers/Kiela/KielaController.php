@@ -57,6 +57,7 @@ class KielaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Kiela::class);
         //Set now time to show the hour
         $now = new Carbon();
 
@@ -71,6 +72,7 @@ class KielaController extends Controller
      */
     public function store(StoreKielaUser $request)
     {
+        $this->authorize('create', Kiela::class);
         //Get request
         $kiela = new Kiela($request->all());
 
@@ -125,6 +127,7 @@ class KielaController extends Controller
      */
     public function destroy(Kiela $kiela)
     {
+        $this->authorize('delete', $kiela);
         $kiela->delete();
         return redirect()
             ->back()

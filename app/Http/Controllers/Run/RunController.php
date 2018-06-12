@@ -159,6 +159,7 @@ class RunController extends Controller
      */
     public function destroy(Run $run)
     {
+        $this->authorize('delete', $run);
         $run->subscriptions->each(function ($sub) {
             $sub->delete();
         });
@@ -166,7 +167,7 @@ class RunController extends Controller
         $run->artists()->detach();
         $run->delete();
         return redirect()
-            ->back()
+            ->route('runs.index')
             ->with('success', "Le run $run->name à bien été supprimé.");
     }
 

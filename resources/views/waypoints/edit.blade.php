@@ -22,7 +22,7 @@
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    @can('update', App\Waypoint::class)
+                    @can('update', $waypoint)
                         <p class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('edit-waypoint-form').submit();"

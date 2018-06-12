@@ -37,6 +37,7 @@ class CarController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Car::class);
         return view('cars.create');
     }
 
@@ -48,6 +49,7 @@ class CarController extends Controller
      */
     public function store(StoreCar $request)
     {
+        $this->authorize('create', Car::class);
         $cars = new Car($request->all());
         $cars->type()->associate(CarType::find($request->type_id));
         $cars->save();
@@ -62,6 +64,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
+        $this->authorize('view', Car::class);
         return view('cars.show')->with(compact('car'));
     }
 
@@ -92,6 +95,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
+        $this->authorize('update', $car);
         return view('cars.edit')->with(compact('car'));
     }
 
@@ -104,6 +108,7 @@ class CarController extends Controller
      */
     public function update(UpdateCar $request, Car $car)
     {
+        $this->authorize('update', $car);
         $car->fill($request->all());
         $car->type()->associate(CarType::find($request->type_id));
         $car->save();
@@ -118,6 +123,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        $this->authorize('delete', $car);
         if ($car->runDrivers()->exists()) {
             return redirect()
                 ->back()

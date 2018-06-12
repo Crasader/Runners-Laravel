@@ -58,6 +58,6 @@ Permissions assignables for **all other users** :
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](./3_architecture.md) // [Summary](../README.md) // [Next ->](./5_status.md)**
 
 </div>

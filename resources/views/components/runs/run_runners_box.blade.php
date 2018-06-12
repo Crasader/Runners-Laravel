@@ -5,51 +5,35 @@
   -- @author Bastien Nicoud
   --}}
 
-<table class="table is-striped is-hoverable is-fullwidth">
-    <thead>
-        <tr>
-            <th>Chauffeur</th>
-            <th>Type de véhicule</th>
-            <th>Véhicule</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="box content">
+    <strong>{{ $subscriptions->count() }}</strong> Runners pour ce run :
+    <ul>
         @foreach($subscriptions as $subscription)
-            <tr>
-                <th>
-                    @if($subscription->user()->exists())
-                        <a href="{{ route('users.show', ['user' => $subscription->user->id]) }}">
-                            {{ $subscription->user->fullname }}
-                        </a>
-                    @else
-                        Pas de chauffeur selectionné
-                    @endif
-                </th>
-                <td>
+            <li>
+                @if($subscription->user()->exists())
+                    <a href="{{ route('users.show', ['user' => $subscription->user->id]) }}">
+                        {{ $subscription->user->fullname }},
+                    </a>
+                @else
+                    Chauffeur a définir,
+                @endif
+                @if($subscription->car()->exists())
+                    avec le véhicule
+                    <a href="{{ route('cars.show', ['car' => $subscription->car->id]) }}">
+                        {{ $subscription->car->name }}
+                    </a>
+                @else
+                    avec un véhicule de type
                     @if($subscription->carType()->exists())
                         <a href="{{ route('carTypes.show', ['carType' => $subscription->carType->id]) }}">
                             {{ $subscription->carType->name }}
                         </a>
+                        , pas encore défini présisément.
                     @else
-                        Pas de type de véhicule spécifié
+                        pas encore défini.
                     @endif
-                </td>
-                <td>
-                    @if($subscription->car()->exists())
-                        <a href="{{ route('cars.show', ['car' => $subscription->car->id]) }}">
-                            {{ $subscription->car->name }}
-                        </a>
-                    @else
-                        Pas de véhicule specifié
-                    @endif
-                </td>
-                <td>
-                    {{-- Status tag (see related component) --}}
-                    @component('components/status_tag', ['status' => $subscription->status])
-                    @endcomponent
-                </td>
-            </tr>
+                @endif
+            </li>
         @endforeach
-    </tbody>
-</table>
+    </ul>
+</div>

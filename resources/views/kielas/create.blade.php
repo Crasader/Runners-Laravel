@@ -10,9 +10,13 @@
     <li><a href="{{ route('kiela.index') }}">Kiéla?</a></li>
     <li class="is-active"><a href="#" aria-current="page">Ajouter un chauffeur</a></li>
 @endsection
-  
+
+@push('scripts')
+    <script src="{{ mix('js/pages/kielas/create.js') }}"></script>
+@endpush
+
 @section('content')
-  
+
 <div class="section">
     <div class="container">
         <div class="columns">
@@ -30,27 +34,25 @@
 
                     {{-- Form add user --}}
                     <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label">Chauffeur</label>
-                    </div>
-                    <div class="field-body">
-
-                        {{-- user_id --}}
-                        <div class="field is-narrow">
-                            <div class="control">
-                                <div class="select is-fullwidth">
-                                    <select name="user_id">
-                                        @foreach (App\User::all() as $user)
-                                            <option value="{{$user->id}}" >{{$user->firstname}} {{$user->lastname}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="field-label is-normal">
+                            <label class="label">Chauffeur</label>
                         </div>
+                        <div class="field-body">
 
+                            {{-- Runner--}}
+                            {{-- SEARCH FIELD --}}
+                            @component('components/horizontal_search_input', [
+                                'name'        => "name",
+                                'placeholder' => 'Utilisateur à ajouter temporairement',
+                                'type'        => 'text',
+                                'icon'        => 'fa-user',
+                                'searchUrl'   => route('users.search'),
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
+                        </div>
                     </div>
-                </div>
 
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
@@ -58,16 +60,16 @@
                         </div>
                         <div class="field-body">
 
-                        {{-- START TIME --}}
-                        @component('components/horizontal_form_input', [
-                            'name'        => 'start_time',
-                            'placeholder' => "2018-04-19 15:25:39",
-                            'type'        => 'datetime-local',
-                            'icon'        => 'fa-hourglass-start',
-                            'value'       => $now->format('Y-m-d\\TH:i:s'),
-                            'errors'      => $errors
-                            ])
-                        @endcomponent
+                            {{-- START TIME --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'start_time',
+                                'placeholder' => "2018-04-19 15:25:39",
+                                'type'        => 'datetime-local',
+                                'icon'        => 'fa-hourglass-start',
+                                'value'       => $now->format('Y-m-d\\TH:i:s'),
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
 
                         </div>
                     </div>
@@ -78,16 +80,16 @@
                         </div>
                         <div class="field-body">
 
-                        {{-- END TIME --}}
-                        @component('components/horizontal_form_input', [
-                            'name'        => 'end_time',
-                            'placeholder' => "Type de véhicule",
-                            'type'        => 'datetime-local',
-                            'icon'        => 'fa-hourglass-end',
-                            'value'       => $now->addMinutes(60)->format('Y-m-d\\TH:i:s'),
-                            'errors'      => $errors
-                            ])
-                        @endcomponent
+                            {{-- END TIME --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'end_time',
+                                'placeholder' => "Type de véhicule",
+                                'type'        => 'datetime-local',
+                                'icon'        => 'fa-hourglass-end',
+                                'value'       => $now->addMinutes(60)->format('Y-m-d\\TH:i:s'),
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
 
                         </div>
                     </div>
@@ -106,7 +108,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </form>
@@ -114,6 +116,5 @@
         </div>
     </div>
 </div>
-  
+
 @endsection
-  

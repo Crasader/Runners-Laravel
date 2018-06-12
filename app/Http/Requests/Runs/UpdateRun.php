@@ -45,4 +45,16 @@ class UpdateRun extends FormRequest
             'remove-runner'           => ['sometimes', 'integer']
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'subscriptions.*.user.exists' => "Cet utilisateur n'existe pas"
+        ];
+    }
 }

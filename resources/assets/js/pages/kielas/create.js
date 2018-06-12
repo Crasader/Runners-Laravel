@@ -5,8 +5,6 @@
 */
 import { SearchField } from '../../features/searchField'
 
-console.log('RUNS CREATE')
-
 // Scan the page and get all the serch fields
 let fields = document.querySelectorAll('[id^="search-input-"]')
 

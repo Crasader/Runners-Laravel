@@ -82,7 +82,11 @@
                 <div class="content box">
                     <p>
                         <strong>
-                            {{ $run->passengers }}
+                            @if(empty($run->passengers))
+                                0
+                            @else
+                                {{ $run->passengers }}
+                            @endif
                         </strong>
                         passagers
                     </p>

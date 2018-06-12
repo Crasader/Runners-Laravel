@@ -23,9 +23,6 @@
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    <p class="control">
-                        <a href="{{ route('groups.create') }}" class="button is-info">Horaire du groupe</a>
-                    </p>
                     @can('update', $group)
                         <p class="control">
                             <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="button is-info">Modifier le groupe</a>

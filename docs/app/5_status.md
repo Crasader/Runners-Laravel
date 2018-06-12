@@ -55,6 +55,6 @@
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](4_permissions.md) // [Summary](../README.md) // [Next ->](./6_searchInput.md)**
 
 </div>

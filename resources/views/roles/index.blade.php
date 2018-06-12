@@ -46,32 +46,19 @@
                         <tr>
                             <th>Slug</th>
                             <th>Nom</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Slug</th>
                             <th>Nom</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($roles as $role)
-                            <tr>
+                            <tr onclick="window.location.href = '{{ route('roles.show', ['role' => $role->id]) }}'">
                                 <th>{{ $role->slug }}</th>
                                 <td>{{ $role->name }}</td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons has-addons is-right">
-                                        <a href="{{ route('roles.edit', ['role' => $role->id]) }}" class="button is-small is-link">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('roles.show', ['role' => $role->id]) }}" class="button is-small is-link">
-                                            Show
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

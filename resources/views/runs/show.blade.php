@@ -34,7 +34,11 @@
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $run)
                         <div class="control">
-                            @component('components/runs/run_action_buttons', ['status' => $run->status, 'id' => $run->id])
+                            @component('components/runs/run_action_buttons', [
+                                'status' => $run->status,
+                                'id' => $run->id,
+                                'run' => $run
+                                ])
                             @endcomponent
                         </div>
                         <p class="control">

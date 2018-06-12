@@ -24,8 +24,10 @@
                     <b><u>{{$festival->name}}</u></b>
                 </div>
                 <div class="column is-4">
-                    <!-- Add new user to kiela -->
-                    <a href="{{ route('kiela.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
+                    @can('create', App\Kiela::class)
+                        <!-- Add new user to kiela -->
+                        <a href="{{ route('kiela.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
+                    @endcan
                 </div>
 
             </div>

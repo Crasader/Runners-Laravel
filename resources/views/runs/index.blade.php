@@ -45,13 +45,13 @@
                 ],
             ],
             "search" => "name",
-            "orderBy" => [
-                "planned_at" => "Prévu à",
-                "name" => "Nom",
-                "passengers" => "Nb passagers",
-                "status" => "Status",
-                "started_at" => "Démarré à",
-            ]
+            // "orderBy" => [
+            //     "planned_at" => "Prévu à",
+            //     "name" => "Nom",
+            //     "passengers" => "Nb passagers",
+            //     "status" => "Status",
+            //     "started_at" => "Démarré à",
+            // ]
         ]])
         @endcomponent
 

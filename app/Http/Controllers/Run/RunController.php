@@ -42,6 +42,7 @@ class RunController extends Controller
         $this->authorize('view', Run::class);
         $runs = Run::whereDate('planned_at', '>', Carbon::now()->toDateString())
             ->orderBy('planned_at', 'asc')
+            ->whereNotIn('status', ['finished', 'drafting'])
             ->limit(30)
             ->get();
         return view('runs.big')->with(compact('runs'));

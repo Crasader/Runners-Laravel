@@ -27,28 +27,32 @@
                                 name="filter-column"
                                 value="{{ $columns }}"
                                 type="text">
-                            <p class="title is-6">
+                            <p class="title is-6 has-text-centered">
                                 Filtrer {{ $columns }} :
                             </p>
-                            @foreach($fields as $key => $val)
-                                <div class="control">
-                                    <label class="checkbox">
-                                        <input
-                                            name="filter[]"
-                                            value="{{ $key }}"
-                                            type="checkbox"
-                                            {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
-                                        {{ $val }}
-                                    </label>
-                                </div>
-                            @endforeach
+                            <div class="columns is-multiline is-gapless">
+                                @foreach($fields as $key => $val)
+                                    <div class="column is-half">
+                                        <div class="control">
+                                            <label class="checkbox">
+                                                <input
+                                                    name="filter[]"
+                                                    value="{{ $key }}"
+                                                    type="checkbox"
+                                                    {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
+                                                {{ $val }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     @endforeach
 
                     {{-- SEARCH FILTER --}}
-                    @if ($filters["search"])
+                    @if (isset($filters["search"]))
                         <div class="column">
-                            <p class="title is-6">
+                            <p class="title is-6 has-text-centered">
                                 Rechercher :
                             </p>
                             <input
@@ -67,9 +71,9 @@
                     @endif
 
                     {{-- SORT FILTER --}}
-                    @if ($filters["orderBy"])
+                    @if (isset($filters["orderBy"]))
                         <div class="column">
-                            <p class="title is-6">
+                            <p class="title is-6 has-text-centered">
                                 Trier par :
                             </p>
                             <div class="select">

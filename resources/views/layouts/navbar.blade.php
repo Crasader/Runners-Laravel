@@ -23,7 +23,7 @@
                         <a class="navbar-item" href="{{ route('runs.big') }}">
                             Grand affichage
                         </a>
-                        <a class="navbar-item" href="{{ route('runs.index') }}">
+                        <a class="navbar-item" href="{{ route('runs.index') }}?filter-column=status&filter%5B%5D=ready&filter%5B%5D=gone&filter%5B%5D=error&filter%5B%5D=drafting&filter%5B%5D=needs_filling&needle=&search=name">
                             Afficher les runs
                         </a>
                         @can('create', App\Run::class)

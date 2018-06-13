@@ -222,6 +222,8 @@ class Run extends Model
         if (isset($runDatas['subscriptions'])) {
             $this->saveSubscriptions(collect($runDatas['subscriptions']));
         }
+        $this->save();
+        $this->updateStatus();
     }
 
     /**
@@ -441,6 +443,8 @@ class Run extends Model
         // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
         if ($this->needsFilling()) {
             $this->status = 'needs_filling';
+        } elseif ($this->error()) {
+            $this->status = 'error';
         } else {
             $this->status = 'ready';
         }
@@ -460,10 +464,47 @@ class Run extends Model
         $needsFilling |= $this->artists()->first() ? false : true;
         $needsFilling |= $this->passengers > 1 ? false : true;
         $needsFilling |= $this->planned_at ? false : true;
-        $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
-        $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+        if ($this->subscriptions()->exists()) {
+            $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
+            $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+        } else {
+            $needsFilling |= true;
+        }
         $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
         return $needsFilling;
+    }
+
+    /**
+     * MODEL METHOD
+     * Check if the run is in error
+     *
+     * @return bool
+     */
+    public function error()
+    {
+        return false;
+    }
+
+    /**
+     * MODEL METHOD
+     * Check the contents of the run a sets the status
+     *
+     * @return void
+     */
+    public function updateStatus()
+    {
+        if ($this->status === 'drafting') {
+            $this->save();
+        } else {
+            if ($this->needsFilling()) {
+                $this->status = 'needs_filling';
+            } elseif ($this->error()) {
+                $this->status = 'error';
+            } else {
+                $this->status = 'ready';
+            }
+            $this->save();
+        }
     }
 
     /**
@@ -498,7 +539,7 @@ class Run extends Model
     public function stop()
     {
         $this->status = 'finished';
-        $this->ended_at = Carbon::now();
+        $this->ended_at = now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
             $item->status = "free";
@@ -543,7 +584,7 @@ class Run extends Model
     public function forceStop()
     {
         $this->status = 'finished';
-        $this->ended_at = Carbon::now();
+        $this->ended_at = now();
         // Temporary sets the status
         $this->cars->each(function ($item, $key) {
             $item->status = "free";

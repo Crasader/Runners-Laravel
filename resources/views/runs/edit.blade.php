@@ -87,7 +87,7 @@
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
-                                    Si inéxistant, il sera ajouté a la base de données.
+                                    Si inexistant, il sera ajouté a la base de données.
                                 </p>
                             @endcomponent
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Role;
+use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,6 @@ use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
-use App\Status;
 
 /**
  * UserController

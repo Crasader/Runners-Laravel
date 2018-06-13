@@ -31,7 +31,7 @@ class UserResource extends Resource
             'email'         => $this->email,
             'phone_number'  => $this->phone_number,
             'sex'           => $this->sex,
-            'status'        => $this->status,
+            'status'        => $this->status()->slug,
             'image_profile' => asset(Storage::url($this->profilePictures()->first()->path))
         ];
     }

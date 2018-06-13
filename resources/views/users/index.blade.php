@@ -87,7 +87,7 @@
                                 <td>{{ $user->phone_number }}</td>
                                 <td>
                                     {{-- Status tag (see related component) --}}
-                                    @statustag(['status' => $user->status])
+                                    @statustag(['status' => $user->status()->slug])
                                     @endstatustag
                                 </td>
                             </tr>

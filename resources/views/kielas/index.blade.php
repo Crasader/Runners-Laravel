@@ -21,7 +21,6 @@
                         @datetext(['date' => $now])
                         @enddatetext
                     </h1>
-                    <b><u>{{$festival->name}}</u></b>
                 </div>
                 <div class="column is-4">
                     @can('create', App\Kiela::class)
@@ -78,7 +77,7 @@
                                                 <div class="content">
                                                     <p>
                                                         <a href="{{ route('users.show', ['user' => $user->id]) }}">{{$user->firstname}} {{$user->lastname}}</a>
-                                                        @component('components/status_tag', ['status' => $user->status])
+                                                        @component('components/status_tag', ['status' => $user->status()->slug])
                                                         @endcomponent
                                                         <br>
                                                         @if ($user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
@@ -116,7 +115,7 @@
                                                 <div class="content">
                                                     <p>
                                                         <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}">{{$schedule->user->firstname}} {{$schedule->user->lastname}}</a>
-                                                        @component('components/status_tag', ['status' => $schedule->user->status])
+                                                        @component('components/status_tag', ['status' => $schedule->user->status()->slug])
                                                         @endcomponent
                                                         <br>
                                                         @if ($schedule->user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())

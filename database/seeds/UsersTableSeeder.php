@@ -115,11 +115,10 @@ class UsersTableSeeder extends Seeder
             'firstname'    => 'Root',
             'lastname'     => 'Toor',
             'phone_number' => '0794657846',
-            'sex'          => 'm',
-            'status'       => 'free'
+            'sex'          => 'm'
         ]);
         // Asociate the admin role
-        $root->statuses()->save(Status::where('slug', 'free')->first());
+        $root->statuses()->save(Status::where([['slug', 'free'], ['type', 'App\User']])->first());
         $root->roles()->save(Role::where('slug', 'root')->first());
         $root->groups()->save(Group::orderBy('id', 'desc')->first());
 
@@ -134,10 +133,9 @@ class UsersTableSeeder extends Seeder
             'lastname'     => 'Runner',
             'phone_number' => '0794657846',
             'sex'          => 'm',
-            'status'       => 'free'
         ]);
         // Asociate the runner role
-        $runner->statuses()->save(Status::where('slug', 'free')->first());
+        $runner->statuses()->save(Status::where([['slug', 'free'], ['type', 'App\User']])->first());
         $runner->roles()->save(Role::where('slug', 'runner')->first());
         $runner->groups()->save(Group::first());
 
@@ -156,10 +154,9 @@ class UsersTableSeeder extends Seeder
                 'firstname'    => $user[1],
                 'phone_number' => $user[2],
                 'sex'          => $user[3],
-                'status'       => $status->random()
             ]);
             // Attach the right role and group for this user
-            $tmpUser->statuses()->save(Status::where('slug', $status->random())->first());
+            $tmpUser->statuses()->save(Status::where([['slug', $status->random()], ['type', 'App\User']])->first());
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());
             $tmpUser->groups()->save(Group::where('name', $user[5])->first());
             // Attatch the 2016 and 2017 edition of paleo to this user

@@ -42,15 +42,18 @@
                             </div>
                             <div class="column is-6 has-border-right">
                                 <div class="columns is-multiline">
+                                    {{-- Display runs waypoints --}}
+                                    <div class="column is-12">
+                                        @waypoints(['run' => $run])
+                                        @endwaypoints
+                                    </div>
                                     <div class="column is-6">
-                                        <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
                                         <h4 class="title is-5 title-run">
                                             @datetext(['date' => $run->planned_at])
                                             @enddatetext
                                         </h4>
                                     </div>
                                     <div class="column is-6">
-                                        <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>
                                         <p>{{ str_limit($run->infos, 200, ' ...') }}</p>
                                     </div>
                                 </div>

@@ -16,7 +16,7 @@
 
                 {{-- Runs menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="{{ route('runs.index') }}">
+                    <a class="navbar-link" href="{{ route('runs.index') }}?filter-column=status&filter%5B%5D=ready&filter%5B%5D=gone&filter%5B%5D=error&filter%5B%5D=drafting&filter%5B%5D=needs_filling&needle=&search=name">
                         Runs
                     </a>
                     <div class="navbar-dropdown is-boxed">

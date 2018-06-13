@@ -38,16 +38,20 @@ class KielaController extends Controller
         } else {
             $now = new Carbon();
         }
-        //Select all users and show by current status
-        $users = User::orderBy('status', 'asc')->get();
-        //Get current festival
-        $festival = Festival::whereYear('starts_on', date('Y'))->get()->first();
         //Query to get user add on Kiela by button
-        $presentKiela = Kiela::orderBy('user_id', 'asc')->with('user')->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
+        $presentKiela = Kiela::orderBy('user_id', 'asc')
+            ->with('user')
+            ->where('start_time', '<=', $now)
+            ->where('end_time', '>=', $now)
+            ->get();
         //Query to get groups here now
-        $present = Schedule::orderBy('group_id', 'asc')->with(['group', 'group.users'])->where('start_time', '<=', $now)->where('end_time', '>=', $now)->get();
+        $present = Schedule::orderBy('group_id', 'asc')
+            ->with(['group', 'group.users'])
+            ->where('start_time', '<=', $now)
+            ->where('end_time', '>=', $now)
+            ->get();
 
-        return view('kielas.index')->with(compact('now', 'users', 'festival', 'presentKiela', 'present'));
+        return view('kielas.index')->with(compact('now', 'presentKiela', 'present'));
     }
 
     /**

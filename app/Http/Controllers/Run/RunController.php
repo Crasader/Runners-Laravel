@@ -66,10 +66,10 @@ class RunController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Runs\StoreNewRun  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewRun $request)
+    public function store(Request $request)
     {
         //
     }

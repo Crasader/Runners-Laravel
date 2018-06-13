@@ -23,7 +23,7 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">
                     {{ $user->fullname }}
-                    @component('components/status_tag', ['status' => $user->status])
+                    @component('components/status_tag', ['status' => $user->status()->slug])
                     @endcomponent
                 </h1>
             </div>
@@ -201,7 +201,7 @@
                             </div>
                             <div class="column is-8">
                                 <p>
-                                    @statustag(['status' => $user->status])
+                                    @statustag(['status' => $user->status()->slug])
                                     @endstatustag
                                 </p>
                             </div>

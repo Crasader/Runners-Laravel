@@ -17,6 +17,7 @@ use App\Schedule;
 use App\RunDriver;
 use App\Attachment;
 use BaconQrCode\Writer;
+use App\Extensions\Statusable;
 use Illuminate\Support\Facades\Auth;
 use \BaconQrCode\Renderer\Image\Png;
 use App\Extensions\Filters\Filterable;
@@ -35,7 +36,7 @@ use App\Events\Log\LogDatabaseRestoreEvent;
  */
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, Filterable;
+    use Notifiable, SoftDeletes, Filterable, Statusable;
 
     /**
      * MODEL PROPERTY
@@ -321,7 +322,7 @@ class User extends Authenticatable
     {
         // If no role slug passed
         if ($roleSlug === null) {
-            $this->roles()->attach(Role::where('slug', 'runner')->first());
+            $this->roles()->sync(Role::where('slug', 'runner')->first()->id);
         } else {
             $this->roles()->sync([Role::where('slug', $roleSlug)->first()->id]);
         }

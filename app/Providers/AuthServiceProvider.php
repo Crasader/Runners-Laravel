@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 use App\Group;
 use App\Kiela;
+use App\Status;
 use App\Artist;
 use App\Comment;
 use App\CarType;
@@ -22,6 +23,7 @@ use App\Policies\UserPolicy;
 use App\Policies\KielaPolicy;
 use App\Policies\GroupPolicy;
 use App\Policies\ArtistPolicy;
+use App\Policies\StatusPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\CarTypePolicy;
 use App\Policies\SchedulePolicy;
@@ -48,7 +50,8 @@ class AuthServiceProvider extends ServiceProvider
         Artist::class   => ArtistPolicy::class,
         Waypoint::class => WaypointPolicy::class,
         Log::class      => LogPolicy::class,
-        Kiela::class    => KielaPolicy::class
+        Kiela::class    => KielaPolicy::class,
+        Status::class   => StatusPolicy::class
     ];
 
     /**

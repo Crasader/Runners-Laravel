@@ -132,7 +132,6 @@ class UserController extends Controller
     public function update(UpdateUser $request, User $user)
     {
         $this->authorize('update', $user);
-
         $user->fill($request->all());
         $user->generateName();
         $user->save();
@@ -140,7 +139,7 @@ class UserController extends Controller
         $user->setStatus($request->status);
 
         return redirect()
-            ->route('users.edit', ['user' => $user->id])
+            ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été modifié");
     }
 

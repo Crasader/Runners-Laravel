@@ -42,7 +42,7 @@ class StoreUser extends FormRequest
             'phone_number'  => ['required', 'min:2', 'max:100'],
             'sex'           => ['required', 'filled', Rule::in(['m', 'w'])],
             'role'          => ['required', 'exists:roles,slug', new Can('associate', Role::class)],
-            'status'        => ['required', 'exists:statuses,slug']
+            'status'        => ['required', 'exists:statuses,slug', new Can('associate', Status::class)]
         ];
     }
 }

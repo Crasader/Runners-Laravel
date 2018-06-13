@@ -6,6 +6,7 @@ use App\Rules\Can;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Role;
+use App\Status;
 
 /**
  * UpdateUser
@@ -45,7 +46,7 @@ class UpdateUser extends FormRequest
             'phone_number'  => ['sometimes', 'min:2', 'max:100'],
             'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])],
             'role'          => ['sometimes', 'exists:roles,slug', new Can('associate', Role::class)],
-            'status'        => ['sometimes', 'exists:statuses,slug']
+            'status'        => ['sometimes', 'exists:statuses,slug', new Can('associate', Status::class)]
         ];
     }
 }

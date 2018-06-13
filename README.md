@@ -4,26 +4,30 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-beta.3.3](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.3)
+## [v2.0.0-beta.3.4](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.4)
 
-This version includes dependencies changes, dont forget to :
-* Migrate the new database `php artisan migrate:fresh --seed`
-* Generates new assets `npm run dev`
+Don't forget :
+* Migrate the new database `php artisan migrate`
 
 Break changes :
 * x
 
 Changes :
-* Add folding box to hidden comments and logs in the runs show page
-* Change date display in runs big screen
-* Add default filters in the runs page
-* Hidden finished runs in the big screen
+* x
 
 Improuvments :
 * x
 
-Bux fixes :
-* x
+Resolved Issues :
+* [Username #73](https://github.com/CPNV-ES/Runners-Laravel/issues/73)
+* [Status update #71](https://github.com/CPNV-ES/Runners-Laravel/issues/71)
+* [More info #70](https://github.com/CPNV-ES/Runners-Laravel/issues/70)
+* [Default run filters #69](https://github.com/CPNV-ES/Runners-Laravel/issues/69)
+* [Runner not found #67](https://github.com/CPNV-ES/Runners-Laravel/issues/67)
+* [Bad hint #66](https://github.com/CPNV-ES/Runners-Laravel/issues/66)
+* [Spelling #65](https://github.com/CPNV-ES/Runners-Laravel/issues/65)
+* [Interface cleanup #64](https://github.com/CPNV-ES/Runners-Laravel/issues/64)
+* [Validator rule to authorize field edition with specific policie. #63](https://github.com/CPNV-ES/Runners-Laravel/issues/63)
 
 In progress :
 * x

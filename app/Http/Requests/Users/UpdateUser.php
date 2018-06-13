@@ -44,7 +44,8 @@ class UpdateUser extends FormRequest
             ],
             'phone_number'  => ['sometimes', 'min:2', 'max:100'],
             'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])],
-            'role'          => ['sometimes', new Can('associate', Role::class)]
+            'role'          => ['sometimes', 'exists:roles,slug', new Can('associate', Role::class)],
+            'status'        => ['sometimes', 'exists:statuses,slug']
         ];
     }
 }

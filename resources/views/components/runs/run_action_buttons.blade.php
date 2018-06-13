@@ -19,7 +19,7 @@
                 event.stopPropagation();
                 document.getElementById('stop-run-form-{{ $id }}').submit();"
                 class="button {{ $slot }} is-danger">
-                Arréter
+                Arrêter
             </a>
         @endcan
         @break

@@ -59,7 +59,7 @@
         @break
 
     @case('ready')
-        <span class="tag {{ $slot }} is-success">Prét</span>
+        <span class="tag {{ $slot }} is-success">Prêt</span>
         @break
 
     @case('drafting')

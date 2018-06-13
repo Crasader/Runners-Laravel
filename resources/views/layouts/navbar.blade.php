@@ -1,7 +1,7 @@
 <nav class="navbar is-light is-spaced">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item" href="/">
+            <a class="navbar-item" href="{{ route('infos') }}">
                 <img src="/img/logo.svg" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
             </a>
             <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
@@ -16,7 +16,7 @@
 
                 {{-- Runs menu --}}
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="{{ route('runs.index') }}">
+                    <a class="navbar-link" href="{{ route('runs.index') }}?filter-column=status&filter%5B%5D=ready&filter%5B%5D=gone&filter%5B%5D=error&filter%5B%5D=drafting&filter%5B%5D=needs_filling&needle=&search=name">
                         Runs
                     </a>
                     <div class="navbar-dropdown is-boxed">

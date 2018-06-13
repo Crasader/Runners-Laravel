@@ -114,24 +114,6 @@
                     </div>
 
                     <div class="field is-horizontal">
-                        <div class="field-label"></div>
-                        <div class="field-body">
-
-                            {{-- USERNAME --}}
-                            @component('components/horizontal_form_input', [
-                                'name'        => 'name',
-                                'placeholder' => "Nom d'utilisateur",
-                                'value'       => $user->name,
-                                'type'        => 'text',
-                                'icon'        => 'fa-user',
-                                'errors'      => $errors
-                                ])
-                            @endcomponent
-
-                        </div>
-                    </div>
-
-                    <div class="field is-horizontal">
                         <div class="field-label is-normal">
                             <label class="label">Coordonées</label>
                         </div>

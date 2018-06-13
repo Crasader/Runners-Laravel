@@ -167,8 +167,9 @@ class RunController extends Controller
         $run->waypoints()->detach();
         $run->artists()->detach();
         $run->delete();
-        return redirect()
-            ->route('runs.index')
+        // We use plain url here to pass the query string parameters
+        return redirect('runs?filter-column=status&filter%5B%5D=ready&filter%5B%5D=gone&filter%5B%5D=error&filter%5B%5D=drafting&filter%5B%5D=needs_filling&needle=&search=name')
+            // we can change it to ->route('runs.index')
             ->with('success', "Le run $run->name à bien été supprimé.");
     }
 

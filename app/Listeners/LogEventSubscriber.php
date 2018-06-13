@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Log;
+use App\Comment;
+use App\Attachment;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +12,6 @@ use App\Events\Log\LogDatabaseCreateEvent;
 use App\Events\Log\LogDatabaseUpdateEvent;
 use App\Events\Log\LogDatabaseDeleteEvent;
 use App\Events\Log\LogDatabaseRestoreEvent;
-use App\Comment;
 
 /**
  * LogEventSubscriber
@@ -41,6 +42,7 @@ class LogEventSubscriber
     public function onDatabaseCreate($event)
     {
         $this->log($event->model, "created");
+        // Create special log for comments
         if ($event->model instanceof Comment) {
             $this->log($event->model->commentable, "commented");
         }
@@ -52,7 +54,12 @@ class LogEventSubscriber
     public function onDatabaseUpdate($event)
     {
         $this->log($event->model, "updated");
-        // Create special log for comments
+        // Special fog for Qr codes
+        if ($event->model instanceof Attachment) {
+            if ($event->model->type === 'qrcode') {
+                $this->log($event->model->attachable, "qrcode-generated");
+            }
+        }
     }
 
     /**

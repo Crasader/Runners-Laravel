@@ -34,6 +34,14 @@
         <span class="tag {{ $slot }} is-info">Déconnexion de l'administration</span>
         @break
 
+    @case('qrcode-generated')
+        <span class="tag {{ $slot }} is-info">QR code généré</span>
+        @break
+
+    @case('qrcode-deleted')
+        <span class="tag {{ $slot }} is-info">QR code supprimé</span>
+        @break
+
     @default
         <span class="tag {{ $slot }} is-light">Aucun status</span>
 @endswitch

@@ -183,6 +183,15 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
+     * Get ths status of the user
+     */
+    public function statuses()
+    {
+        return $this->morphToMany(Status::class, 'statusable');
+    }
+
+    /**
+     * MODEL RELATION
      * Gets the driver license for this user
      */
     public function attachments()

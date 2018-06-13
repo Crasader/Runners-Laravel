@@ -330,9 +330,30 @@ class User extends Authenticatable
     {
         // If no role slug passed
         if ($roleSlug === null) {
-            $this->roles()->attach(Role::where('slug', 'runner')->first());
+            $this->roles()->sync(Role::where('slug', 'runner')->first()->id);
         } else {
             $this->roles()->sync([Role::where('slug', $roleSlug)->first()->id]);
+        }
+    }
+
+    /**
+     * MODEL METHOD
+     * Generates a fresh api token for the user
+     *
+     * @return string
+     */
+    public function setStatus($statusSlug = null)
+    {
+        if ($statusSlug != null) {
+            $this->statuses()
+                ->sync(
+                    Status::where([
+                        ['slug', $statusSlug],
+                        ['type', get_class($this)]
+                    ])
+                    ->first()
+                    ->id
+                );
         }
     }
 

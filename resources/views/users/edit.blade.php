@@ -165,7 +165,7 @@
                         </div>
                     </div>
 
-                    @can('view', App\Role::class)
+                    @can('associate', App\Role::class)
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
                                 <label class="label">Rôle</label>
@@ -179,6 +179,30 @@
                                             <select name="role">
                                                 @foreach($roles as $role)
                                                     <option value="{{ $role->slug }}" {{ ($role->slug === $user->roles->first()->slug) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('associate', App\Status::class)
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Status</label>
+                            </div>
+                            <div class="field-body">
+
+                                {{-- ROLE --}}
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="status">
+                                                @foreach($statuses as $status)
+                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->statuses()->first()->slug) ? 'selected' : '' }}>{{ $status->slug }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

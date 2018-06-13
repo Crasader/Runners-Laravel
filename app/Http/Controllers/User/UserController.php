@@ -11,6 +11,7 @@ use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
+use App\Status;
 
 /**
  * UserController
@@ -52,7 +53,8 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $roles = Role::assignablesRoles()->get();
-        return view('users.create')->with(compact('roles'));
+        $statuses = Status::userStatuses()->get();
+        return view('users.create')->with(compact('roles', 'statuses'));
     }
 
     /**
@@ -69,6 +71,8 @@ class UserController extends Controller
         $user->save();
         $user->generateDefaultPictures();
         $user->addRole($request->role);
+        $user->setStatus($request->status);
+
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
@@ -114,7 +118,8 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $roles = Role::assignablesRoles()->get();
-        return view('users.edit')->with(compact('user', 'roles'));
+        $statuses = Status::userStatuses()->get();
+        return view('users.edit')->with(compact('user', 'roles', 'statuses'));
     }
 
     /**
@@ -132,6 +137,7 @@ class UserController extends Controller
         $user->generateName();
         $user->save();
         $user->addRole($request->role);
+        $user->setStatus($request->status);
 
         return redirect()
             ->route('users.edit', ['user' => $user->id])

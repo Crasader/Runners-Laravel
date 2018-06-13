@@ -31,4 +31,28 @@ class Status extends Model
     {
         return $this->morphedByMany(User::class, 'statusable');
     }
+
+    /**
+     * MODEL SCOPE
+     * Limit the request to a specific type of statuses
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
+    /**
+     * MODEL SCOPE
+     * Limit the request to the users status
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserStatuses($query)
+    {
+        return $query->type('App\User');
+    }
 }

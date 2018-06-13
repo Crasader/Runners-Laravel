@@ -77,8 +77,10 @@
                                                 <div class="content">
                                                     <p>
                                                         <a href="{{ route('users.show', ['user' => $user->id]) }}">{{$user->firstname}} {{$user->lastname}}</a>
-                                                        @component('components/status_tag', ['status' => $user->status()->slug])
-                                                        @endcomponent
+                                                        @if ($user->status()->shows_on_kiela)
+                                                            @component('components/status_tag', ['status' => $user->status()->slug])
+                                                            @endcomponent
+                                                        @endif
                                                         <br>
                                                         @if ($user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
                                                             Run en cours : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a>

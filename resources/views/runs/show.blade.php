@@ -114,18 +114,34 @@
             </div>
         </div>
 
-        <div class="columns">
-            {{-- Logs --}}
-            <div class="column is-5">
-                @foldable(['folded' => true, 'id' => 'logs-zone'])
-                    @slot('foldedTitle')
+        @foldable(['folded' => true, 'id' => 'more-infos-zone'])
+            @slot('foldedTitle')
+                <div class="columns">
+                    <div class="column is-12">
                         <h2 class="title is-4">
-                            Afficher les logs
+                            Plus d'infos...
                         </h2>
-                    @endslot
-                    @slot('unFoldedTitle')
-                        <h2 class="title is-4">Logs pour ce run (masquer)</h2>
-                    @endslot
+                    </div>
+                </div>
+            @endslot
+            @slot('unFoldedTitle')
+                <div class="columns">
+                    <div class="column is-12">
+                        <h2 class="title is-4">Plus d'infos (masquer)</h2>
+                    </div>
+                </div>
+            @endslot
+            <div class="columns">
+                <div class="column is-5">
+                    <h2 class="title is-4">Logs</h2>
+                </div>
+                <div class="column is-7">
+                    <h2 class="title is-4">Commentaires</h2>
+                </div>
+            </div>
+            <div class="columns">
+                {{-- Logs --}}
+                <div class="column is-5">
                     <table class="table is-striped is-hoverable is-fullwidth">
                         <thead>
                             <tr>
@@ -159,26 +175,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                @endfoldable
-            </div>
+                </div>
 
-            @can('view', App\Comment::class)
-                <div class="column is-7">
-                    @foldable(['folded' => true, 'id' => 'comments-zone'])
-                        @slot('foldedTitle')
-                            <div class="columns">
-                                <div class="column is-12">
-                                    <h2 class="title is-4">Afficher les commentaires</h2>
-                                </div>
-                            </div>
-                        @endslot
-                        @slot('unFoldedTitle')
-                            <div class="columns">
-                                <div class="column is-12">
-                                    <h2 class="title is-4">Commentaires</h2>
-                                </div>
-                            </div>
-                        @endslot
+                @can('view', App\Comment::class)
+                    <div class="column is-7">
                         {{-- --------------------- --}}
                         {{-- COMMENTS LISTING      --}}
                         {{-- --------------------- --}}
@@ -205,7 +205,8 @@
                                                 <div class="media-right">
                                                     <button onclick="event.preventDefault();
                                                         document.getElementById('delete-comment-form-{{ $comment->id }}').submit();"
-                                                        class="delete"></button>
+                                                        class="delete">
+                                                    </button>
                                                     <form id="delete-comment-form-{{ $comment->id }}"
                                                         action="{{ route('runs.comments.destroy', ['run' => $run->id, 'comment' => $comment->id]) }}"
                                                             method="POST" style="display: none;">
@@ -259,14 +260,14 @@
                                 </div>
                             </div>
                         @endcan
-                    @endfoldable
-                </div>
-            @else
-                <div class="column is-8">
-                    <p>Vous ne pouvez pas voir les commentaires</p>
-                </div>
-            @endcan
-        </div>
+                    </div>
+                @else
+                    <div class="column is-7">
+                        <p>Vous ne pouvez pas voir les commentaires</p>
+                    </div>
+                @endcan
+            </div>
+        @endfoldable
     </div>
 </div>
 

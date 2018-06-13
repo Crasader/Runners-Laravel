@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 /**
  * DatabaseSeeder
  * The entry point, this seeder call all the underlying Seeders
- * 
+ *
  * @author Bastien Nicoud
  */
 class DatabaseSeeder extends Seeder
@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            StatusesTableSeeder::class,
             FestivalsTableSeeder::class,
             RolesTableSeeder::class,
             GroupsTableSeeder::class,

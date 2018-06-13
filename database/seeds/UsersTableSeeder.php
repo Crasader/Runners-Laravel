@@ -6,6 +6,7 @@ use App\User;
 use App\Role;
 use App\Group;
 use App\Festival;
+use App\Status;
 
 /**
  * UsersTableSeeder
@@ -118,6 +119,7 @@ class UsersTableSeeder extends Seeder
             'status'       => 'free'
         ]);
         // Asociate the admin role
+        $root->statuses()->save(Status::where('slug', 'free')->first());
         $root->roles()->save(Role::where('slug', 'root')->first());
         $root->groups()->save(Group::orderBy('id', 'desc')->first());
 
@@ -135,6 +137,7 @@ class UsersTableSeeder extends Seeder
             'status'       => 'free'
         ]);
         // Asociate the runner role
+        $runner->statuses()->save(Status::where('slug', 'free')->first());
         $runner->roles()->save(Role::where('slug', 'runner')->first());
         $runner->groups()->save(Group::first());
 
@@ -156,6 +159,7 @@ class UsersTableSeeder extends Seeder
                 'status'       => $status->random()
             ]);
             // Attach the right role and group for this user
+            $tmpUser->statuses()->save(Status::where('slug', $status->random())->first());
             $tmpUser->roles()->save(Role::where('slug', $user[6])->first());
             $tmpUser->groups()->save(Group::where('name', $user[5])->first());
             // Attatch the 2016 and 2017 edition of paleo to this user

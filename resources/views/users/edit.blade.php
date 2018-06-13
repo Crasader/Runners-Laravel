@@ -36,17 +36,17 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
-                        <p class="control">
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('update-user-form').submit();"
                                 class="button is-success">
                                 Valider les modifications
                             </button>
-                        </p>
+                        </div>
                     @endcan
                     @unless($user->id === Auth::user()->id)
                         @can('delete', $user)
-                            <p class="control">
+                            <div class="control">
                                 <form id="delete-user-form"
                                     action="{{ route('users.destroy', ['user' => $user->id]) }}"
                                     method="POST" style="display: none;">
@@ -58,7 +58,7 @@
                                     class="button is-danger">
                                     Supprimer {{ $user->fullname }}
                                 </button>
-                            </p>
+                            </div>
                         @endcan
                     @endunless
                 </div>
@@ -300,7 +300,7 @@
                             <div class="control">
                                 <button type="submit" class="button is-success">Ajouter</button>
                             </div>
-                            @if ($user->profilePictures()->exists())
+                            @if ($user->profilePictures()->first()->path != 'profiles/default.jpg')
                                 <div class="control">
                                     <button onclick="event.preventDefault();
                                         document.getElementById('delete-user-picture-form').submit();"
@@ -311,7 +311,7 @@
                             @endif
                         </div>
                     </form>
-                    @if ($user->profilePictures()->exists())
+                    @if ($user->profilePictures()->first()->path != 'profiles/default.jpg')
                         <form id="delete-user-picture-form"
                             method="POST"
                             action="{{ route('users.profile-picture.destroy', ['user' => $user->id, 'attachment' => $user->profilePictures->first()->id]) }}"
@@ -370,7 +370,7 @@
                             <div class="control">
                                 <button type="submit" class="button is-success">Ajouter</button>
                             </div>
-                            @if ($user->licencePictures()->exists())
+                            @if ($user->licencePictures()->first()->path != 'licences/default.jpg')
                                 <div class="control">
                                     <button onclick="event.preventDefault();
                                         document.getElementById('delete-user-licence-form').submit();"
@@ -381,7 +381,7 @@
                             @endif
                         </div>
                     </form>
-                    @if ($user->licencePictures()->exists())
+                    @if ($user->licencePictures()->first()->path != 'licences/default.jpg')
                         <form id="delete-user-licence-form"
                             method="POST"
                             action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'attachment' => $user->licencePictures->first()->id]) }}"

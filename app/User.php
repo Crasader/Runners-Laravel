@@ -17,6 +17,7 @@ use App\Schedule;
 use App\RunDriver;
 use App\Attachment;
 use BaconQrCode\Writer;
+use App\Extensions\Statusable;
 use Illuminate\Support\Facades\Auth;
 use \BaconQrCode\Renderer\Image\Png;
 use App\Extensions\Filters\Filterable;
@@ -35,7 +36,7 @@ use App\Events\Log\LogDatabaseRestoreEvent;
  */
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, Filterable;
+    use Notifiable, SoftDeletes, Filterable, Statusable;
 
     /**
      * MODEL PROPERTY
@@ -183,15 +184,6 @@ class User extends Authenticatable
 
     /**
      * MODEL RELATION
-     * Get ths status of the user
-     */
-    public function statuses()
-    {
-        return $this->morphToMany(Status::class, 'statusable');
-    }
-
-    /**
-     * MODEL RELATION
      * Gets the driver license for this user
      */
     public function attachments()
@@ -333,27 +325,6 @@ class User extends Authenticatable
             $this->roles()->sync(Role::where('slug', 'runner')->first()->id);
         } else {
             $this->roles()->sync([Role::where('slug', $roleSlug)->first()->id]);
-        }
-    }
-
-    /**
-     * MODEL METHOD
-     * Generates a fresh api token for the user
-     *
-     * @return string
-     */
-    public function setStatus($statusSlug = null)
-    {
-        if ($statusSlug != null) {
-            $this->statuses()
-                ->sync(
-                    Status::where([
-                        ['slug', $statusSlug],
-                        ['type', get_class($this)]
-                    ])
-                    ->first()
-                    ->id
-                );
         }
     }
 

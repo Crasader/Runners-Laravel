@@ -10,7 +10,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @author Bastien Nicoud
  */
-class CreateStatusTable extends Migration
+class CreateStatusesTable extends Migration
 {
     /**
      * Run the migrations.

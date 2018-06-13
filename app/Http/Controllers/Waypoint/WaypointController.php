@@ -24,7 +24,7 @@ class WaypointController extends Controller
     public function index()
     {
         // Where to ignore temporary waypoints used in the run creation
-        $waypoints = Waypoint::orderBy('name', 'asc')->whereNotIn('name', ['tmp'])->paginate(30);
+        $waypoints = Waypoint::orderBy('name', 'asc')->whereNotIn('name', [''])->paginate(30);
         return view('waypoints.index')->with(compact('waypoints'));
     }
 
@@ -89,7 +89,7 @@ class WaypointController extends Controller
      */
     public function edit(Waypoint $waypoint)
     {
-        $this->authorize('update', Waypoint::class);
+        $this->authorize('update', $waypoint);
         return view('waypoints.edit')->with(compact('waypoint'));
     }
 
@@ -102,7 +102,7 @@ class WaypointController extends Controller
      */
     public function update(Request $request, Waypoint $waypoint)
     {
-        $this->authorize('update', Waypoint::class);
+        $this->authorize('update', $waypoint);
         $waypoint->fill($request->all());
         $waypoint->save();
         return redirect()
@@ -118,7 +118,7 @@ class WaypointController extends Controller
      */
     public function destroy(Waypoint $waypoint)
     {
-        $this->authorize('delete', Waypoint::class);
+        $this->authorize('delete', $waypoint);
         $waypoint->delete();
         return redirect()
             ->route('waypoints.index')

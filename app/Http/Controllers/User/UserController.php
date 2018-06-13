@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         if ($request->needle) {
             // Case insensitive search
-            $results = User::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
+            $results = User::whereRaw('LOWER(`firstname`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
             return UserSearchResource::collection($results);
         } else {
             return response()->json([], 200);
@@ -129,6 +129,7 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->fill($request->all());
+        $user->generateName();
         $user->save();
         $user->addRole($request->role);
 

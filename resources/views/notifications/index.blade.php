@@ -52,7 +52,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($notifications as $notification)
+                        @forelse ($notifications as $notification)
                             <tr onclick="window.location.href = '{{ route('notifications.show', ['notification' => $notification->id]) }}'">
                                 <td>
                                     @datetag(['date' => $notification->created_at])
@@ -69,7 +69,15 @@
                                     @enddatetag
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td>
+                                    <span class="tag is-warning is-medium">
+                                        <strong>Aucune notification<strong>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -2,12 +2,12 @@
 
 # Server
 
-* LetsEncrypt
-* Nginx
+* LetsEncrypt (for SSL)
+* Nginx (or apache)
 
 # Php
 
-php-fpm ^7.2.0  
+php-fpm ^7.2.0
 
 Extensions :
 * openSSL

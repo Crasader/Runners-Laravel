@@ -183,27 +183,29 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Rôle</label>
-                        </div>
-                        <div class="field-body">
+                    @can('view', App\Role::class)
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Rôle</label>
+                            </div>
+                            <div class="field-body">
 
-                            {{-- ROLE --}}
-                            <div class="field is-narrow">
-                                <div class="control">
-                                    <div class="select is-fullwidth">
-                                        <select name="role">
-                                            @foreach($roles as $role)
-                                                <option value="{{ $role->slug }}" {{ ($role->slug === $user->roles->first()->slug) ? 'selected' : '' }}>{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
+                                {{-- ROLE --}}
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="role">
+                                                @foreach($roles as $role)
+                                                    <option value="{{ $role->slug }}" {{ ($role->slug === $user->roles->first()->slug) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
+                    @endcan
 
                 </form>
 
@@ -259,7 +261,7 @@
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
                             la connexion a l'app mobile n'est donc pas possible.
                             @can('create', App\User::class)
-                                <strong>Vous pouvez en <a href="{{ route('users.create') }}">générer un</a>.</strong>
+                                <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
                             @endcan
                         </div>
                     </article>

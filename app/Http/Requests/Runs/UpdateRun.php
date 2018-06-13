@@ -31,15 +31,30 @@ class UpdateRun extends FormRequest
     public function rules()
     {
         return [
-            'name'                    => ['required_if:artist,', 'string', 'min:1', 'max:200'],
-            'artist'                  => ['required_if:name,', 'string', 'min:1', 'max:200'],
+            'artist'                  => ['required', 'string', 'min:1', 'max:200', 'exists:artists,name'],
+            'infos'                   => ['nullable', 'max:1000'],
             'planned_at'              => ['nullable', 'date'],
             'end_planned_at'          => ['nullable', 'date'],
             'waypoints.*'             => ['nullable', 'string'],
             'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
             'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],
             'subscriptions.*.car'     => ['nullable', 'string', 'exists:cars,name'],
-            'add-runner'              => ['sometimes', 'in:true']
+            'add-runner'              => ['sometimes', 'in:true'],
+            'remove-runner'           => ['sometimes', 'integer'],
+            'add-waypoint'            => ['sometimes', 'integer'],
+            'remove-runner'           => ['sometimes', 'integer']
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'subscriptions.*.user.exists' => "Cet utilisateur n'existe pas"
         ];
     }
 }

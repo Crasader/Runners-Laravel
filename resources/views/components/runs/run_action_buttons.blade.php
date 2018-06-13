@@ -7,89 +7,101 @@
 
 @switch($status)
     @case('gone')
-        <form
-            id="stop-run-form-{{ $id }}"
-            action="{{ route('runs.stop', ['run' => $id]) }}" method="POST"
-            style="display: none;">
-            @csrf
-            @method('PATCH')
-        </form>
-        <a href="#" onclick="event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('stop-run-form-{{ $id }}').submit();"
-            class="button {{ $slot }} is-danger">
-            Arréter
-        </a>
+        @can('stop', $run)
+            <form
+                id="stop-run-form-{{ $id }}"
+                action="{{ route('runs.stop', ['run' => $id]) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('PATCH')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('stop-run-form-{{ $id }}').submit();"
+                class="button {{ $slot }} is-danger">
+                Arrêter
+            </a>
+        @endcan
         @break
 
     @case('finished')
-        <form
-            id="delete-run-form-{{ $id }}"
-            action="{{ route('runs.destroy', ['run' => $id]) }}" method="POST"
-            style="display: none;">
-            @csrf
-            @method('DELETE')
-        </form>
-        <a href="#" onclick="event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('delete-run-form-{{ $id }}').submit();"
-            class="button {{ $slot }} is-danger">
-            Supprimer
-        </a>
+        @can('delete', $run)
+            <form
+                id="delete-run-form-{{ $id }}"
+                action="{{ route('runs.destroy', ['run' => $id]) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('delete-run-form-{{ $id }}').submit();"
+                class="button {{ $slot }} is-danger">
+                Supprimer
+            </a>
+        @endcan
         @break
 
     @case('needs_filling')
-        <form
-            id="force-start-run-form-{{ $id }}"
-            action="{{ route('runs.force-start', ['run' => $id]) }}" method="POST"
-            style="display: none;">
-            @csrf
-            @method('PATCH')
-        </form>
-        <a href="#" onclick="event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('force-start-run-form-{{ $id }}').submit();"
-            class="button {{ $slot }} is-warning">
-            Force start
-        </a>
+        @can('forceStart', $run)
+            <form
+                id="force-start-run-form-{{ $id }}"
+                action="{{ route('runs.force-start', ['run' => $id]) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('PATCH')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('force-start-run-form-{{ $id }}').submit();"
+                class="button {{ $slot }} is-warning">
+                Force start
+            </a>
+        @endcan
         @break
 
     @case('drafting')
-        <form
-            id="publish-run-form-{{ $id }}"
-            action="{{ route('runs.publish', ['run' => $id]) }}" method="POST"
-            style="display: none;">
-            @csrf
-            @method('PATCH')
-        </form>
-        <a href="#" onclick="event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('publish-run-form-{{ $id }}').submit();"
-            class="button {{ $slot }} is-info">
-            Publier
-        </a>
+        @can('update', $run)
+            <form
+                id="publish-run-form-{{ $id }}"
+                action="{{ route('runs.publish', ['run' => $id]) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('PATCH')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('publish-run-form-{{ $id }}').submit();"
+                class="button {{ $slot }} is-info">
+                Publier
+            </a>
+        @endcan
         @break
 
     @case('error')
-        <a href="{{ route('runs.edit', ['run' => $id]) }}" class="button {{ $slot }} is-info">
-            Compléter
-        </a>
+        @can('update', $run)
+            <a href="{{ route('runs.edit', ['run' => $id]) }}" class="button {{ $slot }} is-info">
+                Compléter
+            </a>
+        @endcan
         @break
 
     @case('ready')
-        <form
-            id="start-run-form-{{ $id }}"
-            action="{{ route('runs.start', ['run' => $id]) }}" method="POST"
-            style="display: none;">
-            @csrf
-            @method('PATCH')
-        </form>
-        <a href="#" onclick="event.preventDefault();
-            event.stopPropagation();
-            document.getElementById('start-run-form-{{ $id }}').submit();"
-            class="button {{ $slot }} is-success">
-            Démarrer
-        </a>
+        @can('start', $run)
+            <form
+                id="start-run-form-{{ $id }}"
+                action="{{ route('runs.start', ['run' => $id]) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('PATCH')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                event.stopPropagation();
+                document.getElementById('start-run-form-{{ $id }}').submit();"
+                class="button {{ $slot }} is-success">
+                Démarrer
+            </a>
+        @endcan
         @break
 
     @default

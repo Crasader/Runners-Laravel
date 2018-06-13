@@ -27,8 +27,8 @@
         {{-- Iterates all the runs --}}
         <div class="columns is-multiline">
             @foreach ($runs as $run)
-                <div class="column is-12">
-                    <div class="box box-big">
+                <div class="column is-12 is-marginless is-paddingless">
+                    <div class="box box-big has-border-black is-radiusless">
                         <div class="columns">
                             <div class="column is-3 has-background-light has-border-right">
                                 <h2 class="title is-5 title-run">
@@ -44,7 +44,10 @@
                                 <div class="columns is-multiline">
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->first()->name }}</h3>
-                                        <h4 class="title is-5 title-run">{{ $run->planned_at->format('l \à H \h i') }}</h4>
+                                        <h4 class="title is-5 title-run">
+                                            @datetext(['date' => $run->planned_at])
+                                            @enddatetext
+                                        </h4>
                                     </div>
                                     <div class="column is-6">
                                         <h3 class="title is-5 title-run">{{ $run->waypoints->last()->name }}</h3>

@@ -36,7 +36,7 @@ class CarTypePolicy
      * @param  \App\CarType  $carType
      * @return mixed
      */
-    public function view(User $user, CarType $carType)
+    public function view(User $user)
     {
         return true;
     }

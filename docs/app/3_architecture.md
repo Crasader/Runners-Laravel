@@ -12,6 +12,6 @@
 <hr>
 <div align="center">
 
-**[<- Prev](#) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](./2_assets.md) // [Summary](../README.md) // [Next ->](4_permissions.md)**
 
 </div>

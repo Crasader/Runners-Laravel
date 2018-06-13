@@ -24,8 +24,10 @@
                     <b><u>{{$festival->name}}</u></b>
                 </div>
                 <div class="column is-4">
-                    <!-- Add new user to kiela -->
-                    <a href="{{ route('kiela.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
+                    @can('create', App\Kiela::class)
+                        <!-- Add new user to kiela -->
+                        <a href="{{ route('kiela.create') }}" class="button is-info is-pulled-right">Ajouter un chauffeur</a>
+                    @endcan
                 </div>
 
             </div>
@@ -127,17 +129,19 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="media-right">
-                                                <button onclick="event.preventDefault();
-                                                    document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
-                                                    class="delete"></button>
-                                                <form id="delete-kiela-user-{{ $schedule->id }}"
-                                                    action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
-                                                        method="POST" style="display: none;">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-                                                </form>
-                                            </div>
+                                            @can('delete', $schedule)
+                                                <div class="media-right">
+                                                    <button onclick="event.preventDefault();
+                                                        document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
+                                                        class="delete"></button>
+                                                    <form id="delete-kiela-user-{{ $schedule->id }}"
+                                                        action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
+                                                            method="POST" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                </div>
+                                            @endcan
                                         </article>
                                     </div>
                                 @endforeach

@@ -7,7 +7,7 @@ use App\Waypoint;
 /**
  * WaypointsTableSeeder
  * Seeds the waypoints table
- * 
+ *
  * @author Bastien Nicoud
  */
 class WaypointsTableSeeder extends Seeder
@@ -21,6 +21,7 @@ class WaypointsTableSeeder extends Seeder
     {
         // All the waypoints to insert in the DB
         $waypoints = [
+            '',
             "Grande scène",
             "Les Arches",
             "Le Dôme",

@@ -9,6 +9,7 @@ use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Kiela\StoreKielaUser;
 
 /**
  * KielaController
@@ -56,6 +57,7 @@ class KielaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Kiela::class);
         //Set now time to show the hour
         $now = new Carbon();
 
@@ -65,16 +67,17 @@ class KielaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Kiela\StoreKielaUser  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreKielaUser $request)
     {
+        $this->authorize('create', Kiela::class);
         //Get request
         $kiela = new Kiela($request->all());
 
         //Associate user to kiela
-        $kiela->user()->associate(User::find($request->user_id));
+        $kiela->user()->associate(User::where('name', $request->name)->first());
         $kiela->save();
 
         return redirect()
@@ -124,6 +127,7 @@ class KielaController extends Controller
      */
     public function destroy(Kiela $kiela)
     {
+        $this->authorize('delete', $kiela);
         $kiela->delete();
         return redirect()
             ->back()

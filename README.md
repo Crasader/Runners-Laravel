@@ -2,20 +2,25 @@
   <img src ="public/img/logo.svg" width="40%"/><br><br>
 </div>
 
-# Runners
-
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## Version changelog **v2.0.0-beta.2**
+## [v2.0.0-beta.3.3](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.3)
+
+This version includes dependencies changes, dont forget to :
+* Migrate the new database `php artisan migrate:fresh --seed`
+* Generates new assets `npm run dev`
 
 Break changes :
 * x
 
 Changes :
-* Now you click on a row to shor the resource
+* Add folding box to hidden comments and logs in the runs show page
+* Change date display in runs big screen
+* Add default filters in the runs page
+* Hidden finished runs in the big screen
 
 Improuvments :
-* Add filters to run and users crud
+* x
 
 Bux fixes :
 * x

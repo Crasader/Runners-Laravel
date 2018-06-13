@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Users;
 
+use App\Rules\Can;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Role;
 
 /**
  * UpdateUser
@@ -41,7 +43,8 @@ class UpdateUser extends FormRequest
                 'sometimes', 'string', 'email', 'max:200', Rule::unique('users')->ignore(request()->user->id)
             ],
             'phone_number'  => ['sometimes', 'min:2', 'max:100'],
-            'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])]
+            'sex'           => ['sometimes', 'filled', Rule::in(['m', 'w'])],
+            'role'          => ['sometimes', new Can('associate', Role::class)]
         ];
     }
 }

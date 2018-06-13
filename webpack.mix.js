@@ -25,6 +25,7 @@ mix
   .js('resources/assets/js/pages/runs/create.js', 'js/pages/runs')
   .js('resources/assets/js/pages/schedules/index.js', 'js/pages/schedules')
   .js('resources/assets/js/pages/runs/big.js', 'js/pages/runs')
+  .js('resources/assets/js/pages/kielas/create.js', 'js/pages/kielas')
   // FUNCTIONALITIES
   .js('resources/assets/js/features/filters.js', 'js/features')
   // SCSS

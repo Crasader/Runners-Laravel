@@ -283,9 +283,7 @@ class User extends Authenticatable
      */
     public function generateName()
     {
-        if (empty($this->name)) {
-            $this->name = "{$this->firstname} {$this->lastname}";
-        }
+        $this->name = "{$this->firstname} {$this->lastname}";
     }
 
     /**

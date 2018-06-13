@@ -11,10 +11,6 @@
 <li class="is-active"><a href="#" aria-current="page">Manager</a></li>
 @endsection
 
-@push('scripts')
-    <script src="{{ mix('js/pages/groups/manager.js') }}"></script>
-@endpush
-
 @section('content')
 
 <div class="section">
@@ -61,12 +57,12 @@
                             <div class="column is-4">
                                 <div class="box" style="background-color: #{{ $group->color }};">
                                     <div class="content">
-                                        <h2><a href="{{ route('groups.show', ['group' => $group->id]) }}">{{ $group->name }}</a></h2>
+                                        <h2><a class="has-text-black" href="{{ route('groups.show', ['group' => $group->id]) }}">{{ $group->name }}</a></h2>
 
                                         {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
                                         <ul id="group[{{ $group->id }}]" data-group-id="{{ $group->id }}" style="min-height: 60px;">
                                             @foreach($group->users as $user)
-                                                <li class="cursor-pointer">
+                                                <li>
                                                     {{--<span class="icon">
                                                         <i class="fas fa-arrows-alt"></i>
                                                     </span>--}}
@@ -89,7 +85,7 @@
                                 {{-- The id is user by sortable js for the mangment system (see the js of this page) --}}
                                 <ul id="group[no-group]" data-group-id="no-group" style="min-height: 60px;">
                                 @foreach($usersWithoutGroup as $user)
-                                    <li class="cursor-pointer">
+                                    <li>
                                         {{--<span class="icon">
                                             <i class="fas fa-arrows-alt"></i>
                                         </span>--}}

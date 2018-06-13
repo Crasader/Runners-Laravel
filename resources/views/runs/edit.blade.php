@@ -87,7 +87,7 @@
                                 'errors'      => $errors
                                 ])
                                 <p class="help">
-                                    Si inéxistant, il sera ajouté a la base de données.
+                                    Si inexistant, il sera ajouté a la base de données.
                                 </p>
                             @endcomponent
 
@@ -181,7 +181,7 @@
                                 @component('components/horizontal_search_input', [
                                     'name'        => "waypoints[{$waypoint->pivot->order}]",
                                     'errorName'   => "waypoints.{$waypoint->pivot->order}",
-                                    'placeholder' => 'Lieu de départ',
+                                    'placeholder' => $waypoint->positionToString(),
                                     'type'        => 'text',
                                     'icon'        => 'fa-map-signs',
                                     'value'       => $waypoint->name,

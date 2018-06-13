@@ -22,7 +22,7 @@
             </div>
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
-                    @can('update', App\Artist::class)
+                    @can('update', $artist)
                         <p class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('edit-artist-form').submit();"

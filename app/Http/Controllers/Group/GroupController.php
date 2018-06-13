@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Groups\StoreGroup;
 use App\Http\Requests\Groups\UpdateGroup;
 use App\Http\Requests\Groups\UpdateGroupUserAssociations;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * GroupController
@@ -37,10 +38,14 @@ class GroupController extends Controller
      */
     public function manager()
     {
-        $this->authorize('view', Group::class);
         $groups = Group::with('users')->get();
         $usersWithoutGroup = User::doesntHave('groups')->get();
-        return view('groups.manager')->with(compact('groups', 'usersWithoutGroup'));
+        if (Auth::user()->can('manage', Group::class)) {
+            $this->authorize('manage', Group::class);
+            return view('groups.manager')->with(compact('groups', 'usersWithoutGroup'));
+        } else {
+            return view('groups.managerNoEdit')->with(compact('groups', 'usersWithoutGroup'));
+        }
     }
 
     /**

@@ -175,4 +175,9 @@ Route::middleware(['auth'])->group(function () {
         'Notification\NotificationController',
         ['only' => ['index', 'show', 'destroy']]
     );
+
+    /**
+     * Connected home page
+     */
+    Route::get('/infos', 'HomeController@infos')->name('infos');
 });

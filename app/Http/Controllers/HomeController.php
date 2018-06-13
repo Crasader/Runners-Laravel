@@ -27,4 +27,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the information page (versions, copiright...)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function infos()
+    {
+        return view('infos');
+    }
 }

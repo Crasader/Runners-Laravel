@@ -53,6 +53,17 @@ class RolePolicy
     }
 
     /**
+     * Determine whether the user can change the role association to a resource
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function associate(User $user)
+    {
+        return $user->may('manage_roles');
+    }
+
+    /**
      * Determine whether the user can update the role.
      *
      * @param  \App\User  $user

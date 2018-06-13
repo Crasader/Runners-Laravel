@@ -4,10 +4,9 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## **v2.0.0-beta.3.1**
+## [v2.0.0-beta.3.3](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.3.3)
 
 This version includes dependencies changes, dont forget to :
-* Run `composer install`
 * Migrate the new database `php artisan migrate:fresh --seed`
 * Generates new assets `npm run dev`
 
@@ -15,20 +14,19 @@ Break changes :
 * x
 
 Changes :
-* Search field now use user full name
+* Add folding box to hidden comments and logs in the runs show page
+* Change date display in runs big screen
+* Add default filters in the runs page
+* Hidden finished runs in the big screen
 
 Improuvments :
-* Add box that display users without group in the groups manager
-* Update of the search field with autocomplete to support key modifiers
+* x
 
 Bux fixes :
-* Runs creation without subscription
-* Request validation fails on run creation
-* Data loss on new run when you add subscription or waypoint
+* x
 
 In progress :
-* Notifications linked to runs actions
-* Schedules crud
+* x
 
 ## Start developping
 

@@ -129,6 +129,7 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->fill($request->all());
+        $user->generateName();
         $user->save();
         $user->addRole($request->role);
 

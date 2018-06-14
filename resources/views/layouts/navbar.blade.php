@@ -4,14 +4,14 @@
             <a class="navbar-item" href="{{ route('infos') }}">
                 <img src="/img/logo.svg" alt="Runners" width="112" height="28">
             </a>
-            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </a>
         </div>
 
-        <div class="navbar-menu">
+        <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
 
                 {{-- Runs menu --}}

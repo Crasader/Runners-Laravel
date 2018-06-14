@@ -83,6 +83,6 @@ You can crete our own custom events for log actions in logs table.
 <hr>
 <div align="center">
 
-**[<- Prev](7_filterSystem.md) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](7_filterSystem.md) // [Summary](../README.md) // [Next ->](./10_foldedBox.md)**
 
 </div>

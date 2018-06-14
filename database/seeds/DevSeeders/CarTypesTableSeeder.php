@@ -7,7 +7,7 @@ use App\CarType;
 /**
  * CarTypesTableSeeder
  * Create all the car types
- * 
+ *
  * @author Bastien Nicoud
  */
 class CarTypesTableSeeder extends Seeder

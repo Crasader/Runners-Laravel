@@ -14,7 +14,6 @@ export class SearchField {
    * @param {*} field
    */
   constructor (field) {
-    console.log('SEARCH FIELD INSERTED')
     /**
      * The field who want autocomplete
      */
@@ -35,7 +34,6 @@ export class SearchField {
    * @param {Element} searchField The fiels on wich to graft the search
    */
   observe () {
-    console.log('SEARCH FIELD OBSERVER LAUNCH')
     // Register listeners on keys (for control actions)
     this.registerListeners()
     // Hook events on each search fields
@@ -165,7 +163,7 @@ export class SearchField {
 
       // Append search results in the box
       for (let result of this.searchResults) {
-        let resultElement = document.createElement('div')
+        let resultElement = document.createElement('a')
         resultElement.className = 'dropdown-item'
         if (result.selected === true) {
           resultElement.className += ' is-hovered'

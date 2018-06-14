@@ -55,7 +55,7 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        $notification = Auth::user()->notifications()->find($id);
+        $notification = Auth::user()->notifications()->findOrFail($id);
         $notification->markAsRead();
         return view('notifications.show')->with(compact('notification'));
     }

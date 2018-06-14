@@ -7,7 +7,7 @@ use App\Artist;
 /**
  * ArtistsTableSeeder
  * Populates the artist table
- * 
+ *
  * @author Bastien Nicoud
  */
 class ArtistsTableSeeder extends Seeder

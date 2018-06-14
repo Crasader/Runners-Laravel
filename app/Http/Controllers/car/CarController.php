@@ -79,7 +79,9 @@ class CarController extends Controller
     {
         if ($request->needle) {
             // Case insensitive search
-            $results = Car::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])->get();
+            $results = Car::whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->needle)).'%'])
+                ->whereNotIn('status', ['problem'])
+                ->get();
             return CarSearchResource::collection($results);
         } else {
             return response()->json([], 200);

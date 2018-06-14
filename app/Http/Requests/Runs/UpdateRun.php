@@ -31,10 +31,10 @@ class UpdateRun extends FormRequest
     public function rules()
     {
         return [
-            'artist'                  => ['required', 'string', 'min:1', 'max:200', 'exists:artists,name'],
+            'artist'                  => ['required', 'string', 'min:1', 'max:200'],
             'infos'                   => ['nullable', 'max:1000'],
             'planned_at'              => ['nullable', 'date'],
-            'end_planned_at'          => ['nullable', 'date'],
+            'passengers'              => ['nullable', 'integer', 'min:0'],
             'waypoints.*'             => ['nullable', 'string'],
             'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
             'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],

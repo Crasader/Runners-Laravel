@@ -303,6 +303,7 @@ class Run extends Model
                 // If not, create it
                 $newArtist = Artist::create(['name' => $artistName]);
                 $this->artists()->sync([$newArtist->id]);
+                $this->name = $newArtist->name;
                 $this->save();
             }
         }
@@ -477,6 +478,7 @@ class Run extends Model
     /**
      * MODEL METHOD
      * Check if the run is in error
+     * !! Implement error managment !!
      *
      * @return bool
      */
@@ -493,7 +495,7 @@ class Run extends Model
      */
     public function updateStatus()
     {
-        if ($this->status === 'drafting') {
+        if ($this->status === 'drafting' || $this->status === 'gone' || $this->status === 'finished') {
             $this->save();
         } else {
             if ($this->needsFilling()) {
@@ -524,7 +526,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "taken";
+            $item->setStatus("taken");
             $item->save();
         });
         $this->save();
@@ -546,7 +548,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "free";
+            $item->setStatus("free");
             $item->save();
         });
         $this->save();
@@ -569,7 +571,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "taken";
+            $item->setStatus("taken");
             $item->save();
         });
         $this->save();
@@ -591,7 +593,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "free";
+            $item->setStatus("free");
             $item->save();
         });
         $this->save();

@@ -28,7 +28,7 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">
                     {{ $user->fullname }}
-                    @component('components/status_tag', ['status' => $user->status])
+                    @component('components/status_tag', ['status' => $user->status()->slug])
                     @endcomponent
                 </h1>
             </div>
@@ -36,17 +36,17 @@
             <div class="column">
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
-                        <p class="control">
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('update-user-form').submit();"
                                 class="button is-success">
                                 Valider les modifications
                             </button>
-                        </p>
+                        </div>
                     @endcan
                     @unless($user->id === Auth::user()->id)
                         @can('delete', $user)
-                            <p class="control">
+                            <div class="control">
                                 <form id="delete-user-form"
                                     action="{{ route('users.destroy', ['user' => $user->id]) }}"
                                     method="POST" style="display: none;">
@@ -58,7 +58,7 @@
                                     class="button is-danger">
                                     Supprimer {{ $user->fullname }}
                                 </button>
-                            </p>
+                            </div>
                         @endcan
                     @endunless
                 </div>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
 
-                    @can('view', App\Role::class)
+                    @can('associate', App\Role::class)
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
                                 <label class="label">Rôle</label>
@@ -179,6 +179,30 @@
                                             <select name="role">
                                                 @foreach($roles as $role)
                                                     <option value="{{ $role->slug }}" {{ ($role->slug === $user->roles->first()->slug) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('associate', App\Status::class)
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">Status</label>
+                            </div>
+                            <div class="field-body">
+
+                                {{-- ROLE --}}
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="status">
+                                                @foreach($statuses as $status)
+                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->status()->slug) ? 'selected' : '' }}>{{ $status->slug }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -300,7 +324,7 @@
                             <div class="control">
                                 <button type="submit" class="button is-success">Ajouter</button>
                             </div>
-                            @if ($user->profilePictures()->exists())
+                            @if ($user->profilePictures()->first()->path != 'profiles/default.jpg')
                                 <div class="control">
                                     <button onclick="event.preventDefault();
                                         document.getElementById('delete-user-picture-form').submit();"
@@ -311,7 +335,7 @@
                             @endif
                         </div>
                     </form>
-                    @if ($user->profilePictures()->exists())
+                    @if ($user->profilePictures()->first()->path != 'profiles/default.jpg')
                         <form id="delete-user-picture-form"
                             method="POST"
                             action="{{ route('users.profile-picture.destroy', ['user' => $user->id, 'attachment' => $user->profilePictures->first()->id]) }}"
@@ -370,7 +394,7 @@
                             <div class="control">
                                 <button type="submit" class="button is-success">Ajouter</button>
                             </div>
-                            @if ($user->licencePictures()->exists())
+                            @if ($user->licencePictures()->first()->path != 'licences/default.jpg')
                                 <div class="control">
                                     <button onclick="event.preventDefault();
                                         document.getElementById('delete-user-licence-form').submit();"
@@ -381,7 +405,7 @@
                             @endif
                         </div>
                     </form>
-                    @if ($user->licencePictures()->exists())
+                    @if ($user->licencePictures()->first()->path != 'licences/default.jpg')
                         <form id="delete-user-licence-form"
                             method="POST"
                             action="{{ route('users.licence-picture.destroy', ['user' => $user->id, 'attachment' => $user->licencePictures->first()->id]) }}"

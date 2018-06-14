@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Role;
+use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,8 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $roles = Role::assignablesRoles()->get();
-        return view('users.create')->with(compact('roles'));
+        $statuses = Status::userStatuses()->get();
+        return view('users.create')->with(compact('roles', 'statuses'));
     }
 
     /**
@@ -69,6 +71,8 @@ class UserController extends Controller
         $user->save();
         $user->generateDefaultPictures();
         $user->addRole($request->role);
+        $user->setStatus($request->status);
+
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
@@ -114,7 +118,8 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $roles = Role::assignablesRoles()->get();
-        return view('users.edit')->with(compact('user', 'roles'));
+        $statuses = Status::userStatuses()->get();
+        return view('users.edit')->with(compact('user', 'roles', 'statuses'));
     }
 
     /**
@@ -127,14 +132,14 @@ class UserController extends Controller
     public function update(UpdateUser $request, User $user)
     {
         $this->authorize('update', $user);
-
         $user->fill($request->all());
         $user->generateName();
         $user->save();
         $user->addRole($request->role);
+        $user->setStatus($request->status);
 
         return redirect()
-            ->route('users.edit', ['user' => $user->id])
+            ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été modifié");
     }
 

@@ -3,8 +3,6 @@
  */
 import { FoldedBox } from './js/features/foldedBox'
 
-console.log('TUTU')
-
 // Register folded box component
 
 // Scan the page and get all the serch fields

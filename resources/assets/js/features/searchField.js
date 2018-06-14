@@ -61,21 +61,15 @@ export class SearchField {
    */
   registerListeners () {
     this.field.addEventListener('keydown', e => {
-      console.log('KEYPRESS', e.keyCode)
-
       // ESCAPE to exit the field
       if (e.keyCode === 27) {
-        console.log('ESCAPE PRESSED')
-        this.field.value = ''
         if (document.getElementById(`search-results-${this.field.name}`)) {
           document.getElementById(`search-results-${this.field.name}`).remove()
         }
       }
       // TAB to insert the value and go to the next field
       if (e.keyCode === 9) {
-        console.log('TAB PRESSED')
         if (this.currentSelected !== 'none') {
-          console.log('Selected field')
           this.field.value = this.searchResults[this.currentSelected].name
         }
         if (document.getElementById(`search-results-${this.field.name}`)) {
@@ -84,7 +78,6 @@ export class SearchField {
       }
       // ARROW DOWN
       if (e.keyCode === 40) {
-        console.log('ARROW DOWN PRESSED')
         if (this.currentSelected !== 'none') {
           this.searchResults[this.currentSelected].selected = false
           this.currentSelected++
@@ -99,7 +92,6 @@ export class SearchField {
       }
       // ARROW UP
       if (e.keyCode === 38) {
-        console.log('ARROW UP PRESSED')
         if (this.currentSelected !== 'none') {
           this.searchResults[this.currentSelected].selected = false
           this.currentSelected--
@@ -114,9 +106,7 @@ export class SearchField {
       }
       // Enter add the curent selected to the field
       if (e.keyCode === 13) {
-        console.log('ENTER PRESSED')
         if (this.currentSelected !== 'none') {
-          console.log('Selected field')
           this.field.value = this.searchResults[this.currentSelected].name
         }
         if (document.getElementById(`search-results-${this.field.name}`)) {
@@ -126,6 +116,16 @@ export class SearchField {
         e.stopPropagation()
       }
     })
+
+    // Listen clicks out of the box
+    document.addEventListener('click', e => {
+      if (!this.resultsBox.contains(event.target)) {
+        e.stopPropagation()
+        if (document.getElementById(`search-results-${this.field.name}`)) {
+          document.getElementById(`search-results-${this.field.name}`).remove()
+        }
+      }
+    })
   }
 
   /**
@@ -133,7 +133,6 @@ export class SearchField {
    * @param {*} datas
    */
   setDatas (datas) {
-    console.log('NEW DATAS SETTED')
     if (datas.length > 0) {
       datas[0].selected = true
       this.currentSelected = 0
@@ -150,7 +149,6 @@ export class SearchField {
    * Render the current state of suggestions in the dom
    */
   render () {
-    console.log('RENDERING RESULTS')
     if (this.searchResults !== null) {
       // Reset the content of the result box
       if (document.getElementById(`search-results-${this.field.name}`)) {
@@ -199,7 +197,6 @@ export class SearchField {
    */
   search (needle) {
     return new Promise((resolve, reject) => {
-      console.log('API CALL')
       fetch(this.searchApiUrl, {
         method: 'post',
         credentials: 'same-origin',

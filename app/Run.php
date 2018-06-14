@@ -303,6 +303,7 @@ class Run extends Model
                 // If not, create it
                 $newArtist = Artist::create(['name' => $artistName]);
                 $this->artists()->sync([$newArtist->id]);
+                $this->name = $newArtist->name;
                 $this->save();
             }
         }

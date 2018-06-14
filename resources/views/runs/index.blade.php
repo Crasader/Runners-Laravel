@@ -82,7 +82,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($runs as $run)
+                        @forelse ($runs as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
                                 <th>{{ $run->name }}</th>
                                 <td>{{ $run->passengers }}</td>
@@ -113,7 +113,15 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td>
+                                    <span class="tag is-warning is-medium">
+                                        <strong>Aucun runs pour l'instant.<strong>
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -7,7 +7,7 @@ use App\Group;
 /**
  * GroupsTableSeeder
  * Create all the base groups
- * 
+ *
  * @author Bastien Nicoud
  */
 class GroupsTableSeeder extends Seeder

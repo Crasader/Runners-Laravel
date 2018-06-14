@@ -477,6 +477,7 @@ class Run extends Model
     /**
      * MODEL METHOD
      * Check if the run is in error
+     * !! Implement error managment !!
      *
      * @return bool
      */
@@ -493,7 +494,7 @@ class Run extends Model
      */
     public function updateStatus()
     {
-        if ($this->status === 'drafting') {
+        if ($this->status === 'drafting' || $this->status === 'gone' || $this->status === 'finished') {
             $this->save();
         } else {
             if ($this->needsFilling()) {

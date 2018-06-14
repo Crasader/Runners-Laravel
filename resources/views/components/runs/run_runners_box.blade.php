@@ -15,7 +15,7 @@
                         {{ $subscription->user->fullname }},
                     </a>
                 @else
-                    Chauffeur a définir,
+                    Chauffeur à définir,
                 @endif
                 @if($subscription->car()->exists())
                     avec le véhicule

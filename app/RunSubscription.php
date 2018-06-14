@@ -101,13 +101,20 @@ class RunSubscription extends Model
     {
         if ($user = User::where('name', $subscriptionDatas['user'])->first()) {
             $this->assignUser($user);
+        } elseif ($subscriptionDatas['user'] == null) {
+            $this->user()->dissociate();
         }
         if ($carType = CarType::where('name', $subscriptionDatas['carType'])->first()) {
             $this->assignCarType($carType);
+        } elseif ($subscriptionDatas['carType'] == null) {
+            $this->carType()->dissociate();
         }
         if ($car = Car::where('name', $subscriptionDatas['car'])->first()) {
             $this->assignCar($car);
+        } elseif ($subscriptionDatas['car'] == null) {
+            $this->car()->dissociate();
         }
+        $this->save();
     }
 
     /**

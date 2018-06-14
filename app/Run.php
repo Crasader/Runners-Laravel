@@ -524,7 +524,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "taken";
+            $item->setStatus("taken");
             $item->save();
         });
         $this->save();
@@ -546,7 +546,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "free";
+            $item->setStatus("free");
             $item->save();
         });
         $this->save();
@@ -569,7 +569,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "taken";
+            $item->setStatus("taken");
             $item->save();
         });
         $this->save();
@@ -591,7 +591,7 @@ class Run extends Model
             $item->save();
         });
         $this->runners->each(function ($item, $key) {
-            $item->status = "free";
+            $item->setStatus("free");
             $item->save();
         });
         $this->save();

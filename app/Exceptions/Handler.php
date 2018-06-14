@@ -60,8 +60,9 @@ class Handler extends ExceptionHandler
         );
 
         // Notify the app administrator (root)
-        Notification::send([User::first()], new UnHandledExceptionNotification($exception));
-
+        if (!config('app.debug')) {
+            Notification::send([User::first()], new UnHandledExceptionNotification($exception));
+        }
         // Call default exeption reporter (displays mor detailed infos in the log)
         parent::report($exception);
     }

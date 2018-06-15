@@ -28,8 +28,9 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">
                     {{ $user->fullname }}
-                    @component('components/status_tag', ['status' => $user->status()->slug])
-                    @endcomponent
+                    {{-- Display the current status of user --}}
+                    {{-- @component('components/status_tag', ['status' => $user->status()->slug])
+                    @endcomponent --}}
                 </h1>
             </div>
             {{-- Controls buttons on the top --}}
@@ -144,13 +145,14 @@
                         </div>
                     </div>
 
-                    <div class="field is-horizontal">
+                    {{-- SEXE --}}
+                    {{-- <div class="field is-horizontal">
                         <div class="field-label is-normal">
                             <label class="label">Sexe</label>
                         </div>
                         <div class="field-body">
 
-                            {{-- SEX --}}
+                            
                             <div class="field is-narrow">
                                 <div class="control">
                                     <div class="select is-fullwidth">
@@ -163,7 +165,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     @can('associate', App\Role::class)
                         <div class="field is-horizontal">
@@ -202,7 +204,7 @@
                                         <div class="select is-fullwidth">
                                             <select name="status">
                                                 @foreach($statuses as $status)
-                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->status()->slug) ? 'selected' : '' }}>{{ $status->slug }}</option>
+                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->status()->slug) ? 'selected' : '' }}>{{ $status->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

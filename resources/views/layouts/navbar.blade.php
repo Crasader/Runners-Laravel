@@ -4,14 +4,14 @@
             <a class="navbar-item" href="{{ route('infos') }}">
                 <img src="/img/logo.svg" alt="Runners" width="112" height="28">
             </a>
-            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </a>
         </div>
 
-        <div class="navbar-menu">
+        <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
 
                 {{-- Runs menu --}}
@@ -118,10 +118,17 @@
                     </div>
                 </div>
 
-                {{-- Schedule menu --}}
-                <a class="navbar-item" href="{{ route('schedules.index')}}">
-                    Horaires
-                </a>
+                {{-- Groups menu --}}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="{{ route('schedules.index') }}">
+                        Horaires
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{{ route('schedules.create') }}">
+                            Créer un nouver horaire
+                        </a>
+                    </div>
+                </div>
 
                 {{-- Kiéla? menu --}}
                 <a class="navbar-item" href="{{ route('kiela.index') }}">

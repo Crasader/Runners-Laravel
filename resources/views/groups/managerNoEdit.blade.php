@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('breadcrum')
-<li><a href="{{ route('groups.index') }}">Groups</a></li>
+<li><a href="{{ route('groups.index') }}">Groupes</a></li>
 <li class="is-active"><a href="#" aria-current="page">Manager</a></li>
 @endsection
 

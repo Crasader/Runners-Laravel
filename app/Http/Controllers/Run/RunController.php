@@ -86,6 +86,17 @@ class RunController extends Controller
     }
 
     /**
+     * Display the specified resource for print
+     *
+     * @param  \App\Run  $run
+     * @return \Illuminate\Http\Response
+     */
+    public function print(Run $run)
+    {
+        return view('runs.print')->with(compact('run'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Run  $run

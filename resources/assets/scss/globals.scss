@@ -7,6 +7,12 @@
     margin: 10px auto;
 }
 
+@media screen and (max-width: $desktop) {
+    .breadcrum-spacing {
+        margin: 10px 24px;
+    }
+  }
+
 // Display a cursor pointer
 .cursor-pointer {
     cursor: pointer;
@@ -19,4 +25,8 @@
 
 .has-border-black {
     border: 1px solid $grey-darker;
+}
+
+.has-margin-top-10 {
+    margin-top: 10px;
 }

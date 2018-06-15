@@ -146,6 +146,29 @@
                         </div>
                     </div>
 
+
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Status</label>
+                        </div>
+                        <div class="field-body">
+
+                            {{-- ROLE --}}
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <div class="select is-fullwidth">
+                                        <select name="status">
+                                            @foreach($statuses as $status)
+                                                <option value="{{ $status->slug }}">{{ $status->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>

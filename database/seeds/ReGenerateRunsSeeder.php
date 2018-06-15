@@ -4,6 +4,12 @@ use Illuminate\Database\Seeder;
 use App\Festival;
 use App\User;
 
+/**
+ * ReGenerateRunsSeeder
+ * Re generate fictive runs
+ *
+ * @author Bastien Nicoud
+ */
 class ReGenerateRunsSeeder extends Seeder
 {
     /**

@@ -16,6 +16,7 @@ $(function () {
     // Sets the default view of the calendar
     defaultView: 'agendaWeek',
     // Options for the view
+    allDaySlot: false,
     slotEventOverlap: false,
     slotLabelFormat: 'H:mm',
     scrollTime: '10:00:00',
@@ -29,8 +30,11 @@ $(function () {
         'Content-Type': 'application/json'
       },
       error: function () {
-        alert('There was an error while fetching events!')
+        alert("Un erreur c'est produite en récupérant les événements")
       }
+    },
+    eventClick: function (calEvent, jsEvent, view) {
+      window.location.href = calEvent.show_route
     }
   })
 })

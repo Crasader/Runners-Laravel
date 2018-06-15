@@ -16,6 +16,7 @@ $(function () {
     // Sets the default view of the calendar
     defaultView: 'agendaWeek',
     // Options for the view
+    allDaySlot: false,
     slotEventOverlap: false,
     slotLabelFormat: 'H:mm',
     scrollTime: '10:00:00',

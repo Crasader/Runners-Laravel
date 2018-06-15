@@ -75,6 +75,7 @@
                                 'placeholder' => "Heure de départ",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-tag',
+                                'value'       => now()->startOfHour()->format('Y-m-d\\TH:i'),
                                 'errors'      => $errors
                                 ])
                             @endcomponent
@@ -94,6 +95,7 @@
                                 'placeholder' => "Heure de fin",
                                 'type'        => 'datetime-local',
                                 'icon'        => 'fa-tag',
+                                'value'       => now()->endOfHour()->format('Y-m-d\\TH:i'),
                                 'errors'      => $errors
                                 ])
                             @endcomponent

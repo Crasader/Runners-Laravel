@@ -25,7 +25,7 @@ class CalendarFormatScheduleResource extends Resource
         return [
             'id'         => $this->id,
             'title'      => $this->group->name,
-            'start'      => $this->end_time->toIso8601String(),
+            'start'      => $this->start_time->toIso8601String(),
             'end'        => $this->end_time->toIso8601String(),
             'color'      => '#' . $this->group->color,
             'show_route' => route('schedules.show', ['schedule' => $this->id])

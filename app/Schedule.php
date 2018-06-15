@@ -28,7 +28,7 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'start_time', 'end_time'
+        'start_time', 'end_time', 'group_id'
     ];
 
     /**
@@ -102,5 +102,30 @@ class Schedule extends Model
     public function scopeBetween($query, $start, $end)
     {
         return $query->where('start_time', '<', $end)->where('end_time', '>', $start);
+    }
+
+    /**
+     * MODEL METHOD
+     * Converts the length of the event in percent
+     * If the events duration is 12h i takes 50% of a journey
+     * Used to display boxes in the schedules
+     * ->endOfDay()
+     * @return number
+     */
+    public function lengthInPercent()
+    {
+        return $this->start_time->diffInMinutes($this->end_time) / 1440 * 100;
+    }
+
+    /**
+     * MODEL METHOD
+     * Converts the time from the begining of the tay to the start of the event in percent
+     * Used to display a margin in the left of the element
+     *
+     * @return number
+     */
+    public function timeFromDawnInPercent()
+    {
+        return (100/1440) * $this->start_time->diffInMinutes($this->start_time->copy()->startOfDay());
     }
 }

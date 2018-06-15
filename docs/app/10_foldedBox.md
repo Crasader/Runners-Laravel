@@ -27,7 +27,7 @@ Add the component in our page
 @endfoldable
 ```
 
-The main JS of Runners will register the boy automaticaly by specific id.
+The main JS of Runners will register the boy automatically by specific id.
 
 <br>
 <br>

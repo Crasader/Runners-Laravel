@@ -1,14 +1,14 @@
 # Migrations and seeding
 
-You can easyly start development with fake datas using migration and seeding.
+You can easily start development with fake data's using migration and seeding.
 
 ## Migrations
 
-The migrations will generate all the database incrementaly. The migrations allows you to track the changes performed on the database over time.
+The migrations will generate all the database incrementally. The migrations allows you to track the changes performed on the database over time.
 
 If you need to make change on the database structure, create a new migration. **Never edit older migrations !**
 
-You find all the migration posibilities on the [official doc](https://laravel.com/docs/5.5/migrations).
+You find all the migration possibilities on the [official doc](https://laravel.com/docs/5.5/migrations).
 
 ### Related commands :
 ```sh
@@ -24,7 +24,9 @@ php artisan migrate:reset
 
 ## Seeding
 
-Laravel provides a seeding system to easily populate the databse. You find all the seeders in the `database/seeds` folder. These scripts populates each tables with fake datas automaticaly. If you want to add new seeders see the [doc](https://laravel.com/docs/5.5/seeding).
+Laravel provides a seeding system to easily populate the database. You find all the seeders in the `database/seeds` folder.
+These scripts populates each tables with fake data's automatically.
+If you want to add new seeders see the [doc](https://laravel.com/docs/5.5/seeding).
 
 ### Related commands
 ```sh
@@ -58,6 +60,6 @@ php artisan db:seed --class=RemoveAllRunsSeeder
 <hr>
 <div align="center">
 
-**[<- Prev](../install/getready.md) // [Summary](../README.md) // [Next ->](database.md)**
+**[<- Prev](../README.md) // [Summary](../README.md) // [Next ->](./2_assets.md)**
 
 </div>

@@ -1,9 +1,9 @@
 # Log System
 
-You can easyly add loging for our diferents models, thats allow you to conserve a stack of all the actions performed in the app.
-For loging actions we use the eloquent events and laravel subscriber system.
-Thats allo you to easyly add logging on any model as you want, after attaching these events,
-all actions performed in the model will be saved in the logs table, and can be acceced by the log page.
+You can easily add logging for our different's models, that's allow you to conserve a stack of all the actions performed in the app.
+For logging actions we use the eloquent events and laravel subscriber system.
+That's allow you to easily add logging on any model as you want, after attaching these events,
+all actions performed in the model will be saved in the logs table, and can be acceded by the log page.
 
 ## How to attach it to a model
 
@@ -32,7 +32,7 @@ In runners you can log 4 events :
 * `updated`
 * `deleted`
 * `restored`
-The restored event can only be addet to medels that uses soft deletes.
+The restored event can only be added to models that uses soft deletes.
 
 Here the code to add in the model to fire events :
 
@@ -51,11 +51,11 @@ protected $dispatchesEvents = [
 ];
 ```
 
-## Retriving logs
+## Retrieving logs
 
 After this manipulations, all the events will be logged in the logs table.
-You can retrieve logs for a specific model by accesing the polymorphic relation you added below.
-Example to retrive runs logs.
+You can retrieve logs for a specific model by accessing the polymorphic relation you added below.
+Example to retrieve runs logs.
 
 ```php
 $run = Run::first();

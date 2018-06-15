@@ -2,14 +2,16 @@
 
 ## Configuration
 
-To run the app in a evironement close as the production env, we use Homestead, a preconfigured VM that includes all the required technologies use by laravel.
+To run the app in a environment close as the production env, we use Homestead, a preconfigured VM that includes all the required technologies use by laravel.
 
 Runners includes the homestead automatic configurator, to generate homestead configuration on the fly.
 
 **1. Requirements :**
 
-* You need to install [vagrant](https://www.vagrantup.com/) on our machine. I use the 1.9.6, but the newer versions vork great, just check the compatibility with homestead.
-* And [virtualbox](), Actually the suported version by vagrant is th 5.1, if you want to use a newer, verify it's compatibility with vagrant.
+* You need to install [vagrant](https://www.vagrantup.com/) on our machine.
+I use the 1.9.6, but the newer versions work great, just check the compatibility with homestead.
+* And [virtualbox](https://www.virtualbox.org/), Actually the supported version by vagrant is th 5.1,
+if you want to use a newer, verify it's compatibility with vagrant.
 
 **2. Download the box**
 
@@ -21,8 +23,8 @@ This will download the base homestead box on our machine.
 
 **3. Initialize homestead in runners**
 
-To generates a homestead configuration, specific to runners you need to run the foolowing commands on our project directory.
-To run this command, you must have install the php dependencies, see [installation](install.md#Install-the-php-dependencies) for more infos.
+To generates a homestead configuration, specific to runners you need to run the following commands on our project directory.
+To run this command, you must have install the php dependencies, see [installation](1_install.md#Install-the-php-dependencies) for more info's.
 
 Linux / Mac OS :
 ```sh
@@ -45,7 +47,7 @@ databases:
     - runners
 ```
 
-To acces the app via our local navigator without typing ip, add this line to our `hosts` file :
+To access the app via our local navigator without typing ip, add this line to our `hosts` file :
 
 ```
 192.168.10.10    runners-laravel
@@ -77,9 +79,10 @@ vagrant halt
 
 **7. SSH**
 
-To wort properly with the `php artisan` commands, we need to a ssh connection to our vm, then we can type commands directly in the vm, to be executed vith the same environment as your project.
+To wort properly with the `php artisan` commands, we need to a ssh connection to our vm,
+then we can type commands directly in the vm, to be executed with the same environment as your project.
 
-To etablish a ssh conection with the homestead machine :
+To establish a ssh connection with the homestead machine :
 
 ```sh
 vagrant ssh
@@ -87,7 +90,7 @@ vagrant ssh
 
 After, your have the control of the prompt in the vm, type `exit` to recover our local prompt.
 
-We recommend to run all the laravel comands in the vm.
+We recommend to run all the laravel commands in the vm.
 
 <hr>
 

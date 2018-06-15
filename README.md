@@ -2,7 +2,7 @@
   <img src ="public/img/logo.svg" width="40%"/><br><br>
 </div>
 
-Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
+Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
 ## [v2.0.0-rc.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1)
 
@@ -17,7 +17,7 @@ Break changes :
 Changes :
 * Remove breadcrum on top of page
 
-Improuvments :
+Improvements :
 * Add schedules crud
     * Schedules creation
     * Schedules edition
@@ -33,7 +33,7 @@ Resolved Issues :
 * [Duplicate runner status #86](https://github.com/CPNV-ES/Runners-Laravel/issues/86)
 * [Status in english (low priority) #87](https://github.com/CPNV-ES/Runners-Laravel/issues/87)
 
-## Start developping
+## Start developing
 
 You can find a complete install procedure [here](docs/install/1_requirements.md).
 
@@ -41,7 +41,7 @@ You can find a complete install procedure [here](docs/install/1_requirements.md)
 
 You find docs [here](docs/README.md)
 
-## Logins
+## Login
 
 If you seeded the database, you will have a couple users, but a few are important.
 

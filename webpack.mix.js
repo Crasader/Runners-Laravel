@@ -6,7 +6,7 @@ let mix = require('laravel-mix')
  |--------------------------------------------------------------------------
  |
  | This file describe the assets to compile
- | The assets are located in the ressources/assets
+ | The assets are located in the resources/assets
  | Mix use webpack to compile the assets
  | See the package.json to see all the available build commands
  |

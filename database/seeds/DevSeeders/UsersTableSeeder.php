@@ -148,7 +148,7 @@ class UsersTableSeeder extends Seeder
                 // The name is generated with fistname and last name (no space, and lowercase)
                 'name'         => "$user[1] $user[0]",
                 // The email is also generated with firstname and lastname and with the @test.local prefix
-                'email'        => str_replace(' ', '', strtolower("{$user[0]}.{$user[1]}@test.local")),
+                'email'        => str_replace(' ', '', mb_strtolower("{$user[0]}.{$user[1]}@test.local")),
                 'password'     => bcrypt($user[4]),
                 'lastname'     => $user[0],
                 'firstname'    => $user[1],

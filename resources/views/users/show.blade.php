@@ -23,8 +23,9 @@
             <div class="column is-narrow">
                 <h1 class="title is-2">
                     {{ $user->fullname }}
-                    @component('components/status_tag', ['status' => $user->status()->slug])
-                    @endcomponent
+                    {{-- Display the status of the current user --}}
+                    {{-- @component('components/status_tag', ['status' => $user->status()->slug])
+                    @endcomponent --}}
                 </h1>
             </div>
             <div class="column">
@@ -143,7 +144,8 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="columns">
+                        {{-- Display the sex of the user --}}
+                        {{-- <div class="columns">
                             <div class="column is-4 has-text-right">
                                 <p>
                                     <strong>Sexe : </strong>
@@ -154,7 +156,7 @@
                                     {{ $user->sex }}
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 

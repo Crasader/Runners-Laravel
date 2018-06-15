@@ -70,7 +70,11 @@
                                             <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                                         </p>
                                         <p class="has-text-centered">
-                                            <a href="{{ route('users.show', ['user' => $user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">{{$user->firstname}}</span></a>
+                                            <a href="{{ route('users.show', ['user' => $user->id]) }}">
+                                                <span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">
+                                                    {{$user->firstname}}
+                                                </span>
+                                            </a>
                                         </p>
                                     </figure>
                                 </article>

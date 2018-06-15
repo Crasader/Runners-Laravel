@@ -43,7 +43,7 @@ class RunController extends Controller
                     'subscriptions.car.type'
                 ])->get()
             );
-        
+
         /**
          * If 'status' is present in the query params
          */

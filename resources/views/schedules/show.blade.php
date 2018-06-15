@@ -52,6 +52,19 @@
 
         <div class="columns">
             <div class="column">
+                <div class="content box">
+                    @datetag(['date' => $schedule->start_time])
+                        Commence :
+                    @enddatetag
+                    @datetag(['date' => $schedule->end_time])
+                        Termine
+                    @enddatetag
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
                 <h2 class="title is-3">Utilisateurs concernées par cet horaire :</h2>
             </div>
         </div>

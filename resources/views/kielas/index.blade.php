@@ -69,7 +69,7 @@
                                         <article class="media">
                                             {{-- Get user --}}
                                             <figure class="media-left">
-                                                <p class="image is-64x64">
+                                                <p class="image is-96x96">
                                                     <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                                                 </p>
                                             </figure>
@@ -85,9 +85,8 @@
                                                         @if ($user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
                                                             Run en cours : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a>
                                                         @elseif ($user->runs->where('planned_at', '<=', $now)->where('end_planned_at', '>=', $now)->first() || $user->runs->where('started_at', '>=', $now)->first())
-                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a> à {{$user->runs->first()->started_at != null ? $user->runs->first()->started_at->format('H:i') : $user->runs->first()->planned_at->format('H:i')}}
+                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a> à {{$user->runs->first()->started_at != null ? $user->runs->first()->started_at->format('H\hi') : $user->runs->first()->planned_at->format('H\hi')}}
                                                         @else
-                                                            Aucun run n'est attribué.
                                                         @endif
                                                     </p>
                                                 </div>
@@ -109,7 +108,7 @@
                                         <article class="media">
                                             {{-- Get user --}}
                                             <figure class="media-left">
-                                                <p class="image is-64x64">
+                                                <p class="image is-96x96">
                                                     <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                                                 </p>
                                             </figure>
@@ -123,9 +122,8 @@
                                                         @if ($schedule->user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
                                                             Run en cours : <a href="{{ route('runs.show', ['run' => $schedule->user->runs->first()->id])}}">{{$schedule->user->runs->first()->name}}</a>
                                                         @elseif ($schedule->user->runs->where('planned_at', '<=', $now)->where('end_planned_at', '>=', $now)->first() || $schedule->user->runs->where('started_at', '>=', $now)->first())
-                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $schedule->user->runs->first()->id])}}">{{$schedule->user->runs->first()->name}}</a> à {{$schedule->user->runs->first()->started_at != null ? $schedule->user->runs->first()->started_at->format('H:i') : $schedule->user->runs->first()->planned_at->format('H:i')}}
+                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $schedule->user->runs->first()->id])}}">{{$schedule->user->runs->first()->name}}</a>, {{$schedule->user->runs->first()->started_at != null ? $schedule->user->runs->first()->started_at->format('H\hi') : $schedule->user->runs->first()->planned_at->format('H\hi')}}
                                                         @else
-                                                            Aucun run n'est attribué.
                                                         @endif
                                                     </p>
                                                 </div>

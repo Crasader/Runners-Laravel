@@ -95,7 +95,7 @@
                                             {{-- Get user --}}
                                             <figure class="media-left">
                                                 <p class="image is-96x96">
-                                                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                                    <img src="{{ asset(Storage::url($schedule->user->profilePictures->last()->path)) }}">
                                                 </p>
                                                 <p class="has-text-centered">
                                                     <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">{{$schedule->user->firstname}}</span></a>

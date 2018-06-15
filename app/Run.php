@@ -413,7 +413,7 @@ class Run extends Model
      */
     public function ready()
     {
-        if ($this->status == 'published' || $this->status == 'finalizing') {
+        if ($this->status == 'ready') {
             return true;
         }
         return false;

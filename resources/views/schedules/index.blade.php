@@ -26,7 +26,7 @@
         {{-- Title and controls --}}
         <div class="columns">
             <div class="column is-narrow">
-                <h1 class="title is-2">Horaires et présences</h1>
+                <h1 class="title is-2">Horaires</h1>
             </div>
             <div class="column">
                 @can('create', App\Schedule::class)

@@ -76,21 +76,16 @@
                     <div class="columns is-multiline">
                         @foreach ($schedule->group->users as $user)
                             <div class="column is-2">
-                                <article class="media">
-                                    {{-- Get user --}}
-                                    <figure class="media-left">
-                                        <p class="image is-64x64">
-                                            <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                                        </p>
-                                        <p class="has-text-centered">
-                                            <a href="{{ route('users.show', ['user' => $user->id]) }}">
-                                                <span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">
-                                                    {{$user->firstname}}
-                                                </span>
-                                            </a>
-                                        </p>
-                                    </figure>
-                                </article>
+                                <figure class="image">
+                                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                </figure>
+                                <p class="has-text-centered has-margin-top-10">
+                                    <a href="{{ route('users.show', ['user' => $user->id]) }}">
+                                        <span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">
+                                            {{$user->firstname}}
+                                        </span>
+                                    </a>
+                                </p>
                             </div>
                         @endforeach
                     </div>

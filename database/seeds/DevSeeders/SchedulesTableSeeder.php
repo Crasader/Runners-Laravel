@@ -11,7 +11,7 @@ use Carbon\Carbon;
  * SchedulesTableSeeder
  * Create all the base schedules, and associate to id a group
  * This seeder can generate randoms shedules or use the shedules filled in the $shedules array
- * 
+ *
  * @author Bastien Nicoud
  */
 class SchedulesTableSeeder extends Seeder

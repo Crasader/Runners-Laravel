@@ -9,7 +9,7 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li>
-                <a href="/">
+                <a href="{{ route('home') }}">
                     <span class="icon is-small">
                         <i class="fas fa-home" aria-hidden="true"></i>
                     </span>

@@ -71,19 +71,16 @@ class RunsTableSeeder extends Seeder
          */
 
         // Get the amounnt of festivals (in the festivals table) to define how many time we have to generates custom runs
-        $festivalsAmount = Festival::all()->count();
+        $festivals = Festival::all();
 
         /**
          * Main loop, iterates for each festival
          */
-        for ($f = 1; $f <= $festivalsAmount; $f++) {
+        $festivals->each(function ($festival) use ($runsAmount, $notes, $status) {
 
             /**
              * Gets datas relatives to all the runs of 1 festival
              */
-
-            // Gets the festival we actually iterates trough
-            $festival = Festival::find($f);
 
             // Get the length of the festival
             $festivalLength = $festival->starts_on->diffInDays($festival->ends_on);
@@ -191,6 +188,6 @@ class RunsTableSeeder extends Seeder
                 $createdRun->comments()->save($comment);
 
             }
-        }
+        });
     }
 }

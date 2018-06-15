@@ -34,6 +34,15 @@ php artisan db:seed
 # You can migrate and seed the database in one time
 php artisan migrate:fresh --seed
 # This will repuild the database from scratch and seed it
+
+# Seed and assign the free status to all users
+php artisan db:seed --class=UserStatusSeedsAndAssociate
+
+# Re seed only the generated runs (will empty all the runs, and relaunch the generation...)
+php artisan db:seed --class=ReGenerateRunsSeeder
+
+# Delete all the runs
+php artisan db:seed --class=RemoveAllRunsSeeder
 ```
 
 <br>

@@ -127,6 +127,10 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        $schedule->delete();
+
+        return redirect()
+            ->route('schedules.index')
+            ->with('success', "L'horaire à bien été supprimé");
     }
 }

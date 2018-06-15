@@ -118,10 +118,17 @@
                     </div>
                 </div>
 
-                {{-- Schedule menu --}}
-                <a class="navbar-item" href="{{ route('schedules.index')}}">
-                    Horaires
-                </a>
+                {{-- Groups menu --}}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="{{ route('schedules.index') }}">
+                        Horaires
+                    </a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{{ route('schedules.create') }}">
+                            Créer un nouver horaire
+                        </a>
+                    </div>
+                </div>
 
                 {{-- Kiéla? menu --}}
                 <a class="navbar-item" href="{{ route('kiela.index') }}">

@@ -31,6 +31,9 @@ $(function () {
       error: function () {
         alert('There was an error while fetching events!')
       }
+    },
+    eventClick: function (calEvent, jsEvent, view) {
+      window.location.href = calEvent.show_route
     }
   })
 })

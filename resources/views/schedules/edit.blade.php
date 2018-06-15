@@ -43,8 +43,6 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
-                    {{$errors}}
-
                     <div class="field is-horizontal">
                         <div class="field-label is-normal">
                             <label class="label">Groupe</label>

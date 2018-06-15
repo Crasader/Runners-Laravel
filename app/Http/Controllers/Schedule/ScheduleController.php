@@ -54,7 +54,8 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('schedules.create');
+        $groups = Group::all();
+        return view('schedules.create')->with(compact('schedule', 'groups'));
     }
 
     /**
@@ -65,7 +66,11 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $schedules = new Schedule($request->all());
+        $schedules = new Schedule([
+            'group_id' => $request->group_id,
+            'start_time' => Carbon::parse($request->start_time),
+            'end_time' => Carbon::parse($request->end_time)
+        ]);
         $schedules->save();
         return redirect()->route('schedules.index');
     }

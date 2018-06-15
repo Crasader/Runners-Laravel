@@ -41,6 +41,9 @@
                             <a href="{{ route('runs.edit', ['run' => $run->id]) }}" class="button is-info">Modifier le run</a>
                         </p>
                     @endcan
+                    <p class="control">
+                        <a href="{{ route('runs.print', ['run' => $run->id]) }}" class="button is-info">Imprimer</a>
+                    </p>
                 </div>
             </div>
         </div>

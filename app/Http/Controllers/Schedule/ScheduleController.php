@@ -61,10 +61,10 @@ class ScheduleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Schedules\StoreSchedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSchedule $request)
     {
         $schedules = new Schedule([
             'group_id' => $request->group_id,

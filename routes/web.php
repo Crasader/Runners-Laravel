@@ -111,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
      */
     // Display runs for TV screen
     Route::get('runs/big', 'Run\RunController@big')->name('runs.big');
+    Route::get('runs/print/{run}', 'Run\RunController@print')->name('runs.print');
     // Publish a run (visible in the mobile app)
     Route::patch('runs/publish/{run}', 'Run\RunController@publish')->name('runs.publish');
     // Start/stop a run

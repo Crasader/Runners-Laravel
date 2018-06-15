@@ -30,7 +30,7 @@ $(function () {
         'Content-Type': 'application/json'
       },
       error: function () {
-        alert('There was an error while fetching events!')
+        alert("Un erreur c'est produite en récupérant les événements")
       }
     },
     eventClick: function (calEvent, jsEvent, view) {
@@ -38,6 +38,3 @@ $(function () {
     }
   })
 })
-
-// Javascript pour les horaires
-console.log('SCHEDULES')

@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Group;
 use App\Http\Resources\Schedules\CalendarFormatScheduleResource;
+use App\Http\Requests\Schedules\StoreSchedule;
 
 /**
  * ScheduleController
@@ -25,7 +26,13 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedules.index');
+        // $firstday = Schedule::orderBy('start_time')->first();
+        // $lastday = Schedule::orderBy('start_time', 'desc')->first();
+        // $nbDays = $firstday->start_time->diffInDays($lastday->end_time);
+        // dd($nbDays, $firstday, $lastday);
+        $schedules = Schedule::with('group')->orderBy('start_time')->get();
+        //return view('schedules.index');
+        return view('schedules.index')->with(compact('schedules'));
     }
 
     /**
@@ -47,7 +54,8 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('schedules.create');
+        $groups = Group::all();
+        return view('schedules.create')->with(compact('schedule', 'groups'));
     }
 
     /**
@@ -58,7 +66,11 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $schedules = new Schedule($request->all());
+        $schedules = new Schedule([
+            'group_id' => $request->group_id,
+            'start_time' => Carbon::parse($request->start_time),
+            'end_time' => Carbon::parse($request->end_time)
+        ]);
         $schedules->save();
         return redirect()->route('schedules.index');
     }
@@ -71,7 +83,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        //
+        return view('schedules.show')->with(compact('schedule'));
     }
 
     /**
@@ -82,19 +94,29 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        $groups = Group::all();
+        return view('schedules.edit')->with(compact('schedule', 'groups'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Schedules\StoreSchedule  $schedule
      * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(StoreSchedule $request, Schedule $schedule)
     {
-        //
+        $schedule->fill([
+            'group_id' => $request->group_id,
+            'start_time' => Carbon::parse($request->start_time),
+            'end_time' => Carbon::parse($request->end_time)
+        ]);
+        $schedule->save();
+
+        return redirect()
+            ->route('schedules.index')
+            ->with('success', "L'horaire à bien été modifié.");
     }
 
     /**

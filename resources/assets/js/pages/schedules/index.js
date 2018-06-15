@@ -34,3 +34,6 @@ $(function () {
     }
   })
 })
+
+// Javascript pour les horaires
+console.log('SCHEDULES')

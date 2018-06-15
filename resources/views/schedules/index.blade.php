@@ -21,7 +21,7 @@
 @section('content')
 
 <div class="section">
-    <div class="container">
+    <div class="container is-fluid">
 
         {{-- Title and controls --}}
         <div class="columns">

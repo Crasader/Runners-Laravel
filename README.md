@@ -4,43 +4,34 @@
 
 Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-beta.4](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.4)
+## [v2.0.0-rc.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1)
 
 !! ATTENTION !! :
-This version includes database changes :
-* Migrate the new database `php artisan migrate:fresh --seed`
-
-If you want to preserve our database, you can just run the migration, and seed only the new contents :
-* `php artisan migrate` will generate the new tables
-* `php artisan db:seed --class=UserStatusSeedsAndAssociate` will generate status in the new table, and assign the free status to all users.
-* !! You need to reassign the status you want to users
+This version includes assets changes :
+* Generate new assets for dev `npm run dev`
+* Generate new assets for production `npm run prod`
 
 Break changes :
-* Status for users are now moved to specific table
+* x
 
 Changes :
-* New default liscence picture
+* Remove breadcrum on top of page
 
 Improuvments :
-* Little updates on the Kiela
-* Updates in the user edition page
-* 3 New seeders for dev purpose :
-    * `php artisan db:seed --class=UserStatusSeedsAndAssociate` Generate and associate free status to all users.
-    * `php artisan db:seed --class=RemoveAllRunsSeeder` Clear the runs and all run drivers.
-    * `php artisan db:seed --class=ReGenerateRunsSeeder` Generate fres runs for the 3 previous and nex days.
+* Add schedules crud
+    * Schedules creation
+    * Schedules edition
+    * Schedules deletion
+* Change kiela layout
 
 Resolved Issues :
-* [Add production seeder #79](https://github.com/CPNV-ES/Runners-Laravel/issues/79)
-* [Runner status #72](https://github.com/CPNV-ES/Runners-Laravel/issues/72)
-* [Add status table for the users #74](https://github.com/CPNV-ES/Runners-Laravel/issues/74)
-* [Full trip in big screen #81](https://github.com/CPNV-ES/Runners-Laravel/issues/81)
-* [Add docs for the folded boxes #76](https://github.com/CPNV-ES/Runners-Laravel/issues/76)
-* [Complete the database diagram #75](https://github.com/CPNV-ES/Runners-Laravel/issues/75)
-* [Picture for new runner #77](https://github.com/CPNV-ES/Runners-Laravel/issues/77)
-* [Remove picture #78](https://github.com/CPNV-ES/Runners-Laravel/issues/78)
-
-In progress :
-* [See details in projects page !](https://github.com/CPNV-ES/Runners-Laravel/projects/2)
+* [Adding driver in kiela fails #89](https://github.com/CPNV-ES/Runners-Laravel/issues/89)
+* [Add seeder to set name field to conform new search fields #90](https://github.com/CPNV-ES/Runners-Laravel/issues/90)
+* [Kiéla #80](https://github.com/CPNV-ES/Runners-Laravel/issues/80)
+* [Interface cleanup #64](https://github.com/CPNV-ES/Runners-Laravel/issues/64)
+* [Sex doesn't matter #85](https://github.com/CPNV-ES/Runners-Laravel/issues/85)
+* [Duplicate runner status #86](https://github.com/CPNV-ES/Runners-Laravel/issues/86)
+* [Status in english (low priority) #87](https://github.com/CPNV-ES/Runners-Laravel/issues/87)
 
 ## Start developping
 

@@ -28,7 +28,7 @@
 <body>
     @include('layouts.navbar')
 
-    @include('layouts.breadcrum')
+    {{-- @include('layouts.breadcrum') --}}
 
     @include('layouts.flash_message')
 

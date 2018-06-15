@@ -59,39 +59,25 @@
         {{-- The table --}}
         <div class="columns">
             <div class="column is-12">
-                <table class="table is-striped is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Tel</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Tel</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @forelse ($schedule->group->users as $user)
-                            <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
-                                <th>{{ $user->firstname }}</th>
-                                <th>{{ $user->lastname }}</th>
-                                <th>{{ $user->phone_number }}</th>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td>
-                                    <span class="tag is-warning is-medium">
-                                        <strong>Aucun utilisateurs dans ce groupe.<strong>
-                                    </span>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                <div class="box">
+                    <div class="columns is-multiline">
+                        @foreach ($schedule->group->users as $user)
+                            <div class="column is-2">
+                                <article class="media">
+                                    {{-- Get user --}}
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                        </p>
+                                        <p class="has-text-centered">
+                                            <a href="{{ route('users.show', ['user' => $user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">{{$user->firstname}}</span></a>
+                                        </p>
+                                    </figure>
+                                </article>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
 

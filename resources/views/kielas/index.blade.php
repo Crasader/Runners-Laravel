@@ -45,7 +45,7 @@
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
-                                    <span class="title is-3">Groupes présents : </span>
+                                    <span class="title is-4">Groupes présents : </span>
                                     <!-- Get groups -->
                                     @foreach ($present as $schedule)
                                         <a href="{{ route('groups.show', ['group' => $schedule->group->id]) }}"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span></a>
@@ -62,36 +62,21 @@
 
                     <div class="box">
                         <div class="columns is-multiline">
-                            <div class="column is-12"><p class="title is-3">Chauffeurs présents :</p></div>
+                            <div class="column is-12"><p class="title is-4">Chauffeurs présents :</p></div>
                             @foreach ($present as $schedule)
                                 @foreach ($schedule->group->users as $user)
-                                    <div class="column {{ $presentKiela->count() > 0 ? 'is-6' : 'is-4'}}">
+                                    <div class="column {{ $presentKiela->count() > 0 ? 'is-2' : 'is-2'}}">
                                         <article class="media">
                                             {{-- Get user --}}
                                             <figure class="media-left">
-                                                <p class="image is-64x64">
+                                                <p class="image is-96x96">
                                                     <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                                                 </p>
+                                                <p class="has-text-centered">
+                                                    <a href="{{ route('users.show', ['user' => $user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">{{$user->firstname}}</span></a>
+                                                    
+                                                </p>
                                             </figure>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    <p>
-                                                        <a href="{{ route('users.show', ['user' => $user->id]) }}">{{$user->firstname}} {{$user->lastname}}</a>
-                                                        @if ($user->status()->shows_on_kiela)
-                                                            @component('components/status_tag', ['status' => $user->status()->slug])
-                                                            @endcomponent
-                                                        @endif
-                                                        <br>
-                                                        @if ($user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
-                                                            Run en cours : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a>
-                                                        @elseif ($user->runs->where('planned_at', '<=', $now)->where('end_planned_at', '>=', $now)->first() || $user->runs->where('started_at', '>=', $now)->first())
-                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $user->runs->first()->id])}}">{{$user->runs->first()->name}}</a> à {{$user->runs->first()->started_at != null ? $user->runs->first()->started_at->format('H:i') : $user->runs->first()->planned_at->format('H:i')}}
-                                                        @else
-                                                            Aucun run n'est attribué.
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                            </div>
                                         </article>
                                     </div>
                                 @endforeach
@@ -100,34 +85,26 @@
                     </div>
                 </div>
                 @if ($presentKiela->count() > 0)
-                    <div class="column is-4">
+                    <div class="column is-2">
                         <div class="box">
                             <div class="columns is-multiline">
-                                    <div class="column is-12"><p class="title is-3">Chauffeurs rajoutés :</p></div>
+                                    <div class="column is-12"><p class="title is-4">Chauffeurs rajoutés :</p></div>
                                 @foreach ($presentKiela as $schedule)
                                     <div class="column is-12">
                                         <article class="media">
                                             {{-- Get user --}}
                                             <figure class="media-left">
-                                                <p class="image is-64x64">
-                                                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                                <p class="image is-96x96">
+                                                    <img src="{{ asset(Storage::url($schedule->user->profilePictures->last()->path)) }}">
+                                                </p>
+                                                <p class="has-text-centered">
+                                                    <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">{{$schedule->user->firstname}}</span></a>
+                                                    <br>
                                                 </p>
                                             </figure>
                                             <div class="media-content">
                                                 <div class="content">
-                                                    <p>
-                                                        <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}">{{$schedule->user->firstname}} {{$schedule->user->lastname}}</a>
-                                                        @component('components/status_tag', ['status' => $schedule->user->status()->slug])
-                                                        @endcomponent
-                                                        <br>
-                                                        @if ($schedule->user->runs->where('started_at', '<=', $now)->where('ended_at', '>=', $now)->first())
-                                                            Run en cours : <a href="{{ route('runs.show', ['run' => $schedule->user->runs->first()->id])}}">{{$schedule->user->runs->first()->name}}</a>
-                                                        @elseif ($schedule->user->runs->where('planned_at', '<=', $now)->where('end_planned_at', '>=', $now)->first() || $schedule->user->runs->where('started_at', '>=', $now)->first())
-                                                            Prochain run : <a href="{{ route('runs.show', ['run' => $schedule->user->runs->first()->id])}}">{{$schedule->user->runs->first()->name}}</a> à {{$schedule->user->runs->first()->started_at != null ? $schedule->user->runs->first()->started_at->format('H:i') : $schedule->user->runs->first()->planned_at->format('H:i')}}
-                                                        @else
-                                                            Aucun run n'est attribué.
-                                                        @endif
-                                                    </p>
+                                                    
                                                 </div>
                                             </div>
                                             @can('delete', $schedule)

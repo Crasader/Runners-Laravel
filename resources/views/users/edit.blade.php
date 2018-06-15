@@ -202,7 +202,7 @@
                                         <div class="select is-fullwidth">
                                             <select name="status">
                                                 @foreach($statuses as $status)
-                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->status()->slug) ? 'selected' : '' }}>{{ $status->slug }}</option>
+                                                    <option value="{{ $status->slug }}" {{ ($status->slug === $user->status()->slug) ? 'selected' : '' }}>{{ $status->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

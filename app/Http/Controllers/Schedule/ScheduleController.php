@@ -32,7 +32,7 @@ class ScheduleController extends Controller
         // dd($nbDays, $firstday, $lastday);
         $schedules = Schedule::with('group')->orderBy('start_time')->get();
         //return view('schedules.index');
-        return view('schedules.test')->with(compact('schedules'));
+        return view('schedules.index')->with(compact('schedules'));
     }
 
     /**

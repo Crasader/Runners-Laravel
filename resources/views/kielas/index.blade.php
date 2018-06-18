@@ -72,7 +72,7 @@
                                                 <p class="image is-96x96">
                                                     <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
                                                 </p>
-                                                <p class="has-text-centered">
+                                                <p class="has-text-centered has-margin-top-10">
                                                     <a href="{{ route('users.show', ['user' => $user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">{{$user->firstname}}</span></a>
                                                     
                                                 </p>
@@ -97,7 +97,7 @@
                                                 <p class="image is-96x96">
                                                     <img src="{{ asset(Storage::url($schedule->user->profilePictures->last()->path)) }}">
                                                 </p>
-                                                <p class="has-text-centered">
+                                                <p class="has-text-centered has-margin-top-10">
                                                     <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">{{$schedule->user->firstname}}</span></a>
                                                     <br>
                                                 </p>

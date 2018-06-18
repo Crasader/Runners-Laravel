@@ -4,9 +4,9 @@
         <nav class="pagination is-centered" role="navigation" aria-label="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <a class="pagination-previous" title="This is the first page" disabled>Previous page</a>
+                <a class="pagination-previous" title="This is the first page" disabled>{{__('pagination.previous')}}</a>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="pagination-previous" rel="prev">Previous page</a>
+                <a href="{{ $paginator->previousPageUrl() }}" class="pagination-previous" rel="prev">{{__('pagination.previous')}}</a>
             @endif
 
             <ul class="pagination-list">
@@ -32,9 +32,9 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="pagination-next" rel="next">Next page</a>
+                <a href="{{ $paginator->nextPageUrl() }}" class="pagination-next" rel="next">{{__('pagination.next')}}</a>
             @else
-                <a class="pagination-next" title="This is the last page" disabled>Next page</a>
+                <a class="pagination-next" title="This is the last page" disabled>{{__('pagination.next')}}</a>
             @endif
         </nav>
     </div>

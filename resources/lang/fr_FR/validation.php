@@ -88,6 +88,9 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'can'                  => 'Vous ne pouvez pas modifier ce champ.',
+    'gt'                   => [
+        'string'  => 'Cette date ne peux pas être inférieur à la date de début.'
+    ],
 
     /*
     |--------------------------------------------------------------------------

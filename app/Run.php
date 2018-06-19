@@ -427,7 +427,7 @@ class Run extends Model
      */
     public function started()
     {
-        if ($this->status == 'started') {
+        if ($this->status == 'gone' || $this->status == 'started') {
             return true;
         }
         return false;

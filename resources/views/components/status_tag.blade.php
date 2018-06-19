@@ -67,7 +67,7 @@
         @break
 
     @case('error')
-        <span class="tag {{ $slot }} is-danger">Erreur</span>
+        <span class="tag {{ $slot }} is-danger">Problème !!</span>
         @break
 
     @case('hors_service')

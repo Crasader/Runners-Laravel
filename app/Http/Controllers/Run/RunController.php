@@ -40,7 +40,10 @@ class RunController extends Controller
     public function big()
     {
         $this->authorize('view', Run::class);
-        $runs = Run::whereDate('planned_at', '>', Carbon::now()->toDateString())
+        Run::whereNotIn('status', ['finished', 'drafting'])->get()->each(function ($run) {
+            $run->updateStatus();
+        });
+        $runs = Run::where('planned_at', '>=', now())
             ->orderBy('planned_at', 'asc')
             ->whereNotIn('status', ['finished', 'drafting'])
             ->limit(30)

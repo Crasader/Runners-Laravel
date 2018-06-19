@@ -1,0 +1,380 @@
+swagger: "2.0"
+info:
+  description: "This swagger documents the runners api."
+  version: "v2.0.0-rc.1.2"
+  title: "Swagger Petstore"
+tags:
+- name: "me"
+  description: "Routes related to the authenticated user"
+- name: "users"
+  description: "Users resource"
+- name: "schedules"
+  description: "Schedules resource"
+- name: "runs"
+  description: "Runs resource"
+- name: "runners"
+  description: "Runners resource (subscriptions)"
+- name: "waypoints"
+  description: "Waypoints resource"
+- name: "cars"
+  description: "Cars resource"
+- name: "groups"
+  description: "Groups resource"
+schemes:
+- "https"
+- "http"
+paths:
+  /me:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user"
+      produces:
+      - "application/json"
+      responses:
+        405:
+          description: "Method not allowed"
+        401:
+          description: "Unauthorized"
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+  /me/workinghours:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user schedules"
+      produces:
+      - "application/json"
+      responses:
+        405:
+          description: "Method not allowed"
+        401:
+          description: "Unauthorized"
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Schedule"
+  /me/runs:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user runs"
+      produces:
+      - "application/json"
+      responses:
+        405:
+          description: "Method not allowed"
+        401:
+          description: "Unauthorized"
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Run"
+  /user/createWithArray:
+    post:
+      tags:
+      - "user"
+      summary: "Creates list of users with given input array"
+      description: ""
+      operationId: "createUsersWithArrayInput"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of user object"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+  /user/createWithList:
+    post:
+      tags:
+      - "user"
+      summary: "Creates list of users with given input array"
+      description: ""
+      operationId: "createUsersWithListInput"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "List of user object"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+  /user/login:
+    get:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "loginUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "query"
+        description: "The user name for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "string"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+        400:
+          description: "Invalid username/password supplied"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "logoutUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+  /user/{username}:
+    get:
+      tags:
+      - "user"
+      summary: "Get user by user name"
+      description: ""
+      operationId: "getUserByName"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be fetched. Use user1 for testing. "
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+    put:
+      tags:
+      - "user"
+      summary: "Updated user"
+      description: "This can only be done by the logged in user."
+      operationId: "updateUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "name that need to be updated"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        400:
+          description: "Invalid user supplied"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "The name that needs to be deleted"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      email:
+        type: "string"
+      phone_number:
+        type: "string"
+      sex:
+        type: "string"
+      status:
+        type: "string"
+      image_profile:
+        type: "string"
+        description: "Link to the user profile picture."
+  Schedule:
+    type: "object"
+    properties:
+      start_at:
+        type: "string"
+      end_at:
+        type: "string"
+  Run:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      status:
+        type: "string"
+      title:
+        type: "string"
+      begin_at:
+        type: "string"
+      start_at:
+        type: "string"
+      end_at:
+        type: "string"
+      finished_at:
+        type: "string"
+      nb_passenger:
+        type: "string"
+      waypoints:
+        type: "array"
+        items:
+          $ref: "#/definitions/Waypoint"
+      runners:
+        type: "array"
+        items:
+          $ref: "#/definitions/Runner"
+  Waypoint:
+    type: "object"
+    properties:
+      nickname:
+        type: "string"
+  Runner:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      user:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+      vehicle_category:
+        type: "array"
+        items:
+          $ref: "#/definitions/CarType"
+      vehicle:
+        type: "array"
+        items:
+          $ref: "#/definitions/Car"
+  CarType:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      description:
+        type: "string"
+  Car:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      plate_number:
+        type: "string"
+      nb_place:
+        type: "integer"
+      status:
+        type: "string"
+      user:
+        type: "null"
+      type:
+        type: "array"
+        items:
+          $ref: "#/definitions/CarType"
+      comments:
+        type: "array"
+        items:
+          $ref: "#/definitions/Comment"
+  Comment:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      content:
+        type: "string"
+      user:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+      created_at:
+        type: "string"

@@ -58,6 +58,7 @@ class RunController extends Controller
         $this->authorize('create', Run::class);
         $run = Run::create(['status' => 'drafting']);
         $run->waypoints()->attach(1, ['order' => 1]);
+        $run->waypoints()->attach(1, ['order' => 2]);
         return redirect()
             ->route('runs.edit', ['run' => $run->id])
             ->with('success', "Le run à correctement été crée");

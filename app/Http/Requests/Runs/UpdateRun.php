@@ -33,9 +33,10 @@ class UpdateRun extends FormRequest
         return [
             'artist'                  => ['required', 'string', 'min:1', 'max:200'],
             'infos'                   => ['nullable', 'max:1000'],
-            'planned_at'              => ['nullable', 'date'],
+            'planned_at'              => ['required', 'date'],
             'passengers'              => ['nullable', 'integer', 'min:0'],
-            'waypoints.*'             => ['nullable', 'string'],
+            'waypoints'               => ['min:2'],
+            'waypoints.*'             => ['required', 'string'],
             'subscriptions.*.user'    => ['nullable', 'string', 'exists:users,name'],
             'subscriptions.*.carType' => ['nullable', 'string', 'exists:car_types,name'],
             'subscriptions.*.car'     => ['nullable', 'string', 'exists:cars,name'],
@@ -54,7 +55,8 @@ class UpdateRun extends FormRequest
     public function messages()
     {
         return [
-            'subscriptions.*.user.exists' => "Cet utilisateur n'existe pas"
+            'subscriptions.*.user.exists' => "Cet utilisateur n'existe pas",
+            'waypoints.min' => "Il faut au moins un lieu de départ et d'arrivée pour créer le run."
         ];
     }
 }

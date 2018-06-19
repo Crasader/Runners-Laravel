@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,16 +16,16 @@ use Illuminate\Http\Request;
  */
 Route::middleware(['auth:api'])->group(function () {
 
-    /**
+    /** *****************************
      * The current user
      */
     Route::get('me', 'api\UserController@me');
     // DEPRECATED old route to get the current user
     Route::get('users/me', 'api\UserController@me');
 
-    /**
+    /** *****************************
      * Routes prefixed by me
-     * Retrive infos for the connected user
+     * Retrieve info's for the connected user
      */
     Route::prefix('me')->group(function () {
         /**
@@ -40,44 +38,44 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('runs', 'api\RunController@myRuns');
     });
 
-    /**
-     * Users ressource
+    /** *****************************
+     * Users resource
      */
     Route::apiResource('users', 'api\UserController', ['only' => ['index', 'show']]);
 
-    /**
-     * Shedules ressource
+    /** *****************************
+     * Schedules resource
      */
     Route::apiResource('schedules', 'api\ScheduleController', ['only' => ['index']]);
 
-    /**
-     * Runs ressource
+    /** *****************************
+     * Runs resource
      */
-    // Spcific route to start the run
+    // Specific route to start the run
     Route::post('/runs/{run}/start', 'api\RunController@start');
     // Specific route to stop the run
     Route::post('/runs/{run}/stop', 'api\RunController@stop');
-    // The ressource
+    // The resource
     Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
-    // The waypoints nested in the runs
+    // The waypoint's nested in the runs
     Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
     // Crete a run_driver for the user
     Route::post('/runs/{run}/runners', 'api\RunnerController@store');
 
-    /**
+    /** *****************************
      * Runners resource
      * This resource is used to access the run_driver table
      */
     Route::apiResource('runners', 'api\RunnerController', ['only' => ['show', 'update']]);
 
-    /**
-     * Waypoints ressource
+    /** *****************************
+     * Waypoints resource
      */
     // Specific route to search waypoints
     Route::get('waypoints/search', 'api\WaypointController@search');
     Route::apiResource('waypoints', 'api\WaypointController', ['only' => ['index', 'show']]);
 
-    /**
+    /** *****************************
      * Cars resource
      */
     Route::apiResource('cars', 'api\CarController', ['only' => ['index', 'show', 'store', 'update']]);
@@ -94,7 +92,7 @@ Route::middleware(['auth:api'])->group(function () {
     //DEPRECATED old route name for cars comments
     Route::apiResource('vehicles.comments', 'api\CarCommentController', ['parameters' => ['vehicles' => 'car']]);
 
-    /**
+    /** *****************************
      * Groups resource
      */
     Route::apiResource('groups', 'api\GroupController', ['only' => ['index', 'show']]);

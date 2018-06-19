@@ -86,6 +86,7 @@ class RunController extends Controller
      */
     public function show(Run $run)
     {
+        $run->updateStatus();
         return view('runs.show')->with(compact('run'));
     }
 

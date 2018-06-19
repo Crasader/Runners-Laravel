@@ -4,26 +4,23 @@
 
 Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-rc.1.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.1)
-
-!! ATTENTION !! :
-This version includes assets changes :
-* Generate new assets for dev `npm run dev`
-* Generate new assets for production `npm run prod`
+## [v2.0.0-rc.1.2](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.2)
 
 Break changes :
 * x
 
 Changes :
-* Change the check of the needs filling runs status
+* Change the runs status logic according to the statuses lifecycle diagram.
 
 Improvements :
-* Add specific seeder to clean the schedules table
-* Fix spelling on docs
+* Change time validation on schedules creation.
+* Add time check to change the status of runs where the status is after current time.
 
 Resolved Issues :
+* [Minimal run info #96](https://github.com/CPNV-ES/Runners-Laravel/issues/96)
+* [Can create new schedule, validation fails #98](https://github.com/CPNV-ES/Runners-Laravel/issues/98)
 * [Run status, subscriptions must be complete to allows ready status. #94](https://github.com/CPNV-ES/Runners-Laravel/issues/94)
-* [Add seeder to remove all schedules #92](https://github.com/CPNV-ES/Runners-Laravel/issues/92)
+* [Update runs status managment according to the diagram in `docs/diagrams/runStats` #97](https://github.com/CPNV-ES/Runners-Laravel/issues/97)
 
 ## Start developing
 

@@ -33,14 +33,14 @@ Route::middleware(['auth'])->group(function () {
 
 
     /** *****************************
-     * Users ressource
+     * Users resource
      */
     // Qr codes management
     Route::get('users/{user}/generate-qr-code', 'User\UserQrCodeController@store')
         ->name('users.generate-qr-code');
     Route::get('users/{user}/delete-qr-code', 'User\UserQrCodeController@destroy')
         ->name('users.delete-qr-code');
-    // Credentials managment
+    // Credentials management
     Route::get('users/{user}/generate-credentials', 'User\UserController@generateCredentials')
         ->name('users.generate-credentials');
     // Import system (csv file)

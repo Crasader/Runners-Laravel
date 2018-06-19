@@ -32,7 +32,7 @@ Here we found the summary of all the documentation for the Runners project.
 
 1. [Database MLD](diagrams/databaseMLD.pdf)
 
-*All the diagrams are created with [draw.io](draw.io), you can easyly edit them.*
+*All the diagrams are created with [draw.io](draw.io), you can easily edit them.*
 
 ### Deployment / production installation
 

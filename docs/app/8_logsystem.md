@@ -1,7 +1,7 @@
 # Notifications
 
 To provide an easy way to sent notifications to users we use the laravel [built-in notifications system](https://laravel.com/docs/5.6/notifications).
-It allows you to easyly create ne notifications in the app. The database notifications are preconfigured, and a dedicated page for consulting notifications is available.
+It allows you to easily create ne notifications in the app. The database notifications are preconfigured, and a dedicated page for consulting notifications is available.
 
 ## Add new notification
 
@@ -22,7 +22,8 @@ public function via($notifiable)
     return ['database'];
 }
 ```
-2. You need to define a to array method thats converts notification datas into associative array to store it in the database. Thats allow you to retrive this data in the notification layout.
+2. You need to define a to array method that's converts notification data's into associative array to store it in the database.
+That's allow you to retrieve this data in the notification layout.
 ```php
 // App\Notifications\MyNewAwesomeNotification
 
@@ -34,17 +35,17 @@ public function toArray($notifiable)
     ];
 }
 ```
-3. Create a new notification type view in the `views/notifications/layouts/YourNotificationName` to provide a confinient layout for displaying the notification (in the show route of the notifications crud). See the [UnHandledExceptionNotification](../../resources/views/notifications/layouts/UnHandledExceptionNotification.blade.php) for example.
-4. Register our notification type the the 2 notification types componenets, thats allow you to convert the complete notification type namespace to an user friendly name, and to load the desired notification layort.
+3. Create a new notification type view in the `views/notifications/layouts/YourNotificationName` to provide a convenient layout for displaying the notification (in the show route of the notifications crud). See the [UnHandledExceptionNotification](../../resources/views/notifications/layouts/UnHandledExceptionNotification.blade.php) for example.
+4. Register our notification type the the 2 notification types components, that's allow you to convert the complete notification type namespace to an user friendly name, and to load the desired notification layort.
 ```html
 <!-- In resources/views/components/notifications/notification_types.blade.php -->
-<!-- Add a case that retrun a tag with the notification name -->
+<!-- Add a case that return a tag with the notification name -->
 @case('App\Notifications\MyNewAwesomeNotification')
     <span class="tag {{ $slot }} is-white">Ma nouvelle notification</span>
     @break
 
-<!-- In resources/views/components/notifications/nrender_notification.blade.php -->
-<!-- Add a case with and include statment that point to our new notification layout -->
+<!-- In resources/views/components/notifications/render_notification.blade.php -->
+<!-- Add a case with and include statement that point to our new notification layout -->
 @case('App\Notifications\MyNewAwesomeNotification')
     @include('notifications.layouts.MyNewAwesomeNotification', ['notification' => $notification])
     @break

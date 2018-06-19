@@ -463,11 +463,13 @@ class Run extends Model
     {
         $needsFilling = false;
         $needsFilling |= $this->artists()->first() ? false : true;
-        $needsFilling |= $this->passengers > 1 ? false : true;
+        $needsFilling |= $this->passengers > 0 ? false : true;
         $needsFilling |= $this->planned_at ? false : true;
         if ($this->subscriptions()->exists()) {
-            $needsFilling |= $this->subscriptions()->first()->user()->exists() ? false : true;
-            $needsFilling |= $this->subscriptions()->first()->car()->exists() ? false : true;
+            $this->subscriptions()->each(function ($subscription) use ($needsFilling) {
+                $needsFilling |= $subscription->user()->exists() ? false : true;
+                $needsFilling |= $subscription->car()->exists() ? false : true;
+            });
         } else {
             $needsFilling |= true;
         }

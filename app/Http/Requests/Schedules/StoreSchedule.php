@@ -33,7 +33,7 @@ class StoreSchedule extends FormRequest
         return [
             'group_id'   => ['required', 'integer'],
             'start_time' => ['required', 'date'],
-            'end_time'   => ['required', 'date']
+            'end_time'   => ['required', 'date', 'gt:start_time']
         ];
     }
 }

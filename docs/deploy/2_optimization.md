@@ -4,7 +4,7 @@ Laravel is really heavy, it is important to do some optimizations wen you pass o
 
 ## Cache the config
 
-This genearte a pre parsed config file for the laravel app. (prevent for re parsing the config at each request)
+This generate a pre parsed config file for the laravel app. (prevent for re parsing the config at each request)
 
 ```sh
 php artisan config:cache
@@ -12,7 +12,7 @@ php artisan config:cache
 
 ## Cache the router
 
-About 50% of the requst life in the laravel app is the parsing of all the routes. So it is really important to cache all the router.
+About 50% of the request life in the laravel app is the parsing of all the routes. So it is really important to cache all the router.
 
 ```sh
 php artisan route:cache
@@ -20,11 +20,11 @@ php artisan route:cache
 
 ## OPcache
 
-To prevent PHP from reinterpreting all files at each request, it is important to enable opcache. This will cache the OPcode, and sinificativly improuve the app performances.
+To prevent PHP from reinterpreting all files at each request, it is important to enable opcache. This will cache the OPcode, and significantly improve the app performances.
 
-## Minified assets
+## Magnified assets
 
-To generate minified and versionned javascript/css files, use the production command :
+To generate magnified and versioned javascript/css files, use the production command :
 ```sh
 # In the root folder of the project
 npm run prod # OR yarn prod

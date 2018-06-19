@@ -1,48 +1,42 @@
-# The status possible to assing to a model
+# The status possible to assign to a model
 
-**!! WARNING !! needs to be updated**
+All the status depending on it's model.
+From the [v2.0.0-beta.4](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-beta.4) the users status are moved into a
+dedicated table. In future versions he would be a good idea to assemble all the status still stored in model table,
+in the dedicated statuses table.
 
 ## App\User
 
-| status key name | displayable value               |
-|-----------------|---------------------------------|
-| active          | Actif                           |
-| gone            | Est parti en run                |
-| not_present     | L'utilisateur n'est pas présent |
-| free            | Disponible                      |
+| status key name | displayable value                                            |
+|-----------------|--------------------------------------------------------------|
+| free            | Active user                                                  |
+| requested       | A demand is send to the user, but no response for the moment |
+| not-present     | User not present in this edition of paleo                    |
+| not-requested   | No demand sent to this user                                  |
+| taken           | Actually in run                                              |
 
 ## App\Car
 
 | status key name | displayable value                              |
 |-----------------|------------------------------------------------|
-| taken           | Utilisé                                        |
-| free            | Disponible                                     |
-| problem         | La voiture n'est pas en état de fonctionnement |
+| taken           | Actually in run                                |
+| free            | Free                                           |
+| problem         | It seems to be a problem with the car          |
 
 ## App\Run
 
-| status key name | displayable value                              |
-|-----------------|------------------------------------------------|
-| gone            | Démarré                                        |
-| error           | Il manque des information pour démarrer le run |
-| finished        | le run est terminé                             |
-| missing_cars    | Il manque des voiture pour démarrer le run     |
-| empty           | vide                                           |
-| ready           | Le run est prêt à être lancé                   |
-| needs_filling   | En train d'être finalisé                       |
-| drafting        | En train d'être organisé                       |
+| status key name | displayable value                                  |
+|-----------------|----------------------------------------------------|
+| gone            | Started run                                        |
+| error           | Error with the run                                 |
+| finished        | Finished run                                       |
+| ready           | Ready to go                                        |
+| needs_filling   | Not complete                                       |
+| drafting        | In creation phase (not displayed in the mobile app |
 
 ## App\RunSubscription
 
-| status key name | displayable value                                                                             |
-|-----------------|-----------------------------------------------------------------------------------------------|
-| ready_to_go     | Pret                                                                                          |
-| missing_user    | Il manque un chauffeur                                                                        |
-| missing_car     | Il manque une voiture                                                                         |
-| needs_filling   | Il faut encore remplir les imformations pour l'utilisateur, la voiture, ou le type de voiture |
-| gone            | Le run est parti                                                                              |
-| error           | Il y a un problèmr grave avec le convoi                                                       |
-| finished        | Ce convoi est terminé                                                                         |
+A field is intended for this status, but actually not used.                                                                    |
 
 
 <br>

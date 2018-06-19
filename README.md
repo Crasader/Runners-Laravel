@@ -2,9 +2,9 @@
   <img src ="public/img/logo.svg" width="40%"/><br><br>
 </div>
 
-Runners is a driver managment app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
+Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-rc.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1)
+## [v2.0.0-rc.1.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.1)
 
 !! ATTENTION !! :
 This version includes assets changes :
@@ -15,25 +15,17 @@ Break changes :
 * x
 
 Changes :
-* Remove breadcrum on top of page
+* Change the check of the needs filling runs status
 
-Improuvments :
-* Add schedules crud
-    * Schedules creation
-    * Schedules edition
-    * Schedules deletion
-* Change kiela layout
+Improvements :
+* Add specific seeder to clean the schedules table
+* Fix spelling on docs
 
 Resolved Issues :
-* [Adding driver in kiela fails #89](https://github.com/CPNV-ES/Runners-Laravel/issues/89)
-* [Add seeder to set name field to conform new search fields #90](https://github.com/CPNV-ES/Runners-Laravel/issues/90)
-* [Kiéla #80](https://github.com/CPNV-ES/Runners-Laravel/issues/80)
-* [Interface cleanup #64](https://github.com/CPNV-ES/Runners-Laravel/issues/64)
-* [Sex doesn't matter #85](https://github.com/CPNV-ES/Runners-Laravel/issues/85)
-* [Duplicate runner status #86](https://github.com/CPNV-ES/Runners-Laravel/issues/86)
-* [Status in english (low priority) #87](https://github.com/CPNV-ES/Runners-Laravel/issues/87)
+* [Run status, subscriptions must be complete to allows ready status. #94](https://github.com/CPNV-ES/Runners-Laravel/issues/94)
+* [Add seeder to remove all schedules #92](https://github.com/CPNV-ES/Runners-Laravel/issues/92)
 
-## Start developping
+## Start developing
 
 You can find a complete install procedure [here](docs/install/1_requirements.md).
 
@@ -41,7 +33,7 @@ You can find a complete install procedure [here](docs/install/1_requirements.md)
 
 You find docs [here](docs/README.md)
 
-## Logins
+## Login
 
 If you seeded the database, you will have a couple users, but a few are important.
 

@@ -466,7 +466,7 @@ class Run extends Model
         $needsFilling |= $this->passengers > 0 ? false : true;
         $needsFilling |= $this->planned_at ? false : true;
         if ($this->subscriptions()->exists()) {
-            $this->subscriptions()->each(function ($subscription) use ($needsFilling) {
+            $this->subscriptions()->each(function ($subscription) use (&$needsFilling) {
                 $needsFilling |= $subscription->user()->exists() ? false : true;
                 $needsFilling |= $subscription->car()->exists() ? false : true;
             });

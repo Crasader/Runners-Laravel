@@ -40,7 +40,10 @@ class RunController extends Controller
     public function big()
     {
         $this->authorize('view', Run::class);
-        $runs = Run::whereDate('planned_at', '>', Carbon::now()->toDateString())
+        Run::whereNotIn('status', ['finished', 'drafting'])->get()->each(function ($run) {
+            $run->updateStatus();
+        });
+        $runs = Run::where('planned_at', '>=', now())
             ->orderBy('planned_at', 'asc')
             ->whereNotIn('status', ['finished', 'drafting'])
             ->limit(30)
@@ -58,6 +61,7 @@ class RunController extends Controller
         $this->authorize('create', Run::class);
         $run = Run::create(['status' => 'drafting']);
         $run->waypoints()->attach(1, ['order' => 1]);
+        $run->waypoints()->attach(1, ['order' => 2]);
         return redirect()
             ->route('runs.edit', ['run' => $run->id])
             ->with('success', "Le run à correctement été crée");
@@ -82,6 +86,7 @@ class RunController extends Controller
      */
     public function show(Run $run)
     {
+        $run->updateStatus();
         return view('runs.show')->with(compact('run'));
     }
 

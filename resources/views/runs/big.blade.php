@@ -65,7 +65,7 @@
                                             <h4 class="subtitle is-5">{{ $sub->car->name }}</h4>
                                         </div>
                                         <div class="column is-6">
-                                            <h4 class="subtitle is-5">{{ $sub->user->firstname }}</h4>
+                                            <h4 class="subtitle is-5">{{ $sub->user->firstname ?? 'aucun chauffeur' }}</h4>
                                         </div>
                                     </div>
                                 @endforeach

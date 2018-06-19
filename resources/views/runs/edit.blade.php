@@ -160,6 +160,14 @@
 
                     <h2 class="title is-4">Lieux de passage</h3>
 
+                    @if ($errors->has('waypoints'))
+                        <article class="message is-danger">
+                            <div class="message-body">
+                                {{ $errors->first('waypoints') }}
+                            </div>
+                        </article>
+                    @endif
+
                     {{-- WAYPOINTS --}}
 
                     @foreach($run->waypoints()->orderBy('pivot_order')->get() as $waypoint)

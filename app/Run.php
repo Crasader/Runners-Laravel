@@ -444,7 +444,7 @@ class Run extends Model
         // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
         if ($this->needsFilling()) {
             $this->status = 'needs_filling';
-        } elseif ($this->error()) {
+        } elseif ($this->problem()) {
             $this->status = 'error';
         } else {
             $this->status = 'ready';
@@ -466,7 +466,7 @@ class Run extends Model
         $needsFilling |= $this->passengers > 0 ? false : true;
         $needsFilling |= $this->planned_at ? false : true;
         if ($this->subscriptions()->exists()) {
-            $this->subscriptions()->each(function ($subscription) use ($needsFilling) {
+            $this->subscriptions()->each(function ($subscription) use (&$needsFilling) {
                 $needsFilling |= $subscription->user()->exists() ? false : true;
                 $needsFilling |= $subscription->car()->exists() ? false : true;
             });
@@ -479,14 +479,14 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Check if the run is in error
-     * !! Implement error managment !!
+     * Deremine if the run is in problem
+     * (the start time of the run is after now)
      *
      * @return bool
      */
-    public function error()
+    public function problem()
     {
-        return false;
+        return now()->greaterThan($this->planned_at);
     }
 
     /**
@@ -502,7 +502,7 @@ class Run extends Model
         } else {
             if ($this->needsFilling()) {
                 $this->status = 'needs_filling';
-            } elseif ($this->error()) {
+            } elseif ($this->problem()) {
                 $this->status = 'error';
             } else {
                 $this->status = 'ready';

@@ -31,6 +31,7 @@ Here we found the summary of all the documentation for the Runners project.
 ### Diagrams
 
 1. [Database MLD](diagrams/databaseMLD.pdf)
+2. [Diagramme d'état d'un run](diagrams/RunStates.pdf)
 
 *All the diagrams are created with [draw.io](draw.io), you can easily edit them.*
 

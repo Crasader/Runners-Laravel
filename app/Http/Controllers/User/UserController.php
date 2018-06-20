@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\Users\ChangePassword;
 use App\User;
 use App\Role;
 use App\Status;
@@ -10,8 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
-use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * UserController
@@ -60,7 +61,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\Users\StoreUser  $request
+     * @param  \App\Http\Requests\Users\StoreUser  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUser $request)
@@ -185,4 +186,37 @@ class UserController extends Controller
             ->back()
             ->with('warning', "L'importation des credentials par csv n'est pas encore implémentée !");
     }
+
+    /**
+     * Import a list of users direct from a csv file
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePassForm(Request $request, User $user)
+    {
+        $this->authorize('changePass', $user);
+        return view('users.password')->with(compact('user'));
+    }
+
+    /**
+     * Import a list of users direct from a csv file
+     *
+     * @param \App\Http\Requests\Users\ChangePassword $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePass(ChangePassword $request, User $user)
+    {
+        $this->authorize('changePass', $user);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()
+            ->route('users.show', ['user' => $user->id])
+            ->with('success', "Le mot-de-passe de $user->fullname à bien été mis-a-jour !");
+    }
+
 }

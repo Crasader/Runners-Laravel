@@ -38,9 +38,16 @@
                 <div class="field is-grouped is-pulled-right">
                     @can('update', $user)
                         <div class="control">
+                            <a href="{{ route('users.pass.edit', ['user' => $user->id]) }}" class="button is-warning">
+                                Changer le mot de passe
+                            </a>
+                        </div>
+                    @endcan
+                    @can('changePass', $user)
+                        <div class="control">
                             <button onclick="event.preventDefault();
                                 document.getElementById('update-user-form').submit();"
-                                class="button is-success">
+                                    class="button is-success">
                                 Valider les modifications
                             </button>
                         </div>

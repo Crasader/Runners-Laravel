@@ -2,7 +2,6 @@
 
 namespace App\Events\Log;
 
-use App\Order;
 use Illuminate\Queue\SerializesModels;
 
 /**

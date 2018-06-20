@@ -9,6 +9,7 @@ use App\Http\Resources\Runners\RunnerResource;
 use App\RunSubscription;
 use App\Run;
 use App\Car;
+use App\Http\Resources\runs\RunResource;
 
 class RunnerController extends Controller
 {
@@ -35,7 +36,8 @@ class RunnerController extends Controller
         $sub = RunSubscription::findOrFail($id);
         $sub->user()->associate($request->user());
         $sub->save();
-        return new RunnerResource($sub);
+        $sub->run->updateStatus();
+        return new RunResource($sub->run);
     }
 
     /**
@@ -51,7 +53,8 @@ class RunnerController extends Controller
         $car = Car::findOrFail($request->car_id);
         $sub->car()->associate($car);
         $sub->save();
-        return new RunnerResource($sub);
+        $sub->run->updateStatus();
+        return new RunResource($sub->run);
     }
 
     /**

@@ -95,7 +95,7 @@ We recommend to run all the laravel commands in the vm.
 <hr>
 
 **Helpful links :**
-* [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Homestead docs](https://laravel.com/docs/5.6/homestead)
 
 <hr>
 <div align="center">

@@ -18,7 +18,7 @@ Authorization: Bearer Ah1mPoahgeKDGdyneM5m60jCbFWj8hDQo0dGqxAE7mC8uojlzHT7dFsEe1
 <hr>
 
 **Helpful links :**
-* [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Homestead docs](https://laravel.com/docs/5.6/homestead)
 
 <hr>
 <div align="center">

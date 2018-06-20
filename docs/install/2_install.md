@@ -45,7 +45,7 @@ npm i # Or yarn
 <hr>
 
 **Helpful links :**
-* [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Homestead docs](https://laravel.com/docs/5.6/homestead)
 * [Composer](https://getcomposer.org/)
 
 <hr>

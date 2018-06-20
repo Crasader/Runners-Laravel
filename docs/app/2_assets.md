@@ -28,7 +28,7 @@ the watch command is unable to detect file changes if you make the changes on th
 
 **Helpful links :**
 
-* [Laravel-mix docs](https://laravel.com/docs/5.5/mix)
+* [Laravel-mix docs](https://laravel.com/docs/5.6/mix)
 * [Yarn](https://yarnpkg.com/en/)
 
 <hr>

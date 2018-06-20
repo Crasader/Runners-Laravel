@@ -1,6 +1,6 @@
 # Users permissions management
 
-We manage the permissions with the laravel [policies](https://laravel.com/docs/5.5/authorization#creating-policies) system and a dedicated table in the database.
+We manage the permissions with the laravel [policies](https://laravel.com/docs/5.6/authorization#creating-policies) system and a dedicated table in the database.
 
 All users are attached to a role, and all role defines a list of permissions.
 So the user permissions for a given action a define by his role.

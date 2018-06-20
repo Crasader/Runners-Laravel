@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Car;
 use App\Comment;
@@ -23,7 +22,7 @@ class CarCommentController extends Controller
      * Display a listing of the resource.
      *
      * @param  \App\Car  $car
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Comments\CommentCollection
      */
     public function index(Car $car)
     {
@@ -35,7 +34,7 @@ class CarCommentController extends Controller
      *
      * @param  \App\Car  $car
      * @param  \App\Http\Requests\StoreComment  $request
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Comments\CommentResource
      */
     public function store(Car $car, StoreComment $request)
     {
@@ -51,7 +50,7 @@ class CarCommentController extends Controller
      *
      * @param  \App\Car  $car
      * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Comments\CommentResource
      */
     public function show(Car $car, Comment $comment)
     {
@@ -64,7 +63,7 @@ class CarCommentController extends Controller
      * @param  \App\Car  $car
      * @param  \App\Comment  $comment
      * @param  \App\Http\Requests\StoreComment  $request
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Comments\CommentResource
      */
     public function update(Car $car, StoreComment $request, Comment $comment)
     {
@@ -77,9 +76,10 @@ class CarCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Car  $car
-     * @param  \App\Comment  $comment
+     * @param  \App\Car $car
+     * @param  \App\Comment $comment
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Car $car, Comment $comment)
     {

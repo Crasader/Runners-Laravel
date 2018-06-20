@@ -62,22 +62,24 @@
 
                     <div class="box">
                         <div class="columns is-multiline">
-                            <div class="column is-12"><p class="title is-4">Chauffeurs présents :</p></div>
+                            <div class="column is-12">
+                                <p class="title is-4">
+                                    Chauffeurs présents :
+                                </p>
+                            </div>
                             @foreach ($present as $schedule)
                                 @foreach ($schedule->group->users as $user)
-                                    <div class="column {{ $presentKiela->count() > 0 ? 'is-2' : 'is-2'}}">
-                                        <article class="media">
-                                            {{-- Get user --}}
-                                            <figure class="media-left">
-                                                <p class="image is-96x96">
-                                                    <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
-                                                </p>
-                                                <p class="has-text-centered has-margin-top-10">
-                                                    <a href="{{ route('users.show', ['user' => $user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">{{$user->firstname}}</span></a>
-                                                    
-                                                </p>
-                                            </figure>
-                                        </article>
+                                    <div class="column is-2">
+                                        <figure class="image">
+                                            <img src="{{ asset(Storage::url($user->profilePictures->first()->path)) }}">
+                                        </figure>
+                                        <p class="has-text-centered has-margin-top-10">
+                                            <a href="{{ route('users.show', ['user' => $user->id]) }}">
+                                        <span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">
+                                            {{$user->firstname}}
+                                        </span>
+                                            </a>
+                                        </p>
                                     </div>
                                 @endforeach
                             @endforeach
@@ -88,39 +90,30 @@
                     <div class="column is-2">
                         <div class="box">
                             <div class="columns is-multiline">
-                                    <div class="column is-12"><p class="title is-4">Chauffeurs rajoutés :</p></div>
+                                <div class="column is-12"><p class="title is-4">Chauffeurs rajoutés :</p></div>
                                 @foreach ($presentKiela as $schedule)
                                     <div class="column is-12">
-                                        <article class="media">
-                                            {{-- Get user --}}
-                                            <figure class="media-left">
-                                                <p class="image is-96x96">
-                                                    <img src="{{ asset(Storage::url($schedule->user->profilePictures->last()->path)) }}">
-                                                </p>
-                                                <p class="has-text-centered has-margin-top-10">
-                                                    <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}"><span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">{{$schedule->user->firstname}}</span></a>
-                                                    <br>
-                                                </p>
-                                            </figure>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    
-                                                </div>
-                                            </div>
+                                        {{-- Get user --}}
+                                        <img src="{{ asset(Storage::url($schedule->user->profilePictures->last()->path)) }}" width="100%">
+                                        <p class="has-text-centered has-margin-top-10">
+                                            <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}">
+                                                <span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">
+                                                    {{$schedule->user->firstname}}
+                                                </span>
+                                            </a>
                                             @can('delete', $schedule)
-                                                <div class="media-right">
-                                                    <button onclick="event.preventDefault();
-                                                        document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
-                                                        class="delete"></button>
-                                                    <form id="delete-kiela-user-{{ $schedule->id }}"
-                                                        action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
-                                                            method="POST" style="display: none;">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                    </form>
-                                                </div>
+                                                <button onclick="event.preventDefault();
+                                                    document.getElementById('delete-kiela-user-{{ $schedule->id }}').submit();"
+                                                    class="delete">
+                                                </button>
+                                                <form id="delete-kiela-user-{{ $schedule->id }}"
+                                                    action="{{ route('kiela.destroy', ['kiela' => $schedule->id]) }}"
+                                                    method="POST" style="display: none;">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                </form>
                                             @endcan
-                                        </article>
+                                        </p>
                                     </div>
                                 @endforeach
                             </div>

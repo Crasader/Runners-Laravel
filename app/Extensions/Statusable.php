@@ -40,6 +40,7 @@ trait Statusable
      * MODEL METHOD
      * Set the status of the model depending the slug
      *
+     * @param null $statusSlug
      * @return string
      */
     public function setStatus($statusSlug = null)

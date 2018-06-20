@@ -48,10 +48,11 @@ class Handler extends ExceptionHandler
      *
      * @param  \Exception  $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
-        // Log the exeption in laravel.log
+        // Log the exception in laravel.log
         Log::error(
             "RUNNERS LOG : " . get_class($exception) .
             " CODE : " . $exception->getCode() .
@@ -63,7 +64,7 @@ class Handler extends ExceptionHandler
         if (!config('app.debug')) {
             Notification::send([User::first()], new UnHandledExceptionNotification($exception));
         }
-        // Call default exeption reporter (displays mor detailed infos in the log)
+        // Call default exception reporter (displays mor detailed info's in the log)
         parent::report($exception);
     }
 

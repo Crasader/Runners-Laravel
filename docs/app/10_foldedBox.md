@@ -42,6 +42,6 @@ The main JS of Runners will register the boy automatically by specific id.
 <hr>
 <div align="center">
 
-**[<- Prev](9_notifications.md) // [Summary](../README.md) // [Next ->](#)**
+**[<- Prev](9_notifications.md) // [Summary](../README.md) // [Next ->](../README.md)**
 
 </div>

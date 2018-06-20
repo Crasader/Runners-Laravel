@@ -62,7 +62,7 @@
                                 @foreach ($run->subscriptions as $sub)
                                     <div class="columns">
                                         <div class="column is-5">
-                                            <h4 class="subtitle is-5">{{ $sub->car->name }}</h4>
+                                            <h4 class="subtitle is-5">{{ $sub->car->name ?? 'aucun véhicule' }}</h4>
                                         </div>
                                         <div class="column is-6">
                                             <h4 class="subtitle is-5">{{ $sub->user->firstname ?? 'aucun chauffeur' }}</h4>

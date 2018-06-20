@@ -228,28 +228,6 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Associate the user to the first free subscription on this run
-     * If they are no free subscriptions, he return false
-     *
-     * @param \App\User $user
-     * @return boolean|\App\RunSubscription
-     */
-    public function takeSubscription($user)
-    {
-        $added = false;
-        $this->subscriptions->each(function ($sub) use ($user, &$added) {
-            // If the subscription have no user
-            if (!$sub->user()->exists()) {
-                $sub->user()->associate($user);
-                $added = $sub;
-                return false;
-            }
-        });
-        return $added;
-    }
-
-    /**
-     * MODEL METHOD
      * Save the subscription to this run
      *
      * @param \Illuminate\Support\Collection $subscriptions

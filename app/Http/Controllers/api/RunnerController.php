@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Requests\AssociateNewCarToRunSubscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Runners\RunnerResource;
 use App\RunSubscription;
 use App\Run;
-use App\Http\Requests\AssignRunnerToRun;
 use App\Car;
 
 class RunnerController extends Controller
@@ -24,19 +24,30 @@ class RunnerController extends Controller
     }
 
     /**
-     * Add the current authenticated user to the first available subscription of the run
+     * Add the current authenticated user to the selected subscription
      *
-     * @param  \App\Http\Requests\AssignRunnerToRun  $request
-     * @param  \App\Run  $run
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\RunSubscription  $sub
      * @return \Illuminate\Http\Response
      */
-    public function store(AssignRunnerToRun $request, Run $run)
+    public function associateRunner(Request $request, RunSubscription $sub)
     {
-        if ($sub = $run->takeSubscription($request->user())) {
-            return new RunnerResource($sub);
-        } else {
-            return response()->json(null, 204);
-        }
+        $sub->user()->associate($request->user());
+        return response()->json(null, 204);
+    }
+
+    /**
+     * Add the parameter car to the selected subscription
+     *
+     * @param  \App\Http\Requests\AssociateNewCarToRunSubscription  $request
+     * @param  \App\RunSubscription  $sub
+     * @return \Illuminate\Http\Response
+     */
+    public function associateCar(AssociateNewCarToRunSubscription $request, RunSubscription $sub)
+    {
+        $car = Car::findOrFail($request->car_id);
+        $sub->car()->associate($car);
+        return response()->json(null, 204);
     }
 
     /**

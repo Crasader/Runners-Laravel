@@ -51,21 +51,25 @@ Route::middleware(['auth:api'])->group(function () {
     /** *****************************
      * Runs resource
      */
-    // Specific route to start the run
+    // Deprecated ! Specific route to start the run (used in the mobile app)
     Route::post('/runs/{run}/start', 'api\RunController@start');
-    // Specific route to stop the run
+    // Starts a run
+    Route::patch('/runs/{run}/start', 'api\RunController@start');
+    // Deprecated ! Specific route to stop the run (used in the mobile app)
     Route::post('/runs/{run}/stop', 'api\RunController@stop');
+    // Ends a run
+    Route::patch('/runs/{run}/stop', 'api\RunController@stop');
     // The resource
     Route::apiResource('runs', 'api\RunController', ['only' => ['index', 'show']]);
     // The waypoint's nested in the runs
     Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
-    // Crete a run_driver for the user
-    Route::post('/runs/{run}/runners', 'api\RunnerController@store');
 
     /** *****************************
      * Runners resource
      * This resource is used to access the run_driver table
      */
+    Route::patch('/runners/{runSubscription}/driver', 'api\RunnerController@associateRunner');
+    Route::patch('/runners/{runSubscription}/car', 'api\RunnerController@associateCar');
     Route::apiResource('runners', 'api\RunnerController', ['only' => ['show', 'update']]);
 
     /** *****************************

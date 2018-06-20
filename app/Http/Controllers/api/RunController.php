@@ -35,7 +35,9 @@ class RunController extends Controller
             // the unfinished runs if the query is false
             return new RunCollection(
                 Run::finished($request->query('finished'))
-                ->withoutStatus('drafting')->with([
+                ->withoutStatus('drafting')
+                ->orderBy('planned_at', 'asc')
+                ->with([
                     'waypoints',
                     'subscriptions.user',
                     'subscriptions.car',
@@ -50,7 +52,9 @@ class RunController extends Controller
         } elseif ($request->has('status')) {
             // Return the runs scoped by his status
             return new RunCollection(Run::whereStatus($request->query('status'))
-            ->withoutStatus('drafting')->with([
+            ->withoutStatus('drafting')
+            ->orderBy('planned_at', 'asc')
+            ->with([
                 'waypoints',
                 'subscriptions.user',
                 'subscriptions.car',
@@ -60,7 +64,9 @@ class RunController extends Controller
         }
 
         // Return all the runs, if no query params
-        return new RunCollection(Run::withoutStatus('drafting')->with([
+        return new RunCollection(Run::withoutStatus('drafting')
+        ->orderBy('planned_at', 'asc')
+        ->with([
             'waypoints',
             'subscriptions.user',
             'subscriptions.car',

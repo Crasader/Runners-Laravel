@@ -27,7 +27,7 @@ class RunnerController extends Controller
      * Add the current authenticated user to the selected subscription
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $sub
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function associateRunner(Request $request, $id)
@@ -42,7 +42,7 @@ class RunnerController extends Controller
      * Add the parameter car to the selected subscription
      *
      * @param  \App\Http\Requests\AssociateNewCarToRunSubscription  $request
-     * @param  int  $sub
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function associateCar(AssociateNewCarToRunSubscription $request, $id)

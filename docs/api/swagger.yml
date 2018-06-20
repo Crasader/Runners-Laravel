@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: "This swagger documents the runners api."
-  version: "v2.0.0-rc.1.2"
+  version: "v2.0.0-rc.1.4"
   title: "Runners"
 tags:
 - name: "me"
@@ -342,8 +342,14 @@ paths:
             type : integer
             minimum: 1
       responses:
-        '204':    # status code
-          description: "No content, update successful"
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Runner"
         '405':
           description: "Method not allowed"
         '401':
@@ -369,8 +375,14 @@ paths:
             schema:
               $ref: '#/components/schemas/requests/CarID'
       responses:
-        '204':    # status code
-          description: "No content, update successful"
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Runner"
         '405':
           description: "Method not allowed"
         '401':

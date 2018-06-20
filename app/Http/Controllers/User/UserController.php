@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\Users\ChangePassword;
+use App\Notifications\SendCredentialsToUserNotification;
 use App\User;
 use App\Role;
 use App\Status;
@@ -10,8 +12,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
-use App\Http\Resources\Users\UserResource;
 use App\Http\Resources\users\UserSearchResource;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * UserController
@@ -48,6 +50,7 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
@@ -60,8 +63,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\Users\StoreUser  $request
+     * @param  \App\Http\Requests\Users\StoreUser  $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(StoreUser $request)
     {
@@ -113,6 +117,7 @@ class UserController extends Controller
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(User $user)
     {
@@ -128,6 +133,7 @@ class UserController extends Controller
      * @param  \App\Http\Requests\Users\UpdateUser  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateUser $request, User $user)
     {
@@ -148,6 +154,7 @@ class UserController extends Controller
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(User $user)
     {
@@ -163,14 +170,22 @@ class UserController extends Controller
     /**
      * Send a credentials request to the user
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function generateCredentials(Request $request)
+    public function generateCredentials(User $user)
     {
+        $this->authorize('sendCredentials', $user);
+        // Generate a random pass for the user
+        $temporaryPass = str_random(12);
+        $user->password = Hash::make($temporaryPass);
+        $user->save();
+        $user->notify(new SendCredentialsToUserNotification($user, $temporaryPass));
+
         return redirect()
             ->back()
-            ->with('warning', "La génération des credentials n'est pas encore implémentée !");
+            ->with('success', "Des nouveaux identifiants on bien été envoyés a $user->fullname");
     }
 
     /**
@@ -185,4 +200,37 @@ class UserController extends Controller
             ->back()
             ->with('warning', "L'importation des credentials par csv n'est pas encore implémentée !");
     }
+
+    /**
+     * Import a list of users direct from a csv file
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePassForm(Request $request, User $user)
+    {
+        $this->authorize('changePass', $user);
+        return view('users.password')->with(compact('user'));
+    }
+
+    /**
+     * Import a list of users direct from a csv file
+     *
+     * @param \App\Http\Requests\Users\ChangePassword $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePass(ChangePassword $request, User $user)
+    {
+        $this->authorize('changePass', $user);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()
+            ->route('users.show', ['user' => $user->id])
+            ->with('success', "Le mot-de-passe de $user->fullname à bien été mis-a-jour !");
+    }
+
 }

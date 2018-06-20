@@ -16,7 +16,7 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Check the authorization before all cheks
+     * Check the authorization before all checks
      * Used in most case to authorize the admin
      *
      * @return mixed
@@ -65,11 +65,11 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        // You can manage your acount
+        // You can manage your account
         if ($user->id === $model->id) {
             return true;
         }
-        // If you have the permission to manage other acounts
+        // If you have the permission to manage other accounts
         return $user->may('manage_other_users');
     }
 
@@ -83,5 +83,33 @@ class UserPolicy
     public function delete(User $user, User $model)
     {
         return $user->may('delete_users');
+    }
+
+    /**
+     * Determine whether the authenticated user can change the password of this user
+     *
+     * @param  \App\User  $user The authenticated user
+     * @param  \App\User  $model The user where we want to update the pass
+     * @return mixed
+     */
+    public function changePass(User $user, User $model)
+    {
+        // You can manage your account
+        if ($user->id === $model->id) {
+            return true;
+        }
+        return $user->may('manage_other_users');
+    }
+
+    /**
+     * Determine whether the authenticated user can send credentials
+     *
+     * @param  \App\User  $user The authenticated user
+     * @param  \App\User  $model The user where we want to update the pass
+     * @return mixed
+     */
+    public function sendCredentials(User $user, User $model)
+    {
+        return $user->may('manage_other_users');
     }
 }

@@ -36,6 +36,13 @@ To make this files reachable, we need to link the folder in the public repertory
 php artisan storage:link
 ```
 
+## Testing mails
+
+If you want to tests mails, you need to configure the smtp driver,
+we recommend to use [mailHog](https://github.com/mailhog/MailHog) or another testing tool.
+Il you use the homestead dev env, mailhog is installed and ready, you just need to open `localhost:8025` (or the IP of our VM).
+Or you can easily install it, you find binaries [here](https://github.com/mailhog/MailHog/releases).
+
 ## Runners is ready
 
 Now you can access to you freshly installed Runners app.

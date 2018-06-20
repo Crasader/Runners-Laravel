@@ -48,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/import', 'User\UserController@import')->name('users.import');
     // Users route for searching in users table (used by search field)
     Route::post('users/search', 'User\UserController@search')->name('users.search');
+    // Dedicated route for users pass
+    Route::get('users/{user}/pass', 'User\UserController@updatePassForm')->name('users.pass.edit');
+    Route::patch('users/{user}/pass', 'User\UserController@updatePass')->name('users.pass.update');
     // The user crud
     Route::resource('users', 'User\UserController');
     // User comments crud

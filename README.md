@@ -4,23 +4,21 @@
 
 Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-rc.1.2](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.2)
+## [v2.0.0-rc.1.3](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.3)
 
-Break changes :
-* x
+**Break changes :**
+* Remove the `runs/{run}/runners` api endpoint.
 
-Changes :
-* Change the runs status logic according to the statuses lifecycle diagram.
+**Removed :**
+* The api `runs/{run}/runners` war replaced by new runners resource routes.
 
-Improvements :
-* Change time validation on schedules creation.
-* Add time check to change the status of runs where the status is after current time.
+**Improvements :**
+* New version of the swagger api doc.
 
-Resolved Issues :
-* [Minimal run info #96](https://github.com/CPNV-ES/Runners-Laravel/issues/96)
-* [Can create new schedule, validation fails #98](https://github.com/CPNV-ES/Runners-Laravel/issues/98)
-* [Run status, subscriptions must be complete to allows ready status. #94](https://github.com/CPNV-ES/Runners-Laravel/issues/94)
-* [Update runs status managment according to the diagram in `docs/diagrams/runStats` #97](https://github.com/CPNV-ES/Runners-Laravel/issues/97)
+**Resolved Issues :**
+* [Take run #95](https://github.com/CPNV-ES/Runners-Laravel/issues/95)
+* [Pick a vehicle #100](https://github.com/CPNV-ES/Runners-Laravel/issues/100)
+* [Take Run (v2) #99](https://github.com/CPNV-ES/Runners-Laravel/issues/99)
 
 ## Start developing
 

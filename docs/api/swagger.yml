@@ -251,32 +251,6 @@ paths:
           description: "The run can not be stopped"
         '401':
           description: "Unauthorized"
-  /runs/{run}/runners:
-    post:
-      tags:
-      - "runs"
-      summary: "Sets the current authenticated user to the first empty subscription of the run."
-      parameters:
-        - name: run
-          in: path
-          required: true
-          description: "The id of the run"
-          schema:
-            type : integer
-            minimum: 1
-      responses:
-        '200':    # status code
-          description: "Run model serialized to JSON"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Runner"
-        '405':
-          description: "The current user cannot be attached to this run."
-        '401':
-          description: "Unauthorized"
   /runs/{run}/waypoints:
     get:
       tags:
@@ -350,6 +324,53 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}/driver:
+    get:
+      tags:
+      - "runners"
+      summary: "Change the driver for the specified subscription."
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '204':    # status code
+          description: "No content, update successful"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}/car:
+    get:
+      tags:
+      - "runners"
+      summary: "Get specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The id of the car you want to associate to the subscription
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/CarID'
+      responses:
+        '204':    # status code
+          description: "No content, update successful"
         '405':
           description: "Method not allowed"
         '401':
@@ -888,5 +909,10 @@ components:
         properties:
           content:
             type: "string"
+      CarID:
+        type: "object"
+        properties:
+          car_id:
+            type: "int"
 security:
   - bearerAuth: []

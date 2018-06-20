@@ -27,12 +27,14 @@ class RunnerController extends Controller
      * Add the current authenticated user to the selected subscription
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RunSubscription  $sub
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function associateRunner(Request $request, RunSubscription $sub)
+    public function associateRunner(Request $request, $id)
     {
+        $sub = RunSubscription::findOrFail($id);
         $sub->user()->associate($request->user());
+        $sub->save();
         return response()->json(null, 204);
     }
 
@@ -40,13 +42,15 @@ class RunnerController extends Controller
      * Add the parameter car to the selected subscription
      *
      * @param  \App\Http\Requests\AssociateNewCarToRunSubscription  $request
-     * @param  \App\RunSubscription  $sub
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function associateCar(AssociateNewCarToRunSubscription $request, RunSubscription $sub)
+    public function associateCar(AssociateNewCarToRunSubscription $request, $id)
     {
+        $sub = RunSubscription::findOrFail($id);
         $car = Car::findOrFail($request->car_id);
         $sub->car()->associate($car);
+        $sub->save();
         return response()->json(null, 204);
     }
 

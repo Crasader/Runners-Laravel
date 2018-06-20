@@ -68,8 +68,8 @@ Route::middleware(['auth:api'])->group(function () {
      * Runners resource
      * This resource is used to access the run_driver table
      */
-    Route::patch('/runners/{runSubscription}/driver', 'api\RunnerController@associateRunner');
-    Route::patch('/runners/{runSubscription}/car', 'api\RunnerController@associateCar');
+    Route::patch('/runners/{id}/driver', 'api\RunnerController@associateRunner');
+    Route::patch('/runners/{id}/car', 'api\RunnerController@associateCar');
     Route::apiResource('runners', 'api\RunnerController', ['only' => ['show', 'update']]);
 
     /** *****************************

@@ -24,9 +24,10 @@ Here we found the summary of all the documentation for the Runners project.
 ### Api
 
 1. [Architecture](api/1_arch.md)
-2. [Api routes](api/2_routes.md)
-3. [Error handling](api/3_errors.md)
-3. [Authentication](api/4_authentication.md)
+2. [Authentication](api/4_authentication.md)
+3. [Routes specification](api/swagger.yml)
+
+*You can import the route specification in the [swagger editor](https://editor.swagger.io/) for better display*
 
 ### Diagrams
 

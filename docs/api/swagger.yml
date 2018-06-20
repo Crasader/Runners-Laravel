@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: "This swagger documents the runners api."
-  version: "v2.0.0-rc.1.4"
+  version: "v2.0.0-rc.1.5"
   title: "Runners"
 tags:
 - name: "me"
@@ -349,7 +349,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Runner"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "Method not allowed"
         '401':
@@ -382,7 +382,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Runner"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "Method not allowed"
         '401':

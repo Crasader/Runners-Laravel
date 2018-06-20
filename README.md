@@ -4,14 +4,13 @@
 
 Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-rc.1.4](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.3)
+## [v2.0.0-rc.1.5](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.1.5)
 
 **Break changes :**
 * -
 
 **Improvements :**
-* `api/runners/{runner}/driver` and `api/runnners/{runner}/car` now returns a RunnerResource.
-* Fix some spelling in docs
+* `api/runners/{runner}/driver` and `api/runnners/{runner}/car` now returns a RunResource.
 
 **Resolved Issues :**
 * [Return Values on actions #101](https://github.com/CPNV-ES/Runners-Laravel/issues/101)

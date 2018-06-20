@@ -24,7 +24,7 @@ class RunnerController extends Controller
     }
 
     /**
-     * Create run driver for the user passed in params
+     * Add the current authenticated user to the first available subscription of the run
      *
      * @param  \App\Http\Requests\AssignRunnerToRun  $request
      * @param  \App\Run  $run
@@ -32,11 +32,11 @@ class RunnerController extends Controller
      */
     public function store(AssignRunnerToRun $request, Run $run)
     {
-        // Create a new subscription to a run
-        $sub = new RunSubscription();
-        $sub->assignUser($request->user());
-        $sub->assignRun($run);
-        return new RunnerResource($sub);
+        if ($sub = $run->takeSubscription($request->user())) {
+            return new RunnerResource($sub);
+        } else {
+            return response()->json(null, 204);
+        }
     }
 
     /**
@@ -50,7 +50,7 @@ class RunnerController extends Controller
     {
         $sub = RunSubscription::find($id);
         if ($request->input('car')) {
-            // Asign a car to the run subscription
+            // Assign a car to the run subscription
             $sub->assignCar(Car::find($request->input('car')));
         } elseif ($request->input('user')) {
             // Change the assigned user to this subscription

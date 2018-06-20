@@ -36,9 +36,6 @@ The main JS of Runners will register the boy automatically by specific id.
 
 **Helpful links :**
 
-* [Eloquent events](https://laravel.com/docs/5.6/eloquent#events)
-* [Laravel events](https://laravel.com/docs/5.6/events#event-subscribers)
-
 <hr>
 <div align="center">
 

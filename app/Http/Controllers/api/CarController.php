@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\cars\CarCollection;
 use App\Http\Resources\cars\CarResource;
 use App\CarType;
-use App\Http\Requests\StoreCar;
+use App\Http\Requests\Cars\StoreCar;
 
 /**
  * CarController
@@ -32,7 +32,7 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Cars\StoreCar  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCar $request)

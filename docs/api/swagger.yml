@@ -18,11 +18,10 @@ tags:
   description: "Waypoints resource"
 - name: "cars"
   description: "Cars resource"
+- name: "cars.comments"
+  description: "Cars comments"
 - name: "groups"
   description: "Groups resource"
-schemes:
-- "https"
-- "http"
 paths:
   /me:
     get:
@@ -38,7 +37,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/User"
+                  $ref: "#/components/schemas/User"
         '405':
           description: "Method not allowed"
         '401':
@@ -56,7 +55,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Schedule"
+                  $ref: "#/components/schemas/Schedule"
         '405':
           description: "Method not allowed"
         '401':
@@ -74,7 +73,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Run"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "Method not allowed"
         '401':
@@ -92,7 +91,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/User"
+                  $ref: "#/components/schemas/User"
         '405':
           description: "Method not allowed"
         '401':
@@ -118,7 +117,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/User"
+                  $ref: "#/components/schemas/User"
         '405':
           description: "Method not allowed"
         '401':
@@ -136,7 +135,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Schedule"
+                  $ref: "#/components/schemas/Schedule"
         '405':
           description: "Method not allowed"
         '401':
@@ -169,7 +168,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Run"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "Method not allowed"
         '401':
@@ -195,7 +194,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Run"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "Method not allowed"
         '401':
@@ -221,7 +220,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Run"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "The run can not be started"
         '401':
@@ -247,7 +246,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Run"
+                  $ref: "#/components/schemas/Run"
         '405':
           description: "The run can not be stopped"
         '401':
@@ -273,7 +272,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Runner"
+                  $ref: "#/components/schemas/Runner"
         '405':
           description: "The current user cannot be attached to this run."
         '401':
@@ -299,7 +298,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Waypoint"
+                  $ref: "#/components/schemas/Waypoint"
         '405':
           description: "Method not allowed"
         '401':
@@ -325,7 +324,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Runner"
+                  $ref: "#/components/schemas/Runner"
         '405':
           description: "Method not allowed"
         '401':
@@ -350,7 +349,383 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/definitions/Runner"
+                  $ref: "#/components/schemas/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints/search:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: "Needle to search in the waypoints names"
+          schema:
+            type : string
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints/{waypoint}:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      parameters:
+        - name: waypoint
+          in: path
+          required: true
+          description: "The id of the waypoint"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars:
+    get:
+      tags:
+      - "cars"
+      summary: "Get all the cars"
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    post:
+      tags:
+      - "cars"
+      summary: "Store a new car"
+      requestBody:
+        description: The datas of our new car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Car'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}:
+    get:
+      tags:
+      - "cars"
+      summary: "Get specific car by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "cars"
+      summary: "Get specific car by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Car'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}/comments:
+    get:
+      tags:
+      - "cars.comments"
+      summary: "Get all comments for the specified car"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    post:
+      tags:
+      - "cars.comments"
+      summary: "Create new comment for the specified car"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new comment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Comment'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}/comments/{comment}:
+    get:
+      tags:
+      - "cars.comments"
+      summary: "Get a specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "cars.comments"
+      summary: "Update a specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new comment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Comment'
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    delete:
+      tags:
+      - "cars.comments"
+      summary: "Delete specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /groups:
+    get:
+      tags:
+      - "groups"
+      summary: "Get all the groups"
+      responses:
+        '200':    # status code
+          description: "Group model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /groups/{group}:
+    get:
+      tags:
+      - "groups"
+      summary: "Get specific group by his ID"
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: "The id of the group"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Group model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
         '405':
           description: "Method not allowed"
         '401':
@@ -361,127 +736,157 @@ components:
       type: http
       scheme: bearer
       bearerFormat: base64
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        firstname:
+          type: "string"
+        lastname:
+          type: "string"
+        email:
+          type: "string"
+        phone_number:
+          type: "string"
+        sex:
+          type: "string"
+        status:
+          type: "string"
+        image_profile:
+          type: "string"
+          description: "Link to the user profile picture."
+    Schedule:
+      type: "object"
+      properties:
+        start_at:
+          type: "string"
+        end_at:
+          type: "string"
+    Run:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        status:
+          type: "string"
+        title:
+          type: "string"
+        begin_at:
+          type: "string"
+        start_at:
+          type: "string"
+        end_at:
+          type: "string"
+        finished_at:
+          type: "string"
+        nb_passenger:
+          type: "string"
+        waypoints:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Waypoint"
+        runners:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Runner"
+    Waypoint:
+      type: "object"
+      properties:
+        nickname:
+          type: "string"
+    Runner:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        user:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        vehicle_category:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CarType"
+        vehicle:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Car"
+    CarType:
+      type: "object"
+      properties:
+        type:
+          type: "string"
+        description:
+          type: "string"
+    Car:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        plate_number:
+          type: "string"
+        nb_place:
+          type: "integer"
+        status:
+          type: "string"
+        user:
+          type: "boolean"
+        type:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CarType"
+        comments:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Comment"
+    Comment:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        content:
+          type: "string"
+        user:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        created_at:
+          type: "string"
+    Group:
+      type: "object"
+      properties:
+        color:
+          type: "string"
+        name:
+          type: "string"
+    requests:
+      Car:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+          plate_number:
+            type: "string"
+          brand:
+            type: "string"
+          model:
+            type: "string"
+          color:
+            type: "string"
+          status:
+            type: "string"
+          type_id:
+            type: "integer"
+      Comment:
+        type: "object"
+        properties:
+          content:
+            type: "string"
 security:
   - bearerAuth: []
-definitions:
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      name:
-        type: "string"
-      firstname:
-        type: "string"
-      lastname:
-        type: "string"
-      email:
-        type: "string"
-      phone_number:
-        type: "string"
-      sex:
-        type: "string"
-      status:
-        type: "string"
-      image_profile:
-        type: "string"
-        description: "Link to the user profile picture."
-  Schedule:
-    type: "object"
-    properties:
-      start_at:
-        type: "string"
-      end_at:
-        type: "string"
-  Run:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      status:
-        type: "string"
-      title:
-        type: "string"
-      begin_at:
-        type: "string"
-      start_at:
-        type: "string"
-      end_at:
-        type: "string"
-      finished_at:
-        type: "string"
-      nb_passenger:
-        type: "string"
-      waypoints:
-        type: "array"
-        items:
-          $ref: "#/definitions/Waypoint"
-      runners:
-        type: "array"
-        items:
-          $ref: "#/definitions/Runner"
-  Waypoint:
-    type: "object"
-    properties:
-      nickname:
-        type: "string"
-  Runner:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      user:
-        type: "array"
-        items:
-          $ref: "#/definitions/User"
-      vehicle_category:
-        type: "array"
-        items:
-          $ref: "#/definitions/CarType"
-      vehicle:
-        type: "array"
-        items:
-          $ref: "#/definitions/Car"
-  CarType:
-    type: "object"
-    properties:
-      type:
-        type: "string"
-      description:
-        type: "string"
-  Car:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      name:
-        type: "string"
-      plate_number:
-        type: "string"
-      nb_place:
-        type: "integer"
-      status:
-        type: "string"
-      user:
-        type: "null"
-      type:
-        type: "array"
-        items:
-          $ref: "#/definitions/CarType"
-      comments:
-        type: "array"
-        items:
-          $ref: "#/definitions/Comment"
-  Comment:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-      content:
-        type: "string"
-      user:
-        type: "array"
-        items:
-          $ref: "#/definitions/User"
-      created_at:
-        type: "string"

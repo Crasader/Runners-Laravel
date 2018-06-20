@@ -100,4 +100,16 @@ class UserPolicy
         }
         return $user->may('manage_other_users');
     }
+
+    /**
+     * Determine whether the authenticated user can send credentials
+     *
+     * @param  \App\User  $user The authenticated user
+     * @param  \App\User  $model The user where we want to update the pass
+     * @return mixed
+     */
+    public function sendCredentials(User $user, User $model)
+    {
+        return $user->may('manage_other_users');
+    }
 }

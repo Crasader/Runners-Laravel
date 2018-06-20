@@ -8,7 +8,7 @@ The migrations will generate all the database incrementally. The migrations allo
 
 If you need to make change on the database structure, create a new migration. **Never edit older migrations !**
 
-You find all the migration possibilities on the [official doc](https://laravel.com/docs/5.5/migrations).
+You find all the migration possibilities on the [official doc](https://laravel.com/docs/5.6/migrations).
 
 ### Related commands :
 ```sh
@@ -26,7 +26,7 @@ php artisan migrate:reset
 
 Laravel provides a seeding system to easily populate the database. You find all the seeders in the `database/seeds` folder.
 These scripts populates each tables with fake data's automatically.
-If you want to add new seeders see the [doc](https://laravel.com/docs/5.5/seeding).
+If you want to add new seeders see the [doc](https://laravel.com/docs/5.6/seeding).
 
 ### Related commands
 ```sh
@@ -54,8 +54,8 @@ php artisan db:seed --class=RemoveAllRunsSeeder
 
 **Helpful links :**
 
-* [Laravel migrations](https://laravel.com/docs/5.5/migrations)
-* [Laravel seeders](https://laravel.com/docs/5.5/seeding)
+* [Laravel migrations](https://laravel.com/docs/5.6/migrations)
+* [Laravel seeders](https://laravel.com/docs/5.6/seeding)
 
 <hr>
 <div align="center">

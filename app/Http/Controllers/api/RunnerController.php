@@ -35,7 +35,7 @@ class RunnerController extends Controller
         $sub = RunSubscription::findOrFail($id);
         $sub->user()->associate($request->user());
         $sub->save();
-        return response()->json(null, 204);
+        return new RunnerResource($sub);
     }
 
     /**
@@ -51,7 +51,7 @@ class RunnerController extends Controller
         $car = Car::findOrFail($request->car_id);
         $sub->car()->associate($car);
         $sub->save();
-        return response()->json(null, 204);
+        return new RunnerResource($sub);
     }
 
     /**

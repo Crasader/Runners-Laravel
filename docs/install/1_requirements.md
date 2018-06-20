@@ -20,7 +20,7 @@
 
 ## Dev env
 
-If you use a **Windows** environment, we recommend to use the [Homestead](https://laravel.com/docs/5.5/homestead)
+If you use a **Windows** environment, we recommend to use the [Homestead](https://laravel.com/docs/5.6/homestead)
 preconfigured virtual machine.
 We explain all the install and configuration procedure for homestead in the next sections of this doc.
 

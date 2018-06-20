@@ -92,9 +92,9 @@ You can easily find extensions to use these linters with many editors.
 
 **Helpful links :**
 
-* [Laravel mix (assets management)](https://laravel.com/docs/5.5/mix)
-* [Laravel migrations](https://laravel.com/docs/5.5/migrations)
-* [Laravel seeding](https://laravel.com/docs/5.5/seeding)
+* [Laravel mix (assets management)](https://laravel.com/docs/5.6/mix)
+* [Laravel migrations](https://laravel.com/docs/5.6/migrations)
+* [Laravel seeding](https://laravel.com/docs/5.6/seeding)
 
 <hr>
 <div align="center">

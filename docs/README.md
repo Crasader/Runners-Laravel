@@ -16,24 +16,25 @@ Here we found the summary of all the documentation for the Runners project.
 3. [App lifecycle](app/3_architecture.md)
 4. [App architecture](app/4_permissions.md)
 5. [Permissions system](app/5_status.md)
-6. [Status system](app/6_searchInput.md)
-7. [Status system](app/6_filterSystem.md)
-8. [Status system](app/6_logsystem.md)
-9. [Status system](app/6_notifications.md)
+6. [Search input](app/6_searchInput.md)
+7. [Filter system](app/7_filterSystem.md)
+8. [Log system](app/8_logsystem.md)
+9. [Notifications](app/9_notifications.md)
 
 ### Api
 
 1. [Architecture](api/1_arch.md)
-2. [Api routes](api/2_routes.md)
-3. [Error handling](api/3_errors.md)
-3. [Authentication](api/4_authentication.md)
+2. [Authentication](api/2_authentication.md)
+3. [Routes specification](api/swagger.yml)
+
+*You can import the route specification in the [swagger editor](https://editor.swagger.io/) for better display*
 
 ### Diagrams
 
 1. [Database MLD](diagrams/databaseMLD.pdf)
 2. [Diagramme d'état d'un run](diagrams/RunStates.pdf)
 
-*All the diagrams are created with [draw.io](draw.io), you can easily edit them.*
+*All the diagrams are created with [draw.io](https://draw.io), you can easily edit them.*
 
 ### Deployment / production installation
 

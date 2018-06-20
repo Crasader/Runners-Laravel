@@ -1,0 +1,918 @@
+openapi: 3.0.0
+info:
+  description: "This swagger documents the runners api."
+  version: "v2.0.0-rc.1.2"
+  title: "Runners"
+tags:
+- name: "me"
+  description: "Routes related to the authenticated user"
+- name: "users"
+  description: "Users resource"
+- name: "schedules"
+  description: "Schedules resource"
+- name: "runs"
+  description: "Runs resource"
+- name: "runners"
+  description: "Runners resource (subscriptions)"
+- name: "waypoints"
+  description: "Waypoints resource"
+- name: "cars"
+  description: "Cars resource"
+- name: "cars.comments"
+  description: "Cars comments"
+- name: "groups"
+  description: "Groups resource"
+paths:
+  /me:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user"
+      description: "Check the bearer authentication, and return the current User model"
+      responses:
+        '200':    # status code
+          description: User model serialized to JSON
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /me/workinghours:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user schedules"
+      responses:
+        '200':
+          description: "Schedule model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Schedule"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /me/runs:
+    get:
+      tags:
+      - "me"
+      summary: "Get the current authenticated user runs"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "Get all the users"
+      responses:
+        '200':    # status code
+          description: "User model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /users/{user}:
+    get:
+      tags:
+      - "users"
+      summary: "Get specific user by his ID"
+      parameters:
+        - name: user
+          in: path
+          required: true
+          description: "The id of the user"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "User model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /schedules:
+    get:
+      tags:
+      - "schedules"
+      summary: "Get all the schedules"
+      responses:
+        '200':    # status code
+          description: "Schedule model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Schedule"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs:
+    get:
+      tags:
+      - "runs"
+      summary: "Get all the runs"
+      parameters:
+        - name: finished
+          in: query
+          required: false
+          description: "Bolean if you want just finished runs '?finished=true'"
+          schema:
+            type : string
+            minimum: 1
+        - name: status
+          in: query
+          required: false
+          description: "Name of the status you want to filter the request"
+          schema:
+            type : string
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}:
+    get:
+      tags:
+      - "runs"
+      summary: "Get specific run by his ID"
+      parameters:
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/start:
+    post:
+      tags:
+      - "runs"
+      summary: "Start a specific run by his ID"
+      parameters:
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Run"
+        '405':
+          description: "The run can not be started"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/stop:
+    post:
+      tags:
+      - "runs"
+      summary: "Stop a specific run by his ID"
+      parameters:
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Run"
+        '405':
+          description: "The run can not be stopped"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/waypoints:
+    get:
+      tags:
+      - "runs"
+      summary: "Show the waypoints of this run."
+      parameters:
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}:
+    get:
+      tags:
+      - "runners"
+      summary: "Get specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "runners"
+      summary: "Update specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}/driver:
+    get:
+      tags:
+      - "runners"
+      summary: "Change the driver for the specified subscription."
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '204':    # status code
+          description: "No content, update successful"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}/car:
+    get:
+      tags:
+      - "runners"
+      summary: "Get specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The id of the car you want to associate to the subscription
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/CarID'
+      responses:
+        '204':    # status code
+          description: "No content, update successful"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints/search:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: "Needle to search in the waypoints names"
+          schema:
+            type : string
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /waypoints/{waypoint}:
+    get:
+      tags:
+      - "waypoints"
+      summary: "Get specific waypoint by his ID"
+      parameters:
+        - name: waypoint
+          in: path
+          required: true
+          description: "The id of the waypoint"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars:
+    get:
+      tags:
+      - "cars"
+      summary: "Get all the cars"
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    post:
+      tags:
+      - "cars"
+      summary: "Store a new car"
+      requestBody:
+        description: The datas of our new car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Car'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}:
+    get:
+      tags:
+      - "cars"
+      summary: "Get specific car by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "cars"
+      summary: "Get specific car by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new car
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Car'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}/comments:
+    get:
+      tags:
+      - "cars.comments"
+      summary: "Get all comments for the specified car"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    post:
+      tags:
+      - "cars.comments"
+      summary: "Create new comment for the specified car"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new comment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Comment'
+      responses:
+        '200':    # status code
+          description: "Car model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /cars/{car}/comments/{comment}:
+    get:
+      tags:
+      - "cars.comments"
+      summary: "Get a specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "cars.comments"
+      summary: "Update a specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      requestBody:
+        description: The datas of our new comment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requests/Comment'
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    delete:
+      tags:
+      - "cars.comments"
+      summary: "Delete specific car comment by his ID"
+      parameters:
+        - name: car
+          in: path
+          required: true
+          description: "The id of the car"
+          schema:
+            type : integer
+            minimum: 1
+        - name: comment
+          in: path
+          required: true
+          description: "The id of the comment"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Comment model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /groups:
+    get:
+      tags:
+      - "groups"
+      summary: "Get all the groups"
+      responses:
+        '200':    # status code
+          description: "Group model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /groups/{group}:
+    get:
+      tags:
+      - "groups"
+      summary: "Get specific group by his ID"
+      parameters:
+        - name: group
+          in: path
+          required: true
+          description: "The id of the group"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Group model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Group"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: base64
+  schemas:
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        firstname:
+          type: "string"
+        lastname:
+          type: "string"
+        email:
+          type: "string"
+        phone_number:
+          type: "string"
+        sex:
+          type: "string"
+        status:
+          type: "string"
+        image_profile:
+          type: "string"
+          description: "Link to the user profile picture."
+    Schedule:
+      type: "object"
+      properties:
+        start_at:
+          type: "string"
+        end_at:
+          type: "string"
+    Run:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        status:
+          type: "string"
+        title:
+          type: "string"
+        begin_at:
+          type: "string"
+        start_at:
+          type: "string"
+        end_at:
+          type: "string"
+        finished_at:
+          type: "string"
+        nb_passenger:
+          type: "string"
+        waypoints:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Waypoint"
+        runners:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Runner"
+    Waypoint:
+      type: "object"
+      properties:
+        nickname:
+          type: "string"
+    Runner:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        user:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        vehicle_category:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CarType"
+        vehicle:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Car"
+    CarType:
+      type: "object"
+      properties:
+        type:
+          type: "string"
+        description:
+          type: "string"
+    Car:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        plate_number:
+          type: "string"
+        nb_place:
+          type: "integer"
+        status:
+          type: "string"
+        user:
+          type: "boolean"
+        type:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CarType"
+        comments:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Comment"
+    Comment:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        content:
+          type: "string"
+        user:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/User"
+        created_at:
+          type: "string"
+    Group:
+      type: "object"
+      properties:
+        color:
+          type: "string"
+        name:
+          type: "string"
+    requests:
+      Car:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+          plate_number:
+            type: "string"
+          brand:
+            type: "string"
+          model:
+            type: "string"
+          color:
+            type: "string"
+          status:
+            type: "string"
+          type_id:
+            type: "integer"
+      Comment:
+        type: "object"
+        properties:
+          content:
+            type: "string"
+      CarID:
+        type: "object"
+        properties:
+          car_id:
+            type: "int"
+security:
+  - bearerAuth: []

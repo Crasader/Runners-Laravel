@@ -4,15 +4,13 @@
 
 Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.0-rc.2](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.2)
+## [v2.0.0-rc.2.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.0-rc.2.1)
 
 **Resolved Issues :**
-* [Implement the send credentials function #51](https://github.com/CPNV-ES/Runners-Laravel/issues/51)
-* [Check permissions for password changes #52](https://github.com/CPNV-ES/Runners-Laravel/issues/52)
+* [Name display overlap #107](https://github.com/CPNV-ES/Runners-Laravel/issues/107)
 
 **Improvements :**
-* Dedicated page to update a user password
-* New notification to send credentials to a user
+* Fix spelling
 
 ## Start developing
 

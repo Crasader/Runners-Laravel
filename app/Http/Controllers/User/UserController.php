@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Requests\Users\ChangePassword;
+use App\Notifications\SendCredentialsToUserNotification;
 use App\User;
 use App\Role;
 use App\Status;
@@ -49,6 +50,7 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
@@ -63,6 +65,7 @@ class UserController extends Controller
      *
      * @param  \App\Http\Requests\Users\StoreUser  $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(StoreUser $request)
     {
@@ -114,6 +117,7 @@ class UserController extends Controller
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(User $user)
     {
@@ -129,6 +133,7 @@ class UserController extends Controller
      * @param  \App\Http\Requests\Users\UpdateUser  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateUser $request, User $user)
     {
@@ -149,6 +154,7 @@ class UserController extends Controller
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(User $user)
     {
@@ -164,14 +170,22 @@ class UserController extends Controller
     /**
      * Send a credentials request to the user
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function generateCredentials(Request $request)
+    public function generateCredentials(User $user)
     {
+        $this->authorize('sendCredentials', $user);
+        // Generate a random pass for the user
+        $temporaryPass = str_random(12);
+        $user->password = Hash::make($temporaryPass);
+        $user->save();
+        $user->notify(new SendCredentialsToUserNotification($user, $temporaryPass));
+
         return redirect()
             ->back()
-            ->with('warning', "La génération des credentials n'est pas encore implémentée !");
+            ->with('success', "Des nouveaux identifiants on bien été envoyés a $user->fullname");
     }
 
     /**

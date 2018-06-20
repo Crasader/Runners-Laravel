@@ -31,7 +31,7 @@ All the releases are pushed on the github repo of the project. You can easily ge
 
 **Helpful links :**
 
-* [Laravel Deployment](https://laravel.com/docs/5.5/deployment)
+* [Laravel Deployment](https://laravel.com/docs/5.6/deployment)
 * [Nginx](https://nginx.org/en/)
 * [php](http://ch1.php.net/downloads.php)
 

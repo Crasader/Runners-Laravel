@@ -24,7 +24,7 @@ This will download the base homestead box on our machine.
 **3. Initialize homestead in runners**
 
 To generates a homestead configuration, specific to runners you need to run the following commands on our project directory.
-To run this command, you must have install the php dependencies, see [installation](1_install.md#Install-the-php-dependencies) for more info's.
+To run this command, you must have install the php dependencies, see [installation](2_install.md#Install-the-php-dependencies) for more info's.
 
 Linux / Mac OS :
 ```sh
@@ -95,7 +95,7 @@ We recommend to run all the laravel commands in the vm.
 <hr>
 
 **Helpful links :**
-* [Homestead docs](https://laravel.com/docs/5.5/homestead)
+* [Homestead docs](https://laravel.com/docs/5.6/homestead)
 
 <hr>
 <div align="center">

@@ -1,8 +1,8 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   description: "This swagger documents the runners api."
   version: "v2.0.0-rc.1.2"
-  title: "Swagger Petstore"
+  title: "Runners"
 tags:
 - name: "me"
   description: "Routes related to the authenticated user"
@@ -29,233 +29,340 @@ paths:
       tags:
       - "me"
       summary: "Get the current authenticated user"
-      produces:
-      - "application/json"
+      description: "Check the bearer authentication, and return the current User model"
       responses:
-        405:
+        '200':    # status code
+          description: User model serialized to JSON
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/User"
+        '405':
           description: "Method not allowed"
-        401:
+        '401':
           description: "Unauthorized"
-        200:
-          description: "OK"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/User"
   /me/workinghours:
     get:
       tags:
       - "me"
       summary: "Get the current authenticated user schedules"
-      produces:
-      - "application/json"
       responses:
-        405:
+        '200':
+          description: "Schedule model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Schedule"
+        '405':
           description: "Method not allowed"
-        401:
+        '401':
           description: "Unauthorized"
-        200:
-          description: "OK"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Schedule"
   /me/runs:
     get:
       tags:
       - "me"
       summary: "Get the current authenticated user runs"
-      produces:
-      - "application/json"
       responses:
-        405:
-          description: "Method not allowed"
-        401:
-          description: "Unauthorized"
-        200:
+        '200':
           description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /users:
+    get:
+      tags:
+      - "users"
+      summary: "Get all the users"
+      responses:
+        '200':    # status code
+          description: "User model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/User"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /users/{user}:
+    get:
+      tags:
+      - "users"
+      summary: "Get specific user by his ID"
+      parameters:
+        - name: user
+          in: path
+          required: true
+          description: "The id of the user"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Run"
-  /user/createWithArray:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "User model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/User"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /schedules:
+    get:
+      tags:
+      - "schedules"
+      summary: "Get all the schedules"
+      responses:
+        '200':    # status code
+          description: "Schedule model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Schedule"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs:
+    get:
+      tags:
+      - "runs"
+      summary: "Get all the runs"
+      parameters:
+        - name: finished
+          in: query
+          required: false
+          description: "Bolean if you want just finished runs '?finished=true'"
+          schema:
+            type : string
+            minimum: 1
+        - name: status
+          in: query
+          required: false
+          description: "Name of the status you want to filter the request"
+          schema:
+            type : string
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}:
+    get:
+      tags:
+      - "runs"
+      summary: "Get specific run by his ID"
+      parameters:
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Run"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/start:
     post:
       tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
-      produces:
-      - "application/xml"
-      - "application/json"
+      - "runs"
+      summary: "Start a specific run by his ID"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
       responses:
-        default:
-          description: "successful operation"
-  /user/createWithList:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Run"
+        '405':
+          description: "The run can not be started"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/stop:
     post:
       tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
-      produces:
-      - "application/xml"
-      - "application/json"
+      - "runs"
+      summary: "Stop a specific run by his ID"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/login:
-    get:
-      tags:
-      - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
           schema:
-            type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
-        400:
-          description: "Invalid username/password supplied"
-  /user/logout:
-    get:
-      tags:
-      - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters: []
+            type : integer
+            minimum: 1
       responses:
-        default:
-          description: "successful operation"
-  /user/{username}:
-    get:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Run"
+        '405':
+          description: "The run can not be stopped"
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/runners:
+    post:
       tags:
-      - "user"
-      summary: "Get user by user name"
-      description: ""
-      operationId: "getUserByName"
-      produces:
-      - "application/xml"
-      - "application/json"
+      - "runs"
+      summary: "Sets the current authenticated user to the first empty subscription of the run."
       parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be fetched. Use user1 for testing. "
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
           schema:
-            $ref: "#/definitions/User"
-        400:
-          description: "Invalid username supplied"
-        404:
-          description: "User not found"
-    put:
-      tags:
-      - "user"
-      summary: "Updated user"
-      description: "This can only be done by the logged in user."
-      operationId: "updateUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "name that need to be updated"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Updated user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+            type : integer
+            minimum: 1
       responses:
-        400:
-          description: "Invalid user supplied"
-        404:
-          description: "User not found"
-    delete:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Runner"
+        '405':
+          description: "The current user cannot be attached to this run."
+        '401':
+          description: "Unauthorized"
+  /runs/{run}/waypoints:
+    get:
       tags:
-      - "user"
-      summary: "Delete user"
-      description: "This can only be done by the logged in user."
-      operationId: "deleteUser"
-      produces:
-      - "application/xml"
-      - "application/json"
+      - "runs"
+      summary: "Show the waypoints of this run."
       parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be deleted"
-        required: true
-        type: "string"
+        - name: run
+          in: path
+          required: true
+          description: "The id of the run"
+          schema:
+            type : integer
+            minimum: 1
       responses:
-        400:
-          description: "Invalid username supplied"
-        404:
-          description: "User not found"
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
+        '200':    # status code
+          description: "Waypoint model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Waypoint"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+  /runners/{runner}:
+    get:
+      tags:
+      - "runners"
+      summary: "Get specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+    patch:
+      tags:
+      - "runners"
+      summary: "Update specific run subscription by his ID"
+      parameters:
+        - name: runner
+          in: path
+          required: true
+          description: "The id of the run subscription"
+          schema:
+            type : integer
+            minimum: 1
+      responses:
+        '200':    # status code
+          description: "Run model serialized to JSON"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/Runner"
+        '405':
+          description: "Method not allowed"
+        '401':
+          description: "Unauthorized"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: base64
+security:
+  - bearerAuth: []
 definitions:
   User:
     type: "object"

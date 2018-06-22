@@ -23,6 +23,7 @@ Route::middleware(['auth:api'])->group(function () {
     // DEPRECATED old route to get the current user
     Route::get('users/me', 'api\UserController@me');
 
+
     /** *****************************
      * Routes prefixed by me
      * Retrieve info's for the connected user
@@ -38,15 +39,18 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('runs', 'api\RunController@myRuns');
     });
 
+
     /** *****************************
      * Users resource
      */
     Route::apiResource('users', 'api\UserController', ['only' => ['index', 'show']]);
 
+
     /** *****************************
      * Schedules resource
      */
     Route::apiResource('schedules', 'api\ScheduleController', ['only' => ['index']]);
+
 
     /** *****************************
      * Runs resource
@@ -64,6 +68,7 @@ Route::middleware(['auth:api'])->group(function () {
     // The waypoint's nested in the runs
     Route::apiResource('runs.waypoints', 'api\RunWaypointController', ['only' => ['index']]);
 
+
     /** *****************************
      * Runners resource
      * This resource is used to access the run_driver table
@@ -72,12 +77,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::patch('/runners/{id}/car', 'api\RunnerController@associateCar');
     Route::apiResource('runners', 'api\RunnerController', ['only' => ['show', 'update']]);
 
+
     /** *****************************
      * Waypoints resource
      */
     // Specific route to search waypoints
     Route::get('waypoints/search', 'api\WaypointController@search');
     Route::apiResource('waypoints', 'api\WaypointController', ['only' => ['index', 'show']]);
+
 
     /** *****************************
      * Cars resource
@@ -95,6 +102,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('cars.comments', 'api\CarCommentController');
     //DEPRECATED old route name for cars comments
     Route::apiResource('vehicles.comments', 'api\CarCommentController', ['parameters' => ['vehicles' => 'car']]);
+
 
     /** *****************************
      * Groups resource

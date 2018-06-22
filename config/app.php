@@ -19,6 +19,9 @@ return [
     |--------------------------------------------------------------------------
     | Application Version
     |--------------------------------------------------------------------------
+    |
+    | Stores the actual version of the app, for display in the app.
+    | Need to update this at each new release.
     */
 
     'version' => 'v2.0.0-rc.2.1',

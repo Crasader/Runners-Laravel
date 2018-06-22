@@ -3,6 +3,11 @@
 use Illuminate\Database\Seeder;
 use App\Schedule;
 
+/**
+ * Specific seeder, he removes all the schedules.
+ *
+ * @author Bastien Nicoud
+ */
 class RemoveAllSchedules extends Seeder
 {
     /**

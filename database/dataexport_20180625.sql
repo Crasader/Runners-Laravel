@@ -135,16 +135,6 @@ INSERT INTO `logs` VALUES (1,1,'App\\Role','created',NULL,'2018-06-11 09:59:24',
 UNLOCK TABLES;
 
 --
--- Dumping data for table `migrations`
---
-
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_02_08_165614_update_users_table',1),(4,'2018_02_08_171355_add_groups_table',1),(5,'2018_02_08_171410_add_shedules_table',1),(6,'2018_02_08_172120_add_group_user_table',1),(7,'2018_02_08_173239_add_attachments_table',1),(8,'2018_02_08_173944_add_comments_table',1),(9,'2018_02_09_204136_create_roles_table',1),(10,'2018_02_09_210652_create_role_user_table',1),(11,'2018_02_09_211908_create_waypoints_table',1),(12,'2018_02_09_212255_create_runs_table',1),(13,'2018_02_09_212950_create_run_waypoint_table',1),(14,'2018_02_12_074149_create_car_types_table',1),(15,'2018_02_12_074313_create_cars_table',1),(16,'2018_02_12_074501_create_run_drivers_table',1),(17,'2018_02_14_180023_create_artists_table',1),(18,'2018_02_14_180043_create_artist_run_table',1),(19,'2018_02_14_180101_create_festivals_table',1),(20,'2018_02_14_180113_create_festival_user_table',1),(21,'2018_03_07_141811_add_user_api_token_field',1),(22,'2018_05_15_161636_add_name_field_to_cars',1),(23,'2018_05_28_082524_create_kiela_table',1),(24,'2018_06_04_085749_add_infos_field_to_runs',1),(25,'2018_06_05_202656_add_logs_table',1),(26,'2018_06_05_211156_add_user_id_to_logs',1),(27,'2018_06_06_211939_create_notifications_table',1),(28,'2018_06_13_165508_create_statuses_table',2),(29,'2018_06_13_175724_create_statusables_table',2),(30,'2018_06_13_191306_add_name_to_statuses',2),(31,'2018_06_13_202217_remove_status_column_to_users',2);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `notifications`
 --
 

@@ -41,3 +41,7 @@ Here we found the summary of all the documentation for the Runners project.
 
 1. [Server requirements](deploy/1_requirements.md)
 2. [Manual deploy](deploy/2_optimization.md)
+
+## Doc for the CPNV (in french)
+
+* [2018 Nicolas Henry - Bastien Nicoud](./2018)

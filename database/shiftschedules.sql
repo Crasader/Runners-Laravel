@@ -1,0 +1,1 @@
+update schedules set start_time = date_add(start_time, interval 8 day), end_time = date_add(end_time, interval 8 day)

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: "This swagger documents the runners api."
-  version: "v2.0.1"
+  version: "v2.0.2"
   title: "Runners"
 tags:
 - name: "me"

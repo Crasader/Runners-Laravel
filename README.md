@@ -4,12 +4,12 @@
 
 Runners is a driver management app, specially designed for the [paleo](http://yeah.paleo.ch/) festival.
 
-## [v2.0.1](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.1)
+## [v2.0.2](https://github.com/CPNV-ES/Runners-Laravel/releases/tag/v2.0.2)
 
 See de changelog of the pre releases of the v2.0.1 to trace all the changes from the v1.
 
 **Changes :**
-* Fix spelling on route controllers calls for case sensitive OS
+* Font Awesome is now loaded from the server (not from the CDN)
 
 ## Start developing
 

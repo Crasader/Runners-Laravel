@@ -18,38 +18,38 @@
                 <div class="columns is-multiline">
 
                     {{-- CHECKBOX FILTERS --}}
-		    {{-- MAX 3 fields (you can add more put layout can be ridiculous) --}}
-@if(isset($filters['filtredColumns']))
-                    @foreach($filters['filtredColumns'] as $columns => $fields)
-                        <div class="column">
-                            <input
-                                class="input"
-                                type="hidden"
-                                name="filter-column"
-                                value="{{ $columns }}"
-                                type="text">
-                            <p class="title is-6 has-text-centered">
-                                Filtrer {{ $columns }} :
-                            </p>
-                            <div class="columns is-multiline is-gapless">
-                                @foreach($fields as $key => $val)
-                                    <div class="column is-half">
-                                        <div class="control">
-                                            <label class="checkbox">
-                                                <input
-                                                    name="filter[]"
-                                                    value="{{ $key }}"
-                                                    type="checkbox"
-                                                    {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
-                                                {{ $val }}
-                                            </label>
+                    {{-- MAX 3 fields (you can add more put layout can be ridiculous) --}}
+                    @if(isset($filters['filtredColumns']))
+                        @foreach($filters['filtredColumns'] as $columns => $fields)
+                            <div class="column">
+                                <input
+                                    class="input"
+                                    type="hidden"
+                                    name="filter-column"
+                                    value="{{ $columns }}"
+                                    type="text">
+                                <p class="title is-6 has-text-centered">
+                                    Filtrer {{ $columns }} :
+                                </p>
+                                <div class="columns is-multiline is-gapless">
+                                    @foreach($fields as $key => $val)
+                                        <div class="column is-half">
+                                            <div class="control">
+                                                <label class="checkbox">
+                                                    <input
+                                                        name="filter[]"
+                                                        value="{{ $key }}"
+                                                        type="checkbox"
+                                                        {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
+                                                    {{ $val }}
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-			@endforeach
-			@endif
+                        @endforeach
+                    @endif
 
                     {{-- SEARCH FILTER --}}
                     @if (isset($filters["search"]))

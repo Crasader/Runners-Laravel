@@ -18,7 +18,8 @@
                 <div class="columns is-multiline">
 
                     {{-- CHECKBOX FILTERS --}}
-                    {{-- MAX 3 fields (you can add more put layout can be ridiculous) --}}
+		    {{-- MAX 3 fields (you can add more put layout can be ridiculous) --}}
+@if(isset($filters['filtredColumns']))
                     @foreach($filters['filtredColumns'] as $columns => $fields)
                         <div class="column">
                             <input
@@ -47,7 +48,8 @@
                                 @endforeach
                             </div>
                         </div>
-                    @endforeach
+			@endforeach
+			@endif
 
                     {{-- SEARCH FILTER --}}
                     @if (isset($filters["search"]))

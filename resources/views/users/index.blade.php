@@ -36,15 +36,15 @@
 
         {{-- Filters --}}
         @component('components/filters_box', ['filters' => [
-            "filtredColumns" => [
-                "status" => [
-                    "not-present" => "Pas présent",
-                    "not-requested" => "Non demandé",
-                    "free" => "Libre",
-                    "requested" => "Demandé",
-                    "gone" => "En run"
-                ],
-            ],
+            //"filtredColumns" => [
+            //    "status" => [
+            //        "not-present" => "Pas présent",
+            //        "not-requested" => "Non demandé",
+            //        "free" => "Libre",
+            //        "requested" => "Demandé",
+            //        "gone" => "En run"
+            //    ],
+            //],
             "search" => "firstname",
             "orderBy" => [
                 "lastname" => "Nom de famille",

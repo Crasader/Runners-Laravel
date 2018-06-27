@@ -32,6 +32,7 @@ mix
   .sass('resources/assets/main.scss', 'css')
   .sass('resources/assets/scss/pages/big_runs.scss', 'css')
   .copy('node_modules/fullcalendar/dist/fullcalendar.min.css', 'public/css/calendar/fullcalendar.css')
+  .copy('resources/assets/js/fontawesome/all.js', 'public/js/fontawesome/all.js')
 
 // Create unique hash in production to force browser cache clearing
 if (mix.inProduction()) {

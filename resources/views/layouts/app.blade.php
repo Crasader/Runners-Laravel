@@ -22,7 +22,7 @@
     {{-- Styles --}}
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
     @stack('styles')
-    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script defer src="{{ mix('js/fontawesome/all.js') }}"></script>
 </head>
 
 <body>

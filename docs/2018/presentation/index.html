@@ -58,8 +58,8 @@
 
           <section>
             <ul>
-              <li>Finaiser l'app pour qu'elle soit utilisable</li>
-              <li>Corriger les bugs lié a la gestion des runs</li>
+              <li>Finaliser l'app pour qu'elle soit utilisable</li>
+              <li>Corriger les bugs liés à la gestion des runs</li>
               <li>Corriger les bugs lié au système de filtres</li>
               <li>Faire fonctionner le kiéla</li>
               <li>Faire fonctionner le big screen</li>
@@ -131,10 +131,37 @@
           </section>
 
           <section>
+            <p><code>runners.ch/runs?search=tutu</code></p>
             <img
               class="image-custom"
               src="img/filters.png"
               >
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+              ```php
+              /**
+               * Run model
+               */
+              class Run extends Model {
+                use Filterable;
+
+                ...
+              }
+              ```
+              ```php
+              /**
+               * RunController
+               */
+              public function index (Request $request) {
+
+                $runs = Run::filter($request, 'planned_at', 'asc')->paginate(20);
+
+                return view('runs.index');
+              }
+              ```
+            </textarea>
           </section>
 
         </section>
@@ -164,8 +191,15 @@
             <section>
               <img
                 class="image-custom"
+                width="55%"
+                src="img/auth.png"
+                >
+            </section>
+
+            <section>
+              <img
+                class="image-custom"
                 src="img/user-page.png"
-                alt="Webpack - ES6"
                 >
             </section>
 
@@ -221,8 +255,8 @@
 
           <section>
             <ul>
-              <li>Réecriture de l'application</li>
-              <li>Utiliser au maximum les fonctionalités laravel</li>
+              <li>Réécriture de l'application</li>
+              <li>Utiliser au maximum les fonctionnalités Laravel</li>
               <li>Système de filtres revu</li>
               <li>Génération des QR codes</li>
               <li>API simplifiée</li>

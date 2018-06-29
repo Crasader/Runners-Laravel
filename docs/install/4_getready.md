@@ -5,6 +5,7 @@
 Don't forget to install the french locale on our system, example on ubuntu :
 
 ```sh
+sudo locale-gen fr_FR
 sudo locale-gen fr_FR.UTF-8
 ```
 

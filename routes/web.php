@@ -123,6 +123,9 @@ Route::middleware(['auth'])->group(function () {
     // Force start/stop of a run (for needs_filling runs)
     Route::patch('runs/force-start/{run}', 'Run\RunController@forceStart')->name('runs.force-start');
     Route::patch('runs/force-stop/{run}', 'Run\RunController@forceStop')->name('runs.force-stop');
+    Route::get('runs/import', 'Run\RunController@import')->name('runs.import');
+    Route::post('runs/importfile', 'Run\RunController@importfile')->name('runs.importfile');
+
     Route::resource('runs', 'Run\RunController');
     // Run comments crud
     Route::resource('runs.comments', 'Run\RunCommentController', ['only' => ['store', 'destroy']]);

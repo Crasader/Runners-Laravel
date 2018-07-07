@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Runs\StoreNewRun;
 use App\Http\Requests\Runs\UpdateRun;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * RunController
@@ -110,6 +111,7 @@ class RunController extends Controller
     public function edit(Run $run)
     {
         $this->authorize('update', $run);
+        error_log(print_r($run,1));
         return view('runs.edit')->with(compact('run'));
     }
 
@@ -262,5 +264,42 @@ class RunController extends Controller
         return redirect()
             ->back()
             ->with('warning', "Vous avez forcé le run à s'arreter !");
+    }
+
+    /**
+     * Import runs from CSV file
+     */
+    public function import()
+    {
+        return view('runs.import');
+    }
+
+    /**
+     * Import runs from CSV file
+     */
+    public function importfile(Request $request)
+    {
+        $request->file->store('runs');
+        $contents = Storage::get('runs/'.$request->file->hashName());
+        $lines = preg_split('/\r\n|\r|\n/', $contents); // neither csv_reader nor explode worked
+        foreach ($lines as $line)
+        {
+            $fields = preg_split('/;/', $line);
+            // Groom data
+            for ($i=0; $i<count($fields); $i++)
+            {
+                if (substr($fields[$i],0,1) === '"' && substr($fields[$i],strlen($fields[$i])-1,1) === '"')
+                    $test = substr($fields[$i],1,strlen($fields[$i])-2);
+                $fields[$i] = str_replace('""','"',$fields[$i]);
+            }
+            $runs[] = Run::create([
+                'name' => $fields[0],
+                'status' => 'drafting',
+                'planned_at' => Carbon::createFromFormat("Y-m-d H:i",$fields[1]),
+                'passengers' => $fields[2],
+                'infos' => $fields[3]
+            ]);
+        }
+        return view('runs.imported')->with(compact('runs'));
     }
 }

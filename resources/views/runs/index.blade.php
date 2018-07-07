@@ -70,17 +70,6 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Passagers</th>
-                            <th>Runners</th>
-                            <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($runs as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">

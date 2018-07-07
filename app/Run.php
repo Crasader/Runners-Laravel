@@ -46,7 +46,8 @@ class Run extends Model
         'end_planned_at',
         'started_at',
         'ended_at',
-        'passengers'
+        'passengers',
+        'infos'
     ];
 
     /**

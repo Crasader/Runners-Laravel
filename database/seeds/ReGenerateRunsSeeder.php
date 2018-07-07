@@ -20,9 +20,10 @@ class ReGenerateRunsSeeder extends Seeder
     public function run()
     {
         // First we remove all runs
-        $this->call([
-            RemoveAllRunsSeeder::class
-        ]);
+        DB::command('DELETE from run_drivers;');
+        DB::command('DELETE from artist_run;');
+        DB::command('DELETE from run_waypoint;');
+        DB::command('DELETE from runs;');
 
         // Remove edition of festival
         $festivals = Festival::all();

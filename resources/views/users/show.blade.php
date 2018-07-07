@@ -39,9 +39,6 @@
                         <p class="control">
                             <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
                         </p>
-                        <p class="control">
-                            <a href="{{ route('users.generate-credentials', ['user' => $user->id]) }}" class="button is-warning">Générer identifiants</a>
-                        </p>
                     @endcan
                 </div>
             </div>

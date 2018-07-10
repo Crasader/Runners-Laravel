@@ -22,6 +22,11 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 
 /**
+ * Download of Android's APK
+ */
+Route::get('/palerunner', 'MobileAppController@download');
+
+/**
  * Routes protected by the auth middleware
  */
 Route::middleware(['auth'])->group(function () {
@@ -187,4 +192,5 @@ Route::middleware(['auth'])->group(function () {
      * Connected home page
      */
     Route::get('/infos', 'HomeController@infos')->name('infos');
+
 });

@@ -43,7 +43,7 @@
         @break
 
     @case('finished')
-        <span class="tag {{ $slot }} is-success">Terminé</span>
+        <span class="tag {{ $slot }} is-white">Terminé</span>
         @break
 
     @case('empty')
@@ -55,7 +55,7 @@
         @break
 
     @case('gone')
-        <span class="tag {{ $slot }} is-success">Démarré</span>
+        <span class="tag {{ $slot }} is-info">Démarré</span>
         @break
 
     @case('ready')

@@ -49,6 +49,13 @@ class RunController extends Controller
             ->whereNotIn('status', ['finished', 'drafting'])
             ->limit(30)
             ->get();
+        // Take this opportunity to check if a run is in trouble
+        foreach ($runs as $run)
+            if ($run->problem())
+            {
+                $run->status = 'error';
+                $run->save();
+            }
         return view('runs.big')->with(compact('runs'));
     }
 
@@ -111,7 +118,6 @@ class RunController extends Controller
     public function edit(Run $run)
     {
         $this->authorize('update', $run);
-        error_log(print_r($run,1));
         return view('runs.edit')->with(compact('run'));
     }
 

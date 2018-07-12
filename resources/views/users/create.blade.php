@@ -37,7 +37,7 @@
         <div class="columns">
             <div class="column">
 
-                <form id="create-user-form" action="{{ route('users.store') }}" method="POST">
+                <form id="create-user-form" action="{{ route('users.create') }}" method="POST">
 
                     {{ csrf_field() }}
 

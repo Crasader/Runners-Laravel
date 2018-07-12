@@ -7,6 +7,7 @@ use App\Notifications\SendCredentialsToUserNotification;
 use App\User;
 use App\Role;
 use App\Status;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use App\Http\Requests\Users\StoreUser;
 use App\Http\Requests\Users\UpdateUser;
 use App\Http\Resources\users\UserSearchResource;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 /**
  * UserController
@@ -76,7 +78,28 @@ class UserController extends Controller
         $user->generateDefaultPictures();
         $user->addRole($request->role);
         $user->setStatus($request->status);
+        return redirect()
+            ->route('users.show', ['user' => $user->id])
+            ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
+    }
 
+    /**
+     * Ugly dirty workaround to the fact that user creation doesn't work
+     */
+    public function manualcreate(Request $request) {
+        $user = new User([
+            'firstname'     => 'fname',
+            'lastname'      => 'lname',
+            'email'         => 'test@local.ch',
+            'phone_number'  => '01234567',
+            'sex'           => 'm'
+        ]);
+
+        $user->generateName();
+        $user->save();
+        $user->generateDefaultPictures();
+        $user->addRole('runner');
+        $user->setStatus('requested');
         return redirect()
             ->route('users.show', ['user' => $user->id])
             ->with('success', "L'utilisateur {$user->fullname} a bien été crée");

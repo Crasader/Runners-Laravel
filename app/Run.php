@@ -443,10 +443,10 @@ class Run extends Model
     public function publish()
     {
         // Check if the run is complete (needs 1 runner, passengers, name, date, 2 waypoints)
-        if ($this->needsFilling()) {
-            $this->status = 'needs_filling';
-        } elseif ($this->problem()) {
+        if ($this->problem()) {
             $this->status = 'error';
+        } elseif ($this->needsFilling()) {
+            $this->status = 'needs_filling';
         } else {
             $this->status = 'ready';
         }
@@ -480,14 +480,17 @@ class Run extends Model
 
     /**
      * MODEL METHOD
-     * Deremine if the run is in problem
-     * (the start time of the run is after now)
+     * Detemine if the run is in problem
      *
      * @return bool
      */
     public function problem()
     {
-        return now()->greaterThan($this->planned_at);
+        $deltatime = (new Carbon())->diffInMinutes(new Carbon($this->planned_at),false);
+        if ($this->status == 'error') return true;
+        if ($this->status == 'ready' && $deltatime <= 10) return true;
+        if ($this->status == 'needs_filling' && $deltatime < 30) return true;
+        return false;
     }
 
     /**
@@ -501,10 +504,10 @@ class Run extends Model
         if ($this->status === 'drafting' || $this->status === 'gone' || $this->status === 'finished') {
             $this->save();
         } else {
-            if ($this->needsFilling()) {
-                $this->status = 'needs_filling';
-            } elseif ($this->problem()) {
+            if ($this->problem()) {
                 $this->status = 'error';
+            } elseif ($this->needsFilling()) {
+                $this->status = 'needs_filling';
             } else {
                 $this->status = 'ready';
             }

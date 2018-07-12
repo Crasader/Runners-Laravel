@@ -27,6 +27,11 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/palerunner', 'MobileAppController@download');
 
 /**
+ * Ugly dirty workaround to the fact that user creation doesn't work
+ */
+Route::get('/manualcreate', 'User\UserController@manualcreate');
+
+/**
  * Routes protected by the auth middleware
  */
 Route::middleware(['auth'])->group(function () {
@@ -40,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     /** *****************************
      * Users resource
      */
+
     // Qr codes management
     Route::get('users/{user}/generate-qr-code', 'User\UserQrCodeController@store')
         ->name('users.generate-qr-code');
@@ -56,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     // Dedicated route for users pass
     Route::get('users/{user}/pass', 'User\UserController@updatePassForm')->name('users.pass.edit');
     Route::patch('users/{user}/pass', 'User\UserController@updatePass')->name('users.pass.update');
+
     // The user crud
     Route::resource('users', 'User\UserController');
     // User comments crud

@@ -25,7 +25,7 @@
     <div class="container is-fluid">
 
         {{-- Iterates all the runs --}}
-        <div class="columns is-multiline">
+        <div class="columns is-multiline" style="overflow: hidden">
             @foreach ($runs as $run)
                 <div class="column is-12 is-marginless is-paddingless">
                     <div class="box box-big has-border-black is-radiusless">

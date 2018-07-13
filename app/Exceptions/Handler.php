@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
 
         // Notify the app administrator (root)
         if (!config('app.debug')) {
-            Notification::send([User::where('lastname','=', 'Carrel')->get()], new UnHandledExceptionNotification($exception));
+            Notification::send([User::find(12)], new UnHandledExceptionNotification($exception));
         }
         // Call default exception reporter (displays mor detailed info's in the log)
         parent::report($exception);

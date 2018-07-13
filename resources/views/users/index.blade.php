@@ -71,7 +71,6 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <?php error_log($user->lastname) ?>
                             <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
                                 <td>{{ $user->firstname }}</td>
                                 <th>{{ $user->lastname }}</th>

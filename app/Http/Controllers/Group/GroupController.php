@@ -69,7 +69,7 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
         Group::create($request->all());
-        return redirect()->route('groups.index')->with('success', 'Le groupe a bien été crée !');
+        return redirect()->route('groups.index')->with('success', 'Le groupe a bien été créé !');
     }
 
     /**

@@ -80,7 +80,7 @@ class UserController extends Controller
         $user->setStatus($request->status);
         return redirect()
             ->route('users.show', ['user' => $user->id])
-            ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
+            ->with('success', "L'utilisateur {$user->fullname} a bien été créé");
     }
 
     /**
@@ -103,7 +103,7 @@ class UserController extends Controller
         $user->setStatus('requested');
         return redirect()
             ->route('users.show', ['user' => $user->id])
-            ->with('success', "L'utilisateur {$user->fullname} a bien été crée");
+            ->with('success', "L'utilisateur {$user->fullname} a bien été créé");
     }
 
     /**

@@ -51,7 +51,7 @@ class RoleController extends Controller
     {
         $this->authorize('create', Role::class);
         Role::create($request->all());
-        return redirect()->route('roles.index')->with('success', 'Le rôle à bien été crée');
+        return redirect()->route('roles.index')->with('success', 'Le rôle à bien été créé');
     }
 
     /**

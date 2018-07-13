@@ -46,7 +46,7 @@ class UserLicencePictureController extends Controller
             // Success message
             return redirect()
                 ->back()
-                ->with('success', "Le photo du permis a corréctement été modifiée.");
+                ->with('success', "La photo du permis a corréctement été modifiée.");
         } else {
             // In invalid request case
             return redirect()

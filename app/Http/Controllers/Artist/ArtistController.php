@@ -48,7 +48,7 @@ class ArtistController extends Controller
     {
         $this->authorize('create', Artist::class);
         Artist::create($request->all());
-        return redirect()->route('artists.index')->with('success', "L'artiste a bien été crée !");
+        return redirect()->route('artists.index')->with('success', "L'artiste a bien été créé !");
     }
 
     /**

@@ -65,7 +65,7 @@
 
         <div class="columns">
             <div class="column">
-                <h2 class="title is-3">Utilisateurs concernées par cet horaire :</h2>
+                <h2 class="title is-3">Utilisateurs concernés par cet horaire :</h2>
             </div>
         </div>
 

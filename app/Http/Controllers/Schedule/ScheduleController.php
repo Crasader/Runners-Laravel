@@ -43,6 +43,7 @@ class ScheduleController extends Controller
      */
     public function events(Request $request)
     {
+        // $events = Schedule::where('group_id','=',5)->with('group')->get(); // check a single group
         $events = Schedule::with('group')->get();
         return CalendarFormatScheduleResource::collection($events);
     }

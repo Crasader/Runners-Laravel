@@ -69,17 +69,9 @@
                             <th>Statut</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>E-mail</th>
-                            <th>Tel</th>
-                            <th>Statut</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($users as $user)
+                            <?php error_log($user->lastname) ?>
                             <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
                                 <td>{{ $user->firstname }}</td>
                                 <th>{{ $user->lastname }}</th>

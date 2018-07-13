@@ -87,10 +87,11 @@ class UserController extends Controller
      * Ugly dirty workaround to the fact that user creation doesn't work
      */
     public function manualcreate(Request $request) {
+        $email = 'mail'.rand(1000,9999).'@local.ch';
         $user = new User([
-            'firstname'     => 'fname',
-            'lastname'      => 'lname',
-            'email'         => 'test@local.ch',
+            'firstname'     => 'John',
+            'lastname'      => 'Doe',
+            'email'         => $email,
             'phone_number'  => '01234567',
             'sex'           => 'm'
         ]);

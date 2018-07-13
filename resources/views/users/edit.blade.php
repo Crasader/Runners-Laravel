@@ -152,28 +152,6 @@
                         </div>
                     </div>
 
-                    {{-- SEXE --}}
-                    {{-- <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label">Sexe</label>
-                        </div>
-                        <div class="field-body">
-
-                            
-                            <div class="field is-narrow">
-                                <div class="control">
-                                    <div class="select is-fullwidth">
-                                        <select name="sex">
-                                            <option value="m" {{ ($user->sex === 'm') ? 'selected' : '' }}>Homme</option>
-                                            <option value="w" {{ ($user->sex === 'w') ? 'selected' : '' }}>Femme</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> --}}
-
                     @can('associate', App\Role::class)
                         <div class="field is-horizontal">
                             <div class="field-label is-normal">
@@ -275,9 +253,6 @@
                         <div class="message-body">
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
                             la connexion a l'app mobile n'est donc pas possible.
-                            @can('create', App\User::class)
-                                <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
-                            @endcan
                         </div>
                     </article>
                     @can('create', App\User::class)

@@ -35,11 +35,6 @@
                             <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="button is-info">Modifier l'utilisateur</a>
                         </p>
                     @endcan
-                    @can('create', App\User::class)
-                        <p class="control">
-                            <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Générer QR code</a>
-                        </p>
-                    @endcan
                 </div>
             </div>
         </div>
@@ -71,24 +66,11 @@
                             Vous pouvez utiliser ce QR code pour vous connecter a l'app mobile.
                         </div>
                     </article>
-                    @can('update', $user)
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}" class="button is-warning">Regénérer QR code</a>
-                            </p>
-                            <p class="control">
-                                <a href="{{ route('users.delete-qr-code', ['user' => $user->id]) }}" class="button is-danger">Supprimer QR code</a>
-                            </p>
-                        </div>
-                    @endcan
                 @else
                     <article class="message is-warning">
                         <div class="message-body">
                             Aucun <strong>qr code</strong> n'est généré pour {{ $user->fullname }},
                             la connexion à l'app mobile n'est donc pas possible.
-                            @can('create', App\User::class)
-                                <strong>Vous pouvez en <a href="{{ route('users.generate-qr-code', ['user' => $user->id]) }}">générer un</a>.</strong>
-                            @endcan
                         </div>
                     </article>
                 @endif

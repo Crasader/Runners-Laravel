@@ -20,7 +20,7 @@
         <div class="columns">
             <div class="column is-narrow">
                 <h1 class="title is-2">
-                    Run {{ $run->name }}
+                    Run {{ $run->name }}, {{ $run->passengers }}pax
                     @component('components/status_tag', ['status' => $run->status])
                         is-medium
                     @endcomponent
@@ -84,19 +84,6 @@
             <div class="column is-5">
                 <div class="content box">
                     <p>
-                        <strong>
-                            @if(empty($run->passengers))
-                                0
-                            @else
-                                {{ $run->passengers }}
-                            @endif
-                        </strong>
-                        passagers
-                    </p>
-                    <p>
-                        <strong>
-                            Informations :
-                        </strong>
                         {{ $run->infos }}
                     </p>
                 </div>

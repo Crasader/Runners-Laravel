@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Runs\StoreNewRun;
 use App\Http\Requests\Runs\UpdateRun;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
 
 /**
  * RunController
@@ -290,6 +291,7 @@ class RunController extends Controller
         $lines = preg_split('/\r\n|\r|\n/', $contents); // neither csv_reader nor explode worked
         foreach ($lines as $line)
         {
+            error_log($line);
             $fields = preg_split('/;/', $line);
             // Groom data
             for ($i=0; $i<count($fields); $i++)
@@ -297,14 +299,21 @@ class RunController extends Controller
                 if (substr($fields[$i],0,1) === '"' && substr($fields[$i],strlen($fields[$i])-1,1) === '"')
                     $test = substr($fields[$i],1,strlen($fields[$i])-2);
                 $fields[$i] = str_replace('""','"',$fields[$i]);
+                $fields[$i] = str_replace("\\n","\n",$fields[$i]);
+                $fields[$i] = utf8_encode($fields[$i]);
             }
-            $runs[] = Run::create([
+            error_log(print_r($fields,1));
+
+            $run = Run::create([
                 'name' => $fields[0],
                 'status' => 'drafting',
-                'planned_at' => Carbon::createFromFormat("Y-m-d H:i",$fields[1]),
-                'passengers' => $fields[2],
-                'infos' => $fields[3]
+                'passengers' => $fields[1],
+                'planned_at' => Carbon::createFromFormat("Y-m-d H:i",$fields[2]),
+                'infos' => $fields[5]
             ]);
+            $run->saveWaypoints(new Collection(array(1 => $fields[3],$fields[4]))); // Start at 1 because waypoints are numbered from 1
+
+            $runs[] = $run;
         }
         return view('runs.imported')->with(compact('runs'));
     }

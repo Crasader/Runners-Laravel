@@ -1,0 +1,15 @@
+Chauffeurs;1;2018-07-14 11:00;Production Artiste;Production Artiste;Aller chercher les boissons secteurs..\n
+Pro;1;2018-07-14 11:00;Production Artiste;Production Artiste;Contact: Hélène +33 6 27 82 84 74.\n
+Héléne Monnier;1;2018-07-15 10:30;Paléo (Production Artiste);Paléo (Production Artiste);Contact: Hélène +33 6 27 82 84 74.\nUtilisation d'un utilitaire pour la journée.\n
+Charlotte Cardin;6;2018-07-15 12:00;Gare de Nyon (côté Jura);Hôtel Chavannes;Bagages: tbc.\n
+Depeche Mode;21;2018-07-15 14:25;GVA;Hotel Kempinski, 19 Quai du Mont-Blanc, Genève;Bagages: 1 person luggage + hand luggage.\n4x Vito.\n
+Peran;1;2018-07-16 10:30;GVA;Hôtel Chavannes;Bagages: 1 bagage + 1 instrument.\nContact: Georgios Stamatis 0044 750 026 44 76.\n
+Peran;3;2018-07-16 11:15;GVA;Hôtel Chavannes;Bagages: 3 bagage + 2 instruments.\nContact: Nicola Cotsoglou, Laura Midgley, Utkan Kocak 447500264476.\nPonctuel please !!!.\n
+Peran;4;2018-07-16 16:00;Hôtel Chavannes;Paléo (Le Dôme);Vol/Train: x x.\n
+The Killers;28;2018-07-16 16:45;GVA;Hôtel Crowne Plaza Geneva ;Vol/Train: BA732 LHR.\n5 Vitos.\n
+Bandakadabra;2;2018-07-16 19:04;Gare de Nyon (côte Jura);Paléo (La Ruche);Vol/Train: n/a tbc.\nContact: Florence Ayrault +33682677287.\n
+Depeche Mode;2;2018-07-16 10:30;GVA;Hôtel Chavannes;Vol/Train: A3854 Athens.\nContact: Georgios Stamatis 0044 750 026 44 76.\nTel équipe Escale (0774202140) pour prévenir de leur arrivée au backstage Dôme pour accueil.\n
+Depeche Mode;3;2018-07-16 11:15;GVA;Hôtel Chavannes;Vol/Train: LX443 Londres.\nBagages: 3 bagage + 2 instruments.\n
+Gorillaz;3;2018-07-16 16:00;Hôtel Chavannes;Paléo (Le Dôme);Vol/Train: x x.\nBagages: Petits sacs et 3 instruments.\nTel équipe Escale (0774202140) pour prévenir de leur arrivée au backstage Dôme pour accueil.\n
+Brigitte;2;2018-07-16 16:45;GVA;Hôtel Crowne Plaza Geneva ;Vol/Train: BA732 LHR.\nBagages: personal luggage.\nContact: Georgios Stamatis 0044 750 026 44 76.\n
+Jambo;5;2018-07-16 19:04;Gare de Nyon (côte Jura);Paléo (La Ruche);Vol/Train: n/a tbc.\nBagages: 2 valises.\nContact: Florence Ayrault +33682677287.\n5 Vitos.\n

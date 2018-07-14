@@ -41,3 +41,5 @@ selenium-debug.log
 # Vagrant
 /.vagrant
 Vagrantfile
+
+storage/*

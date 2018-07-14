@@ -282,38 +282,35 @@ class RunController extends Controller
     }
 
     /**
-     * Import runs from CSV file
+     * Import runs from Excel file using phpspreadsheet https://phpspreadsheet.readthedocs.io/en/develop/
      */
     public function importfile(Request $request)
     {
         $request->file->store('runs');
-        $contents = Storage::get('runs/'.$request->file->hashName());
-        $lines = preg_split('/\r\n|\r|\n/', $contents); // neither csv_reader nor explode worked
-        foreach ($lines as $line)
+        $inputFileName = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix().'runs/'.$request->file->hashName();
+
+        /** Load $inputFileName to a Spreadsheet Object  **/
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
+        unset ($sheetData[1]); // disregard column headers
+        foreach ($sheetData as $row)
         {
-            error_log($line);
-            $fields = preg_split('/;/', $line);
-            // Groom data
-            for ($i=0; $i<count($fields); $i++)
+            extract($row); // $A, $B, ... ,$W
+            // Minimal requirements: Artist, Pax, Date, Time, From, To
+            if (isset($C) && isset($F) && isset($H) && isset($K) && isset($L) && isset($M))
             {
-                if (substr($fields[$i],0,1) === '"' && substr($fields[$i],strlen($fields[$i])-1,1) === '"')
-                    $test = substr($fields[$i],1,strlen($fields[$i])-2);
-                $fields[$i] = str_replace('""','"',$fields[$i]);
-                $fields[$i] = str_replace("\\n","\n",$fields[$i]);
-                $fields[$i] = utf8_encode($fields[$i]);
+                $run = Run::create([
+                    'name' => $C,
+                    'status' => 'drafting',
+                    'passengers' => $F,
+                    'planned_at' => Carbon::createFromFormat("m/d/Y H:i","$H $K"),
+                    'infos' => ""
+                ]);
+                $run->saveWaypoints(new Collection(array(1 => $L,$M))); // Start at 1 because waypoints are numbered from 1
+
+                $runs[] = $run;
             }
-            error_log(print_r($fields,1));
-
-            $run = Run::create([
-                'name' => $fields[0],
-                'status' => 'drafting',
-                'passengers' => $fields[1],
-                'planned_at' => Carbon::createFromFormat("Y-m-d H:i",$fields[2]),
-                'infos' => $fields[5]
-            ]);
-            $run->saveWaypoints(new Collection(array(1 => $fields[3],$fields[4]))); // Start at 1 because waypoints are numbered from 1
-
-            $runs[] = $run;
         }
         return view('runs.imported')->with(compact('runs'));
     }

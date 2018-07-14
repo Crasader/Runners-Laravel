@@ -24,7 +24,7 @@ return [
     | Need to update this at each new release.
     */
 
-    'version' => 'v2.0.6',
+    'version' => 'v2.0.7',
 
     /*
     |--------------------------------------------------------------------------

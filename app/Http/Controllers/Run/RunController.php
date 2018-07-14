@@ -309,7 +309,7 @@ class RunController extends Controller
                 if (isset($Q)) // Contact
                     $infos[] = "Contact: $Q $R";
                 if (isset($S)) // Comments
-                    $infos[] = "Autres: $S";
+                    $infos[] = "Divers: $S";
 
                 $run = Run::create([
                     'name' => $C,

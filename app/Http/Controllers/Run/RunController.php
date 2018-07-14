@@ -300,12 +300,23 @@ class RunController extends Controller
             // Minimal requirements: Artist, Pax, Date, Time, From, To
             if (isset($C) && isset($F) && isset($H) && isset($K) && isset($L) && isset($M))
             {
+                unset ($infos);
+                // Build info fields
+                if (isset($N)) // Flight info
+                    $infos[] = "Transports: $N $O";
+                if (isset($P)) // Luggage
+                    $infos[] = "Bagages: $P";
+                if (isset($Q)) // Contact
+                    $infos[] = "Contact: $Q $R";
+                if (isset($S)) // Comments
+                    $infos[] = "Autres: $S";
+
                 $run = Run::create([
                     'name' => $C,
                     'status' => 'drafting',
                     'passengers' => $F,
                     'planned_at' => Carbon::createFromFormat("m/d/Y H:i","$H $K"),
-                    'infos' => ""
+                    'infos' => implode(" | ",$infos)
                 ]);
                 $run->saveWaypoints(new Collection(array(1 => $L,$M))); // Start at 1 because waypoints are numbered from 1
 

@@ -32,7 +32,7 @@ class StoreCar extends FormRequest
     {
         return [
             'name'         => ['required', 'min:2', 'max:40', 'unique:cars'],
-            'plate_number' => ['required', 'min:9', 'max:9'],
+            'plate_number' => ['required', 'min:5', 'max:9'],
             'brand'        => ['required', 'min:2', 'max:20'],
             'model'        => ['required', 'min:2', 'max:10'],
             'color'        => ['required', 'min:2', 'max:10'],

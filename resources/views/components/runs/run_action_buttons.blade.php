@@ -83,6 +83,19 @@
             <a href="{{ route('runs.edit', ['run' => $id]) }}" class="button {{ $slot }} is-info">
                 Compléter
             </a>
+            <form
+                    id="force-start-run-form-{{ $id }}"
+                    action="{{ route('runs.force-start', ['run' => $id]) }}" method="POST"
+                    style="display: none;">
+                @csrf
+                @method('PATCH')
+            </form>
+            <a href="#" onclick="event.preventDefault();
+                    event.stopPropagation();
+                    document.getElementById('force-start-run-form-{{ $id }}').submit();"
+               class="button {{ $slot }} is-warning">
+                Force start
+            </a>
         @endcan
         @break
 

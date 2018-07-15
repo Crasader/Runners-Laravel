@@ -32,6 +32,7 @@ class RunResource extends Resource
             'end_at'       => $this->ended_at ? $this->ended_at->toAtomString() : null,
             'finished_at'  => $this->end_planned_at ? $this->end_planned_at->toAtomString() : null,
             'nb_passenger' => $this->passengers,
+            'runinfo'      => $this->infos,
             'waypoints'    => new WaypointCollection($this->waypoints),
             'runners'      => new RunnerCollection($this->subscriptions)
         ];

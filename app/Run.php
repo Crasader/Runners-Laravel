@@ -39,6 +39,7 @@ class Run extends Model
      * @var array
      */
     protected $fillable = [
+        'prodid',
         'name',
         'status',
         'published_at',

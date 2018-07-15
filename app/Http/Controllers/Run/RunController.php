@@ -295,6 +295,7 @@ class RunController extends Controller
         unset ($sheetData[1]); // disregard column headers
         $rownb = 2; // for error reporting
         $badtrips = array();
+        $runs = array();
         foreach ($sheetData as $row)
         {
             extract($row); // $A, $B, ... ,$W
@@ -303,6 +304,8 @@ class RunController extends Controller
             {
                 try // We expect at least: Pax, Date, Time, From, To
                 {
+                    // Check if exists
+                    if (Run::where('prodid', '=', intval($A))->count() > 0) throw new Exception("Run déjà importé");
                     if (!isset($F)) throw new Exception("Pax manque");
                     if (!isset($H)) throw new Exception("Date manque");
                     if (!isset($K)) throw new Exception("Heure manque");
@@ -320,6 +323,7 @@ class RunController extends Controller
                         $infos[] = "Divers: $S";
 
                     $run = Run::create([
+                        'prodid' => $A,
                         'name' => $C,
                         'status' => 'drafting',
                         'passengers' => $F,

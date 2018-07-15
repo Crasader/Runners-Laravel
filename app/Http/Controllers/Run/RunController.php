@@ -12,6 +12,7 @@ use App\Http\Requests\Runs\StoreNewRun;
 use App\Http\Requests\Runs\UpdateRun;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
+use Exception;
 
 /**
  * RunController
@@ -24,7 +25,7 @@ class RunController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -79,7 +80,7 @@ class RunController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -90,7 +91,7 @@ class RunController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function show(Run $run)
@@ -102,7 +103,7 @@ class RunController extends Controller
     /**
      * Display the specified resource for print
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function print(Run $run)
@@ -113,7 +114,7 @@ class RunController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function edit(Run $run)
@@ -125,8 +126,8 @@ class RunController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Runs\UpdateRun  $request
-     * @param  \App\Run  $run
+     * @param  \App\Http\Requests\Runs\UpdateRun $request
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRun $request, Run $run)
@@ -134,7 +135,8 @@ class RunController extends Controller
         $this->authorize('update', $run);
 
         // Check usage of action buttons on the form
-        if ($this->checkFormActions($request, $run)) {
+        if ($this->checkFormActions($request, $run))
+        {
             return redirect()->action('Run\RunController@edit', ['run' => $run->id])->withInput();
         }
 
@@ -149,29 +151,33 @@ class RunController extends Controller
     /**
      * Check if actions buttons are used in the view (add waypoint, add run)
      *
-     * @param  \App\Http\Requests\Runs\UpdateRun  $request
-     * @param  \App\Run  $run
+     * @param  \App\Http\Requests\Runs\UpdateRun $request
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function checkFormActions($request, $run)
     {
         // Check runners addition
-        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true") {
+        if ($request->has('add-runner') && $request->input('add-runner', "false") === "true")
+        {
             $run->newSubscription();
             return true;
         }
         // Check runners deletion
-        if ($request->has('remove-runner')) {
+        if ($request->has('remove-runner'))
+        {
             $run->removeSubscription($request->input('remove-runner'));
             return true;
         }
         // Check waypoints additions
-        if ($request->has('add-waypoint')) {
+        if ($request->has('add-waypoint'))
+        {
             $run->newWaypoint($request->input('add-waypoint'));
             return true;
         }
         // Check waypoints removes
-        if ($request->has('remove-waypoint')) {
+        if ($request->has('remove-waypoint'))
+        {
             $run->removeWaypoint($request->input('remove-waypoint'));
             return true;
         }
@@ -180,7 +186,7 @@ class RunController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function destroy(Run $run)
@@ -201,7 +207,7 @@ class RunController extends Controller
     /**
      * Ends the run
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function publish(Run $run)
@@ -216,7 +222,7 @@ class RunController extends Controller
     /**
      * Start the run
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function start(Run $run)
@@ -231,7 +237,7 @@ class RunController extends Controller
     /**
      * Ends the run
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function stop(Run $run)
@@ -246,7 +252,7 @@ class RunController extends Controller
     /**
      * Force the start of a run
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function forceStart(Run $run)
@@ -261,7 +267,7 @@ class RunController extends Controller
     /**
      * Force the end of a run
      *
-     * @param  \App\Run  $run
+     * @param  \App\Run $run
      * @return \Illuminate\Http\Response
      */
     public function forceStop(Run $run)
@@ -287,42 +293,59 @@ class RunController extends Controller
     public function importfile(Request $request)
     {
         $request->file->store('runs');
-        $inputFileName = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix().'runs/'.$request->file->hashName();
+        $inputFileName = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix() . 'runs/' . $request->file->hashName();
 
         /** Load $inputFileName to a Spreadsheet Object  **/
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
         unset ($sheetData[1]); // disregard column headers
+        $rownb = 2; // for error reporting
+        $badtrips = array();
         foreach ($sheetData as $row)
         {
             extract($row); // $A, $B, ... ,$W
-            // Minimal requirements: Artist, Pax, Date, Time, From, To
-            if (isset($C) && isset($F) && isset($H) && isset($K) && isset($L) && isset($M))
+
+            if (isset($C)) // Artist
             {
-                unset ($infos);
-                // Build info fields
-                if (isset($N)) // Flight info
-                    $infos[] = "Transports: $N $O";
-                if (isset($P)) // Luggage
-                    $infos[] = "Bagages: $P";
-                if (isset($Q)) // Contact
-                    $infos[] = "Contact: $Q $R";
-                if (isset($S)) // Comments
-                    $infos[] = "Divers: $S";
+                try // We expect at least: Pax, Date, Time, From, To
+                {
+                    if (!isset($F)) throw new Exception("Pax manque");
+                    if (!isset($H)) throw new Exception("Date manque");
+                    if (!isset($K)) throw new Exception("Heure manque");
+                    if (!isset($L)) throw new Exception("Départ manque");
+                    if (!isset($M)) throw new Exception("Arrivée manque");
+                    unset ($infos);
+                    // Build info fields
+                    if (isset($N)) // Flight info
+                        $infos[] = "Transports: $N $O";
+                    if (isset($P)) // Luggage
+                        $infos[] = "Bagages: $P";
+                    if (isset($Q)) // Contact
+                        $infos[] = "Contact: $Q $R";
+                    if (isset($S)) // Comments
+                        $infos[] = "Divers: $S";
 
-                $run = Run::create([
-                    'name' => $C,
-                    'status' => 'drafting',
-                    'passengers' => $F,
-                    'planned_at' => Carbon::createFromFormat("m/d/Y H:i","$H $K"),
-                    'infos' => implode(" | ",$infos)
-                ]);
-                $run->saveWaypoints(new Collection(array(1 => $L,$M))); // Start at 1 because waypoints are numbered from 1
+                    $run = Run::create([
+                        'name' => $C,
+                        'status' => 'drafting',
+                        'passengers' => $F,
+                        'planned_at' => Carbon::createFromFormat("m/d/Y H:i", "$H $K"),
+                        'infos' => implode(" | ", $infos)
+                    ]);
+                    $run->saveWaypoints(new Collection(array(1 => $L, $M))); // Start at 1 because waypoints are numbered from 1
 
-                $runs[] = $run;
+                    $runs[] = $run;
+                }
+                catch (\Exception $ex)
+                {
+                    $badtrips[] = "Ligne $rownb, $C, {$ex->getMessage()}";
+                }
             }
+            else
+                break; // we stop importing as soon as column C is empty
+            $rownb++;
         }
-        return view('runs.imported')->with(compact('runs'));
+        return view('runs.imported')->with(compact('runs'))->with(compact('badtrips'));
     }
 }

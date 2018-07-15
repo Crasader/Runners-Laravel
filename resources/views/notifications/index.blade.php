@@ -44,13 +44,6 @@
                             <th>Lue</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Lue</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($notifications as $notification)
                             <tr onclick="window.location.href = '{{ route('notifications.show', ['notification' => $notification->id]) }}'">

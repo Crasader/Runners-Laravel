@@ -53,9 +53,11 @@
                                             @enddatetext
                                         </h4>
                                     </div>
+                                    <!-- No infos for now: takes too much space
                                     <div class="column is-6">
                                         <p>{{ str_limit($run->infos, 200, ' ...') }}</p>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                             <div class="column is-3">

@@ -41,12 +41,6 @@
                             <th>Utilisation</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Utilisation</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($artists as $artist)
                             <tr onclick="window.location.href = '{{ route('artists.show', ['user' => $artist->id]) }}'">

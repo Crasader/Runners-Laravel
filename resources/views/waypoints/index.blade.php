@@ -41,12 +41,6 @@
                             <th>Utilisation</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Utilisation</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($waypoints as $waypoint)
                             <tr onclick="window.location.href = '{{ route('waypoints.show', ['waypoint' => $waypoint->id]) }}'">

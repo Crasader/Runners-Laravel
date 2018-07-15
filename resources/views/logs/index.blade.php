@@ -35,15 +35,6 @@
                             <th>Effectué par</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Date</th>
-                            <th>Heure</th>
-                            <th>Action</th>
-                            <th>Ressource</th>
-                            <th>Effectué par</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($logs as $log)
                             <tr>

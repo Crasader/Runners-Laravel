@@ -66,15 +66,6 @@
                             <th>A terminé le</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Status</th>
-                            <th>Départ prévu le</th>
-                            <th>A démarré le</th>
-                            <th>A terminé le</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($waypoint->runs()->orderBy('planned_at')->get() as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">

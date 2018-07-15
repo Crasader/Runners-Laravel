@@ -70,13 +70,6 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Numéro de plaque</th>
-                            <th>Status</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse($carType->cars as $car)
                             <tr onclick="window.location.href = '{{ route('cars.show', ['car' => $car->id]) }}'">
@@ -120,15 +113,6 @@
                             <th>A terminé le</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Status</th>
-                            <th>Départ prévu le</th>
-                            <th>A démarré le</th>
-                            <th>A terminé le</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @forelse ($carType->runs()->orderBy('planned_at')->get() as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['run' => $run->id]) }}'">

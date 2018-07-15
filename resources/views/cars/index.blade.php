@@ -32,13 +32,6 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Numéro de plaque</th>
-                            <th>Status</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($cars as $car)
                             <tr onclick="window.location.href = '{{ route('cars.show', ['car' => $car->id]) }}'">

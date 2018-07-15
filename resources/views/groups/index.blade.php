@@ -41,12 +41,6 @@
                             <th>Couleur</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Couleur</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($groups as $group)
                             <tr onclick="window.location.href = '{{ route('groups.show', ['group' => $group->id]) }}'">

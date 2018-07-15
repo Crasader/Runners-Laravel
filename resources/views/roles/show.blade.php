@@ -65,12 +65,6 @@
                             <th>Etat</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Permission</th>
-                            <th>Etat</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($role->permissions as $permission => $state)
                             <tr>

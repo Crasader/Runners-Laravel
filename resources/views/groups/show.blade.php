@@ -63,13 +63,7 @@
                             <th>Email</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Email</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
+                     <tbody>
                         @foreach ($group->users as $user)
                             <tr onclick="window.location.href = '{{ route('users.show', ['user' => $user->id]) }}'">
                                 <th>{{ $user->fullname }}</th>

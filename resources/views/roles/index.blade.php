@@ -48,12 +48,6 @@
                             <th>Nom</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Slug</th>
-                            <th>Nom</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($roles as $role)
                             <tr onclick="window.location.href = '{{ route('roles.show', ['role' => $role->id]) }}'">

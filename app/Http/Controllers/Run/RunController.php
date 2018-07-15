@@ -43,21 +43,15 @@ class RunController extends Controller
     public function big()
     {
         $this->authorize('view', Run::class);
+        // Take this opportunity to check if a run is in trouble
         Run::whereNotIn('status', ['finished', 'drafting'])->get()->each(function ($run) {
             $run->updateStatus();
         });
-        $runs = Run::where('planned_at', '>=', now())
+        $runs = Run::where('planned_at', '>=', now())->orWhere('status','=','error')
             ->orderBy('planned_at', 'asc')
             ->whereNotIn('status', ['finished', 'drafting'])
             ->limit(30)
             ->get();
-        // Take this opportunity to check if a run is in trouble
-        foreach ($runs as $run)
-            if ($run->problem())
-            {
-                $run->status = 'error';
-                $run->save();
-            }
         return view('runs.big')->with(compact('runs'));
     }
 

@@ -82,7 +82,7 @@
                                 'placeholder' => 'Artiste',
                                 'type'        => 'text',
                                 'icon'        => 'fa-search',
-                                'value'       => $run->artists()->exists() ? $run->artists->first()->name : '',
+                                'value'       => $run->name,
                                 'searchUrl'   => route('artists.search'),
                                 'errors'      => $errors
                                 ])

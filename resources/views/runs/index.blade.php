@@ -89,18 +89,6 @@
                                     @datetag(['date' => $run->started_at])
                                     @enddatetag
                                 </td>
-                                <td>
-                                    {{-- Edition buttons --}}
-                                    <div class="buttons is-right">
-                                        @component('components/runs/run_action_buttons', [
-                                            'status' => $run->status,
-                                            'id' => $run->id,
-                                            'run' => $run
-                                            ])
-                                            is-small
-                                        @endcomponent
-                                    </div>
-                                </td>
                             </tr>
                         @empty
                             <tr>

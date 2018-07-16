@@ -80,6 +80,11 @@
                                         </span>
                                             </a>
                                         </p>
+                                        <p>
+                                            <span class="tag">
+                                                {{$user->phone_number}}
+                                            </span>
+                                        </p>
                                     </div>
                                 @endforeach
                             @endforeach

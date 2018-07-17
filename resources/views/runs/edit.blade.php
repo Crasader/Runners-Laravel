@@ -136,7 +136,7 @@
                             </div>
                             <div class="field is-horizontal">
                                 <div class="field-label is-normal">
-                                    <label class="label">TBC:</label>
+                                    <label class="label">Heure à confirmer:</label>
                                 </div>
                                 <input type="checkbox" name="tbc" {{ $run->tbc == 0 ? '' : 'checked' }}>
                             </div>

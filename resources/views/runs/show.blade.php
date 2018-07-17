@@ -66,7 +66,7 @@
                     <div class="content box">
                         @datetag(['date' => $run->planned_at])
                         @if($run->tbc == 1)
-                            <span class="tag is-info">tbc</span>
+                            <i class="far fa-question-circle"></i>
                         @endif
                         @enddatetag
                         @datetag(['date' => $run->started_at])

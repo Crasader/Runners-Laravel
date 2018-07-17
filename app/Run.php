@@ -44,6 +44,7 @@ class Run extends Model
         'status',
         'published_at',
         'planned_at',
+        'tbc',
         'end_planned_at',
         'started_at',
         'ended_at',
@@ -219,6 +220,7 @@ class Run extends Model
         $this->infos = $runDatas['infos'];
         $this->passengers = $runDatas['passengers'];
         $this->savePlannedDates($runDatas['planned_at']);
+        $this->tbc = isset($runDatas['tbc']) ? 1 : 0;
         $this->save();
         $this->saveWaypoints(collect($runDatas['waypoints']));
         if (isset($runDatas['subscriptions'])) {

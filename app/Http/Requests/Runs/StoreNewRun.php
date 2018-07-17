@@ -34,6 +34,7 @@ class StoreNewRun extends FormRequest
             'name'                     => ['required_if:artist,', 'string', 'min:1', 'max:200'],
             'artist'                  => ['required_if:name,', 'string', 'min:1', 'max:200'],
             'planned_at'              => ['nullable', 'date'],
+            'tbc'                     => ['nullable', 'integer'],
             'end_planned_at'          => ['nullable', 'date'],
             'waypoints.*'             => ['sometimes', 'string'],
             'subscriptions.*.user'    => ['sometimes', 'string', 'exists:users,name'],

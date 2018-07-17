@@ -83,6 +83,9 @@
                                 </td>
                                 <td>
                                     @datetag(['date' => $run->planned_at])
+                                    @if ($run->tbc)
+                                        <i class="far fa-question-circle"></i>
+                                    @endif
                                     @enddatetag
                                 </td>
                                 <td>

@@ -282,6 +282,20 @@ class RunController extends Controller
 
     /**
      * Import runs from Excel file using phpspreadsheet https://phpspreadsheet.readthedocs.io/en/develop/
+     *
+     * Expected structure of the run file:
+     *
+     * Column A: prodid
+     * Column C: name
+     * Column F: #pax
+     * Column H: date, format m/d/Y
+     * Column K: time
+     * Column L: from
+     * Column M: to
+     * Column N+O: transport info
+     * Column P: luggage info
+     * Column Q+R: contact info
+     * Column S: comments
      */
     public function importfile(Request $request)
     {
@@ -295,6 +309,7 @@ class RunController extends Controller
         unset ($sheetData[1]); // disregard column headers
         $rownb = 2; // for error reporting
         $badtrips = array();
+        $alreadyimported = array();
         $runs = array();
         foreach ($sheetData as $row)
         {
@@ -305,12 +320,25 @@ class RunController extends Controller
                 try // We expect at least: Pax, Date, Time, From, To
                 {
                     // Check if exists
-                    if (Run::where('prodid', '=', intval($A))->count() > 0) throw new Exception("Run déjà importé");
+                    if (Run::where('prodid', '=', intval($A))->count() > 0) throw new Exception("Run déjà importé",1); // code 1 because different list
                     if (!isset($F)) throw new Exception("Pax manque");
                     if (!isset($H)) throw new Exception("Date manque");
-                    if (!isset($K)) throw new Exception("Heure manque");
+                    if (!isset($I)) throw new Exception("Heure manque");
                     if (!isset($L)) throw new Exception("Départ manque");
                     if (!isset($M)) throw new Exception("Arrivée manque");
+                    if (!(intval($F) >= 0)) throw new Exception("#Pax ($F)incorrect");
+                    try {
+                        Carbon::createFromFormat("m/d/Y", "$H"); // will throw exception if data is bad
+                    } catch (Exception $ex) {
+                        throw new Exception("Mauvais format de date: $H");
+                    }
+                    $tbc = 0; // time to be confirmed ??
+                    try {
+                        $start = Carbon::createFromFormat("m/d/Y H:i", "$H $K");
+                    } catch (Exception $ex) { // date is OK but time is not --> make it 'tbc'
+                        $I = "00:00";
+                        $tbc = 1;
+                    }
                     unset ($infos);
                     // Build info fields
                     if (isset($N)) // Flight info
@@ -327,7 +355,8 @@ class RunController extends Controller
                         'name' => $C,
                         'status' => 'drafting',
                         'passengers' => $F,
-                        'planned_at' => Carbon::createFromFormat("m/d/Y H:i", "$H $K"),
+                        'planned_at' => $start,
+                        'tbc' => $tbc,
                         'infos' => implode(" | ", $infos)
                     ]);
                     $run->saveWaypoints(new Collection(array(1 => $L, $M))); // Start at 1 because waypoints are numbered from 1
@@ -336,13 +365,16 @@ class RunController extends Controller
                 }
                 catch (\Exception $ex)
                 {
-                    $badtrips[] = "Ligne $rownb, $C, {$ex->getMessage()}";
+                    if ($ex->getCode() == 0)
+                        $badtrips[] = "Ligne $rownb, $C, {$ex->getMessage()}";
+                    else
+                        $alreadyimported[] = "Ligne $rownb, $C, $H $K";
                 }
             }
             else
                 break; // we stop importing as soon as column C is empty
             $rownb++;
         }
-        return view('runs.imported')->with(compact('runs'))->with(compact('badtrips'));
+        return view('runs.imported')->with(compact('runs'))->with(compact('badtrips'))->with(compact('alreadyimported'));
     }
 }

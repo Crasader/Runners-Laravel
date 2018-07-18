@@ -118,6 +118,17 @@
                                 ])
                             @endcomponent
 
+                            {{-- DISPLAY NAME --}}
+                            @component('components/horizontal_form_input', [
+                                'name'        => 'name',
+                                'placeholder' => 'Nom d\'affichage',
+                                'value'       => $user->name,
+                                'type'        => 'text',
+                                'icon'        => 'fa-user',
+                                'errors'      => $errors
+                                ])
+                            @endcomponent
+
                         </div>
                     </div>
 

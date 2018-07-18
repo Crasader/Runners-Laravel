@@ -73,7 +73,6 @@ class UserController extends Controller
     {
         $this->authorize('create', User::class);
         $user = new User($request->all());
-        $user->generateName();
         $user->save();
         $user->generateDefaultPictures();
         $user->addRole($request->role);
@@ -91,12 +90,12 @@ class UserController extends Controller
         $user = new User([
             'firstname'     => 'John',
             'lastname'      => 'Doe',
+            'name'          => 'JD',
             'email'         => $email,
             'phone_number'  => '01234567',
             'sex'           => 'm'
         ]);
 
-        $user->generateName();
         $user->save();
         $user->generateDefaultPictures();
         $user->addRole('runner');
@@ -163,7 +162,6 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $user->fill($request->all());
-        $user->generateName();
         $user->save();
         $user->addRole($request->role);
         $user->setStatus($request->status);

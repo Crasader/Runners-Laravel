@@ -278,17 +278,6 @@ class User extends Authenticatable
 
     /**
      * MODEL METHOD
-     * Generates a name if its not specified
-     *
-     * @return string
-     */
-    public function generateName()
-    {
-        $this->name = "{$this->firstname} {$this->lastname}";
-    }
-
-    /**
-     * MODEL METHOD
      * Generates the default set of pictures for new users
      *
      * @return string

@@ -102,6 +102,18 @@
                         <div class="columns">
                             <div class="column is-4 has-text-right">
                                 <p>
+                                    <strong>Affichage : </strong>
+                                </p>
+                            </div>
+                            <div class="column is-8">
+                                <p>
+                                    {{ $user->name }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-4 has-text-right">
+                                <p>
                                     <strong>Adresse email :</strong>
                                 </p>
                             </div>

@@ -179,11 +179,6 @@
                                 @if ($run->comments()->exists())
                                     @foreach ($run->comments as $comment)
                                         <article class="media">
-                                            <figure class="media-left">
-                                                <p class="image is-64x64">
-                                                    <img src="{{ asset(Storage::url($comment->author->profilePictures->first()->path)) }}">
-                                                </p>
-                                            </figure>
                                             <div class="media-content">
                                                 <div class="content">
                                                     <p>
@@ -226,11 +221,6 @@
                                     <form action="{{ route('runs.comments.store', ['run' => $run->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         <article class="media">
-                                            <figure class="media-left">
-                                                <p class="image is-64x64">
-                                                    <img src="{{ asset(Storage::url(Auth::user()->profilePictures->first()->path)) }}">
-                                                </p>
-                                            </figure>
                                             <div class="media-content">
                                                 <div class="field">
                                                     <p class="control">

@@ -20,13 +20,4 @@
             </strong>
         </span>
     </p>
-@else
-    <p>
-        {{ $slot }}
-        <span class="tag">
-            <strong>
-                -
-            </strong>
-        </span>
-    </p>
 @endif

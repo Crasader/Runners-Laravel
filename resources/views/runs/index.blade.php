@@ -62,26 +62,22 @@
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Passagers</th>
-                            <th>Runners</th>
+                            <th>Parcours / Heure</th>
+                            <th>Véhicule/Chauffeur</th>
                             <th>Status</th>
-                            <th>Prévu à</th>
-                            <th>Démarré à</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($runs as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
-                                <th>{{ $run->name }}</th>
-                                <td>{{ $run->passengers }}</td>
-                                <td>{{ $run->subscriptions()->count() }}</td>
-                                <td>
-                                    {{-- Status tag (see related component) --}}
-                                    @component('components/status_tag', ['status' => $run->status])
-                                    @endcomponent
+                                <th>{{ $run->name }}<br>{{ $run->passengers }} pax
+                                    @updatetag(['date' => $run->updated_at])
+                                    @endupdatetag
                                 </td>
                                 <td>
+                                    @smallwaypoints(['run' => $run])
+                                    @endwaypoints
+                                    <br>
                                     @datetag(['date' => $run->planned_at])
                                     @if ($run->tbc)
                                         <i class="far fa-question-circle"></i>
@@ -89,8 +85,13 @@
                                     @enddatetag
                                 </td>
                                 <td>
-                                    @datetag(['date' => $run->started_at])
-                                    @enddatetag
+                                    @runners(['subscriptions' => $run->subscriptions])
+                                    @endrunners
+                                </td>
+                                <td>
+                                    {{-- Status tag (see related component) --}}
+                                    @component('components/status_tag', ['status' => $run->status])
+                                    @endcomponent
                                 </td>
                             </tr>
                         @empty

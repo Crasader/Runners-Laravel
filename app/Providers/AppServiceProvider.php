@@ -39,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components/date', 'date');
         Blade::component('components/foldable_box', 'foldable');
         Blade::component('components/runs/waypoints_breadcrum', 'waypoints');
+        Blade::component('components/runs/small_waypoints_breadcrum', 'smallwaypoints');
+        Blade::component('components/runs/runners', 'runners');
+        Blade::component('components/runs/update_tag', 'updatetag');
 
         /**
          * Log all the sql queries in a log file

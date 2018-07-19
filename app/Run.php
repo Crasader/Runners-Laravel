@@ -465,19 +465,26 @@ class Run extends Model
      */
     public function needsFilling()
     {
+        error_log("Checking run {$this->id}, {$this->name}");
         $needsFilling = false;
         $needsFilling |= $this->artists()->first() ? false : true;
+        error_log("check artist: $needsFilling");
         $needsFilling |= $this->passengers > 0 ? false : true;
+        error_log("check pax: $needsFilling");
         $needsFilling |= $this->planned_at ? false : true;
+        error_log("check time: $needsFilling");
         if ($this->subscriptions()->exists()) {
             $this->subscriptions()->each(function ($subscription) use (&$needsFilling) {
                 $needsFilling |= $subscription->user()->exists() ? false : true;
+                error_log("check driver: $needsFilling");
                 $needsFilling |= $subscription->car()->exists() ? false : true;
+                error_log("check car: $needsFilling");
             });
         } else {
             $needsFilling |= true;
         }
         $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
+        error_log("check waypoints: $needsFilling");
         return $needsFilling;
     }
 
@@ -492,7 +499,7 @@ class Run extends Model
         $deltatime = (new Carbon())->diffInMinutes(new Carbon($this->planned_at),false);
         if ($this->status == 'error') return true;
         if ($this->status == 'ready' && $deltatime <= 10) return true;
-        if ($this->status == 'needs_filling' && $deltatime < 30) return true;
+        if ($this->status == 'needs_filling' && $deltatime < 10) return true;
         return false;
     }
 

@@ -467,7 +467,7 @@ class Run extends Model
     {
         error_log("Checking run {$this->id}, {$this->name}");
         $needsFilling = false;
-        $needsFilling |= $this->artists()->first() ? false : true;
+        $needsFilling |= $this->name ? false : true;
         error_log("check artist: $needsFilling");
         $needsFilling |= $this->passengers > 0 ? false : true;
         error_log("check pax: $needsFilling");

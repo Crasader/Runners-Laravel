@@ -86,8 +86,8 @@
                                         </span>
                                             </a>
                                         </p>
-                                        <p>
-                                            <span class="tag">
+                                        <p class="has-text-centered">
+                                            <span class="is-bold">
                                                 {{$user->phone_number}}
                                             </span>
                                         </p>

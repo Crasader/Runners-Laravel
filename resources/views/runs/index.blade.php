@@ -65,6 +65,7 @@
                             <th>Parcours / Heure</th>
                             <th>Véhicule/Chauffeur</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +94,18 @@
                                     @component('components/status_tag', ['status' => $run->status])
                                     @endcomponent
                                 </td>
-                            </tr>
+                                <td>
+                                    {{-- Edition buttons --}}
+                                    <div class="buttons is-right">
+                                        @component('components/runs/run_action_buttons', [
+                                            'status' => $run->status,
+                                            'id' => $run->id,
+                                            'run' => $run
+                                            ])
+                                            is-small
+                                        @endcomponent
+                                    </div>
+                                </td>                             </tr>
                         @empty
                             <tr>
                                 <td>

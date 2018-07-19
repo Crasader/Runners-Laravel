@@ -48,7 +48,13 @@
                                     <span class="title is-4">Groupes présents : </span>
                                     <!-- Get groups -->
                                     @foreach ($present as $schedule)
-                                        <a href="{{ route('groups.show', ['group' => $schedule->group->id]) }}"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span></a>
+                                        <a href="{{ route('groups.show', ['group' => $schedule->group->id]) }}"><span class="tag is-large" style="background-color: #{{ $schedule->group->color }};">{{ $schedule->group->name }}</span>
+                                            @timetag(['date' => $schedule->start_time])
+                                            @endtimetag
+                                            -
+                                            @timetag(['date' => $schedule->end_time])
+                                            @endtimetag
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>

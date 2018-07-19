@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components/horizontal_search_input', 'horizontalsearchinput');
         Blade::component('components/log_action', 'logaction');
         Blade::component('components/date_tag', 'datetag');
+        Blade::component('components/time_tag', 'timetag');
         Blade::component('components/date_text', 'datetext');
         Blade::component('components/date', 'date');
         Blade::component('components/foldable_box', 'foldable');

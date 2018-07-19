@@ -465,26 +465,19 @@ class Run extends Model
      */
     public function needsFilling()
     {
-        error_log("Checking run {$this->id}, {$this->name}");
         $needsFilling = false;
         $needsFilling |= $this->name ? false : true;
-        error_log("check artist: $needsFilling");
         $needsFilling |= $this->passengers > 0 ? false : true;
-        error_log("check pax: $needsFilling");
         $needsFilling |= $this->planned_at ? false : true;
-        error_log("check time: $needsFilling");
         if ($this->subscriptions()->exists()) {
             $this->subscriptions()->each(function ($subscription) use (&$needsFilling) {
                 $needsFilling |= $subscription->user()->exists() ? false : true;
-                error_log("check driver: $needsFilling");
                 $needsFilling |= $subscription->car()->exists() ? false : true;
-                error_log("check car: $needsFilling");
             });
         } else {
             $needsFilling |= true;
         }
         $needsFilling |= ($this->waypoints()->count() > 1) ? false : true;
-        error_log("check waypoints: $needsFilling");
         return $needsFilling;
     }
 

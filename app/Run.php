@@ -490,8 +490,8 @@ class Run extends Model
     {
         $deltatime = (new Carbon())->diffInMinutes(new Carbon($this->planned_at),false);
         if ($this->status == 'error') return true;
-        if ($this->status == 'ready' && $deltatime <= -10) return true;
-        if ($this->status == 'needs_filling' && $deltatime <= -10) return true;
+        if ($this->status == 'ready' && $deltatime <= -100) return true;
+        if ($this->status == 'needs_filling' && $deltatime <= -100) return true;
         return false;
     }
 

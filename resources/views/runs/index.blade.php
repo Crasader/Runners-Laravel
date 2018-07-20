@@ -71,7 +71,7 @@
                     <tbody>
                         @forelse ($runs as $run)
                             <tr onclick="window.location.href = '{{ route('runs.show', ['user' => $run->id]) }}'">
-                                <th>{{ $run->name }}<br>{{ $run->passengers }} pax
+                                <th>{{ $run->name }}<br>{{ $run->passengers }} pax<br><span style="color: gray; font-size: xx-small">({{ $run->prodid }})</span>
                                     @updatetag(['date' => $run->updated_at])
                                     @endupdatetag
                                 </td>

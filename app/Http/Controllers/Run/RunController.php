@@ -323,7 +323,7 @@ class RunController extends Controller
                     if (Run::where('prodid', '=', intval($A))->count() > 0) throw new Exception("Run déjà importé",1); // code 1 because different list
                     if (!isset($F)) throw new Exception("Pax manque");
                     if (!isset($H)) throw new Exception("Date manque");
-                    if (!isset($I)) throw new Exception("Heure manque");
+                    if (!isset($K)) throw new Exception("Heure manque");
                     if (!isset($L)) throw new Exception("Départ manque");
                     if (!isset($M)) throw new Exception("Arrivée manque");
                     if (!(intval($F) >= 0)) throw new Exception("#Pax ($F)incorrect");

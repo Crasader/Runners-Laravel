@@ -82,7 +82,7 @@
                                         <p class="has-text-centered has-margin-top-10">
                                             <a href="{{ route('users.show', ['user' => $user->id]) }}">
                                         <span class="tag is-medium" style="background-color: #{{ $schedule->group->color }};">
-                                            {{$user->firstname}}
+                                            {{$user->name}}
                                         </span>
                                             </a>
                                         </p>
@@ -109,7 +109,7 @@
                                         <p class="has-text-centered has-margin-top-10">
                                             <a href="{{ route('users.show', ['user' => $schedule->user->id]) }}">
                                                 <span class="tag is-medium" style="background-color: #{{ $schedule->user->groups->first()->color }}; text-align:center;">
-                                                    {{$schedule->user->firstname}}
+                                                    {{$schedule->user->name}}
                                                 </span>
                                             </a>
                                             @can('delete', $schedule)

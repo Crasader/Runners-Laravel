@@ -22,7 +22,7 @@ class UserSearchResource extends Resource
     public function toArray($request)
     {
         return [
-            'name' => $this->fullname
+            'name' => $this->name
         ];
     }
 }

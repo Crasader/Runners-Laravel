@@ -256,14 +256,10 @@
                                                     'errors'      => $errors
                                                     ])
                                                     @slot('button')
-                                                        <button
-                                                                type="submit"
-                                                                name="remove-runner"
-                                                                value="{{ $subscription->id }}"
-                                                                class="button is-danger">
-                                            <span class="icon">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
+                                                        <button type="submit" name="remove-runner" value="{{ $subscription->id }}" class="button is-danger">
+                                                            <span class="icon">
+                                                                <i class="fas fa-minus"></i>
+                                                            </span>
                                                         </button>
                                                     @endslot
                                                 @endcomponent

@@ -472,7 +472,6 @@ class Run extends Model
         if ($this->subscriptions()->exists()) {
             $this->subscriptions()->each(function ($subscription) use (&$needsFilling) {
                 $needsFilling |= $subscription->user()->exists() ? false : true;
-                $needsFilling |= $subscription->car()->exists() ? false : true;
             });
         } else {
             $needsFilling |= true;

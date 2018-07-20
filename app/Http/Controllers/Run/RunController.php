@@ -336,7 +336,7 @@ class RunController extends Controller
                     try {
                         $start = Carbon::createFromFormat("m/d/Y H:i", "$H $K");
                     } catch (Exception $ex) { // date is OK but time is not --> make it 'tbc'
-                        $I = "00:00";
+                        $start = "00:00";
                         $tbc = 1;
                     }
                     unset ($infos);

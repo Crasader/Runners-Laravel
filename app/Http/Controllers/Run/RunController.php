@@ -287,14 +287,14 @@ class RunController extends Controller
      *
      * Column A: prodid
      * Column C: name
-     * Column F: #pax
-     * Column H: date, format m/d/Y
-     * Column K: time
-     * Column L: from
-     * Column M: to
-     * Column N+O: transport info
-     * Column P: luggage info
-     * Column Q+R: contact info
+     * Column E: #pax
+     * Column G: date, format m/d/Y
+     * Column H: time
+     * Column I: from
+     * Column J: to
+     * Column K+L: transport info
+     * Column N: luggage info
+     * Column O+P: contact info
      * Column S: comments
      */
     public function importfile(Request $request)

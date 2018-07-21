@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Run;
 use App\RunSubscription;
+use App\RunWaypoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\runs\RunCollection;
@@ -63,16 +64,23 @@ class RunController extends Controller
             ])->get());
         }
 
-        // Return all the runs, if no query params
-        return new RunCollection(Run::withoutStatus('drafting')
-        ->orderBy('planned_at', 'asc')
-        ->with([
-            'waypoints',
-            'subscriptions.user',
-            'subscriptions.car',
-            'subscriptions.carType',
-            'subscriptions.car.type'
-        ])->get());
+        $runs = new RunCollection(Run::withoutStatus('drafting')
+            ->orderBy('planned_at', 'asc')
+            ->with([
+                'waypoints',
+                'subscriptions.user',
+                'subscriptions.car',
+                'subscriptions.carType',
+                'subscriptions.car.type'
+            ])->get());
+        // Reorder waypoints - they came up in the order in the table, which may be incorrect depending on how the run was organized
+        foreach ($runs as $run)
+        {
+            $wpts = RunWaypoint::join('waypoints','waypoint_id','=','waypoints.id')->select('name')->where('run_id',$run->id)->orderBy('order')->get();
+            foreach ($run->waypoints as $key => $wp)
+                $wp->name = ($wpts[$key])->name;
+        }
+        return $runs;
     }
 
     /**

@@ -321,45 +321,45 @@ class RunController extends Controller
                 {
                     // Check if exists
                     if (Run::where('prodid', '=', intval($A))->count() > 0) throw new Exception("Run déjà importé",1); // code 1 because different list
-                    if (!isset($F)) throw new Exception("Pax manque");
-                    if (!isset($H)) throw new Exception("Date manque");
-                    if (!isset($K)) throw new Exception("Heure manque");
-                    if (!isset($L)) throw new Exception("Départ manque");
-                    if (!isset($M)) throw new Exception("Arrivée manque");
-                    if (!(intval($F) >= 0)) throw new Exception("#Pax ($F)incorrect");
+                    if (!isset($E)) throw new Exception("Pax manque");
+                    if (!isset($G)) throw new Exception("Date manque");
+                    if (!isset($H)) throw new Exception("Heure manque");
+                    if (!isset($I)) throw new Exception("Départ manque");
+                    if (!isset($J)) throw new Exception("Arrivée manque");
+                    if (!(intval($E) >= 0)) throw new Exception("#Pax ($F)incorrect");
                     try {
-                        Carbon::createFromFormat("m/d/Y", "$H"); // will throw exception if data is bad
+                        Carbon::createFromFormat("m/d/Y", "$G"); // will throw exception if data is bad
                     } catch (Exception $ex) {
-                        throw new Exception("Mauvais format de date: $H");
+                        throw new Exception("Mauvais format de date: $G");
                     }
                     $tbc = 0; // time to be confirmed ??
                     try {
-                        $start = Carbon::createFromFormat("m/d/Y H:i", "$H $K");
+                        $start = Carbon::createFromFormat("m/d/Y H:i", "$G $H");
                     } catch (Exception $ex) { // date is OK but time is not --> make it 'tbc'
                         $start = "00:00";
                         $tbc = 1;
                     }
                     unset ($infos);
                     // Build info fields
-                    if (isset($N)) // Flight info
-                        $infos[] = "Transports: $N $O";
-                    if (isset($P)) // Luggage
-                        $infos[] = "Bagages: $P";
-                    if (isset($Q)) // Contact
-                        $infos[] = "Contact: $Q $R";
-                    if (isset($S)) // Comments
-                        $infos[] = "Divers: $S";
+                    if (isset($K)) // Flight info
+                        $infos[] = "Transports: $K $L";
+                    if (isset($N)) // Luggage
+                        $infos[] = "Bagages: $N";
+                    if (isset($O)) // Contact
+                        $infos[] = "Contact: $O $P";
+                    if (isset($Q)) // Comments
+                        $infos[] = "Divers: $Q";
 
                     $run = Run::create([
                         'prodid' => $A,
                         'name' => $C,
                         'status' => 'drafting',
-                        'passengers' => $F,
+                        'passengers' => $E,
                         'planned_at' => $start,
                         'tbc' => $tbc,
                         'infos' => implode(" | ", $infos)
                     ]);
-                    $run->saveWaypoints(new Collection(array(1 => $L, $M))); // Start at 1 because waypoints are numbered from 1
+                    $run->saveWaypoints(new Collection(array(1 => $I, $J))); // Start at 1 because waypoints are numbered from 1
 
                     $runs[] = $run;
                 }
@@ -368,7 +368,7 @@ class RunController extends Controller
                     if ($ex->getCode() == 0)
                         $badtrips[] = "Ligne $rownb, $C, {$ex->getMessage()}";
                     else
-                        $alreadyimported[] = "Ligne $rownb, $C, $H $K";
+                        $alreadyimported[] = "Ligne $rownb, $C, $G $H";
                 }
             }
             else

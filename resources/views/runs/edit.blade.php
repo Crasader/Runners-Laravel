@@ -327,6 +327,7 @@
                                     </div>
 
                     </form>
+                    <a href="/panic/{{ $run->id }}" class="is-pulled-right">Panique</a>
                 </div>
             </div>
         </div>

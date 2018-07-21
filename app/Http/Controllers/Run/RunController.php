@@ -377,4 +377,14 @@ class RunController extends Controller
         }
         return view('runs.imported')->with(compact('runs'))->with(compact('badtrips'))->with(compact('alreadyimported'));
     }
+
+    public function panic (Request $request)
+    {
+        $run = Run::find($request->runid);
+        $run->status = 'drafting';
+        $run->save();
+        return redirect()
+            ->route('runs.edit', ['run' => $run->id])
+            ->with('success', "Le run à correctement été réinitialisé");
+    }
 }

@@ -32,6 +32,11 @@ Route::get('/palerunner', 'MobileAppController@download');
 Route::get('/manualcreate', 'User\UserController@manualcreate');
 
 /**
+ * Ugly dirty workaround 2 : force run state
+ */
+Route::get('/panic/{runid}', 'Run\RunController@panic');
+
+/**
  * Routes protected by the auth middleware
  */
 Route::middleware(['auth'])->group(function () {

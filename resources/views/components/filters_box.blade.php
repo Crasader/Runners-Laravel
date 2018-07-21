@@ -23,24 +23,24 @@
                         @foreach($filters['filtredColumns'] as $columns => $fields)
                             <div class="column">
                                 <input
-                                    class="input"
-                                    type="hidden"
-                                    name="filter-column"
-                                    value="{{ $columns }}"
-                                    type="text">
+                                        class="input"
+                                        type="hidden"
+                                        name="filter-column"
+                                        value="{{ $columns }}"
+                                        type="text">
                                 <p class="title is-6 has-text-centered">
                                     Filtrer {{ $columns }} :
                                 </p>
                                 <div class="columns is-multiline is-gapless">
                                     @foreach($fields as $key => $val)
-                                        <div class="column is-half">
+                                        <div class="column is-one-third">
                                             <div class="control">
                                                 <label class="checkbox">
                                                     <input
-                                                        name="filter[]"
-                                                        value="{{ $key }}"
-                                                        type="checkbox"
-                                                        {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
+                                                            name="filter[]"
+                                                            value="{{ $key }}"
+                                                            type="checkbox"
+                                                            {{ in_array($key, request()->query('filter', [])) ? 'checked' : '' }}>
                                                     {{ $val }}
                                                 </label>
                                             </div>
@@ -58,17 +58,17 @@
                                 Rechercher :
                             </p>
                             <input
-                                class="input"
-                                name="needle"
-                                type="text"
-                                placeholder="Rechercher dans {{ $filters["search"] }}"
-                                value="{{ request()->needle }}">
+                                    class="input"
+                                    name="needle"
+                                    type="text"
+                                    placeholder="Rechercher dans {{ $filters["search"] }}"
+                                    value="{{ request()->needle }}">
                             <input
-                                class="input"
-                                type="hidden"
-                                name="search"
-                                value="{{ $filters["search"] }}"
-                                type="text">
+                                    class="input"
+                                    type="hidden"
+                                    name="search"
+                                    value="{{ $filters["search"] }}"
+                                    type="text">
                         </div>
                     @endif
 
@@ -101,6 +101,13 @@
                             @if (request()->query())
                                 <a class="button" href="{{ route(request()->route()->getName()) }}">Enlever les filtres</a>
                             @endif
+                            @can('create', App\Run::class)
+                                <div class="field is-pulled-right">
+                                    <p class="control">
+                                        <a href="{{ route('runs.create') }}" class="button is-info">Nouveau run</a>
+                                    </p>
+                                </div>
+                            @endcan
                         </div>
                     </div>
                 </div>

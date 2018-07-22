@@ -36,7 +36,7 @@
                                     @statustag(['status' => $run->status])
                                     @endstatustag
                                     <p>
-                                        {{ $run->passengers }} personnes
+                                        {{ $run->passengers }} pax
                                     </p>
                                 </div>
                                 <div class="column is-6 has-border-right">

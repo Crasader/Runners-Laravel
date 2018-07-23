@@ -47,7 +47,7 @@ class RunController extends Controller
         Run::whereNotIn('status', ['finished', 'drafting'])->get()->each(function ($run) {
             $run->updateStatus();
         });
-        $runs = Run::where('planned_at', '>=', now())->whereNotIn('status', ['finished', 'drafting'])->orWhere('status','=','error')->orWhere('status','=','gone')
+        $runs = Run::whereNotIn('status', ['finished', 'drafting'])->orWhere('status','=','error')->orWhere('status','=','gone')
             ->orderBy('planned_at', 'asc')
             ->limit(30)
             ->get();

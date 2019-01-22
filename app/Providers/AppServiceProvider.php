@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Blade;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema; //If windows // TODO: Check compability
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191); //If windows // TODO: Check compability
         /**
          * Disable the api ressources wrapping to a 'data' key
          */

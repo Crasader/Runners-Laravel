@@ -27,7 +27,7 @@ class RunsTableSeeder extends Seeder
     public function run()
     {
         // The number of runs you want to generate for each edition of the paleo festival
-        $runsAmount = 50;
+        $runsAmount = 100;
 
         // Little notes to simulate runs notes (randomly assigned to runs)
         // These notes will be assigned to the run via a comment
@@ -43,28 +43,6 @@ class RunsTableSeeder extends Seeder
             'divers transfert Pax'
         ]);
 
-        // The status possible for a run
-        // You can influence the propability by duplicate status in the array
-        $status = collect([
-            'drafting',
-            'drafting',
-            'drafting',
-            'drafting',
-            'ready',
-            'ready',
-            'ready',
-            'ready',
-            'needs_filling',
-            'needs_filling',
-            'gone',
-            'gone',
-            'gone',
-            'finished',
-            'finished',
-            'finished',
-            'error'
-        ]);
-
         /**
          * Create runs randomly using the datas indicated above
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
@@ -76,7 +54,7 @@ class RunsTableSeeder extends Seeder
         /**
          * Main loop, iterates for each festival
          */
-        $festivals->each(function ($festival) use ($runsAmount, $notes, $status) {
+        $festivals->each(function ($festival) use ($runsAmount, $notes) {
 
             /**
              * Gets datas relatives to all the runs of 1 festival
@@ -111,14 +89,11 @@ class RunsTableSeeder extends Seeder
                 // Sets the run name
                 $run['name'] = $selectedArtist->name;
 
-                // Selects randomly a status for this run
-                $selectedStatus = $status->random();
-
                 // Add a note randomly
                 $run['infos'] = $notes->random();
 
                 // Sets the run status
-                $run['status'] = $selectedStatus;
+                $run['status'] = 'drafting';
 
                 // Sets a number of passanger randomly
                 $run['passengers'] = mt_rand(1, 9);
@@ -176,8 +151,17 @@ class RunsTableSeeder extends Seeder
                 $createdRun->artists()->save($selectedArtist);
 
                 // Sets random waypoints for the run
+
                 $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 1]);
                 $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 2]);
+                if (mt_rand(1,8) == 1)
+                {
+                    $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 3]);
+                    if (mt_rand(1,8) == 1)
+                    {
+                        $createdRun->waypoints()->save(Waypoint::all()->random(), ['order' => 4]);
+                    }
+                }
 
                 // Insert random notes to the run
                 // create a comment with a random note and user

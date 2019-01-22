@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             ArtistsTableSeeder::class,
             AttachmentsTableSeeder::class,
             RunsTableSeeder::class,
-            AssociateRunnersAndCarsToRunSeeder::class
+            AssociateRunnersAndCarsToRunSeeder::class,
+            UpdateRunStatusSeeder::class
         ]);
     }
 }

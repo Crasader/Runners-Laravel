@@ -21,7 +21,6 @@ class WaypointsTableSeeder extends Seeder
     {
         // All the waypoints to insert in the DB
         $waypoints = [
-            '',
             "Grande scène",
             "Les Arches",
             "Le Dôme",

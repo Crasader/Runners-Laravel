@@ -123,23 +123,6 @@ class UsersTableSeeder extends Seeder
         $root->groups()->save(Group::orderBy('id', 'desc')->first());
 
         /**
-         * Create a generic user (for tests)
-         */
-        $runner = User::create([
-            'name'         => 'Runner Runner',
-            'email'        => 'runner@paleo.ch',
-            'password'     => bcrypt('runner'),
-            'firstname'    => 'Runner',
-            'lastname'     => 'Runner',
-            'phone_number' => '0794657846',
-            'sex'          => 'm',
-        ]);
-        // Asociate the runner role
-        $runner->statuses()->save(Status::where([['slug', 'free'], ['type', 'App\User']])->first());
-        $runner->roles()->save(Role::where('slug', 'runner')->first());
-        $runner->groups()->save(Group::first());
-
-        /**
          * loop all the users and insert it in the database
          */
         foreach ($users as $user) {

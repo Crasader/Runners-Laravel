@@ -28,6 +28,7 @@ class CreateRunsTable extends Migration
             $table->dateTime('started_at')->nullable();
             $table->dateTime('ended_at')->nullable();
             $table->integer('passengers')->nullable();
+            $table->integer('tbc')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

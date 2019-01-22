@@ -178,8 +178,6 @@ class StatusesTableSeeder extends Seeder
         ]);
 
 
-
-
         // Save all the statuses in the database
         $status->each(function ($status) {
             Status::create($status);

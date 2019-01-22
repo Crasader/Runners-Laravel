@@ -77,6 +77,15 @@ class Run extends Model
         'restored' => LogDatabaseRestoreEvent::class
     ];
 
+
+    /**
+     * MODEL RELATION
+     * Gets the logs corresponding to this model
+     */
+    public function status(){
+        return $this->morphToMany(Status::class, 'statusable');
+    }
+
     /**
      * MODEL RELATION
      * Gets the logs corresponding to this model

@@ -32,6 +32,17 @@ class Status extends Model
         return $this->morphedByMany(User::class, 'statusable');
     }
 
+
+    /**
+     * MODEL RELATION
+     * the model who have this status
+     */
+    public function runs()
+    {
+        return $this->morphedByMany(Run::class, 'statusable');
+    }
+
+
     /**
      * MODEL SCOPE
      * Limit the request to a specific type of statuses

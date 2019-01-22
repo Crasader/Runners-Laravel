@@ -65,6 +65,7 @@ class RunsTableSeeder extends Seeder
             'error'
         ]);
 
+
         /**
          * Create runs randomly using the datas indicated above
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run

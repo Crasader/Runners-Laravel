@@ -18,6 +18,23 @@ USE `runners`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `artist_run`
+--
+
+DROP TABLE IF EXISTS `artist_run`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artist_run` (
+  `artist_id` int(10) unsigned NOT NULL,
+  `run_id` int(10) unsigned NOT NULL,
+  KEY `artist_run_artist_id_foreign` (`artist_id`),
+  KEY `artist_run_run_id_foreign` (`run_id`),
+  CONSTRAINT `artist_run_artist_id_foreign` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
+  CONSTRAINT `artist_run_run_id_foreign` FOREIGN KEY (`run_id`) REFERENCES `runs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `artist_run`
 --
 
@@ -26,6 +43,23 @@ LOCK TABLES `artist_run` WRITE;
 INSERT INTO `artist_run` VALUES (23,656),(9,657),(91,658),(67,660),(87,661),(6,662),(54,663),(28,664),(23,665),(45,666),(63,667),(63,668),(60,669),(57,670),(43,671),(30,672),(23,673),(40,674),(94,675),(60,676),(72,677),(4,678),(23,679),(65,680),(92,681),(96,682),(97,683),(21,684),(58,685),(78,686),(49,687),(20,688),(7,689),(10,691),(89,692),(94,693),(4,694),(80,695),(73,696),(8,697),(23,698),(97,699),(33,700),(36,701),(22,702),(27,703),(3,704),(71,705),(62,690);
 /*!40000 ALTER TABLE `artist_run` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `artists`
+--
+
+DROP TABLE IF EXISTS `artists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artists` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `artists`
@@ -38,6 +72,29 @@ INSERT INTO `artists` VALUES (1,'RED HOT CHILI PEPPERS',NULL,'2018-06-11 09:59:3
 UNLOCK TABLES;
 
 --
+-- Table structure for table `attachments`
+--
+
+DROP TABLE IF EXISTS `attachments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attachments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `attachable_id` int(10) unsigned DEFAULT NULL,
+  `attachable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `attachments_user_id_foreign` (`user_id`),
+  CONSTRAINT `attachments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `attachments`
 --
 
@@ -46,6 +103,24 @@ LOCK TABLES `attachments` WRITE;
 INSERT INTO `attachments` VALUES (1,1,1,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(2,1,1,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(3,2,2,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(4,2,2,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(6,3,3,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(8,4,4,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(10,5,5,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(12,6,6,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(14,7,7,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(16,8,8,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(18,9,9,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(20,10,10,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(22,11,11,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(24,12,12,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:31','2018-06-11 09:59:31'),(26,13,13,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(28,14,14,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(30,15,15,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(32,16,16,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(34,17,17,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(35,18,18,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(36,18,18,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(37,19,19,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(38,19,19,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(40,20,20,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(42,21,21,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(44,22,22,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(46,23,23,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(48,24,24,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(50,25,25,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(52,26,26,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(54,27,27,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(56,28,28,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(58,29,29,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(60,30,30,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(62,31,31,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(64,32,32,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(65,33,33,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(66,33,33,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(68,34,34,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(70,35,35,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(71,36,36,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(72,36,36,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(74,37,37,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(76,38,38,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(78,39,39,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(80,40,40,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(82,41,41,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(84,42,42,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(86,43,43,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(88,44,44,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(92,46,46,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(94,47,47,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(96,48,48,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(97,49,49,'App\\User','profile',NULL,'profiles/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(98,49,49,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(100,50,50,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(102,51,51,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(104,52,52,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(106,53,53,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(108,54,54,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(110,55,55,'App\\User','licence',NULL,'licences/default.jpg','2018-06-11 09:59:32','2018-06-11 09:59:32'),(111,1,45,'App\\User','qrcode',NULL,'qrcodes/jean-marc-anderesf79MEgmM4Khaw95QLP1g.png','2018-06-13 06:37:34','2018-06-13 06:37:34'),(113,1,56,'App\\User','licence',NULL,'licences/default.jpg','2018-06-13 09:09:47','2018-06-13 09:09:47'),(115,1,57,'App\\User','licence',NULL,'licences/default.jpg','2018-06-13 09:11:24','2018-06-13 09:11:24'),(119,58,58,'App\\User','licence',NULL,'licences/default.jpg','2018-06-13 09:15:34','2018-06-13 09:15:34'),(121,1,59,'App\\User','licence',NULL,'licences/default.jpg','2018-06-13 09:18:05','2018-06-13 09:18:05'),(122,1,59,'App\\User','qrcode',NULL,'qrcodes/pascal-kuenzipZvoyFP5iTpjiCY6SyCp.png','2018-06-13 09:18:19','2018-06-13 09:18:19'),(124,1,45,'App\\User','profile',NULL,'public/profiles/THDZCCJ87aSgOW9Z6FRuzvcXKTwSrvmzBV8H2SIb.png','2018-06-13 09:23:40','2018-06-13 09:23:40'),(125,1,13,'App\\User','profile',NULL,'public/profiles/32tPb3k0eKzW4RgrAXdkCThvq81jo7PnfHnsyZeu.png','2018-06-13 09:24:13','2018-06-13 09:24:13'),(126,45,45,'App\\User','licence',NULL,'licences/default.jpg','2018-06-13 09:25:41','2018-06-13 09:25:41'),(127,1,46,'App\\User','profile',NULL,'public/profiles/WgbXyqk60zzuNb7x8aRsMFXM7P0cYIwr0RAqNoV3.png','2018-06-13 09:28:47','2018-06-13 09:28:47'),(128,1,40,'App\\User','profile',NULL,'public/profiles/IJXHWdo5YqTAKNuIi9USXjJS6TwlEQz2yMotQ7Kj.png','2018-06-13 09:29:55','2018-06-13 09:29:55'),(129,1,41,'App\\User','profile',NULL,'public/profiles/OSOqa3RGgfka22Z7uBQkPFyokNiAH3ZS4WAzrpeg.png','2018-06-13 09:30:53','2018-06-13 09:30:53'),(131,1,23,'App\\User','profile',NULL,'public/profiles/AUVQkXF9RAklRZLM3CB6lP9rnggfCetEvT3ovSKE.png','2018-06-13 09:32:43','2018-06-13 09:32:43'),(132,1,23,'App\\User','qrcode',NULL,'qrcodes/carole-bourgeoisCj6PbmZh3UzWIgffGm10.png','2018-06-13 09:33:12','2018-06-13 09:33:12'),(133,1,42,'App\\User','qrcode',NULL,'qrcodes/vincent-bobillierHhrUx3F3hyGhpy7Yjg5A.png','2018-06-13 09:33:21','2018-06-13 09:33:21'),(134,1,41,'App\\User','qrcode',NULL,'qrcodes/pierre-yves-bernasconidoYIVwUuJNft2UCiPGGL.png','2018-06-13 09:33:31','2018-06-13 09:33:31'),(135,1,40,'App\\User','qrcode',NULL,'qrcodes/sandra-bergerWXMnR55gtfxHRaaAmoIa.png','2018-06-13 09:33:39','2018-06-13 09:33:39'),(136,1,46,'App\\User','qrcode',NULL,'qrcodes/oliver-baechlerxeLRkyN2RXh5SbNnOjqD.png','2018-06-13 09:33:46','2018-06-13 09:33:46'),(137,1,13,'App\\User','qrcode',NULL,'qrcodes/aude-angiolilij12dV0Csge6ozdFfhKE6.png','2018-06-13 09:33:52','2018-06-13 09:33:52'),(138,1,12,'App\\User','profile',NULL,'public/profiles/ik9wgbrFqUbwoCFZitn3H5rpnB6EJJ3pEdbuyIG1.png','2018-06-13 09:34:42','2018-06-13 09:34:42'),(139,1,11,'App\\User','profile',NULL,'public/profiles/E4BR2TbdZP2g7CEFBktR8C1UQKjmVKNJsZok2r2J.png','2018-06-13 09:36:56','2018-06-13 09:36:56'),(140,1,47,'App\\User','profile',NULL,'public/profiles/ic5QNMWY4ZJsM7FOjxzkO7X7f52173sDOtEbIWT2.png','2018-06-13 09:37:46','2018-06-13 09:37:46'),(141,1,47,'App\\User','qrcode',NULL,'qrcodes/enrico-chiabudiniqjfYCPAtdUewb8MH8QYp.png','2018-06-13 09:40:15','2018-06-13 09:40:15'),(142,1,34,'App\\User','profile',NULL,'public/profiles/f42wo98DQzLJLKV6utVqUYx6UliO1EGpl2Yc9Jbr.png','2018-06-13 09:42:57','2018-06-13 09:42:57'),(143,1,48,'App\\User','profile',NULL,'public/profiles/Mvawoa6a1UimSdZ3kTP0JEgnEmyZuYn03QjQqlpP.png','2018-06-13 09:46:52','2018-06-13 09:46:52'),(144,1,48,'App\\User','qrcode',NULL,'qrcodes/pascal-comminotjkMucHscEzYGkof1wvBL.png','2018-06-13 09:46:58','2018-06-13 09:46:58'),(145,1,24,'App\\User','profile',NULL,'public/profiles/fH9mi4Quqr94txItmwg7EEhnqHdHV7YkskX7MOVj.png','2018-06-13 09:47:43','2018-06-13 09:47:43'),(146,1,24,'App\\User','qrcode',NULL,'qrcodes/marc-courdierZ3D32wkwvEKAZuVlFFKw.png','2018-06-13 09:47:46','2018-06-13 09:47:46'),(147,1,14,'App\\User','qrcode',NULL,'qrcodes/nicolas-delacretazQqCFylKieOW6QlHfxd1Z.png','2018-06-13 09:48:36','2018-06-13 09:48:36'),(148,1,14,'App\\User','profile',NULL,'public/profiles/6oSTXW7vGx5w23q50Yt9NnnUlTDYuZEf2jYWrKLs.png','2018-06-13 09:49:07','2018-06-13 09:49:07'),(149,1,35,'App\\User','qrcode',NULL,'qrcodes/jean-marc-ducrycCN9mZ1xfSuXVUsX6d4n.png','2018-06-13 09:50:31','2018-06-13 09:50:31'),(150,1,35,'App\\User','profile',NULL,'public/profiles/J2XbaI2moINo6sToDD7WPUYn85omaxRC80EOm7tM.png','2018-06-13 09:50:46','2018-06-13 09:50:46'),(151,1,51,'App\\User','qrcode',NULL,'qrcodes/christine-fery-hammeroGetVLof4Cnygr8f4ZdF.png','2018-06-13 09:51:50','2018-06-13 09:51:50'),(152,1,51,'App\\User','profile',NULL,'public/profiles/eV6BHZDIHdgMvxEiPAT3gMjO70NjaSUBSQ8OysCQ.png','2018-06-13 09:51:57','2018-06-13 09:51:57'),(153,1,3,'App\\User','qrcode',NULL,'qrcodes/roland-fleischmanDgMR23t4y8focJndZRe5.png','2018-06-13 09:55:59','2018-06-13 09:55:59'),(154,1,3,'App\\User','profile',NULL,'public/profiles/h4aXwy9oupcBn2FhZMXi2nHi5R0dxCDAMhJfAA6q.png','2018-06-13 09:56:18','2018-06-13 09:56:18'),(155,1,25,'App\\User','qrcode',NULL,'qrcodes/julien-fleischmannS77jEeERXdjqnaxyeMGf.png','2018-06-13 09:57:38','2018-06-13 09:57:38'),(156,1,25,'App\\User','profile',NULL,'public/profiles/TjtfvzilMRQBuS4JlwAp3pebUBhBDiVKbNPDM0p6.png','2018-06-13 09:57:45','2018-06-13 09:57:45'),(157,1,15,'App\\User','qrcode',NULL,'qrcodes/yves-fritscheQFm4QEalqeB3eH2p9JOm.png','2018-06-13 10:00:00','2018-06-13 10:00:00'),(158,1,15,'App\\User','profile',NULL,'public/profiles/asREYdqcrKNrx3aZzpzHWHUf5H7PyablTTpyW90V.png','2018-06-13 10:00:08','2018-06-13 10:00:08'),(159,1,26,'App\\User','qrcode',NULL,'qrcodes/serge-gagliardohu5zkKjfWgUq7Rpk7Scz.png','2018-06-13 10:00:46','2018-06-13 10:00:46'),(160,1,26,'App\\User','profile',NULL,'public/profiles/md90b7U8yoU87HBa2AYQuU6LgWZhkxhWipMNUX6O.png','2018-06-13 10:00:53','2018-06-13 10:00:53'),(161,1,16,'App\\User','qrcode',NULL,'qrcodes/melanie-ganz2mFdtGvp4is5pny1dCOn.png','2018-06-13 10:01:34','2018-06-13 10:01:34'),(162,1,16,'App\\User','profile',NULL,'public/profiles/LKhEl3dntRbSTFz1DvKCT73k9qC0BKmWMVzYYgMb.png','2018-06-13 10:01:47','2018-06-13 10:01:47'),(163,1,29,'App\\User','qrcode',NULL,'qrcodes/oceane-gauthierwcd0tU1A37AeUhqcR9ae.png','2018-06-13 10:02:36','2018-06-13 10:02:36'),(164,1,29,'App\\User','profile',NULL,'public/profiles/c6d53J9zslHZRnD8BYqQIUasztArf5HgWr4NDnbO.png','2018-06-13 10:02:43','2018-06-13 10:02:43'),(165,1,5,'App\\User','profile',NULL,'public/profiles/bJBaTaZBopKrKYAYmKkARFuefNds4WdXzMeuOiZ9.png','2018-06-13 10:03:23','2018-06-13 10:03:24'),(166,1,5,'App\\User','qrcode',NULL,'qrcodes/nicole-gautier25erfVGnNnMf90yERf4L.png','2018-06-13 10:03:25','2018-06-13 10:03:25'),(167,1,43,'App\\User','qrcode',NULL,'qrcodes/eladio-germanZpi92dVS2E3BjabaBirR.png','2018-06-13 10:03:51','2018-06-13 10:03:51'),(168,1,43,'App\\User','profile',NULL,'public/profiles/fl2feYRcT7bVFFY0QaENBc3kDIHqHIYwMO6L268u.png','2018-06-13 10:04:07','2018-06-13 10:04:07'),(169,1,27,'App\\User','qrcode',NULL,'qrcodes/kevin-howellsGqWX5X5i3yy319gbo6lF.png','2018-06-13 10:04:39','2018-06-13 10:04:39'),(170,1,27,'App\\User','profile',NULL,'public/profiles/felXSpSDvPb5LyhpTQx4BO6BionsbuSECljhIRsQ.png','2018-06-13 10:04:58','2018-06-13 10:04:58'),(171,1,31,'App\\User','qrcode',NULL,'qrcodes/heloise-janinVxmeAAtR9NicOsZS6nE2.png','2018-06-13 10:05:59','2018-06-13 10:05:59'),(172,1,31,'App\\User','profile',NULL,'public/profiles/qdf12QwoF5u1xcX13n81KDSS2Mg3E3bWOLjF5zuc.png','2018-06-13 10:06:05','2018-06-13 10:06:05'),(173,1,30,'App\\User','qrcode',NULL,'qrcodes/leonore-janin-cancianUSocaDx52vNYyRjf1TLq.png','2018-06-13 10:06:32','2018-06-13 10:06:32'),(174,1,30,'App\\User','profile',NULL,'public/profiles/NsDDIMrYnpxpphavlSPDPl1Amu9JFNEQoA1a6r88.png','2018-06-13 10:06:49','2018-06-13 10:06:49'),(175,1,52,'App\\User','qrcode',NULL,'qrcodes/david-korkia6i2BEvjBGqtlOcPrpCeO.png','2018-06-13 10:09:46','2018-06-13 10:09:46'),(176,1,52,'App\\User','profile',NULL,'public/profiles/DfBriQLZEyQAnYCLCtVsupJ9igo8EpNS7tclU31k.png','2018-06-13 10:10:13','2018-06-13 10:10:13'),(177,1,57,'App\\User','qrcode',NULL,'qrcodes/blaise-laurentOM0GEehnnw9SrZyOgt0z.png','2018-06-13 10:11:25','2018-06-13 10:11:25'),(178,1,57,'App\\User','profile',NULL,'public/profiles/7khf81JALB5LlwzNOmbjPzJiW4Z7zuo2qRoNAbt5.png','2018-06-13 10:11:32','2018-06-13 10:11:32'),(179,1,32,'App\\User','qrcode',NULL,'qrcodes/vincent-lopezJTwnIlUF0jreV6OZMhxr.png','2018-06-13 10:11:54','2018-06-13 10:11:54'),(180,1,32,'App\\User','profile',NULL,'public/profiles/6ztH9apJ9FP2A2TYGIjXbsWpW9LTOTLIuzFrbCzW.png','2018-06-13 10:12:15','2018-06-13 10:12:15'),(181,1,17,'App\\User','qrcode',NULL,'qrcodes/patrick-martinUAQVnLGgyf6z58HUlmuP.png','2018-06-13 10:12:53','2018-06-13 10:12:53'),(182,1,17,'App\\User','profile',NULL,'public/profiles/krFtPzV0Co40toSKCF0NdkkXwwIXJxbcSNYTSO2I.png','2018-06-13 10:12:59','2018-06-13 10:12:59'),(183,1,20,'App\\User','qrcode',NULL,'qrcodes/nicolas-miesegaesxC2bfTKMEj8nxynnawXd.png','2018-06-13 10:13:25','2018-06-13 10:13:25'),(184,1,20,'App\\User','profile',NULL,'public/profiles/XQqLBThOW50h7BUCUWB91JfM36B6yi7RuYaPwBUI.png','2018-06-13 10:13:44','2018-06-13 10:13:44'),(185,1,53,'App\\User','qrcode',NULL,'qrcodes/valerie-perretPzpHDodJcXZ2uK6xuRn0.png','2018-06-13 10:14:25','2018-06-13 10:14:25'),(186,1,53,'App\\User','profile',NULL,'public/profiles/NgGPAfVQkFIszdAHd6Z7FcLt0bX0hVj3p7R7fGxB.png','2018-06-13 10:14:46','2018-06-13 10:14:46'),(187,1,21,'App\\User','profile',NULL,'public/profiles/4sUNE4QjCj7ZXD84vGrYeEw9lWuz4mewNFT1Bsly.png','2018-06-13 10:15:24','2018-06-13 10:15:24'),(188,1,21,'App\\User','qrcode',NULL,'qrcodes/christian-pinillaJ18MLzXqOKcgFjdt4v2p.png','2018-06-13 10:15:26','2018-06-13 10:15:26'),(189,1,22,'App\\User','qrcode',NULL,'qrcodes/andres-pinilla-marinwlJ8ZRKEwy0AItjBbLhP.png','2018-06-13 10:16:08','2018-06-13 10:16:08'),(190,1,22,'App\\User','profile',NULL,'public/profiles/uNyFvjMG9hV1z9NhqLqfy9WMEaIv41muBjUCesME.png','2018-06-13 10:16:14','2018-06-13 10:16:14'),(191,1,54,'App\\User','qrcode',NULL,'qrcodes/bertrand-pouillycPAi6M3kwuRZb1rLAM9X.png','2018-06-13 10:16:54','2018-06-13 10:16:54'),(192,1,54,'App\\User','profile',NULL,'public/profiles/gbdcROzpH6HJ8oGpPqLG8EFJBjT5Otji2K854CKQ.png','2018-06-13 10:17:00','2018-06-13 10:17:00'),(193,1,50,'App\\User','qrcode',NULL,'qrcodes/joao-ramos1112tUBisqdbTkpjEy5Q.png','2018-06-13 10:17:58','2018-06-13 10:17:58'),(194,1,50,'App\\User','profile',NULL,'public/profiles/ZYmIyq1bvBfxwXRUJ7eLh2YRP9mMCrthN92OKhhs.png','2018-06-13 10:18:16','2018-06-13 10:18:16'),(195,1,28,'App\\User','qrcode',NULL,'qrcodes/marc-rossoVhCnmhMPUdduzg2m2FVT.png','2018-06-13 10:18:45','2018-06-13 10:18:45'),(196,1,28,'App\\User','profile',NULL,'public/profiles/DgWZLd82VJY2P2ltEibu5ana5lfxYyZQZEIUwXxJ.png','2018-06-13 10:19:05','2018-06-13 10:19:05'),(197,1,37,'App\\User','qrcode',NULL,'qrcodes/rene-schindlerbMJSpXJIAU41lCQJf9oc.png','2018-06-13 10:19:27','2018-06-13 10:19:27'),(198,1,37,'App\\User','profile',NULL,'public/profiles/thAIRt57Tmc0FiUEJeie0RaryvehZ8xO7IxueklV.png','2018-06-13 10:20:04','2018-06-13 10:20:04'),(199,1,55,'App\\User','qrcode',NULL,'qrcodes/paul-schumacherp2yGfrXkJ9QfH6tSXjOk.png','2018-06-13 10:21:05','2018-06-13 10:21:05'),(200,1,55,'App\\User','profile',NULL,'public/profiles/17gdAW9rDCS3Jp1z5E7HMjTSJP8rqdooa96TucpE.png','2018-06-13 10:21:32','2018-06-13 10:21:32'),(201,1,38,'App\\User','qrcode',NULL,'qrcodes/laura-ujvariTyF2BX96752zLnTsh1YZ.png','2018-06-13 10:21:58','2018-06-13 10:21:58'),(203,1,44,'App\\User','qrcode',NULL,'qrcodes/julien-wolfGeZ6ekqm2C4ScXzSQ8R9.png','2018-06-13 10:22:43','2018-06-13 10:22:43'),(204,1,44,'App\\User','profile',NULL,'public/profiles/86IQ9iGQyE6J9sx1T0St3Pmr0hqNWd6TpbR5EQUC.png','2018-06-13 10:22:57','2018-06-13 10:22:57'),(205,1,58,'App\\User','qrcode',NULL,'qrcodes/thierry-rochPjw8quTMEJcze09Kr0nP.png','2018-06-13 10:23:36','2018-06-13 10:23:36'),(206,1,58,'App\\User','profile',NULL,'public/profiles/Rswnr9NzY3EDSqRiV4g53CGVuC0KDWNcAQolKF0X.png','2018-06-13 10:23:42','2018-06-13 10:23:42'),(207,1,7,'App\\User','profile',NULL,'public/profiles/fFMLD0JrnIIWpXzzTkNvuC3sQnskjHSBVv0cKl1f.png','2018-06-13 10:25:00','2018-06-13 10:25:00'),(208,1,7,'App\\User','qrcode',NULL,'qrcodes/daniel-grosjean8KWLijlnQZEZH17fZppS.png','2018-06-13 10:25:02','2018-06-13 10:25:02'),(209,1,39,'App\\User','profile',NULL,'public/profiles/lI6xz2nSfAwxKtW9yNAy9jAbL6oSqBtuE7zwZUSN.png','2018-06-13 10:26:31','2018-06-13 10:26:31'),(210,1,39,'App\\User','qrcode',NULL,'qrcodes/robin-baillifuMjef0LlVjtFLMYajnhN.png','2018-06-13 10:26:34','2018-06-13 10:26:34'),(212,1,12,'App\\User','qrcode',NULL,'qrcodes/xavier-carrelMjn2KZBKAfW2g20dvLWc.png','2018-06-14 12:35:10','2018-06-14 12:35:10'),(213,1,11,'App\\User','qrcode',NULL,'qrcodes/gerald-chaignatvb5EoDKP0sxT36LXSVuh.png','2018-06-22 16:11:47','2018-06-22 16:11:47'),(215,1,62,'App\\User','licence',NULL,'licences/default.jpg','2018-07-11 09:51:15','2018-07-11 09:51:15'),(216,1,62,'App\\User','profile',NULL,'public/profiles/ZOlEs1KFdYm2uoogiEQnQcmu3eXt1oetFh2A0Dnf.png','2018-07-11 09:53:45','2018-07-11 09:53:45'),(218,62,62,'App\\User','qrcode',NULL,'qrcodes/leandro-jardim2BtZ1PMVjo461wbLXAEK.png','2018-07-12 18:15:50','2018-07-12 18:15:50'),(220,12,65,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 07:22:03','2018-07-13 07:22:03'),(222,12,65,'App\\User','qrcode',NULL,'qrcodes/julien-tappye0L88razv12rVeKKTPQZ.png','2018-07-13 07:25:57','2018-07-13 07:25:57'),(223,12,65,'App\\User','profile',NULL,'public/profiles/1GDeiQzupTTqcZNF9iklKqgu3NYFoQhtBEssjKHG.png','2018-07-13 07:27:34','2018-07-13 07:27:34'),(225,12,69,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 07:42:33','2018-07-13 07:42:33'),(226,12,69,'App\\User','profile',NULL,'public/profiles/nPqyiMre6ADOIzrQlG1E5ZYfFhZz7iOX9LiGALPW.png','2018-07-13 07:44:30','2018-07-13 07:44:30'),(227,12,69,'App\\User','qrcode',NULL,'qrcodes/john-doeIiz80gkNi4HzqHo4Lx3j.png','2018-07-13 07:44:34','2018-07-13 07:44:34'),(228,12,70,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 07:52:31','2018-07-13 07:52:31'),(229,12,70,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 07:52:31','2018-07-13 07:52:31'),(231,12,71,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 07:52:32','2018-07-13 07:52:32'),(232,12,71,'App\\User','qrcode',NULL,'qrcodes/paul-chatenoudxOVjHtRfuPOEyY2mRR5O.png','2018-07-13 07:53:47','2018-07-13 07:53:47'),(233,12,71,'App\\User','profile',NULL,'public/profiles/Kxy3QYeATl54kl4HU18vak0DtzaSg4P5hMV9AaCv.png','2018-07-13 07:53:55','2018-07-13 07:53:55'),(235,12,72,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 08:10:07','2018-07-13 08:10:07'),(236,12,73,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 08:10:09','2018-07-13 08:10:09'),(237,12,73,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 08:10:10','2018-07-13 08:10:10'),(238,12,72,'App\\User','profile',NULL,'public/profiles/F2BS71uK4eybrn91M60jPcMnv9o0JvtQl6fmq9jL.png','2018-07-13 08:11:32','2018-07-13 08:11:32'),(239,12,72,'App\\User','qrcode',NULL,'qrcodes/jean-yves-girodijvxffgGcQUt7wU1RW2m.png','2018-07-13 08:11:36','2018-07-13 08:11:36'),(241,12,74,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 08:15:59','2018-07-13 08:15:59'),(242,12,74,'App\\User','profile',NULL,'public/profiles/UBvuz62zy4FJuylo2vndpvezH1GH6KfQCQGSL5yt.png','2018-07-13 08:16:58','2018-07-13 08:16:58'),(243,12,74,'App\\User','qrcode',NULL,'qrcodes/stephanie-robyrbhJxJY3V32nCiiPxLy4j.png','2018-07-13 08:17:01','2018-07-13 08:17:01'),(244,12,75,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 08:18:29','2018-07-13 08:18:29'),(245,12,75,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 08:18:29','2018-07-13 08:18:29'),(247,12,76,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 08:18:29','2018-07-13 08:18:29'),(248,12,76,'App\\User','profile',NULL,'public/profiles/Yh0Y5Xaqep4euGEUiT3RZeQG1NW1VrXk76ASCCTj.png','2018-07-13 08:19:21','2018-07-13 08:19:21'),(249,12,76,'App\\User','qrcode',NULL,'qrcodes/claudio-stighezzafDypvAO8iHgVGVwMNwPB.png','2018-07-13 08:19:25','2018-07-13 08:19:25'),(250,12,4,'App\\User','profile',NULL,'public/profiles/csrkXWjoxoA9lXuTePlnb5TOFuuwrwFLCOYkXi2g.png','2018-07-13 08:21:06','2018-07-13 08:21:06'),(251,12,4,'App\\User','qrcode',NULL,'qrcodes/julien-borelTCtdAWW1182sAChnP7vr.png','2018-07-13 08:21:08','2018-07-13 08:21:08'),(252,12,34,'App\\User','qrcode',NULL,'qrcodes/jacques-colincqZ1LejFFhCaWeDkHoXH.png','2018-07-13 08:22:11','2018-07-13 08:22:11'),(253,12,49,'App\\User','qrcode',NULL,'qrcodes/matia-gojun65Xp0qiDVKuPDr2cvsrx.png','2018-07-13 08:24:00','2018-07-13 08:24:00'),(254,12,36,'App\\User','qrcode',NULL,'qrcodes/david-harbt8OtcbXb6ph53BclcmDN.png','2018-07-13 08:24:13','2018-07-13 08:24:13'),(255,12,56,'App\\User','qrcode',NULL,'qrcodes/marie-helene-imfeldyI9mBZRyw57ZUMyZpKWm.png','2018-07-13 08:25:30','2018-07-13 08:25:30'),(256,12,56,'App\\User','profile',NULL,'public/profiles/iGNU5klmoHiWwkQF82LzzQAX03JqEjrsnssRrUoZ.png','2018-07-13 08:26:07','2018-07-13 08:26:07'),(257,12,6,'App\\User','qrcode',NULL,'qrcodes/laurent-jungsh4POciFxlDPX352BoUL.png','2018-07-13 08:26:42','2018-07-13 08:26:42'),(258,12,6,'App\\User','profile',NULL,'public/profiles/dh7NDjDxfMIucT6jQFmN4v8C02MDsIIteASw7CfH.png','2018-07-13 08:27:22','2018-07-13 08:27:22'),(259,12,59,'App\\User','profile',NULL,'public/profiles/0keVruZtQ94mvlqRPHI7azueBM9Eh6i3dr9gBgnp.png','2018-07-13 08:28:59','2018-07-13 08:28:59'),(260,12,18,'App\\User','qrcode',NULL,'qrcodes/michel-lagerOE4tCZNdwip6oHH6NYX8.png','2018-07-13 08:29:21','2018-07-13 08:29:21'),(261,12,10,'App\\User','profile',NULL,'public/profiles/Ppvo0xRDE7sMTWFvi9UFKak1ig2jcUYcMhWFkL1k.png','2018-07-13 08:30:34','2018-07-13 08:30:34'),(262,12,10,'App\\User','qrcode',NULL,'qrcodes/laurent-mingardipt7wW4hKOszULLBaEbJ.png','2018-07-13 08:30:37','2018-07-13 08:30:37'),(263,12,9,'App\\User','qrcode',NULL,'qrcodes/simone-muller4QlRHW8nGrJtmQPaTP9T.png','2018-07-13 08:31:05','2018-07-13 08:31:05'),(264,12,9,'App\\User','profile',NULL,'public/profiles/Z1gP1qFjoU2qWSU9Ir7yliTwBS4iqkfvtvd8XVn1.png','2018-07-13 08:31:39','2018-07-13 08:31:39'),(265,12,8,'App\\User','profile',NULL,'public/profiles/IsrKYoUOVUf1E7pptJBoE005ULqWxLRxkicOwXja.png','2018-07-13 08:35:34','2018-07-13 08:35:34'),(266,12,8,'App\\User','qrcode',NULL,'qrcodes/floriane-piguetucKjnrpNBCrcKeJPCziZ.png','2018-07-13 08:36:51','2018-07-13 08:36:51'),(267,12,38,'App\\User','profile',NULL,'public/profiles/egH5grxxGucUVLQTeNbnMbK5j9ozQN8xUkil7cLQ.png','2018-07-13 08:38:39','2018-07-13 08:38:39'),(268,12,42,'App\\User','profile',NULL,'public/profiles/qKdUjzNmsZzqbMLzEiUgJr0BdNkjU9iLLy2b2ImK.png','2018-07-13 14:56:31','2018-07-13 14:56:31'),(269,12,78,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 15:45:03','2018-07-13 15:45:03'),(270,12,78,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 15:45:04','2018-07-13 15:45:04'),(271,12,79,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 16:35:51','2018-07-13 16:35:51'),(272,12,79,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 16:35:51','2018-07-13 16:35:51'),(273,12,80,'App\\User','profile',NULL,'profiles/default.jpg','2018-07-13 16:35:53','2018-07-13 16:35:53'),(274,12,80,'App\\User','licence',NULL,'licences/default.jpg','2018-07-13 16:35:53','2018-07-13 16:35:53'),(275,12,79,'App\\User','qrcode',NULL,'qrcodes/martine-robyrPFoNkcisS6wPiEN1kfqc.png','2018-07-13 16:37:12','2018-07-13 16:37:12');
 /*!40000 ALTER TABLE `attachments` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `car_types`
+--
+
+DROP TABLE IF EXISTS `car_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `car_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nb_place` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `car_types`
@@ -58,6 +133,31 @@ INSERT INTO `car_types` VALUES (1,'VITO','Bus 9 places pour les runs standard',5
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cars`
+--
+
+DROP TABLE IF EXISTS `cars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cars` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `plate_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `brand` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_id` int(10) unsigned DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cars_type_id_foreign` (`type_id`),
+  CONSTRAINT `cars_type_id_foreign` FOREIGN KEY (`type_id`) REFERENCES `car_types` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `cars`
 --
 
@@ -66,6 +166,27 @@ LOCK TABLES `cars` WRITE;
 INSERT INTO `cars` VALUES (1,'Vito 1','AI 934366','Mercedes','Vito','noir','taken',1,NULL,'2018-06-11 09:59:25','2018-07-08 15:26:21'),(2,'Vito 2','AI 856275','Mercedes','Vito','noir','taken',1,NULL,'2018-06-11 09:59:25','2018-06-19 09:04:32'),(3,'Vito 3','AI 877209','Mercedes','Vito','noir','taken',1,NULL,'2018-06-11 09:59:25','2018-07-10 14:42:06'),(4,'Vito 4','AI 589652','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-07-08 16:22:23'),(5,'Vito 5','AI 632552','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-06-20 12:49:27'),(6,'Vito 6','AI 490269','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-06-11 09:59:25'),(7,'Vito 7','AI 387423','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-06-11 09:59:25'),(8,'Vito 8','AI 639780','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-07-06 11:17:09'),(9,'Vito 9','AI 748695','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-06-11 09:59:25'),(10,'Vito 10','AI 742669','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:25','2018-06-11 09:59:25'),(11,'Vito 11','AI 339042','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:26','2018-06-11 09:59:26'),(12,'Vito 12','AI 462223','Mercedes','Vito','noir','free',1,NULL,'2018-06-11 09:59:26','2018-06-11 09:59:26'),(13,'Limo 1','VD 558137','Mercedes','S500','noir','free',2,NULL,'2018-06-11 09:59:26','2018-11-27 12:13:37'),(14,'Limo 2','VD 526791','Mercedes','S350','blue','free',2,NULL,'2018-06-11 09:59:26','2018-07-06 09:18:32'),(15,'Matos 1','VD 791572','Peugeot','Boxer','white','free',3,NULL,'2018-06-11 09:59:26','2018-06-11 09:59:26'),(16,'Matos 2','VD 692738','Peugeot','Kangoo','white','free',3,NULL,'2018-06-11 09:59:26','2018-07-10 13:14:39'),(17,'Ferrari (test)','VD 289811','Peugeot','Carbo','Verte','free',1,NULL,'2018-07-08 14:29:29','2018-07-08 23:23:34');
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `commentable_id` int(10) unsigned DEFAULT NULL,
+  `commentable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_user_id_foreign` (`user_id`),
+  CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=501 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `comments`
@@ -78,6 +199,23 @@ INSERT INTO `comments` VALUES (1,34,1,'App\\Run','invité arrivé 1 Pax','2018-0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `festival_user`
+--
+
+DROP TABLE IF EXISTS `festival_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `festival_user` (
+  `festival_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  KEY `festival_user_festival_id_foreign` (`festival_id`),
+  KEY `festival_user_user_id_foreign` (`user_id`),
+  CONSTRAINT `festival_user_festival_id_foreign` FOREIGN KEY (`festival_id`) REFERENCES `festivals` (`id`),
+  CONSTRAINT `festival_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `festival_user`
 --
 
@@ -86,6 +224,26 @@ LOCK TABLES `festival_user` WRITE;
 INSERT INTO `festival_user` VALUES (10,3),(10,4),(10,5),(10,6),(10,7),(10,8),(10,9),(10,10),(10,11),(10,12),(10,13),(10,14),(10,15),(10,16),(10,17),(10,18),(10,19),(10,20),(10,21),(10,22),(10,23),(10,24),(10,25),(10,26),(10,27),(10,28),(10,29),(10,30),(10,31),(10,32),(10,33),(10,34),(10,35),(10,36),(10,37),(10,38),(10,39),(10,40),(10,41),(10,42),(10,43),(10,44),(10,45),(10,46),(10,47),(10,48),(10,49),(10,50),(10,51),(10,52),(10,53),(10,54),(10,55),(10,56),(10,57),(10,58),(10,59),(10,62),(10,65),(10,69),(10,71),(10,72),(10,74),(10,76),(10,78),(10,79);
 /*!40000 ALTER TABLE `festival_user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `festivals`
+--
+
+DROP TABLE IF EXISTS `festivals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `festivals` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `edition` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `starts_on` datetime DEFAULT NULL,
+  `ends_on` datetime DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `festivals`
@@ -98,6 +256,23 @@ INSERT INTO `festivals` VALUES (10,43,'43e Paléo Festival de Nyon Developpement
 UNLOCK TABLES;
 
 --
+-- Table structure for table `group_user`
+--
+
+DROP TABLE IF EXISTS `group_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `group_id` int(10) unsigned NOT NULL,
+  KEY `group_user_user_id_foreign` (`user_id`),
+  KEY `group_user_group_id_foreign` (`group_id`),
+  CONSTRAINT `group_user_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`),
+  CONSTRAINT `group_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `group_user`
 --
 
@@ -106,6 +281,24 @@ LOCK TABLES `group_user` WRITE;
 INSERT INTO `group_user` VALUES (3,9),(4,9),(7,11),(8,11),(11,13),(12,13),(14,1),(16,1),(23,3),(26,3),(29,4),(31,4),(32,4),(34,5),(37,5),(38,5),(41,6),(46,7),(51,8),(54,8),(55,8),(13,2),(15,7),(17,3),(21,1),(22,1),(24,4),(27,6),(28,5),(35,3),(40,5),(42,7),(43,1),(44,7),(45,6),(48,6),(50,8),(52,2),(53,6),(57,2),(58,2),(59,7),(5,12),(6,12),(9,10),(10,10),(20,4),(71,8),(25,2),(56,3);
 /*!40000 ALTER TABLE `group_user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS `groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `groups_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `groups`
@@ -118,6 +311,26 @@ INSERT INTO `groups` VALUES (1,'ff9144','A','2018-06-11 09:59:24','2019-01-08 13
 UNLOCK TABLES;
 
 --
+-- Table structure for table `kielas`
+--
+
+DROP TABLE IF EXISTS `kielas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kielas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kielas_user_id_foreign` (`user_id`),
+  CONSTRAINT `kielas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `kielas`
 --
 
@@ -125,6 +338,27 @@ LOCK TABLES `kielas` WRITE;
 /*!40000 ALTER TABLE `kielas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `kielas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `loggable_id` int(10) unsigned DEFAULT NULL,
+  `loggable_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `logs_user_id_foreign` (`user_id`),
+  CONSTRAINT `logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22616 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `logs`
@@ -138,6 +372,21 @@ INSERT INTO `logs` VALUES (13103,492,'App\\Run','updated',1,'2018-07-10 18:31:20
 UNLOCK TABLES;
 
 --
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `migrations`
 --
 
@@ -146,6 +395,27 @@ LOCK TABLES `migrations` WRITE;
 INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_02_08_165614_update_users_table',1),(4,'2018_02_08_171355_add_groups_table',1),(5,'2018_02_08_171410_add_shedules_table',1),(6,'2018_02_08_172120_add_group_user_table',1),(7,'2018_02_08_173239_add_attachments_table',1),(8,'2018_02_08_173944_add_comments_table',1),(9,'2018_02_09_204136_create_roles_table',1),(10,'2018_02_09_210652_create_role_user_table',1),(11,'2018_02_09_211908_create_waypoints_table',1),(12,'2018_02_09_212255_create_runs_table',1),(13,'2018_02_09_212950_create_run_waypoint_table',1),(14,'2018_02_12_074149_create_car_types_table',1),(15,'2018_02_12_074313_create_cars_table',1),(16,'2018_02_12_074501_create_run_drivers_table',1),(17,'2018_02_14_180023_create_artists_table',1),(18,'2018_02_14_180043_create_artist_run_table',1),(19,'2018_02_14_180101_create_festivals_table',1),(20,'2018_02_14_180113_create_festival_user_table',1),(21,'2018_03_07_141811_add_user_api_token_field',1),(22,'2018_05_15_161636_add_name_field_to_cars',1),(23,'2018_05_28_082524_create_kiela_table',1),(24,'2018_06_04_085749_add_infos_field_to_runs',1),(25,'2018_06_05_202656_add_logs_table',1),(26,'2018_06_05_211156_add_user_id_to_logs',1),(27,'2018_06_06_211939_create_notifications_table',1),(28,'2018_06_13_165508_create_statuses_table',2),(29,'2018_06_13_175724_create_statusables_table',2),(30,'2018_06_13_191306_add_name_to_statuses',2),(31,'2018_06_13_202217_remove_status_column_to_users',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_id` bigint(20) unsigned NOT NULL,
+  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `notifications`
@@ -158,6 +428,21 @@ INSERT INTO `notifications` VALUES ('0234d301-f52a-427d-b4b4-0c02b441c97d','App\
 UNLOCK TABLES;
 
 --
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `password_resets`
 --
 
@@ -165,6 +450,23 @@ LOCK TABLES `password_resets` WRITE;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `role_user`
+--
+
+DROP TABLE IF EXISTS `role_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  KEY `role_user_user_id_foreign` (`user_id`),
+  KEY `role_user_role_id_foreign` (`role_id`),
+  CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `role_user`
@@ -177,6 +479,25 @@ INSERT INTO `role_user` VALUES (1,1),(2,4),(3,3),(4,3),(5,3),(6,3),(7,3),(8,3),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `permissions` json NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_slug_unique` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `roles`
 --
 
@@ -185,6 +506,35 @@ LOCK TABLES `roles` WRITE;
 INSERT INTO `roles` VALUES (1,'The superuser','root','{\"end_run\": true, \"start_run\": true, \"manage_cars\": true, \"manage_logs\": true, \"manage_runs\": true, \"create_users\": true, \"delete_users\": true, \"manage_roles\": true, \"force_end_run\": true, \"manage_groups\": true, \"view_comments\": true, \"manage_artists\": true, \"force_start_run\": true, \"manage_car_types\": true, \"manage_schedules\": true, \"manage_waypoints\": true, \"manage_my_comments\": true, \"manage_other_users\": true, \"manage_other_user_comments\": true}','2018-06-11 09:59:24','2018-06-11 09:59:24'),(2,'Runners administrator','admin','{\"end_run\": true, \"start_run\": true, \"manage_cars\": true, \"manage_logs\": true, \"manage_runs\": true, \"create_users\": true, \"delete_users\": true, \"manage_roles\": true, \"force_end_run\": true, \"manage_groups\": true, \"view_comments\": true, \"manage_artists\": true, \"force_start_run\": true, \"manage_car_types\": true, \"manage_schedules\": true, \"manage_waypoints\": true, \"manage_my_comments\": true, \"manage_other_users\": true, \"manage_other_user_comments\": true}','2018-06-11 09:59:24','2018-06-11 09:59:24'),(3,'Runners coordinator','coordinator','{\"end_run\": true, \"start_run\": true, \"manage_cars\": true, \"manage_logs\": true, \"manage_runs\": true, \"create_users\": true, \"delete_users\": false, \"manage_roles\": false, \"force_end_run\": true, \"manage_groups\": true, \"view_comments\": true, \"manage_artists\": true, \"force_start_run\": true, \"manage_car_types\": true, \"manage_schedules\": true, \"manage_waypoints\": true, \"manage_my_comments\": true, \"manage_other_users\": true, \"manage_other_user_comments\": false}','2018-06-11 09:59:24','2018-06-11 09:59:24'),(4,'Runner','runner','{\"end_run\": true, \"start_run\": true, \"manage_cars\": false, \"manage_logs\": false, \"manage_runs\": false, \"create_users\": false, \"delete_users\": false, \"manage_roles\": false, \"force_end_run\": false, \"manage_groups\": false, \"view_comments\": true, \"manage_artists\": false, \"force_start_run\": false, \"manage_car_types\": false, \"manage_schedules\": false, \"manage_waypoints\": false, \"manage_my_comments\": true, \"manage_other_users\": false, \"manage_other_user_comments\": false}','2018-06-11 09:59:24','2018-06-11 09:59:24');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `run_drivers`
+--
+
+DROP TABLE IF EXISTS `run_drivers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `run_drivers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `run_id` int(10) unsigned DEFAULT NULL,
+  `car_id` int(10) unsigned DEFAULT NULL,
+  `car_type_id` int(10) unsigned DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sollicited',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `run_drivers_user_id_foreign` (`user_id`),
+  KEY `run_drivers_run_id_foreign` (`run_id`),
+  KEY `run_drivers_car_id_foreign` (`car_id`),
+  KEY `run_drivers_car_type_id_foreign` (`car_type_id`),
+  CONSTRAINT `run_drivers_car_id_foreign` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`),
+  CONSTRAINT `run_drivers_car_type_id_foreign` FOREIGN KEY (`car_type_id`) REFERENCES `car_types` (`id`),
+  CONSTRAINT `run_drivers_run_id_foreign` FOREIGN KEY (`run_id`) REFERENCES `runs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `run_drivers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `run_drivers`
@@ -197,6 +547,24 @@ INSERT INTO `run_drivers` VALUES (500,10,656,14,2,'sollicited',NULL,'2018-11-27 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `run_waypoint`
+--
+
+DROP TABLE IF EXISTS `run_waypoint`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `run_waypoint` (
+  `run_id` int(10) unsigned NOT NULL,
+  `waypoint_id` int(10) unsigned NOT NULL,
+  `order` int(10) unsigned NOT NULL,
+  KEY `run_waypoint_run_id_foreign` (`run_id`),
+  KEY `run_waypoint_waypoint_id_foreign` (`waypoint_id`),
+  CONSTRAINT `run_waypoint_run_id_foreign` FOREIGN KEY (`run_id`) REFERENCES `runs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `run_waypoint_waypoint_id_foreign` FOREIGN KEY (`waypoint_id`) REFERENCES `waypoints` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `run_waypoint`
 --
 
@@ -205,6 +573,33 @@ LOCK TABLES `run_waypoint` WRITE;
 INSERT INTO `run_waypoint` VALUES (656,28,1),(656,7,2),(657,27,1),(657,37,2),(658,15,1),(658,26,2),(660,27,1),(660,26,2),(661,7,1),(661,34,2),(662,10,1),(662,36,2),(663,14,1),(663,18,2),(664,37,1),(664,24,2),(665,28,1),(665,26,2),(666,19,1),(666,32,2),(667,23,1),(667,26,2),(668,24,1),(668,8,2),(669,18,1),(669,32,2),(670,3,1),(670,14,2),(671,19,1),(671,12,2),(672,11,1),(672,22,2),(673,26,1),(673,37,2),(674,36,1),(674,17,2),(675,12,1),(675,10,2),(676,3,1),(676,1,2),(677,22,1),(677,25,2),(678,22,1),(678,9,2),(679,14,1),(679,1,2),(680,12,1),(680,1,2),(681,4,1),(681,38,2),(682,6,1),(682,14,2),(683,36,1),(683,4,2),(684,18,1),(684,28,2),(685,20,1),(685,23,2),(686,16,1),(686,26,2),(687,37,1),(687,5,2),(688,31,1),(688,7,2),(689,11,1),(689,31,2),(692,27,1),(692,20,2),(693,34,1),(693,27,2),(694,20,1),(694,11,2),(695,27,1),(695,4,2),(696,4,1),(696,36,2),(697,27,1),(697,7,2),(698,15,1),(698,28,2),(699,5,1),(699,12,2),(700,8,1),(700,19,2),(701,13,1),(701,23,2),(702,27,1),(702,28,2),(703,11,1),(703,9,2),(704,15,1),(704,26,2),(705,5,1),(705,23,2),(690,28,1),(690,28,2),(691,13,1),(691,7,2);
 /*!40000 ALTER TABLE `run_waypoint` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `runs`
+--
+
+DROP TABLE IF EXISTS `runs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `runs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `prodid` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'drafting',
+  `published_at` datetime DEFAULT NULL,
+  `planned_at` datetime DEFAULT NULL,
+  `tbc` int(11) NOT NULL DEFAULT '0',
+  `end_planned_at` datetime DEFAULT NULL,
+  `started_at` datetime DEFAULT NULL,
+  `ended_at` datetime DEFAULT NULL,
+  `passengers` int(11) DEFAULT NULL,
+  `infos` longtext COLLATE utf8mb4_unicode_ci,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=711 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `runs`
@@ -217,6 +612,24 @@ INSERT INTO `runs` VALUES (656,NULL,'HYPERCULTE','finished','2018-11-14 11:52:29
 UNLOCK TABLES;
 
 --
+-- Table structure for table `schedules`
+--
+
+DROP TABLE IF EXISTS `schedules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedules` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` int(10) unsigned DEFAULT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `schedules_group_id_foreign` (`group_id`),
+  CONSTRAINT `schedules_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `schedules`
 --
 
@@ -225,6 +638,25 @@ LOCK TABLES `schedules` WRITE;
 INSERT INTO `schedules` VALUES (1,1,'2019-01-20 07:30:00','2019-01-20 14:30:00'),(2,1,'2019-01-22 01:00:00','2019-01-22 08:00:00'),(3,1,'2019-01-22 23:00:00','2019-01-23 04:00:00'),(4,1,'2019-01-23 22:00:00','2019-01-24 03:00:00'),(5,1,'2019-01-24 18:00:00','2019-01-25 00:00:00'),(6,1,'2019-01-25 14:30:00','2019-01-25 22:00:00'),(7,1,'2019-01-26 10:00:00','2019-01-26 15:00:00'),(8,2,'2019-01-20 10:00:00','2019-01-20 17:00:00'),(9,2,'2019-01-21 07:30:00','2019-01-21 14:30:00'),(10,2,'2019-01-23 01:00:00','2019-01-23 08:00:00'),(11,2,'2019-01-23 23:00:00','2019-01-24 04:00:00'),(12,2,'2019-01-24 22:00:00','2019-01-25 03:00:00'),(13,2,'2019-01-25 18:00:00','2019-01-26 00:00:00'),(14,2,'2019-01-26 10:00:00','2019-01-26 15:00:00'),(15,3,'2019-01-19 14:00:00','2019-01-19 22:00:00'),(16,3,'2019-01-20 13:00:00','2019-01-20 20:00:00'),(17,3,'2019-01-21 10:00:00','2019-01-21 17:00:00'),(18,3,'2019-01-22 07:30:00','2019-01-22 14:30:00'),(19,3,'2019-01-24 01:00:00','2019-01-24 08:00:00'),(20,3,'2019-01-24 23:00:00','2019-01-25 04:00:00'),(21,3,'2019-01-25 22:00:00','2019-01-26 03:00:00'),(22,4,'2019-01-18 11:00:00','2019-01-19 02:00:00'),(23,4,'2019-01-20 14:30:00','2019-01-20 22:00:00'),(24,4,'2019-01-21 13:00:00','2019-01-21 20:00:00'),(25,4,'2019-01-22 10:00:00','2019-01-22 17:00:00'),(26,4,'2019-01-23 07:30:00','2019-01-23 14:30:00'),(27,4,'2019-01-25 01:00:00','2019-01-25 08:00:00'),(28,4,'2019-01-25 23:00:00','2019-01-26 04:00:00'),(31,5,'2019-01-19 07:30:00','2019-01-19 14:30:00'),(32,5,'2019-01-20 18:00:00','2019-01-21 00:00:00'),(33,5,'2019-01-21 14:30:00','2019-01-21 22:00:00'),(34,5,'2019-01-22 13:00:00','2019-01-22 20:00:00'),(35,5,'2019-01-23 10:00:00','2019-01-23 17:00:00'),(36,5,'2019-01-24 07:30:00','2019-01-24 14:30:00'),(37,5,'2019-01-26 01:00:00','2019-01-26 08:00:00'),(41,6,'2019-01-20 22:00:00','2019-01-21 03:00:00'),(42,6,'2019-01-21 18:00:00','2019-01-22 00:00:00'),(43,6,'2019-01-22 14:30:00','2019-01-22 22:00:00'),(44,6,'2019-01-23 13:00:00','2019-01-23 20:00:00'),(45,6,'2019-01-24 10:00:00','2019-01-24 17:00:00'),(46,6,'2019-01-25 07:30:00','2019-01-25 14:30:00'),(47,6,'2019-01-26 10:00:00','2019-01-26 15:00:00'),(51,7,'2019-01-19 22:00:00','2019-01-20 08:00:00'),(52,7,'2019-01-20 23:00:00','2019-01-21 04:00:00'),(53,7,'2019-01-21 22:00:00','2019-01-22 03:00:00'),(54,7,'2019-01-22 18:00:00','2019-01-23 00:00:00'),(55,7,'2019-01-23 14:30:00','2019-01-23 22:00:00'),(56,7,'2019-01-24 13:00:00','2019-01-24 20:00:00'),(57,7,'2019-01-25 10:00:00','2019-01-25 15:00:00'),(58,7,'2019-01-26 07:30:00','2019-01-26 14:30:00'),(61,8,'2019-01-19 12:00:00','2019-01-19 16:00:00'),(62,8,'2019-01-21 01:00:00','2019-01-21 08:00:00'),(63,8,'2019-01-21 23:00:00','2019-01-22 04:00:00'),(64,8,'2019-01-22 22:00:00','2019-01-23 03:00:00'),(65,8,'2019-01-23 18:00:00','2019-01-24 00:00:00'),(66,8,'2019-01-24 14:30:00','2019-01-24 22:00:00'),(67,8,'2019-01-25 13:00:00','2019-01-25 20:00:00'),(68,8,'2019-01-26 10:00:00','2019-01-26 17:00:00'),(69,12,'2019-01-19 08:00:00','2019-01-19 12:00:00'),(70,13,'2019-01-19 16:00:00','2019-01-19 20:00:00'),(71,9,'2019-01-20 08:00:00','2019-01-20 14:00:00'),(72,10,'2019-01-20 14:00:00','2019-01-20 20:00:00'),(75,13,'2019-01-21 02:00:00','2019-01-21 08:00:00'),(76,10,'2019-01-21 08:00:00','2019-01-21 14:00:00'),(77,11,'2019-01-21 14:00:00','2019-01-21 20:00:00'),(78,12,'2019-01-21 20:00:00','2019-01-21 23:00:00'),(79,13,'2019-01-21 23:00:00','2019-01-22 02:00:00'),(80,9,'2019-01-22 02:00:00','2019-01-22 08:00:00'),(81,11,'2019-01-22 08:00:00','2019-01-22 14:00:00'),(82,12,'2019-01-22 14:00:00','2019-01-22 20:00:00'),(83,13,'2019-01-22 20:00:00','2019-01-22 23:00:00'),(84,9,'2019-01-22 23:00:00','2019-01-23 02:00:00'),(85,10,'2019-01-23 02:00:00','2019-01-23 08:00:00'),(86,12,'2019-01-23 08:00:00','2019-01-23 14:00:00'),(87,13,'2019-01-23 14:00:00','2019-01-23 20:00:00'),(88,9,'2019-01-23 20:00:00','2019-01-23 23:00:00'),(89,10,'2019-01-23 23:00:00','2019-01-24 02:00:00'),(90,11,'2019-01-24 02:00:00','2019-01-24 08:00:00'),(91,13,'2019-01-24 08:00:00','2019-01-24 14:00:00'),(92,9,'2019-01-24 14:00:00','2019-01-24 20:00:00'),(93,10,'2019-01-24 20:00:00','2019-01-24 23:00:00'),(94,11,'2019-01-24 23:00:00','2019-01-25 02:00:00'),(95,12,'2019-01-25 02:00:00','2019-01-25 08:00:00'),(96,9,'2019-01-25 08:00:00','2019-01-25 14:00:00'),(97,10,'2019-01-25 14:00:00','2019-01-25 20:00:00'),(98,11,'2019-01-25 20:00:00','2019-01-25 23:00:00'),(99,12,'2019-01-25 23:00:00','2019-01-26 02:00:00'),(100,13,'2019-01-26 02:00:00','2019-01-26 08:00:00'),(101,11,'2019-01-20 20:00:00','2019-01-20 23:00:00'),(102,12,'2019-01-20 23:00:00','2019-01-21 02:00:00'),(103,9,'2019-01-26 10:00:00','2019-01-26 15:00:00'),(104,10,'2019-01-26 11:00:00','2019-01-26 16:00:00'),(105,11,'2019-01-26 12:00:00','2019-01-26 17:00:00');
 /*!40000 ALTER TABLE `schedules` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `statusables`
+--
+
+DROP TABLE IF EXISTS `statusables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `statusables` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `statusable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `statusable_id` bigint(20) unsigned NOT NULL,
+  `status_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `statusables_statusable_type_statusable_id_index` (`statusable_type`,`statusable_id`),
+  KEY `statusables_status_id_foreign` (`status_id`),
+  CONSTRAINT `statusables_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `statusables`
@@ -237,6 +669,26 @@ INSERT INTO `statusables` VALUES (1,'App\\User',1,2),(4,'App\\User',4,2),(9,'App
 UNLOCK TABLES;
 
 --
+-- Table structure for table `statuses`
+--
+
+DROP TABLE IF EXISTS `statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `statuses` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `shows_on_kiela` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `statuses`
 --
 
@@ -247,6 +699,32 @@ INSERT INTO `statuses` VALUES (1,'App\\User','free','Disponible','Utilisateurs d
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_token` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `users`
 --
 
@@ -255,6 +733,22 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'Root Toor','root.toor@paleo.ch','$2y$10$ndXbSyMLHzpKKqlB2lLZIuwlj/r2fGpBbAVxvkllj4xXBCC260RNW','P48UyFGBOyDicnGzBRB0cAwSJmNLfdiRXtPbzeEHf6K1kFE3tmTgxpeMoKme',NULL,'2018-06-11 09:59:26','2019-01-08 13:08:06',NULL,'Root','Toor','-','m'),(2,'Runner Runner','Runner.Runner@test.local','$2y$10$J3ISwCtEtV3YvJDywWnrZeDVpf3XnQlcwmvnHMQhNATE/Tf6P91G6',NULL,NULL,'2018-06-11 09:59:26','2018-07-13 08:17:37',NULL,'Runner','Runner','-','m'),(3,'Roland Fleischmann','rofl62@gmail.com','$2y$10$Q5zOhibz7YxLh.gAyDZLkufimSwOS9TMGFDLeZEFvSqJY22MbIdBS','hhBTDT3zrBmDWbCpOxp4ZWRmBU3LbARrYop1EfZaJuvqGTF6kQuQD1WsCDWt','XeGzijr1VjUxl7KNKp7IFOon22t9AEB0ox5AS2nuIV9no6qO36Owp4sinTox','2018-06-11 09:59:26','2018-07-13 16:43:42',NULL,'Roland','Fleischmann','+41792068823','m'),(4,'Julien Borel','julien_b_77@hotmail.com','$2y$10$Kg0EG0dxO0WPQkvsXL4dHezYYUALWnXhrVXb/xunljf1UrH5Sz1La',NULL,'qBidigXtFloqdtxmDV8rihyuJW0GnWld2a6K4FZtpowNNHXkvRitl8SYHQjC','2018-06-11 09:59:26','2018-07-13 08:21:08',NULL,'Julien','Borel','+41763176025','m'),(5,'Nicole Gauthier','ngauthier@sunrise.ch','$2y$10$UGYPHH00x5eMLP2dSyM2dOcWVN.7XMCVhvA2Pad//.rtl0bUklnDm',NULL,'PgTAn79i8fJy2EzxsnGN3oMinLp00RCmLcNRinLrWGiXOIykDdDvlcBzMT8v','2018-06-11 09:59:26','2018-07-13 08:08:24',NULL,'Nicole','Gauthier','+41763704316','w'),(6,'Laurent Jung','laurentjung@bluewin.ch','$2y$10$VQcodVWFeDUnjmxzSPxfOOSVj1ZdXHpQ9RTXYJO479BQbLulU9s5G',NULL,'couF3tROtW68k4SLKnfbVwZlt2lcNHvIApdsir9aK4WPCNeamRNoWXARXlrK','2018-06-11 09:59:26','2018-07-13 08:26:42',NULL,'Laurent','Jung','+41766162174','m'),(7,'Daniel Grosjean','daniel.grosjean@me.com','$2y$10$PDMKmc4iqtirsRveNc0cL.ucq9hHX67QT991nUuqYCj6fexAKu24q',NULL,'xJT3nTbzEFX4Uv321TDcAUTlFi1EvbQrjrkVVwommTm6JqOgmNn8LDmYXt2c','2018-06-11 09:59:26','2018-06-13 10:25:02',NULL,'Daniel','Grosjean','+41798748363','m'),(8,'Floriane Piguet','floriane.piguet@gmx.ch','$2y$10$.s2EcJgeYX7k3h6wSspnf.5r3JQgj/w1AKXHGwST/JWV5a4gQzFm2',NULL,'krIJ4jX6Xtbhpsc5T3PJhWXK3hL3YzVEsZKGAQxXr3k1Tb2SRg5fW0ezCfbL','2018-06-11 09:59:26','2018-07-13 08:36:51',NULL,'Floriane','Piguet','+41786206160','w'),(9,'Simone Muller','simone_muller@hotmail.com','$2y$10$j90rFsAOx.wTtlrYsLUExOoTC3KCx2WcRKKxrtF2faasMq4O5GQWK',NULL,'5cOgzadC3fm0BdS2D7rIIBq2JksYE1fxXuRHqnL4zVsil145LuemxcUwwW1C','2018-06-11 09:59:26','2018-07-13 08:31:05',NULL,'Simone','Muller','+41792398060','w'),(10,'Laurent Mingard','lmingard@bluewin.ch','$2y$10$6Z10J2joBO/vjHpFHh2CV.0KyoE3AhjbNNFTiXaHFE6DdOwtyxhxK',NULL,'GE78qGoyeRb1rGsOE5g6H23Bbk74J9KVLZ0PytV6lXjdVR59Xqit1L4AzixC','2018-06-11 09:59:27','2018-07-13 08:30:37',NULL,'Laurent','Mingard','+41794710779','m'),(11,'Gérald Chaignat','gerald.chaignat@sefanet.ch','$2y$10$hh4mSnmInWjb6ER7gvtp2u4IVrEVMaPaVbBGJRcjE8HELat6zKBoy',NULL,'ePJyBAswxEsRNzAhhekmwxdQ4HbOb7Ddfzy5uhLhVUWp2M0lYHG3GCCc9uuh','2018-06-11 09:59:27','2018-06-22 16:14:17',NULL,'Gérald','Chaignat','+41793744028','m'),(12,'Xavier Carrel','cx.carrel@citycable.ch','$2y$10$F3eE/Y2c4IRcoreO/3pFCeAFXRF1RnLnT0f7hUh1So8hc21jWwJMu','LOZQFeDOlUWZzjr5aGm3kjuQbmJNhniNxMK9CavGpjyfqO0uewyz1OhpY3ha','dCpZ5j8Wx3JDNMUEMVuat4WVbM6nIo9gGBFdqCAUeEPtPGj74fOghh5QQ7cX','2018-06-11 09:59:27','2018-07-11 11:26:46',NULL,'Xavier','Carrel','+41792129621','m'),(13,'Aude Angiolilli','aude.angiolilli@yahoo.fr','$2y$10$YlDZAKZuQ81yvJju25YKP.o.qfMmpjdWzU3sKVn3fkgx6a6QlNWYq',NULL,'2VGDijsqBYDERH8qrDzGO9O78lJbGq5a6yQCivuz89S2AVRFmXQc45q6LT7v','2018-06-11 09:59:27','2018-07-13 16:38:13',NULL,'Aude','Angiolilli','+41766163849','w'),(14,'Nicolas Delacrétaz','delacretaz.n@gmail.com','$2y$10$X3B8bKk9oeYhhVxwIW3YLOjTon9pv4.MQWNgDDo7Hn.d527KQ8UyO',NULL,'ZW5GDIyWdnJhQYOThUMosxpSurqM6vKp6FK9bQvTxSQSXIrMwjpBPzp2ahR4','2018-06-11 09:59:27','2018-06-13 09:49:59',NULL,'Nicolas','Delacrétaz','+41795366108','m'),(15,'Yves Fritsché','pecos4@me.com','$2y$10$q.AAv0fy1/6SikOT5.zOUelJM4tJBtlPnDkbzLiVpHc1Ly7jKEFGG',NULL,'Naatdk5l4Fr7lZWMaWQY9DmYaUuWM85CQYeMJSh8SEpYV9qBot87OKr7HHoI','2018-06-11 09:59:27','2018-06-13 10:00:00',NULL,'Yves','Fritsché','+41766570657','m'),(16,'Mélanie Ganz','mel_ganz@hotmail.com','$2y$10$uPFmFrtMrIIMQY9Ug4X31eAXbfII5qIheMcTtj6eONKlPSk9KLH.W',NULL,'CbKnbXLQIKs5oaiRgDLembED2TlDI0Zn1DTfk7oPHAyAjqg7EqiGWpoK9lPw','2018-06-11 09:59:27','2018-06-13 10:01:34',NULL,'Mélanie','Ganz','+41797843592','w'),(17,'Patrick Martin','patrick.martin@cardok.com','$2y$10$uXP4NfVcgBPdVQNCydqTvu59h0k2j.km/8DgR04hlBGKB2OIGD/yO',NULL,'iHTTC1ie5LL1ggkrFYmB7LvFk0q92fXaarHL6RV0cApNtRGpXm7dKkooCbzU','2018-06-11 09:59:27','2018-06-13 10:12:53',NULL,'Patrick','Martin','+41793963094','m'),(18,'Michel Lager','elodie.lager@wanadoo.fr','$2y$10$U6xlUrSXNS2uu23d/8.eYeWZ/QFslYrVqyGbA4f7IZ9ul6pde0XEG',NULL,'PLtpIVsH5GmngjQssl8uhAadyZCcE2XAoGAoLMPzIuLeY8umFaHd72xLs6Wv','2018-06-11 09:59:27','2018-07-13 08:29:21',NULL,'Michel','Lager','-','m'),(19,'Matthieu Beck','matthieu.beck1986@gmail.com','$2y$10$zW6eIr4.5Xm00OBLHovUOuBz4VS3BZif6jOwmhuO0Weu1Zw5Aqq5O',NULL,NULL,'2018-06-11 09:59:27','2018-06-15 09:19:16',NULL,'Matthieu','Beck','-','m'),(20,'Nicolas Miesegaes','nicoulala@yahoo.fr','$2y$10$M.Q7rAXN0n2J7mdfkX9lm.KBKC5s1qejpkASruSQRGvqQnd2fXdXO',NULL,'D4c27cX74hYK11FdOeHokUJqMxn8o75bTFOHDNjDivrw8pvYvVcIffzo3cTR','2018-06-11 09:59:27','2018-06-13 10:13:25',NULL,'Nicolas','Miesegaes','+41794617508','m'),(21,'Christian Pinilla','cpinillamarin@gmail.com','$2y$10$ZSaf21ltcPO3C4eejHhax.QIpeT6z23D/JCS1IR7tobwztFRXFE4m',NULL,'8ipLRKZ7U5mffwdCbMpsWLFtRov4fpAkf3ROtkLYpkgh7H4jwBlGlSJ9CW7l','2018-06-11 09:59:28','2018-06-13 10:15:26',NULL,'Christian','Pinilla','+41786200894','m'),(22,'Andres Pinilla-Marin','andres.pinillamarin@hotmail.com','$2y$10$yU7wFGMuh6FBC1z5C.2ZFOgI0UBBtl6CKTN3U5yX2MFxedcs4SC5a',NULL,'1AvIJ5IlPYWsHyPRqRnNzM9DrCAI5hFYWlUzlLBZYjBt1zSAiOmtT0AJPUcc','2018-06-11 09:59:28','2018-06-13 10:16:08',NULL,'Andres','Pinilla-Marin','+41791362132','m'),(23,'Carole Bourgeois','poine77@hotmail.com','$2y$10$0H3MuO/f7tZeHO1iSszOQ.fd6jb.RErqyJFEx2yiWi3iopaFnR1ce',NULL,'PvI6jVNMiwflgMsPreeFpCAMQihem0nKr0Q1cWjhPqdGQHcb9vjqGwYM8n01','2018-06-11 09:59:28','2018-06-15 09:08:12',NULL,'Carole','Bourgeois','+41794765821','w'),(24,'Marc Courdier','marc.courdier@gmail.com','$2y$10$rbXMqbJHPmCSQKdqnBl1heOrgELB35rkWTi3Mw5LaZTUfAOcFzz3y',NULL,'clEZSDWH8FVSCIy382fBs8D90vweenxdDMbv8cly81m4Sun8xTIElCK01GBt','2018-06-11 09:59:28','2018-06-13 09:47:46',NULL,'Marc','Courdier','+41788227698','m'),(25,'Julien Fleischmann','razzorback11@gmail.com','$2y$10$/qBbP5UphaojJhiFjpGRteyzXEXwU7s54EWusY5q/J1skiEQachn6',NULL,'6AtguIJTFgFLJ7oPMGcdKRdjyMHUx6PxGfGLOJaeKtQYyTFr8Mupi5IIXcpd','2018-06-11 09:59:28','2018-06-13 09:57:38',NULL,'Julien','Fleischmann','+41797678327','m'),(26,'Serge Gagliardo','sgapi@sunrise.ch','$2y$10$xoTHEfENFn3Kh96cg08cwO6H6SajNNn6vWcPoRwE5AhvrvruiOWLS',NULL,'m0a0TrEpdwVKPLnDpeQXC50W0vw4cc1Mr3Tfgha0zr5oRaBIAMOKg3Xz5u3b','2018-06-11 09:59:28','2018-06-13 10:00:46',NULL,'Serge','Gagliardo','+41796241429','m'),(27,'Kevin Howells','k.howells@cbts.ch','$2y$10$tEUh.6AWbv1Kabw0d1oREOkFoLVuBpjctqzwx6stUgeU8Z5TUFB7i',NULL,'cHiFvuuOLyMoTul0Ns5tRtOp9Jk00igoWbJN5IlAYJEyYjQQkJpATxk7Pw5z','2018-06-11 09:59:28','2018-06-13 10:04:39',NULL,'Kevin','Howells','+41793486487','m'),(28,'Marc Rosso','marcrosso@hotmail.com','$2y$10$Kg0oPxP1lDsT6PFL60Q3GudjVwOJ1kzL7QUiPmpRO12fc9tYYFpn6',NULL,'tTZsHOmSPDISHlrc5r84W1yIQiHXHq64fkxEgI7xTR4eOxDuM9FytVK9RGbb','2018-06-11 09:59:28','2018-06-13 10:18:45',NULL,'Marc','Rosso','+41786770997','m'),(29,'Océane Gauthier','oce.gauthier@gmail.com','$2y$10$7y9YhoEDik.6gEY4iFt45OgADTBb7D5vy5APRdsWrQGc6ARrPqLoi',NULL,'3kndzOIvfoLPXlo31jUdJWDiCInkhPaPk2tvt0FFEKoxDkIzGpGFdkzmjQzi','2018-06-11 09:59:28','2018-06-13 10:02:36',NULL,'Océane','Gauthier','+41792938861','w'),(30,'Léonore Janin-Cancian','Léonore.Janin-Cancian@test.local','$2y$10$viIvpg/PLOnYQJwO367DCOSIb6JYaziCACpV9jGK3XQfbM/rwCgVG',NULL,'VlWiMjUZSQLu18h2Q18dhhAVojWjY4JI4vayGt8MUKpkCEFKqNO5KafbNJLM','2018-06-11 09:59:28','2018-06-13 10:07:12',NULL,'Léonore','Janin-Cancian','-','w'),(31,'Héloïse Janin','heloise.janin@hotmail.com','$2y$10$m/ADRSomDco8ktiLsZzssumv.WMQ2DU.iSogPDIA.AU5mp/BIVcka',NULL,'iRe8Dk9OE6xOnonvXRWqAy8wixwuHjdDAV3ERt7mBL5ZW4WgCeJ8Ag73wlUM','2018-06-11 09:59:28','2018-06-13 10:05:59',NULL,'Héloïse','Janin','+41788603348','w'),(32,'Vincent Lopez','vincentlopez2@orange.fr','$2y$10$Q7jBg09F/Inw.vUgjOp9/eyz9s9rj4GzVwyZB3Iqyaf2FL1Gx7BY2',NULL,'ARnzARDLtLJ57o2SE9aStWXxaf4m4AWA5KopuvifQZ5EBsQVTbEwxH5y7NdR','2018-06-11 09:59:28','2018-06-13 10:11:54',NULL,'Vincent','Lopez','+41763692383','m'),(33,'Sébastien Rais','sebastien.rais@netplus.ch','$2y$10$3QOo.MJkSb1q9JxjQCvaaepeXMNYQuJ.CKA.dyO6ajilju.AGdqHW',NULL,NULL,'2018-06-11 09:59:29','2018-06-11 09:59:29',NULL,'Sébastien','Rais','-','m'),(34,'Jacques Colin','jacqcolin@gmail.com','$2y$10$uXMZv73AL6X7g.tC.0fNIunrckHQUhi63OkRj9itH9D704dr1gcIG',NULL,'ojbEZem7kIOXzIaxCxAUqJjhoxEz1dhlrDRT8rOdWK1XMiXR3Zorjn75lqlD','2018-06-11 09:59:29','2018-07-13 08:22:11',NULL,'Jacques','Colin','+33672435425','m'),(35,'Jean-Marc Ducry','jean-marc.ducry@romandie.com','$2y$10$VUSrArEDyiRNDUNsRgVX4.gIk2rhZp1XAkoR48XGbHqEWWvUCASWi',NULL,'NyOs4OHZ55vDy8nMYuPx9Y5lHtiQTE2QGoRpVzjcuZ3IutvG1mAIWfCCyIPE','2018-06-11 09:59:29','2018-06-13 09:50:51',NULL,'Jean-Marc','Ducry','+41793988400','m'),(36,'David Harb','harbdavid0463@gmail.com','$2y$10$P5nyFSecnFAOXIxknNY7kucafH.QfaSJ1uAfaZux/fLbshK5dzD7u',NULL,'r7ZCGiJeG3HM9jUzvw0vMNMawJdp64n5yNGX2TSPzzZnwOxfhe9jwn0p80XT','2018-06-11 09:59:29','2018-07-13 08:24:12',NULL,'David','Harb','-','m'),(37,'René Schindler','schindlerrene@yahoo.fr','$2y$10$BgPh1Zr1jkDjOne9GitiVuAB1vpQ52woJ/K/YpwZ9n3BM2pt2Mu.K',NULL,'mO2nqshqN6aSLQ9tCuETGsX5O02kOYq52jhEtpjGhVjHrJd52hhaqu1xlWXI','2018-06-11 09:59:29','2018-06-13 10:20:38',NULL,'René','Schindler','+41788636364','m'),(38,'Laura Ujvari','laura_ujvari@msn.com','$2y$10$UFqKP4p.boRjXmbuRM6FruXYudyeE66CuH./BBxmmEgVh1Lx9PNDi',NULL,'c5PKHpiQMeJPxPEgTKOzGMqEOZ4tg9bU88Y2V1AShslpCmtHOHbIotb6o1FW','2018-06-11 09:59:29','2018-06-13 10:21:58',NULL,'Laura','Ujvari','+41786705977','w'),(39,'Robin Baillif','robin.baillif@sunrise.ch','$2y$10$NoknMkfAO.8sjeJmv2rUT.EI9IW0BimoAns/O/jmeGh0QKMohGBXO',NULL,'trPJxwlNYnrYYIe4Dvatjo7UmHCRj33G6bShopF53P7lwRsEskQkJ93IMhNE','2018-06-11 09:59:29','2018-06-15 09:19:03',NULL,'Robin','Baillif','-','m'),(40,'Sandra Berger','sandra@tiare.ch','$2y$10$caQfw8lIO/BoFcHBtzlY7eKa1Hgo32lQ9KoeyNK82cIj/8x0HjlTO',NULL,'guHpKFoi9MFJqadehXt46ZDFNauB0IK3vYDpj1a9A9DbZvagJdKiISopxkn1','2018-06-11 09:59:29','2018-06-15 09:05:12',NULL,'Sandra','Berger','+41795013181','w'),(41,'Pierre-Yves Bernasconi','mbpyb@hotmail.com','$2y$10$HalhMLvSWrAiaklBgqTOCeSe8o3onlClV2AekUff14LWRl4iGunS2',NULL,'ZMtWeIpAyiB7VSL4LfvhMFswwhKXDKbc81OUUfE35CxdZSXvlkOjj4jBzS1e','2018-06-11 09:59:29','2018-06-15 09:07:31',NULL,'Pierre-Yves','Bernasconi','141787076931','m'),(42,'Vincent Bobillier','vincent.bobillier@cern.ch','$2y$10$BqZE19P5i99D/Wwt0Eli4.olpzjl3lLiRq0JQZ.JYn9O325Akh4gO',NULL,'pBOycAiqimsNYjVB4tKsFChx81Pyz8BM3kJkaLK3qsHDOwKOSLDAtCjbslJN','2018-06-11 09:59:29','2018-06-15 09:07:47',NULL,'Vincent','Bobillier','+41754110164','m'),(43,'Eladio German','eladiogerman@hotmail.com','$2y$10$EpaKWnuX2lqNzTtpgLoURuORy7OdmKuA5wd1Jv5bjC0cn9vRG4uw.',NULL,'H2PqIjD0VUCN7kojRDnz09n1YHtfMuTnhShd2HmmfyJKncAUVcRmNSSnIa1q','2018-06-11 09:59:29','2018-06-13 10:03:51',NULL,'Eladio','German','+41787079222','m'),(44,'Julien Wolf','julien.wolf@sportsevents.ch','$2y$10$W0ETbHzEGXEoyjFQqRblw.qQujVr1Po.lt1vFhUtyTv18uxdVMeEa',NULL,'cqTRbtmVXGCBcnqqaarQ3Mjt1uikr11GGCCt27todF233XWlvOsQApIX0CsJ','2018-06-11 09:59:30','2018-06-13 10:22:43',NULL,'Julien','Wolf','+41786966890','m'),(45,'Jean-Marc Anderes','jm.anderes@gmail.com','$2y$10$uWhmePJeOJVlU07IwO47Iuq/VMIMhDIWMDfsgW9yuiBtOdDWlEwFq',NULL,'nMUWUYXHjF5442wQkn7eeWPuwGEqGezqTNIXY5sGNuf3PTqZRQZoswzDkOVk','2018-06-11 09:59:30','2018-06-15 08:57:14',NULL,'Jean-Marc','Anderes','+41792042146','m'),(46,'Oliver Baechler','oliver.baechler@bluewin.ch','$2y$10$jjco6CSfUeq.tNu38IygL.AsuBnQXctzOiDdH6xIuFJc6F/ykuiXK',NULL,'NWAL39zLXMEo6htWn6p4a7RnF5OYYQ5fz4Fvu64r8MfyGQAuSENvBm1RczA5','2018-06-11 09:59:30','2018-06-15 09:00:27',NULL,'Oliver','Baechler','+41793078063','m'),(47,'Enrico Chiabudini','Enrico.Chiabudini@test.local','$2y$10$l4WFA9PT/i4j2pwZAwUmlOtp2smPXHNC6tC3zPxHJgb2ZlOR/7T16',NULL,'zNepB3ExinRgHt71wn6yH6wmrEiU5wcaYawA87reRtyBa4XUUIMDQTYBkzqS','2018-06-11 09:59:30','2018-06-13 09:40:15',NULL,'Enrico','Chiabudini','-','m'),(48,'Pascal Comminot','pascal.comminot@edu.ge.ch','$2y$10$5zrr71EWb0mSr.DLvUmevuohGqN3TUKOry1fPiPcun6kfrL1uKAFS',NULL,'BkiH6StXGyMvsa5v330jAgUSiYi0uLt4fI1uUtxRDFM7YlnNjXLMDRcrRJcl','2018-06-11 09:59:30','2018-06-13 09:46:58',NULL,'Pascal','Comminot','+41788544257','m'),(49,'Matia Gojun','Matia.Gojun@test.local','$2y$10$K0BZ0TJd2TH4f21F0iHFb.p8iro7i4s7XkX9a2WDm.BMr3s/SLgbe',NULL,'cgZe0I8Y39WocPP1xBNZd6bGZDcb96qfGdqr50hZImChHxDZyV4GFEsLFHyh','2018-06-11 09:59:30','2018-07-13 08:24:00',NULL,'Matia','Gojun','-','m'),(50,'Joao Ramos','joaosomar13@gmail.com','$2y$10$eLGq0qCtiTk/Zu/66AwAzOY4BM1qZoE66xekcLuev5x2N1LXHjXFW',NULL,'b6eMdTm8xM6ZkwUjLwJDwn1vdmzw9FW6qSY3J4tnqkip4IcqTHDfwPer5aZn','2018-06-11 09:59:30','2018-06-13 10:17:58',NULL,'Joao','Ramos','+41766936814','m'),(51,'Christine Féry-Hammer','christine.fery-hammer@hesge.ch','$2y$10$p1re6jvjTc7R5pdMyWZuBuaKMheUTJLLg0s0z2PE8DtMGi24VKoCS',NULL,'fSoPPbjVVHPOiZYNqzeHxUcyZhYm59AZekKLLA1h452Vlc7d3znl4DRlkgys','2018-06-11 09:59:30','2018-06-13 09:52:14',NULL,'Christine','Féry-Hammer','+41797564981','w'),(52,'David Korkia','draks@sunrise.ch','$2y$10$J7aL6RiBSBYfOLEQZ.TcgOb.t9hbEw9tMNUWKoUDdLSOnK/KEgbpy',NULL,'yteETKL86Np5vEfIsODjMzzeB1fZgau8NOz0nhnJoWcp65YIXva9h4od81AV','2018-06-11 09:59:30','2018-06-13 10:09:46',NULL,'David','Korkia','+41763406034','m'),(53,'Valérie Perret','perret.valerie@gmail.com','$2y$10$we7ddOw4bQvD/R5SyH9BUOPvsG6xBNcFGVT/J7BlpotPHct64oN4i',NULL,'hUFkDsHss0htUTGBAdrY2MtGpFV6SVoHKKuvTNkO3a2GEvhwBiLkYA01JhNr','2018-06-11 09:59:30','2018-06-13 10:14:25',NULL,'Valérie','Perret','+41793376040','w'),(54,'Bertrand Pouilly','bertrand.pouilly@ecolint.ch','$2y$10$QyNyqh9gR67ycLHnoMvATuNMQJet3BvebX7WLrh6D/1BpNCdxErte',NULL,'Bji2Ayvy2wWAUBYLHPXSLmsJCTCxMVYmyiybv2BSlWWNkeIodFSrgRZ2eGhy','2018-06-11 09:59:30','2018-06-13 10:16:54',NULL,'Bertrand','Pouilly','+33673139277','m'),(55,'Paul Schumacher','pschu13@gmail.com','$2y$10$lAc7vyrkh/MfEJFcJ2KUXu6Hbxj.WxsrJK7ZY4Km/cKCi7IPdDRYO',NULL,'mbAxUL7o8hO1IzlQvD0sY5sMwRkcNQeSPtbqHTAWACZYDSjLjmQME1Z1Z4RI','2018-06-11 09:59:30','2018-06-13 10:21:04',NULL,'Paul','Schumacher','+41799067254','m'),(56,'Marie-Hélène Imfeld','marieh12@bluewin.ch','',NULL,'hIJXThA7zhXlc43eXxXs6wuBSHKPtHkLCOTelz6b1UZSDO6xNAVmaZZWxdRI','2018-06-13 09:09:47','2018-07-13 08:25:30',NULL,'Marie-Hélène','Imfeld','+41792479665','w'),(57,'Blaise Laurent','bllaurent@hotmail.com','',NULL,'6GIsdWcr7j3oNkB6RVOvyoKK1pZ0EcsfL2p5PXAu5Sxid3yBDFL1XYpDOEcs','2018-06-13 09:11:24','2018-06-13 10:11:25',NULL,'Blaise','Laurent','+41786286234','m'),(58,'Thierry Roch','troch@windowslive.com','',NULL,'nhERijimmdVAfhRrASmv4SrOdhJSfV95oodawcpnrueIuLDLUMZOY7UMByU0','2018-06-13 09:12:13','2018-06-13 10:23:36',NULL,'Thierry','Roch','+41796587802','m'),(59,'Pascal Kuenzi','pascal_kuenzi@bluewin.ch','',NULL,'jRf0Hl3gn9yxaGJ22QcAXxsx1VpFAKOaihqi6BcbZU5XoUK5A0WJgTwr5OXB','2018-06-13 09:18:04','2018-06-13 09:18:19',NULL,'Pascal','Kuenzi','+41787798081','m'),(62,'Leandro Jardim','leandro.jardim@hotmail.com','$2y$10$CNcFLXUz8BtKWmeGFbv1mOoLiqg1zVNN01CYdffG2VjfruQQqQmoG','98gitVrrm0l3r81HWABzigWls8TDgmK2VqXt00N3i1wh9FpulKufEFJE4rW8','Yoi4LWTfnBWEGBhov5nQ7HzEtiMfvP0c2vQ8zC0FBBa7uEdVdawLWyN8RPrK','2018-07-11 09:51:14','2018-07-12 18:15:50',NULL,'Leandro','Jardim','+41787077253','m'),(65,'Julien Tappy','julientappy@me.com','$2y$10$qmU8uuunqCN9qcJrdKALPuIU8Ihk476j5P.cyoTo23P7m.Jw9r2vm','yoBiKncTg87U4iggwG3AVV9pVQ4FcFdmxvVH6NBg0lNaROYIfK8iV14W35bP','dqjTbs37FUlMsW1PuJY9Wi428UB1vt1X3PNdWOWjd83Dn4corxstFMvJK6KW','2018-07-13 07:22:03','2018-07-13 08:49:48',NULL,'Julien','Tappy','+41792137876','m'),(69,'Dany Hassenstein','Dany.Hassenstein@test.local','$2y$10$V.3MNv51aTQp0YYd4eRHbOG57Rk/KP85P.PqrmUzfWLdV1v8hXGIq','7NeAeOJfwWlD5eg1o9gnAi3sxWvxRrpeocMMvX2M2FAXsf0VJOfl2n63HYSm','k8CebgOIJPmlKLQcXwWwcDkKPb854enCj5Nf4HyRW22i8BCl0awo8pnyIz4U','2018-07-13 07:42:33','2018-07-13 07:49:15',NULL,'Dany','Hassenstein','-','m'),(71,'Paul Chatenoud','noguinoah@hotmail.com','',NULL,'AWJ4Nq2NqDTr01Pt8VC3hL0dUiNxrJF7cpFqf9w3Ga5v2hZMJ06RXdurt3QP','2018-07-13 07:52:32','2018-07-13 07:53:47',NULL,'Paul','Chatenoud','+41787450751','m'),(72,'Jean-Yves Girod','jean-yves@lesavouillons.ch','',NULL,'RnWUX5lnfryJIfnbB1t6dP1JjrOzOpGGCaAExDpVQBcAATIRCv7lKPPNhJGh','2018-07-13 08:10:07','2018-07-13 08:11:36',NULL,'Jean-Yves','Girod','+41793014985','m'),(74,'Stéphanie Robyr','robyrs@bluewin.ch','',NULL,'BbJRIOfsAgZH4asIghQcCMCbNInbdhAKutSDWspdYDn5DHDnfXZMZpy0IE7F','2018-07-13 08:15:59','2018-07-13 08:17:01',NULL,'Stéphanie','Robyr','+41794248620','m'),(76,'Claudio Stighezza','claudiostighezza@hotmail.com','',NULL,'uXJ100EwAQSbUBjpnU0k7yzz69YjIPPFIs2hyc8hLzBbwHT3BtSrZkAsAQW8','2018-07-13 08:18:29','2018-07-13 08:19:25',NULL,'Claudio','Stighezza','+41792206874','m'),(78,'Ecran Géant','Ecran.Géant@test.local','$2y$10$WprvKXBLv47LgSXgYb9gy.a.3qwK3HgmLO.nEeUkr.IVBfzzO62/C','9gwYJVFprTEUKFl6VYGgeHHXOLc5JaJ1g4gruzzdyOxtl8m2MJNBWhZH6xhL',NULL,'2018-07-13 15:45:03','2018-07-13 15:49:46',NULL,'Ecran','Géant','-','m'),(79,'Martine Robyr','martine_robyr@hotmail.com','',NULL,'mKlz2EVB5fWw11oGeIdZJ133w6aKhiIlTfE1OjF46nRly8c1vpnw3DuWILLN','2018-07-13 16:35:51','2018-07-13 16:37:12',NULL,'Martine','Robyr','+41765687392','m'),(80,'John Doe','John.Doe@test.local','',NULL,NULL,'2018-07-13 16:35:53','2018-07-13 16:36:15',NULL,'John','Doe','-','m');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `waypoints`
+--
+
+DROP TABLE IF EXISTS `waypoints`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `waypoints` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `waypoints`
@@ -275,4 +769,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-22 13:27:04
+-- Dump completed on 2019-01-22 13:33:03

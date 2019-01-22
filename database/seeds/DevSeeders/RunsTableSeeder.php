@@ -114,6 +114,7 @@ class RunsTableSeeder extends Seeder
                 // Selects randomly a status for this run
                 $selectedStatus = $status->random();
 
+
                 // Add a note randomly
                 $run['infos'] = $notes->random();
 

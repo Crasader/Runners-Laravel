@@ -21,44 +21,44 @@ class StatusesTableSeeder extends Seeder
         $status = collect([
             // ****************************
             // User status
-//            [
-//                'type'           => 'App\User',
-//                'slug'           => 'free',
-//                'name'           => 'Disponible',
-//                'description'    => 'Utilisateurs disponibles en ce moment.',
-//                'shows_on_kiela' => true
-//            ],[
-//                'type'           => 'App\User',
-//                'slug'           => 'requested',
-//                'name'           => 'Demandé',
-//                'description'    => "Un demande a été faite a cet utilisateur, mais il n'a pas encore répondu.",
-//                'shows_on_kiela' => false
-//            ],[
-//                'type'           => 'App\User',
-//                'slug'           => 'not-present',
-//                'name'           => 'Pas présent',
-//                'description'    => 'Cet utilisateur ne participe pas à cette edition de paléo.',
-//                'shows_on_kiela' => false
-//            ],[
-//                'type'           => 'App\User',
-//                'slug'           => 'not-requested',
-//                'name'           => 'Non demandé',
-//                'description'    => "Aucunne demande de participation n'a été faite pour cet utilisateur.",
-//                'shows_on_kiela' => false
-//            ],[
-//                'type'           => 'App\User',
-//                'slug'           => 'taken',
-//                'name'           => 'En run',
-//                'description'    => 'Utilisateur actuellement en run.',
-//                'shows_on_kiela' => true
-//            ],
-//            [
-//                'type'           => 'App\Run',
-//                'slug'           => 'free',
-//                'name'           => 'Disponible',
-//                'description'    => '',
-//                'shows_on_kiela' => true
-//            ]
+            [
+                'type'           => 'App\User',
+                'slug'           => 'free',
+                'name'           => 'Disponible',
+                'description'    => 'Utilisateurs disponibles en ce moment.',
+                'shows_on_kiela' => true
+            ],[
+                'type'           => 'App\User',
+                'slug'           => 'requested',
+                'name'           => 'Demandé',
+                'description'    => "Un demande a été faite a cet utilisateur, mais il n'a pas encore répondu.",
+                'shows_on_kiela' => false
+            ],[
+                'type'           => 'App\User',
+                'slug'           => 'not-present',
+                'name'           => 'Pas présent',
+                'description'    => 'Cet utilisateur ne participe pas à cette edition de paléo.',
+                'shows_on_kiela' => false
+            ],[
+                'type'           => 'App\User',
+                'slug'           => 'not-requested',
+                'name'           => 'Non demandé',
+                'description'    => "Aucunne demande de participation n'a été faite pour cet utilisateur.",
+                'shows_on_kiela' => false
+            ],[
+                'type'           => 'App\User',
+                'slug'           => 'taken',
+                'name'           => 'En run',
+                'description'    => 'Utilisateur actuellement en run.',
+                'shows_on_kiela' => true
+            ],
+            [
+                'type'           => 'App\Run',
+                'slug'           => 'free',
+                'name'           => 'Disponible',
+                'description'    => '',
+                'shows_on_kiela' => true
+            ],
 
             // Run status
             [

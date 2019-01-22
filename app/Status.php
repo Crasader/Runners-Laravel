@@ -66,4 +66,8 @@ class Status extends Model
     {
         return $query->type('App\User');
     }
+
+    public function scopeRunsStatuses($query){
+        return $query->type('App\Run');
+    }
 }

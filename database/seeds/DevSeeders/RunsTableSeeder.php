@@ -65,6 +65,16 @@ class RunsTableSeeder extends Seeder
             'error'
         ]);
 
+        // Boolean, defines if the number of passengers need to be confirmed
+        // You can influence the propability by duplicate status in the array
+        $PaxTBC = collect([
+            '0',
+            '0',
+            '0',
+            '0',
+            '1',
+        ]);
+
         /**
          * Create runs randomly using the datas indicated above
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
@@ -76,7 +86,7 @@ class RunsTableSeeder extends Seeder
         /**
          * Main loop, iterates for each festival
          */
-        $festivals->each(function ($festival) use ($runsAmount, $notes, $status) {
+        $festivals->each(function ($festival) use ($runsAmount, $notes, $status, $PaxTBC) {
 
             /**
              * Gets datas relatives to all the runs of 1 festival
@@ -127,6 +137,9 @@ class RunsTableSeeder extends Seeder
                 // Store in tmp var the start day of festival
                 $runPublishedTimeTmp = clone $festivalStarts;
                 $run['published_at'] = $runPublishedTimeTmp->subDays(mt_rand(1, 50));
+
+                // Sets randomly if the number of passengers need to be confirmed
+                $run['PaxTBC'] = $PaxTBC->random();
 
 
                 // Generates the planned at
@@ -186,7 +199,6 @@ class RunsTableSeeder extends Seeder
                 $comment->save();
                 // Atach the comment to the run
                 $createdRun->comments()->save($comment);
-
             }
         });
     }

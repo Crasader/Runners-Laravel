@@ -109,6 +109,10 @@
                                 'errors'      => $errors,
                                 'value'       => $run->passengers
                                 ])
+                                <p class="help">
+                                    <input type="checkbox" style="vertical-align:middle" name="passenger_to_confirm" value="PaxTBC">
+                                    <label for="TBC" style="vertical-align:middle">A confirmer</label>
+                                </p>
                             @endcomponent
 
                         </div>

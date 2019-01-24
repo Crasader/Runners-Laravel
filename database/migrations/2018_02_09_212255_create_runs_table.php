@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * CreateRunsTable
- * 
+ *
  * @author Bastien Nicoud
  */
 class CreateRunsTable extends Migration
@@ -30,6 +30,7 @@ class CreateRunsTable extends Migration
             $table->integer('passengers')->nullable();
             $table->softDeletes();
             $table->timestamps();
+            $table->boolean('PaxTBC')->default(0);
         });
     }
 

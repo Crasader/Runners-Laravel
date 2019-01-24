@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Car;
+use App\Extensions\Statusable;
 use App\User;
 use App\Artist;
 use App\Comment;
@@ -30,7 +31,7 @@ use Illuminate\Support\Facades\Validator;
  */
 class Run extends Model
 {
-    use SoftDeletes, Filterable;
+    use SoftDeletes, Filterable, Statusable;
 
     /**
      * MODEL PROPERTY
@@ -83,7 +84,7 @@ class Run extends Model
      * Gets the logs corresponding to this model
      */
     public function status(){
-        return $this->morphToMany(Status::class, 'statusable');
+        return $this->morphToMany('App\Status', 'statusable');
     }
 
     /**
@@ -506,15 +507,16 @@ class Run extends Model
      */
     public function updateStatus()
     {
-        if ($this->status === 'drafting' || $this->status === 'gone' || $this->status === 'finished') {
+
+        if ($this->status_id === Status::runsStatuses()->slug('drafting')->first()->id || $this->status_id === Status::runsStatuses()->slug('gone')->first()->id || $this->status_id === Status::runsStatuses()->slug('finished')->first()->id) {
             $this->save();
         } else {
             if ($this->needsFilling()) {
-                $this->status = 'needs_filling';
+                $this->status_id = Status::runsStatuses()->slug('needs_filling')->first()->id;
             } elseif ($this->problem()) {
-                $this->status = 'error';
+                $this->status_id = Status::runsStatuses()->slug('error')->first()->id;
             } else {
-                $this->status = 'ready';
+                $this->status_id = Status::runsStatuses()->slug('ready')->first()->id;
             }
             $this->save();
         }

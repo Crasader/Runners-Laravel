@@ -45,25 +45,29 @@ class RunsTableSeeder extends Seeder
 
         // The status possible for a run
         // You can influence the propability by duplicate status in the array
-        $status = collect([
-            'drafting',
-            'drafting',
-            'drafting',
-            'drafting',
-            'ready',
-            'ready',
-            'ready',
-            'ready',
-            'needs_filling',
-            'needs_filling',
-            'gone',
-            'gone',
-            'gone',
-            'finished',
-            'finished',
-            'finished',
-            'error'
-        ]);
+//        $status = collect([
+//            'drafting',
+//            'drafting',
+//            'drafting',
+//            'drafting',
+//            'ready',
+//            'ready',
+//            'ready',
+//            'ready',
+//            'needs_filling',
+//            'needs_filling',
+//            'gone',
+//            'gone',
+//            'gone',
+//            'finished',
+//            'finished',
+//            'finished',
+//            'error'
+//        ]);
+        // Actually with the new status_id, there is a totally random selection
+
+
+        $status = \App\Status::runsStatuses()->pluck('id');
 
 
         /**
@@ -120,7 +124,8 @@ class RunsTableSeeder extends Seeder
                 $run['infos'] = $notes->random();
 
                 // Sets the run status
-                $run['status'] = $selectedStatus;
+                $run['status_id'] = $selectedStatus;
+
 
                 // Sets a number of passanger randomly
                 $run['passengers'] = mt_rand(1, 9);
@@ -152,7 +157,8 @@ class RunsTableSeeder extends Seeder
 
 
                 // IF the run is started or finished we have to generate a started_at
-                if ($run['status'] === 'gone' || $run['status'] === 'finished') {
+
+                if ($run['status_id'] === \App\Status::runsStatuses()->slug('gone')->first()->id || $run['status_id'] === \App\Status::runsStatuses()->slug('finished')->first()->id) {
 
                     // create a start time with 0 to 30 minutes of delay from the planned at time
                     $runStartedTimeTmp = clone $runPlannedTimeTmp;
@@ -162,7 +168,7 @@ class RunsTableSeeder extends Seeder
                 }
 
                 // IF the run is finished we have to generate an ended_at
-                if ($run['status'] === 'finished') {
+                if ($run['status_id'] === \App\Status::runsStatuses()->slug('finished')->first()->id) {
 
                     // create a start time with 0 to 30 minutes of delay from the planned at time
                     $runEndedAtTimeTmp = clone $runEndPlannedTimeTmp;

@@ -21,7 +21,8 @@ class CreateRunsTable extends Migration
         Schema::create('runs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('status')->default('drafting');
+//            $table->string('status')->default('drafting');
+            $table->integer('status_id')->unsigned()->nullable();
             $table->dateTime('published_at')->nullable();
             $table->dateTime('planned_at')->nullable();
             $table->dateTime('end_planned_at')->nullable();
@@ -30,6 +31,9 @@ class CreateRunsTable extends Migration
             $table->integer('passengers')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            // Foreign key
+            $table->foreign('status_id')->references('id')->on('statuses');
         });
     }
 

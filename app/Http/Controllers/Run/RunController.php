@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Run;
 
 use App\Run;
 use App\Artist;
+use App\Status;
 use App\Waypoint;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class RunController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resp§onse
      */
     public function index(Request $request)
     {
@@ -40,12 +41,12 @@ class RunController extends Controller
     public function big()
     {
         $this->authorize('view', Run::class);
-        Run::whereNotIn('status', ['finished', 'drafting'])->get()->each(function ($run) {
+        Run::whereNotIn('status_id', [Status::runsStatuses()->slug('finished')->first()->id, Status::runsStatuses()->slug('drafting')->first()->id])->get()->each(function ($run) {
             $run->updateStatus();
         });
         $runs = Run::where('planned_at', '>=', now())
             ->orderBy('planned_at', 'asc')
-            ->whereNotIn('status', ['finished', 'drafting'])
+            ->whereNotIn('status_id', [Status::runsStatuses()->slug('finished')->first()->id, Status::runsStatuses()->slug('drafting')->first()->id])
             ->limit(30)
             ->get();
         return view('runs.big')->with(compact('runs'));
@@ -59,7 +60,7 @@ class RunController extends Controller
     public function create()
     {
         $this->authorize('create', Run::class);
-        $run = Run::create(['status' => 'drafting']);
+        $run = Run::create(['status_id' => Status::runsStatuses()->slug('drafting')->first()->id]);
         $run->waypoints()->attach(1, ['order' => 1]);
         $run->waypoints()->attach(1, ['order' => 2]);
         return redirect()

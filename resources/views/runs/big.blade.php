@@ -34,7 +34,7 @@
                                 <h2 class="title is-5 title-run">
                                     {{ $run->name }}
                                 </h2>
-                                @statustag(['status' => $run->status])
+                                @statustag(['status' => $run->status->first()])
                                 @endstatustag
                                 <p>
                                     {{ $run->passengers }} personnes

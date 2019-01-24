@@ -39,7 +39,7 @@ class Status extends Model
      */
     public function runs()
     {
-        return $this->morphedByMany(Run::class, 'statusable');
+        return $this->morphedByMany('App\Run', 'statusable');
     }
 
 
@@ -57,6 +57,18 @@ class Status extends Model
 
     /**
      * MODEL SCOPE
+     * Limit the request to a specific type of statuses
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
+
+    /**
+     * MODEL SCOPE
      * Limit the request to the users status
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -66,6 +78,8 @@ class Status extends Model
     {
         return $query->type('App\User');
     }
+
+
 
     public function scopeRunsStatuses($query){
         return $query->type('App\Run');

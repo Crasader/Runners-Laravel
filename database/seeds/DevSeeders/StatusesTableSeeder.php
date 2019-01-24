@@ -174,6 +174,13 @@ class StatusesTableSeeder extends Seeder
                 'name'           => 'Hors service',
                 'description'    => '',
                 'shows_on_kiela' => false
+            ],
+            [
+                'type'           => 'App\Run',
+                'slug'           => 'tbc',
+                'name'           => 'A confirmer',
+                'description'    => '',
+                'shows_on_kiela' => false
             ]
         ]);
 

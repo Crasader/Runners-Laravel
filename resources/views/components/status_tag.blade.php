@@ -5,7 +5,8 @@
   -- @author Bastien Nicoud
   --}}
 
-@switch($status)
+
+@switch($status["slug"])
     @case('active')
         <span class="tag {{ $slot }} is-success">Disponible</span>
         @break

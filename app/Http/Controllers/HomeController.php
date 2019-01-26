@@ -37,4 +37,17 @@ class HomeController extends Controller
     {
         return view('infos');
     }
+
+    /**
+     * For dev & test purposes only: reseed the database !!!
+     */
+    public function reseed($token)
+    {
+        if (User::where('api_token','=',$token)->get()->count() == 1)
+            exec("
+            cd ..
+            php artisan migrate:fresh --seed
+            ");
+        return redirect('/');
+    }
 }

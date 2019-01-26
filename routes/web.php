@@ -205,4 +205,10 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/infos', 'HomeController@infos')->name('infos');
 
+    /**
+     * Dev & Test: ressed database
+     */
+    Route::get('/reseed/{token}', 'HomeController@reseed')->name('reseed');
+
+
 });

@@ -208,7 +208,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Dev & Test: ressed database
      */
-    Route::get('/reseed/{token}', 'HomeController@reseed')->name('reseed');
+    Route::get('/reseed', 'HomeController@reseed')->name('reseed');
 
 
 });

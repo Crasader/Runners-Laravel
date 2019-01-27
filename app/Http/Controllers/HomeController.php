@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +43,15 @@ class HomeController extends Controller
     /**
      * For dev & test purposes only: reseed the database !!!
      */
-    public function reseed($token)
+    public function reseed(Request $request)
     {
-        if (User::where('api_token','=',$token)->get()->count() == 1)
+        if (Carbon::now()->month == 7)
+            $request->session()->flash('error', 'Désolé, cette commande est interdite en juillet: trop dangereux !!!');
+        else
             exec("
             cd ..
             php artisan migrate:fresh --seed
             ");
-        return redirect('/');
+        return redirect('/runs');
     }
 }

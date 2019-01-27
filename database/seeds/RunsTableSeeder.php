@@ -43,6 +43,35 @@ class RunsTableSeeder extends Seeder
             'divers transfert Pax'
         ]);
 
+        // The run hour will be picked randomly in this collection
+        // Simulate busy hours by repeating them
+        $runhours = collect([
+            0,0,0,0,
+            1,1,1,
+            2,2,
+            3,
+            4,
+            5,
+            6,
+            7,7,
+            8,8,
+            9,9,
+            10,10,
+            11,11,
+            12,12,
+            13,13,13,
+            14,14,14,
+            15,15,15,15,
+            16,16,16,16,
+            17,17,17,17,
+            18,18,18,18,
+            19,19,19,19,
+            20,20,20,20,20,
+            21,21,21,21,21,
+            22,22,22,22,
+            23,23,23,23
+        ]);
+
         /**
          * Create runs randomly using the datas indicated above
          * This seeder only create the run, see the AssociateRunsInfosSeeder to see the cars and runners association to a run
@@ -54,7 +83,7 @@ class RunsTableSeeder extends Seeder
         /**
          * Main loop, iterates for each festival
          */
-        $festivals->each(function ($festival) use ($runsAmount, $notes) {
+        $festivals->each(function ($festival) use ($runsAmount, $notes, $runhours) {
 
             /**
              * Gets datas relatives to all the runs of 1 festival
@@ -62,6 +91,7 @@ class RunsTableSeeder extends Seeder
 
             // Get the length of the festival
             $festivalLength = $festival->starts_on->diffInDays($festival->ends_on);
+            $festivalLengthSoFar = $festival->starts_on->diffInDays(Carbon::now());
 
             /**
              * Sub-loop
@@ -108,10 +138,13 @@ class RunsTableSeeder extends Seeder
                 // Store in tmp var the start day of festival
                 $runPlannedTimeTmp = clone $festivalStarts;
                 // Chose a day randomly during the festival
-                $runPlannedTimeTmp->addDays(mt_rand(0, $festivalLength));
+                if (mt_rand(0,100) < 90) // 90% runs past or present
+                    $runPlannedTimeTmp->addDays(mt_rand(0, $festivalLengthSoFar));
+                else // 10% runs future
+                    $runPlannedTimeTmp->addDays(mt_rand($festivalLengthSoFar, $festivalLength-$festivalLengthSoFar));
                 // Sets the start time randomly (between 08h and 00h00)
-                $runPlannedTimeTmp->hour = mt_rand(4, 24);
-                $runPlannedTimeTmp->minute = mt_rand(0, 60);
+                $runPlannedTimeTmp->hour = mt_rand(0, $runhours->random());
+                $runPlannedTimeTmp->minute = mt_rand(0, 12)*5;
                 $runPlannedTimeTmp->second = 0;
                 // Save this time for the start of the run
                 $run['planned_at'] = $runPlannedTimeTmp;
